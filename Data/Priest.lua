@@ -13,6 +13,15 @@ lib:RegisterSpells({
     -- Crowd Control - Hard CC
     -------------------------------------------------------------------------------
     {
+        spellID = 44046,  -- Chastise (Holy talent, Humanoids only)
+        tags = {C.CC_HARD, C.ROOT},
+        cooldown = 30,
+        duration = 2,
+        talent = true,
+        ranks = {44041, 44043, 44044, 44045, 44046},
+        -- No spec restriction - show if player has the talent
+    },
+    {
         spellID = 8122,  -- Psychic Scream
         tags = {C.CC_HARD, C.FEAR},
         cooldown = 30,
@@ -57,7 +66,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 15286,  -- Vampiric Embrace
-        tags = {C.PERSONAL_DEFENSIVE, C.BUFF, C.TRACK_BUFF},
+        tags = {C.PERSONAL_DEFENSIVE, C.BUFF, C.HAS_BUFF},
         cooldown = 0,
         duration = 60,  -- Buff on self, heals based on shadow damage
         talent = true,
@@ -70,7 +79,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 6346,  -- Fear Ward
-        tags = {C.PERSONAL_DEFENSIVE, C.EXTERNAL_DEFENSIVE, C.CC_IMMUNITY, C.TRACK_BUFF},
+        tags = {C.PERSONAL_DEFENSIVE, C.EXTERNAL_DEFENSIVE, C.CC_IMMUNITY, C.HAS_BUFF},
         cooldown = 30,
         duration = 180,
     },
@@ -78,6 +87,14 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     -- External Defensives
     -------------------------------------------------------------------------------
+    {
+        spellID = 33206,  -- Pain Suppression (Discipline talent)
+        tags = {C.EXTERNAL_DEFENSIVE, C.SITUATIONAL, C.HAS_BUFF, C.PVE_PVP},
+        cooldown = 120,
+        duration = 8,
+        talent = true,
+        specs = {"DISCIPLINE"},
+    },
     {
         spellID = 13908,  -- Desperate Prayer (Dwarf/Human racial talent)
         tags = {C.PERSONAL_DEFENSIVE, C.HEAL_SINGLE},
@@ -98,14 +115,14 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 14751,  -- Inner Focus
-        tags = {C.HEALING_CD, C.RESOURCE, C.TRACK_BUFF},
+        tags = {C.HEALING_CD, C.RESOURCE, C.HAS_BUFF},
         cooldown = 180,
         duration = 0,  -- Next spell only
         talent = true,
     },
     {
         spellID = 10060,  -- Power Infusion
-        tags = {C.HEALING_CD, C.OFFENSIVE_CD, C.EXTERNAL_DEFENSIVE, C.TRACK_BUFF},
+        tags = {C.HEALING_CD, C.OFFENSIVE_CD, C.EXTERNAL_DEFENSIVE, C.HAS_BUFF},
         cooldown = 180,
         duration = 15,
         talent = true,
@@ -124,11 +141,14 @@ lib:RegisterSpells({
     },
     {
         spellID = 17,  -- Power Word: Shield (prevent damage)
-        tags = {C.EXTERNAL_DEFENSIVE, C.PERSONAL_DEFENSIVE, C.HEAL_SINGLE, C.TRACK_BUFF, C.CORE_ROTATION},
+        tags = {C.EXTERNAL_DEFENSIVE, C.PERSONAL_DEFENSIVE, C.HEAL_SINGLE, C.HAS_BUFF, C.CORE_ROTATION},
         cooldown = 0,
         duration = 30,
         priority = 2,
         ranks = {17, 592, 600, 3747, 6065, 6066, 10898, 10899, 10900, 10901, 25217, 25218},
+        -- Weakened Soul debuff prevents casting PWS on same target for 15s
+        -- Check friendly target first, fallback to self if targeting enemy
+        targetLockoutDebuff = 6788,
     },
     {
         spellID = 34866,  -- Circle of Healing (instant AoE heal - situational)

@@ -63,7 +63,7 @@ lib:RegisterSpells({
     -- Orc - Blood Fury (+AP, healing debuff on self)
     {
         spellID = 20572,
-        tags = {C.OFFENSIVE_CD, C.TRACK_BUFF},
+        tags = {C.OFFENSIVE_CD, C.HAS_BUFF},
         cooldown = 120,
         duration = 15,
         race = ORC,
@@ -72,7 +72,7 @@ lib:RegisterSpells({
     -- Troll - Berserking (attack/cast speed)
     {
         spellID = 26297,
-        tags = {C.OFFENSIVE_CD, C.TRACK_BUFF},
+        tags = {C.OFFENSIVE_CD, C.HAS_BUFF},
         cooldown = 180,
         duration = 10,
         race = TROLL,

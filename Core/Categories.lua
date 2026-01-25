@@ -94,11 +94,11 @@ lib.Categories = {
     PROC                = "PROC",                -- Proc-based abilities
     REACTIVE            = "REACTIVE",            -- Reactive/conditional abilities - usability shown via overlay (Overpower, Revenge, Execute)
 
-    -- Tracking (for HUD display hints)
-    TRACK_ALWAYS        = "TRACK_ALWAYS",        -- Always show on HUD
-    TRACK_BUFF          = "TRACK_BUFF",          -- Track as buff duration
-    TRACK_DEBUFF        = "TRACK_DEBUFF",        -- Track as debuff on target
-    TRACK_COOLDOWN      = "TRACK_COOLDOWN",      -- Track cooldown timer
+    -- Spell Effects (describes what the spell applies)
+    HAS_BUFF            = "HAS_BUFF",            -- Applies a buff (same ID as spell unless appliesAura set)
+    HAS_DEBUFF          = "HAS_DEBUFF",          -- Applies a debuff on target
+    HAS_HOT             = "HAS_HOT",             -- Applies a heal over time
+    HAS_DOT             = "HAS_DOT",             -- Applies a damage over time
 
     -- Content Type (for filtering)
     PVE                 = "PVE",                 -- Primarily PvE ability

@@ -40,14 +40,14 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 642,  -- Divine Shield
-        tags = {C.IMMUNITY, C.PERSONAL_DEFENSIVE, C.TRACK_BUFF},
+        tags = {C.IMMUNITY, C.PERSONAL_DEFENSIVE, C.HAS_BUFF},
         cooldown = 300,
         duration = 12,
         ranks = {642, 1020},
     },
     {
         spellID = 498,  -- Divine Protection
-        tags = {C.IMMUNITY, C.PERSONAL_DEFENSIVE, C.TRACK_BUFF},
+        tags = {C.IMMUNITY, C.PERSONAL_DEFENSIVE, C.HAS_BUFF},
         cooldown = 300,
         duration = 8,
         ranks = {498, 5573},
@@ -58,21 +58,21 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 1022,  -- Blessing of Protection
-        tags = {C.EXTERNAL_DEFENSIVE, C.IMMUNITY, C.TRACK_BUFF},
+        tags = {C.EXTERNAL_DEFENSIVE, C.IMMUNITY, C.HAS_BUFF},
         cooldown = 300,
         duration = 10,
         ranks = {1022, 5599, 10278},
     },
     {
         spellID = 6940,  -- Blessing of Sacrifice
-        tags = {C.EXTERNAL_DEFENSIVE, C.TRACK_BUFF},
+        tags = {C.EXTERNAL_DEFENSIVE, C.HAS_BUFF},
         cooldown = 0,  -- No CD in Classic
         duration = 30,
         ranks = {6940, 20729},
     },
     {
         spellID = 1044,  -- Blessing of Freedom
-        tags = {C.EXTERNAL_DEFENSIVE, C.CC_BREAK, C.TRACK_BUFF},
+        tags = {C.EXTERNAL_DEFENSIVE, C.CC_BREAK, C.HAS_BUFF},
         cooldown = 20,
         duration = 10,
     },
@@ -83,7 +83,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 20216,  -- Divine Favor
-        tags = {C.HEALING_CD, C.TRACK_BUFF},
+        tags = {C.HEALING_CD, C.HAS_BUFF},
         cooldown = 120,
         talent = true,
     },
@@ -126,7 +126,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 31842,  -- Divine Illumination (mana CD)
-        tags = {C.HEALING_CD, C.RESOURCE, C.TRACK_BUFF, C.PVE},
+        tags = {C.HEALING_CD, C.RESOURCE, C.HAS_BUFF, C.PVE},
         cooldown = 180,
         duration = 15,
         priority = 4,
@@ -189,7 +189,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 20925,  -- Holy Shield (maintain for block)
-        tags = {C.PERSONAL_DEFENSIVE, C.TRACK_BUFF, C.CORE_ROTATION, C.PVE},
+        tags = {C.PERSONAL_DEFENSIVE, C.HAS_BUFF, C.CORE_ROTATION, C.PVE},
         cooldown = 10,
         duration = 10,
         priority = 1,
@@ -207,7 +207,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 31884,  -- Avenging Wrath (DPS CD)
-        tags = {C.OFFENSIVE_CD, C.TRACK_BUFF, C.PVE_PVP},
+        tags = {C.OFFENSIVE_CD, C.HAS_BUFF, C.PVE_PVP},
         cooldown = 180,
         duration = 20,
         priority = 7,

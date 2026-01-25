@@ -43,20 +43,20 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 11958,  -- Ice Block (Cold Snap can reset this)
-        tags = {C.IMMUNITY, C.PERSONAL_DEFENSIVE, C.TRACK_BUFF},
+        tags = {C.IMMUNITY, C.PERSONAL_DEFENSIVE, C.HAS_BUFF},
         cooldown = 300,
         duration = 10,
         talent = true,
     },
     {
         spellID = 45438,  -- Ice Block (learned version in later expansions)
-        tags = {C.IMMUNITY, C.PERSONAL_DEFENSIVE, C.TRACK_BUFF},
+        tags = {C.IMMUNITY, C.PERSONAL_DEFENSIVE, C.HAS_BUFF},
         cooldown = 300,
         duration = 10,
     },
     {
         spellID = 11426,  -- Ice Barrier
-        tags = {C.PERSONAL_DEFENSIVE, C.TRACK_BUFF},
+        tags = {C.PERSONAL_DEFENSIVE, C.HAS_BUFF},
         cooldown = 30,
         duration = 60,
         talent = true,
@@ -64,21 +64,21 @@ lib:RegisterSpells({
     },
     {
         spellID = 543,  -- Fire Ward
-        tags = {C.PERSONAL_DEFENSIVE, C.TRACK_BUFF},
+        tags = {C.PERSONAL_DEFENSIVE, C.HAS_BUFF},
         cooldown = 30,
         duration = 30,
         ranks = {543, 8457, 8458, 10223, 10225},
     },
     {
         spellID = 6143,  -- Frost Ward
-        tags = {C.PERSONAL_DEFENSIVE, C.TRACK_BUFF},
+        tags = {C.PERSONAL_DEFENSIVE, C.HAS_BUFF},
         cooldown = 30,
         duration = 30,
         ranks = {6143, 8461, 8462, 10177, 28609},
     },
     {
         spellID = 1463,  -- Mana Shield
-        tags = {C.PERSONAL_DEFENSIVE, C.TRACK_BUFF},
+        tags = {C.PERSONAL_DEFENSIVE, C.HAS_BUFF},
         cooldown = 0,
         duration = 60,
         ranks = {1463, 8494, 8495, 10191, 10192, 10193},
@@ -89,7 +89,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 12042,  -- Arcane Power
-        tags = {C.OFFENSIVE_CD, C.TRACK_BUFF, C.PVE},
+        tags = {C.OFFENSIVE_CD, C.HAS_BUFF, C.PVE},
         cooldown = 180,
         duration = 15,
         talent = true,
@@ -97,21 +97,21 @@ lib:RegisterSpells({
     },
     {
         spellID = 12043,  -- Presence of Mind
-        tags = {C.OFFENSIVE_CD, C.TRACK_BUFF, C.PVE_PVP},
+        tags = {C.OFFENSIVE_CD, C.HAS_BUFF, C.PVE_PVP},
         cooldown = 180,
         talent = true,
         specs = {"ARCANE"},
     },
     {
         spellID = 11129,  -- Combustion
-        tags = {C.OFFENSIVE_CD, C.TRACK_BUFF, C.PVE},
+        tags = {C.OFFENSIVE_CD, C.HAS_BUFF, C.PVE},
         cooldown = 180,
         talent = true,
         specs = {"FIRE"},
     },
     {
         spellID = 12472,  -- Icy Veins (TBC)
-        tags = {C.OFFENSIVE_CD, C.TRACK_BUFF, C.PVE},
+        tags = {C.OFFENSIVE_CD, C.HAS_BUFF, C.PVE},
         cooldown = 180,
         duration = 20,
         talent = true,

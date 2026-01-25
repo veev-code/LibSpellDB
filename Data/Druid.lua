@@ -51,19 +51,19 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 22812,  -- Barkskin
-        tags = {C.PERSONAL_DEFENSIVE, C.DAMAGE_REDUCTION, C.TRACK_BUFF},
+        tags = {C.PERSONAL_DEFENSIVE, C.DAMAGE_REDUCTION, C.HAS_BUFF},
         cooldown = 60,
         duration = 12,
     },
     {
         spellID = 22842,  -- Frenzied Regeneration
-        tags = {C.PERSONAL_DEFENSIVE, C.HEAL_SINGLE, C.TRACK_BUFF},
+        tags = {C.PERSONAL_DEFENSIVE, C.HEAL_SINGLE, C.HAS_BUFF},
         cooldown = 180,
         duration = 10,
     },
     {
         spellID = 16689,  -- Nature's Grasp
-        tags = {C.PERSONAL_DEFENSIVE, C.ROOT, C.TRACK_BUFF},
+        tags = {C.PERSONAL_DEFENSIVE, C.ROOT, C.HAS_BUFF},
         cooldown = 60,
         duration = 45,
         ranks = {16689, 16810, 16811, 16812, 16813, 17329},
@@ -74,7 +74,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 17116,  -- Nature's Swiftness
-        tags = {C.HEALING_CD, C.TRACK_BUFF, C.PVE_PVP},
+        tags = {C.HEALING_CD, C.HAS_BUFF, C.PVE_PVP},
         cooldown = 180,
         talent = true,
     },
@@ -91,7 +91,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 29166,  -- Innervate
-        tags = {C.EXTERNAL_DEFENSIVE, C.RESOURCE, C.UTILITY, C.TRACK_BUFF},
+        tags = {C.EXTERNAL_DEFENSIVE, C.RESOURCE, C.UTILITY, C.HAS_BUFF},
         cooldown = 360,
         duration = 20,
     },
@@ -101,7 +101,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 1850,  -- Dash
-        tags = {C.MOVEMENT, C.MOVEMENT_SPEED, C.TRACK_BUFF},
+        tags = {C.MOVEMENT, C.MOVEMENT_SPEED, C.HAS_BUFF},
         cooldown = 300,
         duration = 15,
         ranks = {1850, 9821},

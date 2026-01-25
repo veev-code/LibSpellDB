@@ -78,7 +78,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 19263,  -- Deterrence
-        tags = {C.PERSONAL_DEFENSIVE, C.TRACK_BUFF},
+        tags = {C.PERSONAL_DEFENSIVE, C.HAS_BUFF},
         cooldown = 300,
         duration = 10,
         talent = true,
@@ -94,14 +94,14 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 19574,  -- Bestial Wrath
-        tags = {C.OFFENSIVE_CD, C.TRACK_BUFF, C.PET},
+        tags = {C.OFFENSIVE_CD, C.HAS_BUFF, C.PET},
         cooldown = 120,
         duration = 18,
         talent = true,
     },
     {
         spellID = 3045,  -- Rapid Fire
-        tags = {C.OFFENSIVE_CD, C.TRACK_BUFF},
+        tags = {C.OFFENSIVE_CD, C.HAS_BUFF},
         cooldown = 300,
         duration = 15,
     },

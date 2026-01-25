@@ -32,7 +32,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 30823,  -- Shamanistic Rage (TBC+)
-        tags = {C.PERSONAL_DEFENSIVE, C.RESOURCE, C.TRACK_BUFF},
+        tags = {C.PERSONAL_DEFENSIVE, C.RESOURCE, C.HAS_BUFF},
         cooldown = 120,
         duration = 15,
         talent = true,
@@ -94,7 +94,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 16166,  -- Elemental Mastery
-        tags = {C.OFFENSIVE_CD, C.TRACK_BUFF, C.PVE_PVP},
+        tags = {C.OFFENSIVE_CD, C.HAS_BUFF, C.PVE_PVP},
         cooldown = 180,
         talent = true,
         specs = {"ELEMENTAL"},
@@ -105,13 +105,13 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 2825,  -- Bloodlust (Horde)
-        tags = {C.OFFENSIVE_CD, C.RAID_DEFENSIVE, C.TRACK_BUFF},
+        tags = {C.OFFENSIVE_CD, C.RAID_DEFENSIVE, C.HAS_BUFF},
         cooldown = 600,
         duration = 40,
     },
     {
         spellID = 32182,  -- Heroism (Alliance) - TBC+
-        tags = {C.OFFENSIVE_CD, C.RAID_DEFENSIVE, C.TRACK_BUFF},
+        tags = {C.OFFENSIVE_CD, C.RAID_DEFENSIVE, C.HAS_BUFF},
         cooldown = 600,
         duration = 40,
     },
@@ -133,7 +133,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 32594,  -- Earth Shield (maintain on tank)
-        tags = {C.CORE_ROTATION, C.HEAL_SINGLE, C.TRACK_BUFF, C.PVE},
+        tags = {C.CORE_ROTATION, C.HEAL_SINGLE, C.HAS_BUFF, C.PVE},
         cooldown = 0,
         duration = 600,
         priority = 1,
@@ -142,7 +142,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 33736,  -- Water Shield (maintain on self)
-        tags = {C.BUFF, C.RESOURCE, C.TRACK_BUFF, C.CORE_ROTATION, C.PVE_PVP},
+        tags = {C.BUFF, C.RESOURCE, C.HAS_BUFF, C.CORE_ROTATION, C.PVE_PVP},
         cooldown = 0,
         duration = 600,
         priority = 2,
@@ -170,7 +170,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 16188,  -- Nature's Swiftness (emergency)
-        tags = {C.HEALING_CD, C.TRACK_BUFF, C.PVE_PVP},
+        tags = {C.HEALING_CD, C.HAS_BUFF, C.PVE_PVP},
         cooldown = 180,
         priority = 6,
         talent = true,

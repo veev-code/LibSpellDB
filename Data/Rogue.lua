@@ -63,7 +63,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 5277,  -- Evasion
-        tags = {C.PERSONAL_DEFENSIVE, C.TRACK_BUFF},
+        tags = {C.PERSONAL_DEFENSIVE, C.HAS_BUFF},
         cooldown = 300,
         duration = 15,
     },
@@ -75,7 +75,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 31224,  -- Cloak of Shadows (TBC+, may not exist in Classic)
-        tags = {C.PERSONAL_DEFENSIVE, C.IMMUNITY, C.TRACK_BUFF},
+        tags = {C.PERSONAL_DEFENSIVE, C.IMMUNITY, C.HAS_BUFF},
         cooldown = 90,
         duration = 5,
     },
@@ -96,21 +96,21 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 13750,  -- Adrenaline Rush
-        tags = {C.OFFENSIVE_CD, C.TRACK_BUFF},
+        tags = {C.OFFENSIVE_CD, C.HAS_BUFF},
         cooldown = 300,
         duration = 15,
         talent = true,
     },
     {
         spellID = 13877,  -- Blade Flurry
-        tags = {C.OFFENSIVE_CD, C.TRACK_BUFF},
+        tags = {C.OFFENSIVE_CD, C.HAS_BUFF},
         cooldown = 120,
         duration = 15,
         talent = true,
     },
     {
         spellID = 14177,  -- Cold Blood
-        tags = {C.OFFENSIVE_CD, C.TRACK_BUFF},
+        tags = {C.OFFENSIVE_CD, C.HAS_BUFF},
         cooldown = 180,
         talent = true,
     },
@@ -139,7 +139,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 2983,  -- Sprint
-        tags = {C.MOVEMENT, C.MOVEMENT_SPEED, C.TRACK_BUFF},
+        tags = {C.MOVEMENT, C.MOVEMENT_SPEED, C.HAS_BUFF},
         cooldown = 300,
         duration = 15,
         ranks = {2983, 8696, 11305},
@@ -160,7 +160,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 5171,  -- Slice and Dice (maintain first, #1 priority)
-        tags = {C.CORE_ROTATION, C.FINISHER, C.BUFF, C.TRACK_BUFF, C.PVE},
+        tags = {C.CORE_ROTATION, C.FINISHER, C.BUFF, C.HAS_BUFF, C.PVE},
         cooldown = 0,
         duration = 21,  -- Max at 5 CP
         priority = 1,

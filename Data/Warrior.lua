@@ -17,7 +17,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 18499,  -- Berserker Rage (CC break - moved to top)
-        tags = {C.CC_BREAK, C.CC_IMMUNITY, C.TRACK_BUFF},
+        tags = {C.CC_BREAK, C.CC_IMMUNITY, C.HAS_BUFF},
         cooldown = 30,
         duration = 10,
         priority = 1,  -- CC break = highest utility priority
@@ -136,7 +136,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 871,  -- Shield Wall
-        tags = {C.PERSONAL_DEFENSIVE, C.DAMAGE_REDUCTION, C.TRACK_BUFF},
+        tags = {C.PERSONAL_DEFENSIVE, C.DAMAGE_REDUCTION, C.HAS_BUFF},
         cooldown = 1800,
         duration = 10,
         priority = 6,  -- Personal defensive
@@ -145,7 +145,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 12975,  -- Last Stand
-        tags = {C.PERSONAL_DEFENSIVE, C.TRACK_BUFF},
+        tags = {C.PERSONAL_DEFENSIVE, C.HAS_BUFF},
         cooldown = 600,
         duration = 20,
         priority = 6,  -- Personal defensive
@@ -154,7 +154,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 23920,  -- Spell Reflection
-        tags = {C.PERSONAL_DEFENSIVE, C.IMMUNITY, C.TRACK_BUFF},
+        tags = {C.PERSONAL_DEFENSIVE, C.IMMUNITY, C.HAS_BUFF},
         cooldown = 10,
         duration = 5,
         priority = 6,  -- Personal defensive
@@ -166,7 +166,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 2687,  -- Bloodrage
-        tags = {C.OFFENSIVE_CD_MINOR, C.RESOURCE, C.TRACK_BUFF},
+        tags = {C.OFFENSIVE_CD_MINOR, C.RESOURCE, C.HAS_BUFF},
         cooldown = 60,
         duration = 10,
         priority = 7,  -- Resource
@@ -183,7 +183,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 1719,  -- Recklessness
-        tags = {C.OFFENSIVE_CD, C.TRACK_BUFF},
+        tags = {C.OFFENSIVE_CD, C.HAS_BUFF},
         cooldown = 1800,
         duration = 15,
         specs = {"FURY"},
@@ -191,7 +191,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 12292,  -- Death Wish
-        tags = {C.OFFENSIVE_CD, C.TRACK_BUFF},
+        tags = {C.OFFENSIVE_CD, C.HAS_BUFF},
         cooldown = 180,
         duration = 30,
         talent = true,
@@ -199,7 +199,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 12328,  -- Sweeping Strikes (Fury talent in TBC/Anniversary)
-        tags = {C.OFFENSIVE_CD, C.TRACK_BUFF},
+        tags = {C.OFFENSIVE_CD, C.HAS_BUFF},
         cooldown = 30,
         duration = 10,
         talent = true,
@@ -207,7 +207,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 20230,  -- Retaliation
-        tags = {C.OFFENSIVE_CD, C.PERSONAL_DEFENSIVE, C.TRACK_BUFF},
+        tags = {C.OFFENSIVE_CD, C.PERSONAL_DEFENSIVE, C.HAS_BUFF},
         cooldown = 1800,
         duration = 15,
         specs = {"ARMS"},
@@ -290,7 +290,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 29801,  -- Rampage (critical buff to maintain, procs on crit)
-        tags = {C.CORE_ROTATION, C.BUFF, C.TRACK_BUFF, C.REACTIVE, C.PVE},
+        tags = {C.CORE_ROTATION, C.BUFF, C.HAS_BUFF, C.REACTIVE, C.PVE},
         cooldown = 0,
         duration = 30,
         priority = 2,
@@ -324,7 +324,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 2565,  -- Shield Block (use on CD for survivability)
-        tags = {C.CORE_ROTATION, C.PERSONAL_DEFENSIVE, C.TRACK_BUFF, C.PVE},
+        tags = {C.CORE_ROTATION, C.PERSONAL_DEFENSIVE, C.HAS_BUFF, C.PVE},
         cooldown = 5,
         duration = 5,
         priority = 1,

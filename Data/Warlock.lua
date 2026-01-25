@@ -90,14 +90,14 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 6229,  -- Shadow Ward
-        tags = {C.PERSONAL_DEFENSIVE, C.TRACK_BUFF},
+        tags = {C.PERSONAL_DEFENSIVE, C.HAS_BUFF},
         cooldown = 30,
         duration = 30,
         ranks = {6229, 11739, 11740, 28610},
     },
     {
         spellID = 7812,  -- Sacrifice (Voidwalker)
-        tags = {C.PERSONAL_DEFENSIVE, C.PET, C.TRACK_BUFF},
+        tags = {C.PERSONAL_DEFENSIVE, C.PET, C.HAS_BUFF},
         cooldown = 0,
         duration = 30,
         ranks = {7812, 19438, 19440, 19441, 19442, 19443},
@@ -108,7 +108,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 18288,  -- Amplify Curse
-        tags = {C.OFFENSIVE_CD, C.TRACK_BUFF},
+        tags = {C.OFFENSIVE_CD, C.HAS_BUFF},
         cooldown = 180,
         talent = true,
     },
@@ -357,7 +357,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 18094,  -- Nightfall (proc tracking)
-        tags = {C.PROC, C.TRACK_BUFF},
+        tags = {C.PROC, C.HAS_BUFF},
         talent = true,
     },
     {
