@@ -15,4 +15,7 @@
     <!-- Racials and Trinkets -->
     <Script file="Racials.lua"/>
 
+    <!-- Proc Buffs -->
+    <Script file="Procs.lua"/>
+
 </Ui>

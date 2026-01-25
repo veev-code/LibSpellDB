@@ -480,3 +480,38 @@ function lib:DumpInvalidSpells()
         print(("  [%d]"):format(spellID))
     end
 end
+
+-------------------------------------------------------------------------------
+-- Proc API
+-------------------------------------------------------------------------------
+
+--[[
+    Get all proc buffs for a class
+
+    @param class (string) - Class token (e.g., "WARRIOR")
+    @return (table) - Array of proc spell data
+]]
+function lib:GetProcs(class)
+    local procs = {}
+    local classSpells = self:GetSpellsByClassAndTag(class, "PROC")
+    
+    for spellID, spellData in pairs(classSpells) do
+        table.insert(procs, spellData)
+    end
+    
+    return procs
+end
+
+--[[
+    Get proc info for a specific spell
+
+    @param spellID (number) - Spell/buff ID
+    @return (table or nil) - Proc info or nil if not a proc
+]]
+function lib:GetProcInfo(spellID)
+    local spellData = self:GetSpellInfo(spellID)
+    if spellData and spellData.procInfo then
+        return spellData.procInfo
+    end
+    return nil
+end
