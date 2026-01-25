@@ -1,0 +1,257 @@
+--[[
+    LibSpellDB - Hunter Spells (Anniversary Edition / Classic)
+    TODO: Populate with full spell list
+]]
+
+local MAJOR = "LibSpellDB-1.0"
+local lib = LibStub and LibStub:GetLibrary(MAJOR, true)
+if not lib then return end
+
+local C = lib.Categories
+
+lib:RegisterSpells({
+    -------------------------------------------------------------------------------
+    -- Crowd Control
+    -------------------------------------------------------------------------------
+    {
+        spellID = 19503,  -- Scatter Shot
+        tags = {C.CC_HARD, C.DISORIENT},
+        cooldown = 30,
+        duration = 4,
+        talent = true,
+    },
+    {
+        spellID = 3355,  -- Freezing Trap
+        tags = {C.CC_HARD},
+        cooldown = 0,  -- Trap has arming time, shared with other traps
+        duration = 20,
+        ranks = {3355, 14308, 14309},
+    },
+    {
+        spellID = 19386,  -- Wyvern Sting
+        tags = {C.CC_HARD},
+        cooldown = 120,
+        duration = 12,
+        talent = true,
+        ranks = {19386, 24132, 24133},
+    },
+    {
+        spellID = 19577,  -- Intimidation
+        tags = {C.CC_HARD},
+        cooldown = 60,
+        duration = 3,
+        talent = true,
+    },
+    {
+        spellID = 1513,  -- Scare Beast
+        tags = {C.CC_HARD, C.FEAR},
+        cooldown = 30,
+        duration = 20,
+        ranks = {1513, 14326, 14327},
+    },
+    {
+        spellID = 1499,  -- Freezing Trap (the trap itself)
+        tags = {C.CC_HARD, C.UTILITY},
+        cooldown = 15,  -- Trap cooldown
+        ranks = {1499, 14310, 14311},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Soft CC / Slows
+    -------------------------------------------------------------------------------
+    {
+        spellID = 5116,  -- Concussive Shot
+        tags = {C.CC_SOFT},
+        cooldown = 12,
+        duration = 4,
+    },
+    {
+        spellID = 2974,  -- Wing Clip
+        tags = {C.CC_SOFT},
+        cooldown = 0,
+        duration = 10,
+        ranks = {2974, 14267, 14268},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Personal Defensives
+    -------------------------------------------------------------------------------
+    {
+        spellID = 19263,  -- Deterrence
+        tags = {C.PERSONAL_DEFENSIVE, C.TRACK_BUFF},
+        cooldown = 300,
+        duration = 10,
+        talent = true,
+    },
+    {
+        spellID = 5384,  -- Feign Death
+        tags = {C.PERSONAL_DEFENSIVE, C.UTILITY},
+        cooldown = 30,
+    },
+
+    -------------------------------------------------------------------------------
+    -- Offensive Cooldowns
+    -------------------------------------------------------------------------------
+    {
+        spellID = 19574,  -- Bestial Wrath
+        tags = {C.OFFENSIVE_CD, C.TRACK_BUFF, C.PET},
+        cooldown = 120,
+        duration = 18,
+        talent = true,
+    },
+    {
+        spellID = 3045,  -- Rapid Fire
+        tags = {C.OFFENSIVE_CD, C.TRACK_BUFF},
+        cooldown = 300,
+        duration = 15,
+    },
+    {
+        spellID = 23989,  -- Readiness
+        tags = {C.OFFENSIVE_CD, C.UTILITY},
+        cooldown = 300,
+        talent = true,
+    },
+
+    -------------------------------------------------------------------------------
+    -- Movement
+    -------------------------------------------------------------------------------
+    {
+        spellID = 781,  -- Disengage (Classic version - threat drop)
+        tags = {C.UTILITY},
+        cooldown = 5,
+        ranks = {781, 14272, 14273},
+    },
+    {
+        spellID = 5118,  -- Aspect of the Cheetah
+        tags = {C.MOVEMENT, C.MOVEMENT_SPEED},
+        cooldown = 0,
+    },
+    {
+        spellID = 13159,  -- Aspect of the Pack
+        tags = {C.MOVEMENT, C.MOVEMENT_SPEED, C.UTILITY},
+        cooldown = 0,
+    },
+
+    -------------------------------------------------------------------------------
+    -- Dispels
+    -------------------------------------------------------------------------------
+    {
+        spellID = 19801,  -- Tranquilizing Shot
+        tags = {C.PURGE, C.DISPEL_MAGIC},
+        cooldown = 20,
+    },
+
+    -------------------------------------------------------------------------------
+    -- Pet Control
+    -------------------------------------------------------------------------------
+    {
+        spellID = 2641,  -- Dismiss Pet
+        tags = {C.PET_CONTROL, C.UTILITY},
+        cooldown = 0,
+    },
+    {
+        spellID = 883,  -- Call Pet
+        tags = {C.PET_SUMMON, C.UTILITY},
+        cooldown = 0,
+    },
+    {
+        spellID = 136,  -- Mend Pet
+        tags = {C.PET, C.HEAL_SINGLE},
+        cooldown = 0,
+        duration = 15,
+        ranks = {136, 3111, 3661, 3662, 13542, 13543, 13544},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Traps
+    -------------------------------------------------------------------------------
+    {
+        spellID = 13795,  -- Immolation Trap
+        tags = {C.OFFENSIVE_CD_MINOR, C.DEBUFF},
+        cooldown = 15,
+        ranks = {13795, 14302, 14303, 14304, 14305},
+    },
+    {
+        spellID = 13813,  -- Explosive Trap
+        tags = {C.OFFENSIVE_CD_MINOR},
+        cooldown = 15,
+        ranks = {13813, 14316, 14317},
+    },
+    {
+        spellID = 13809,  -- Frost Trap
+        tags = {C.CC_SOFT, C.UTILITY},
+        cooldown = 15,
+    },
+
+    -------------------------------------------------------------------------------
+    -- Core Rotation
+    -------------------------------------------------------------------------------
+    {
+        spellID = 19434,  -- Aimed Shot
+        tags = {C.CORE_ROTATION},
+        cooldown = 6,
+        talent = true,
+        ranks = {19434, 20900, 20901, 20902, 20903, 20904},
+    },
+    {
+        spellID = 2643,  -- Multi-Shot
+        tags = {C.CORE_ROTATION},
+        cooldown = 10,
+        ranks = {2643, 14288, 14289, 14290, 25294},
+    },
+    {
+        spellID = 1978,  -- Serpent Sting
+        tags = {C.CORE_ROTATION, C.DEBUFF},
+        cooldown = 0,
+        duration = 15,
+        ranks = {1978, 13549, 13550, 13551, 13552, 13553, 13554, 13555, 25295},
+    },
+    {
+        spellID = 75,  -- Auto Shot
+        tags = {C.CORE_ROTATION},
+        cooldown = 0,
+    },
+    {
+        spellID = 3044,  -- Arcane Shot
+        tags = {C.CORE_ROTATION},
+        cooldown = 6,
+        ranks = {3044, 14281, 14282, 14283, 14284, 14285, 14286, 14287},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Utility
+    -------------------------------------------------------------------------------
+    {
+        spellID = 1543,  -- Flare
+        tags = {C.UTILITY, C.STEALTH_BREAK},
+        cooldown = 15,
+        duration = 30,
+    },
+    {
+        spellID = 1462,  -- Beast Lore
+        tags = {C.UTILITY},
+        cooldown = 0,
+    },
+    {
+        spellID = 5118,  -- Aspect of the Cheetah
+        tags = {C.BUFF, C.MOVEMENT_SPEED},
+        cooldown = 0,
+    },
+    {
+        spellID = 13161,  -- Aspect of the Beast
+        tags = {C.BUFF, C.UTILITY},
+        cooldown = 0,
+    },
+    {
+        spellID = 13163,  -- Aspect of the Monkey
+        tags = {C.BUFF, C.PERSONAL_DEFENSIVE},
+        cooldown = 0,
+    },
+    {
+        spellID = 13165,  -- Aspect of the Hawk
+        tags = {C.BUFF, C.OFFENSIVE_CD_MINOR},
+        cooldown = 0,
+        ranks = {13165, 14318, 14319, 14320, 14321, 14322, 25296},
+    },
+
+}, "HUNTER")

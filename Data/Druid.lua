@@ -1,0 +1,184 @@
+--[[
+    LibSpellDB - Druid Spells (Anniversary Edition / Classic)
+    TODO: Populate with full spell list
+]]
+
+local MAJOR = "LibSpellDB-1.0"
+local lib = LibStub and LibStub:GetLibrary(MAJOR, true)
+if not lib then return end
+
+local C = lib.Categories
+
+lib:RegisterSpells({
+    -------------------------------------------------------------------------------
+    -- Interrupts
+    -------------------------------------------------------------------------------
+    {
+        spellID = 16979,  -- Feral Charge
+        tags = {C.INTERRUPT, C.MOVEMENT_GAP_CLOSE, C.MOVEMENT},
+        cooldown = 15,
+        duration = 4,  -- Interrupt lockout
+        talent = true,
+    },
+    {
+        spellID = 5211,  -- Bash
+        tags = {C.CC_HARD},
+        cooldown = 60,
+        duration = 4,
+        ranks = {5211, 6798, 8983},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Crowd Control
+    -------------------------------------------------------------------------------
+    {
+        spellID = 339,  -- Entangling Roots
+        tags = {C.ROOT, C.CC_SOFT},
+        cooldown = 0,
+        duration = 27,
+        ranks = {339, 1062, 5195, 5196, 9852, 9853},
+    },
+    {
+        spellID = 2637,  -- Hibernate
+        tags = {C.CC_HARD},
+        cooldown = 0,
+        duration = 40,
+        ranks = {2637, 18657, 18658},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Personal Defensives
+    -------------------------------------------------------------------------------
+    {
+        spellID = 22812,  -- Barkskin
+        tags = {C.PERSONAL_DEFENSIVE, C.DAMAGE_REDUCTION, C.TRACK_BUFF},
+        cooldown = 60,
+        duration = 12,
+    },
+    {
+        spellID = 22842,  -- Frenzied Regeneration
+        tags = {C.PERSONAL_DEFENSIVE, C.HEAL_SINGLE, C.TRACK_BUFF},
+        cooldown = 180,
+        duration = 10,
+    },
+    {
+        spellID = 16689,  -- Nature's Grasp
+        tags = {C.PERSONAL_DEFENSIVE, C.ROOT, C.TRACK_BUFF},
+        cooldown = 60,
+        duration = 45,
+        ranks = {16689, 16810, 16811, 16812, 16813, 17329},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Healing Cooldowns
+    -------------------------------------------------------------------------------
+    {
+        spellID = 17116,  -- Nature's Swiftness
+        tags = {C.HEALING_CD, C.TRACK_BUFF},
+        cooldown = 180,
+        talent = true,
+    },
+    {
+        spellID = 18562,  -- Swiftmend
+        tags = {C.HEALING_CD, C.HEAL_SINGLE},
+        cooldown = 15,
+        talent = true,
+    },
+
+    -------------------------------------------------------------------------------
+    -- Raid Defensives
+    -------------------------------------------------------------------------------
+    {
+        spellID = 740,  -- Tranquility
+        tags = {C.RAID_DEFENSIVE, C.HEAL_AOE, C.HEALING_CD},
+        cooldown = 300,
+        duration = 10,
+        ranks = {740, 8918, 9862, 9863},
+    },
+    {
+        spellID = 29166,  -- Innervate
+        tags = {C.EXTERNAL_DEFENSIVE, C.RESOURCE, C.UTILITY, C.TRACK_BUFF},
+        cooldown = 360,
+        duration = 20,
+    },
+
+    -------------------------------------------------------------------------------
+    -- Movement
+    -------------------------------------------------------------------------------
+    {
+        spellID = 1850,  -- Dash
+        tags = {C.MOVEMENT, C.MOVEMENT_SPEED, C.TRACK_BUFF},
+        cooldown = 300,
+        duration = 15,
+        ranks = {1850, 9821},
+    },
+    {
+        spellID = 5215,  -- Prowl
+        tags = {C.STEALTH},
+        cooldown = 10,
+        ranks = {5215, 6783, 9913},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Shapeshifts
+    -------------------------------------------------------------------------------
+    {
+        spellID = 768,  -- Cat Form
+        tags = {C.SHAPESHIFT},
+        cooldown = 0,
+    },
+    {
+        spellID = 5487,  -- Bear Form
+        tags = {C.SHAPESHIFT},
+        cooldown = 0,
+    },
+    {
+        spellID = 9634,  -- Dire Bear Form
+        tags = {C.SHAPESHIFT},
+        cooldown = 0,
+    },
+    {
+        spellID = 783,  -- Travel Form
+        tags = {C.SHAPESHIFT, C.MOVEMENT},
+        cooldown = 0,
+    },
+    {
+        spellID = 24858,  -- Moonkin Form
+        tags = {C.SHAPESHIFT, C.OFFENSIVE_CD},
+        cooldown = 0,
+        talent = true,
+    },
+
+    -------------------------------------------------------------------------------
+    -- Utility
+    -------------------------------------------------------------------------------
+    {
+        spellID = 20484,  -- Rebirth
+        tags = {C.BATTLE_REZ, C.RESURRECT, C.UTILITY},
+        cooldown = 1800,
+        ranks = {20484, 20739, 20742, 20747, 20748},
+    },
+    {
+        spellID = 5209,  -- Challenging Roar
+        tags = {C.TAUNT},
+        cooldown = 600,
+        duration = 6,
+    },
+    {
+        spellID = 6795,  -- Growl
+        tags = {C.TAUNT},
+        cooldown = 10,
+    },
+
+    -------------------------------------------------------------------------------
+    -- Offensive
+    -------------------------------------------------------------------------------
+    {
+        spellID = 16914,  -- Hurricane
+        tags = {C.CORE_ROTATION, C.CC_SOFT},
+        cooldown = 60,
+        duration = 10,
+        ranks = {16914, 17401, 17402},
+    },
+
+}, "DRUID")

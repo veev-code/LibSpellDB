@@ -1,0 +1,19 @@
+## Interface: 11508
+## Title: Lib: SpellDB
+## Notes: Shared spell database with taggable categories for WoW addons
+## Author: Veev
+## Version: 1.0.0
+## IconTexture: Interface\Icons\INV_Misc_Book_09
+## X-Category: Library
+## X-License: MIT
+## X-Website: https://github.com/veev-code/LibSpellDB
+## X-Twitch: https://www.twitch.tv/veev
+## X-Twitter: https://x.com/VeevTSG
+
+## OptionalDeps: LibStub
+
+# Core library
+lib.xml
+
+# Spell data
+Data\Data.xml
