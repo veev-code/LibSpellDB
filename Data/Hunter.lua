@@ -123,12 +123,12 @@ lib:RegisterSpells({
     },
     {
         spellID = 5118,  -- Aspect of the Cheetah
-        tags = {C.MOVEMENT, C.MOVEMENT_SPEED},
+        tags = {C.MOVEMENT, C.MOVEMENT_SPEED, C.LONG_BUFF},
         cooldown = 0,
     },
     {
         spellID = 13159,  -- Aspect of the Pack
-        tags = {C.MOVEMENT, C.MOVEMENT_SPEED, C.UTILITY},
+        tags = {C.MOVEMENT, C.MOVEMENT_SPEED, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
     },
 
@@ -184,38 +184,64 @@ lib:RegisterSpells({
     },
 
     -------------------------------------------------------------------------------
-    -- Core Rotation
+    -- Core Rotation (Priority: MD → Serpent → Kill Command → Steady → Multi → Arcane → Aimed)
     -------------------------------------------------------------------------------
     {
-        spellID = 19434,  -- Aimed Shot
-        tags = {C.CORE_ROTATION},
-        cooldown = 6,
-        talent = true,
-        ranks = {19434, 20900, 20901, 20902, 20903, 20904},
+        spellID = 34477,  -- Misdirection (use on pull)
+        tags = {C.UTILITY, C.PVE},
+        cooldown = 120,
+        duration = 30,
+        priority = 1,
     },
     {
-        spellID = 2643,  -- Multi-Shot
-        tags = {C.CORE_ROTATION},
-        cooldown = 10,
-        ranks = {2643, 14288, 14289, 14290, 25294},
-    },
-    {
-        spellID = 1978,  -- Serpent Sting
-        tags = {C.CORE_ROTATION, C.DEBUFF},
+        spellID = 1978,  -- Serpent Sting (maintain DoT)
+        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE_PVP},
         cooldown = 0,
         duration = 15,
-        ranks = {1978, 13549, 13550, 13551, 13552, 13553, 13554, 13555, 25295},
+        priority = 2,
+        ranks = {1978, 13549, 13550, 13551, 13552, 13553, 13554, 13555, 25295, 27016},
     },
     {
-        spellID = 75,  -- Auto Shot
+        spellID = 34026,  -- Kill Command (use on CD with pet)
+        tags = {C.CORE_ROTATION, C.OFFENSIVE_CD_MINOR, C.PVE},
+        cooldown = 5,
+        priority = 3,
+        specs = nil,
+    },
+    {
+        spellID = 34120,  -- Steady Shot (main shot, weave with Auto)
+        tags = {C.CORE_ROTATION, C.PVE},
+        cooldown = 0,
+        priority = 4,
+        specs = nil,
+    },
+    {
+        spellID = 75,  -- Auto Shot (weave between Steady)
         tags = {C.CORE_ROTATION},
         cooldown = 0,
+        priority = 5,
     },
     {
-        spellID = 3044,  -- Arcane Shot
-        tags = {C.CORE_ROTATION},
+        spellID = 2643,  -- Multi-Shot (use on CD in rotation)
+        tags = {C.CORE_ROTATION, C.PVE_PVP},
+        cooldown = 10,
+        priority = 6,
+        ranks = {2643, 14288, 14289, 14290, 25294, 27021},
+    },
+    {
+        spellID = 3044,  -- Arcane Shot (mana dump / BM rotation)
+        tags = {C.CORE_ROTATION, C.PVE_PVP},
         cooldown = 6,
-        ranks = {3044, 14281, 14282, 14283, 14284, 14285, 14286, 14287},
+        priority = 7,
+        ranks = {3044, 14281, 14282, 14283, 14284, 14285, 14286, 14287, 27019},
+    },
+    {
+        spellID = 19434,  -- Aimed Shot (when procs / opener)
+        tags = {C.CORE_ROTATION, C.PVE},
+        cooldown = 6,
+        priority = 8,
+        talent = true,
+        ranks = {19434, 20900, 20901, 20902, 20903, 20904, 27065},
     },
 
     -------------------------------------------------------------------------------
@@ -234,22 +260,22 @@ lib:RegisterSpells({
     },
     {
         spellID = 5118,  -- Aspect of the Cheetah
-        tags = {C.BUFF, C.MOVEMENT_SPEED},
+        tags = {C.BUFF, C.MOVEMENT_SPEED, C.LONG_BUFF},
         cooldown = 0,
     },
     {
         spellID = 13161,  -- Aspect of the Beast
-        tags = {C.BUFF, C.UTILITY},
+        tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
     },
     {
         spellID = 13163,  -- Aspect of the Monkey
-        tags = {C.BUFF, C.PERSONAL_DEFENSIVE},
+        tags = {C.BUFF, C.PERSONAL_DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
     },
     {
         spellID = 13165,  -- Aspect of the Hawk
-        tags = {C.BUFF, C.OFFENSIVE_CD_MINOR},
+        tags = {C.BUFF, C.OFFENSIVE_CD_MINOR, C.LONG_BUFF},
         cooldown = 0,
         ranks = {13165, 14318, 14319, 14320, 14321, 14322, 25296},
     },

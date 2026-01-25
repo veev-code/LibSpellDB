@@ -15,7 +15,9 @@ if not lib then return end
 lib.Categories = {
     -- Rotational / Core
     CORE_ROTATION       = "CORE_ROTATION",       -- Primary rotational abilities
-    FILLER              = "FILLER",              -- Filler abilities (low priority)
+    FILLER              = "FILLER",              -- Mana-based spammables (excluded from HUD by default)
+    OUT_OF_COMBAT       = "OUT_OF_COMBAT",       -- Abilities only used out of combat (excluded from HUD)
+    LONG_BUFF           = "LONG_BUFF",           -- Long-duration buffs cast out of combat (excluded from HUD)
     FINISHER            = "FINISHER",            -- Combo point / resource spenders
 
     -- Offensive Cooldowns
@@ -96,6 +98,11 @@ lib.Categories = {
     TRACK_BUFF          = "TRACK_BUFF",          -- Track as buff duration
     TRACK_DEBUFF        = "TRACK_DEBUFF",        -- Track as debuff on target
     TRACK_COOLDOWN      = "TRACK_COOLDOWN",      -- Track cooldown timer
+
+    -- Content Type (for filtering)
+    PVE                 = "PVE",                 -- Primarily PvE ability
+    PVP                 = "PVP",                 -- Primarily PvP ability
+    PVE_PVP             = "PVE_PVP",             -- Important in both contexts
 }
 
 -------------------------------------------------------------------------------

@@ -54,14 +54,14 @@ lib:RegisterSpells({
     },
     {
         spellID = 710,  -- Banish
-        tags = {C.CC_HARD},
+        tags = {C.CC_HARD, C.FILLER},  -- Spammable CC
         cooldown = 0,
         duration = 30,
         ranks = {710, 18647},
     },
     {
         spellID = 1098,  -- Enslave Demon
-        tags = {C.CC_HARD},
+        tags = {C.CC_HARD, C.FILLER},  -- Spammable CC
         cooldown = 0,
         duration = 300,
         ranks = {1098, 11725, 11726},
@@ -148,92 +148,119 @@ lib:RegisterSpells({
     },
 
     -------------------------------------------------------------------------------
-    -- Core Rotation / DoTs
+    -- Core Rotation - Affliction (Priority: CoE → UA → Corr → SL → SB)
     -------------------------------------------------------------------------------
     {
-        spellID = 172,  -- Corruption
-        tags = {C.CORE_ROTATION, C.DEBUFF},
-        cooldown = 0,
-        duration = 18,
-        ranks = {172, 6222, 6223, 7648, 11671, 11672, 25311},
-    },
-    {
-        spellID = 980,  -- Curse of Agony
-        tags = {C.CORE_ROTATION, C.DEBUFF},
-        cooldown = 0,
-        duration = 24,
-        ranks = {980, 1014, 6217, 11711, 11712, 11713},
-    },
-    {
-        spellID = 603,  -- Curse of Doom
-        tags = {C.CORE_ROTATION, C.DEBUFF, C.OFFENSIVE_CD},
+        spellID = 603,  -- Curse of Doom (on long boss fights)
+        tags = {C.CORE_ROTATION, C.DEBUFF, C.OFFENSIVE_CD, C.PVE},
         cooldown = 60,
         duration = 60,
+        priority = 1,
     },
     {
-        spellID = 348,  -- Immolate
-        tags = {C.CORE_ROTATION, C.DEBUFF},
+        spellID = 980,  -- Curse of Agony (shorter fights)
+        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE_PVP},
         cooldown = 0,
-        duration = 15,
-        ranks = {348, 707, 1094, 2941, 11665, 11667, 11668, 25309},
+        duration = 24,
+        priority = 1,
+        ranks = {980, 1014, 6217, 11711, 11712, 11713, 27218},
     },
     {
-        spellID = 30108,  -- Unstable Affliction (TBC+)
-        tags = {C.CORE_ROTATION, C.DEBUFF},
+        spellID = 30108,  -- Unstable Affliction (apply early)
+        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE},
         cooldown = 0,
         duration = 18,
+        priority = 2,
         talent = true,
+        specs = {"AFFLICTION"},
+        ranks = {30108, 30404, 30405},
     },
     {
-        spellID = 18265,  -- Siphon Life
-        tags = {C.CORE_ROTATION, C.DEBUFF, C.HEAL_SINGLE},
+        spellID = 172,  -- Corruption (maintain)
+        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE_PVP},
+        cooldown = 0,
+        duration = 18,
+        priority = 3,
+        ranks = {172, 6222, 6223, 7648, 11671, 11672, 25311, 27216},
+    },
+    {
+        spellID = 18265,  -- Siphon Life (maintain if talented)
+        tags = {C.CORE_ROTATION, C.DEBUFF, C.HEAL_SINGLE, C.PVE},
         cooldown = 0,
         duration = 30,
+        priority = 4,
         talent = true,
-        ranks = {18265, 18879, 18880, 18881},
+        specs = {"AFFLICTION"},
+        ranks = {18265, 18879, 18880, 18881, 27264},
     },
 
     -------------------------------------------------------------------------------
-    -- Direct Damage
+    -- Core Rotation - Destruction (Priority: Immolate → Incinerate/SB)
     -------------------------------------------------------------------------------
     {
-        spellID = 686,  -- Shadow Bolt
-        tags = {C.CORE_ROTATION, C.FILLER},
-        cooldown = 0,
-        ranks = {686, 695, 705, 1088, 1106, 7641, 11659, 11660, 11661, 25307},
-    },
-    {
-        spellID = 5676,  -- Searing Pain
-        tags = {C.CORE_ROTATION, C.FILLER},
-        cooldown = 0,
-        ranks = {5676, 17919, 17920, 17921, 17922, 17923},
-    },
-    {
-        spellID = 6353,  -- Soul Fire
-        tags = {C.CORE_ROTATION, C.OFFENSIVE_CD},
-        cooldown = 60,
-        ranks = {6353, 17924},
-    },
-    {
-        spellID = 1120,  -- Drain Soul
-        tags = {C.CORE_ROTATION, C.UTILITY, C.RESOURCE},
+        spellID = 348,  -- Immolate (apply first for Conflag/Incinerate)
+        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE},
         cooldown = 0,
         duration = 15,
-        ranks = {1120, 8288, 8289, 11675},
+        priority = 1,
+        ranks = {348, 707, 1094, 2941, 11665, 11667, 11668, 25309, 27215},
+        specs = {"DESTRUCTION"},
     },
     {
-        spellID = 689,  -- Drain Life
-        tags = {C.CORE_ROTATION, C.HEAL_SINGLE},
+        spellID = 29722,  -- Incinerate (main nuke with Immolate up)
+        tags = {C.CORE_ROTATION, C.FILLER, C.PVE},
         cooldown = 0,
-        duration = 5,
-        ranks = {689, 699, 709, 7651, 11699, 11700},
+        priority = 2,
+        ranks = {29722, 32231},
+        specs = {"DESTRUCTION"},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Core Rotation - Filler/Shared
+    -------------------------------------------------------------------------------
+    {
+        spellID = 686,  -- Shadow Bolt (main filler)
+        tags = {C.CORE_ROTATION, C.FILLER, C.PVE_PVP},
+        cooldown = 0,
+        priority = 5,
+        ranks = {686, 695, 705, 1088, 1106, 7641, 11659, 11660, 11661, 25307, 27209},
     },
     {
-        spellID = 5138,  -- Drain Mana
-        tags = {C.CORE_ROTATION, C.RESOURCE},
+        spellID = 5676,  -- Searing Pain (threat issues / low rank snipe)
+        tags = {C.CORE_ROTATION, C.FILLER, C.PVP},
+        cooldown = 0,
+        priority = 6,
+        ranks = {5676, 17919, 17920, 17921, 17922, 17923, 27210},
+    },
+    {
+        spellID = 6353,  -- Soul Fire (opener/finisher)
+        tags = {C.CORE_ROTATION, C.OFFENSIVE_CD, C.PVE},
+        cooldown = 60,
+        priority = 7,
+        ranks = {6353, 17924, 27211},
+    },
+    {
+        spellID = 1120,  -- Drain Soul (execute phase / shard)
+        tags = {C.CORE_ROTATION, C.UTILITY, C.RESOURCE, C.PVE},
+        cooldown = 0,
+        duration = 15,
+        priority = 8,
+        ranks = {1120, 8288, 8289, 11675, 27217},
+    },
+    {
+        spellID = 689,  -- Drain Life (self-sustain)
+        tags = {C.CORE_ROTATION, C.HEAL_SINGLE, C.PVP},
         cooldown = 0,
         duration = 5,
-        ranks = {5138, 6226, 11703, 11704},
+        priority = 9,
+        ranks = {689, 699, 709, 7651, 11699, 11700, 27219, 27220},
+    },
+    {
+        spellID = 5138,  -- Drain Mana (PvP utility)
+        tags = {C.UTILITY, C.RESOURCE, C.PVP},
+        cooldown = 0,
+        duration = 5,
+        ranks = {5138, 6226, 11703, 11704, 27221},
     },
 
     -------------------------------------------------------------------------------
@@ -288,19 +315,19 @@ lib:RegisterSpells({
     },
     {
         spellID = 5697,  -- Unending Breath
-        tags = {C.UTILITY, C.BUFF},
+        tags = {C.UTILITY, C.BUFF, C.OUT_OF_COMBAT},
         cooldown = 0,
         duration = 600,
     },
     {
         spellID = 132,  -- Detect Invisibility
-        tags = {C.UTILITY, C.BUFF},
+        tags = {C.UTILITY, C.BUFF, C.OUT_OF_COMBAT},
         cooldown = 0,
         duration = 600,
     },
     {
-        spellID = 1098,  -- Enslave Demon
-        tags = {C.CC_HARD, C.PET_CONTROL},
+        spellID = 1098,  -- Enslave Demon (duplicate removed - already above)
+        tags = {C.CC_HARD, C.PET_CONTROL, C.FILLER},
         cooldown = 0,
         duration = 300,
         ranks = {1098, 11725, 11726},
@@ -344,21 +371,21 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 706,  -- Demon Armor
-        tags = {C.BUFF, C.PERSONAL_DEFENSIVE},
+        tags = {C.BUFF, C.PERSONAL_DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
         duration = 1800,
         ranks = {706, 1086, 11733, 11734, 11735},
     },
     {
         spellID = 687,  -- Demon Skin
-        tags = {C.BUFF, C.PERSONAL_DEFENSIVE},
+        tags = {C.BUFF, C.PERSONAL_DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
         duration = 1800,
         ranks = {687, 696},
     },
     {
         spellID = 28176,  -- Fel Armor (TBC+)
-        tags = {C.BUFF, C.PERSONAL_DEFENSIVE},
+        tags = {C.BUFF, C.PERSONAL_DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
         duration = 1800,
     },

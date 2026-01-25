@@ -13,95 +13,164 @@ local C = lib.Categories
 
 lib:RegisterSpells({
     -------------------------------------------------------------------------------
-    -- Interrupts (all specs use these)
+    -- CC Breaks (utility priority 1)
     -------------------------------------------------------------------------------
     {
-        spellID = 6552,  -- Pummel
-        tags = {C.INTERRUPT},
-        cooldown = 10,
-        duration = 4,
-        ranks = {6552, 6554},
-        specs = {"ARMS", "FURY"},  -- Berserker stance, so DPS specs
-    },
-    {
-        spellID = 72,  -- Shield Bash
-        tags = {C.INTERRUPT},
-        cooldown = 12,
-        duration = 6,
-        ranks = {72, 1671, 1672},
-        specs = {"PROTECTION"},  -- Requires shield
+        spellID = 18499,  -- Berserker Rage (CC break - moved to top)
+        tags = {C.CC_BREAK, C.CC_IMMUNITY, C.TRACK_BUFF},
+        cooldown = 30,
+        duration = 10,
+        priority = 1,  -- CC break = highest utility priority
+        specs = nil,
     },
 
     -------------------------------------------------------------------------------
-    -- Gap Closers / CC (all specs in PvP, but context matters)
+    -- Movement / Gap Closers (utility priority 2)
     -------------------------------------------------------------------------------
     {
         spellID = 100,  -- Charge
         tags = {C.CC_HARD, C.MOVEMENT_GAP_CLOSE, C.MOVEMENT},
         cooldown = 15,
         duration = 1,
+        priority = 2,  -- Movement
         ranks = {100, 6178, 11578},
-        specs = nil,  -- All specs
+        specs = nil,
     },
     {
-        spellID = 20252,  -- Intercept
+        spellID = 20252,  -- Intercept (next to Charge)
         tags = {C.CC_HARD, C.MOVEMENT_GAP_CLOSE, C.MOVEMENT},
         cooldown = 30,
         duration = 3,
+        priority = 2,  -- Movement
         ranks = {20252, 20616, 20617},
-        specs = nil,  -- All specs use for stun
+        specs = nil,
+    },
+    {
+        spellID = 3411,  -- Intervene (movement utility)
+        tags = {C.EXTERNAL_DEFENSIVE, C.MOVEMENT_GAP_CLOSE, C.MOVEMENT},
+        cooldown = 30,
+        priority = 2,  -- Movement
+        specs = nil,
+    },
+
+    -------------------------------------------------------------------------------
+    -- Hard CC (utility priority 3)
+    -------------------------------------------------------------------------------
+    {
+        spellID = 5246,  -- Intimidating Shout
+        tags = {C.CC_HARD, C.FEAR},
+        cooldown = 180,
+        duration = 8,
+        priority = 3,  -- Hard CC
+        specs = nil,
+        appliesAura = {
+            spellID = 20511,
+            type = "DEBUFF",
+            onTarget = true,
+        },
     },
     {
         spellID = 12809,  -- Concussion Blow
         tags = {C.CC_HARD},
         cooldown = 45,
         duration = 5,
+        priority = 3,  -- Hard CC
         talent = true,
-        specs = {"PROTECTION"},  -- Prot talent
+        specs = {"PROTECTION"},
     },
     {
-        spellID = 5246,  -- Intimidating Shout
-        tags = {C.CC_HARD, C.FEAR},
-        cooldown = 180,
-        duration = 8,
-        specs = nil,  -- All specs (PvP essential)
-        -- Track the fear debuff when active on targets
-        appliesAura = {
-            spellID = 20511,  -- Fear debuff ID
-            type = "DEBUFF",
-            onTarget = true,  -- Track on enemy targets
-        },
+        spellID = 676,  -- Disarm
+        tags = {C.CC_HARD},
+        cooldown = 60,
+        duration = 10,
+        priority = 3,  -- Hard CC
+        specs = nil,
     },
 
     -------------------------------------------------------------------------------
-    -- Soft CC
+    -- Interrupts (utility priority 4)
+    -------------------------------------------------------------------------------
+    {
+        spellID = 6552,  -- Pummel
+        tags = {C.INTERRUPT},
+        cooldown = 10,
+        duration = 4,
+        priority = 4,  -- Interrupt
+        ranks = {6552, 6554},
+        specs = {"ARMS", "FURY"},
+    },
+    {
+        spellID = 72,  -- Shield Bash
+        tags = {C.INTERRUPT},
+        cooldown = 12,
+        duration = 6,
+        priority = 4,  -- Interrupt
+        ranks = {72, 1671, 1672},
+        specs = {"PROTECTION"},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Soft CC (utility priority 5)
     -------------------------------------------------------------------------------
     {
         spellID = 1715,  -- Hamstring
         tags = {C.CC_SOFT, C.CORE_ROTATION},
         cooldown = 0,
         duration = 15,
+        priority = 5,  -- Soft CC
         ranks = {1715, 7372, 7373},
-        specs = nil,  -- All specs in PvP
+        specs = nil,
     },
     {
         spellID = 12323,  -- Piercing Howl
         tags = {C.CC_SOFT},
         cooldown = 0,
         duration = 6,
+        priority = 5,  -- Soft CC
         talent = true,
-        specs = {"FURY"},  -- Fury talent
+        specs = {"FURY"},
     },
 
     -------------------------------------------------------------------------------
-    -- Disarm
+    -- Personal Defensives (utility priority 6)
     -------------------------------------------------------------------------------
     {
-        spellID = 676,  -- Disarm
-        tags = {C.CC_HARD},
+        spellID = 871,  -- Shield Wall
+        tags = {C.PERSONAL_DEFENSIVE, C.DAMAGE_REDUCTION, C.TRACK_BUFF},
+        cooldown = 1800,
+        duration = 10,
+        priority = 6,  -- Personal defensive
+        specs = {"PROTECTION"},
+        sharedCooldownGroup = "WARRIOR_30MIN_CD",
+    },
+    {
+        spellID = 12975,  -- Last Stand
+        tags = {C.PERSONAL_DEFENSIVE, C.TRACK_BUFF},
+        cooldown = 600,
+        duration = 20,
+        priority = 6,  -- Personal defensive
+        talent = true,
+        specs = {"PROTECTION"},
+    },
+    {
+        spellID = 23920,  -- Spell Reflection
+        tags = {C.PERSONAL_DEFENSIVE, C.IMMUNITY, C.TRACK_BUFF},
+        cooldown = 10,
+        duration = 5,
+        priority = 6,  -- Personal defensive
+        specs = nil,
+    },
+
+    -------------------------------------------------------------------------------
+    -- Resource (utility priority 7)
+    -------------------------------------------------------------------------------
+    {
+        spellID = 2687,  -- Bloodrage
+        tags = {C.OFFENSIVE_CD_MINOR, C.RESOURCE, C.TRACK_BUFF},
         cooldown = 60,
         duration = 10,
-        specs = nil,  -- All specs in PvP
+        priority = 7,  -- Resource
+        specs = nil,
     },
 
     -------------------------------------------------------------------------------
@@ -112,7 +181,7 @@ lib:RegisterSpells({
         tags = {C.OFFENSIVE_CD, C.TRACK_BUFF},
         cooldown = 1800,
         duration = 15,
-        specs = {"FURY"},  -- Show for Fury (Berserker Stance CD)
+        specs = {"FURY"},
         sharedCooldownGroup = "WARRIOR_30MIN_CD",
     },
     {
@@ -121,7 +190,7 @@ lib:RegisterSpells({
         cooldown = 180,
         duration = 30,
         talent = true,
-        specs = {"FURY"},  -- Fury talent
+        specs = {"FURY"},
     },
     {
         spellID = 12328,  -- Sweeping Strikes
@@ -129,175 +198,167 @@ lib:RegisterSpells({
         cooldown = 30,
         duration = 10,
         talent = true,
-        specs = {"ARMS"},  -- Arms talent
-    },
-    {
-        spellID = 2687,  -- Bloodrage
-        tags = {C.OFFENSIVE_CD_MINOR, C.RESOURCE},
-        cooldown = 60,
-        duration = 10,
-        specs = nil,  -- All specs use for rage
+        specs = {"ARMS"},
     },
     {
         spellID = 20230,  -- Retaliation
         tags = {C.OFFENSIVE_CD, C.PERSONAL_DEFENSIVE, C.TRACK_BUFF},
         cooldown = 1800,
         duration = 15,
-        specs = {"ARMS"},  -- Show for Arms (Battle Stance CD)
+        specs = {"ARMS"},
         sharedCooldownGroup = "WARRIOR_30MIN_CD",
     },
 
-    -------------------------------------------------------------------------------
-    -- Personal Defensives
-    -------------------------------------------------------------------------------
-    {
-        spellID = 871,  -- Shield Wall
-        tags = {C.PERSONAL_DEFENSIVE, C.DAMAGE_REDUCTION, C.TRACK_BUFF},
-        cooldown = 1800,
-        duration = 10,
-        specs = {"PROTECTION"},  -- Show for Protection (Defensive Stance CD)
-        sharedCooldownGroup = "WARRIOR_30MIN_CD",
-    },
-    {
-        spellID = 12975,  -- Last Stand
-        tags = {C.PERSONAL_DEFENSIVE, C.TRACK_BUFF},
-        cooldown = 600,
-        duration = 20,
-        talent = true,
-        specs = {"PROTECTION"},  -- Prot talent
-    },
-    {
-        spellID = 23920,  -- Spell Reflection
-        tags = {C.PERSONAL_DEFENSIVE, C.IMMUNITY, C.TRACK_BUFF},
-        cooldown = 10,
-        duration = 5,
-        specs = nil,  -- All specs in PvP (with shield swap)
-    },
 
     -------------------------------------------------------------------------------
-    -- External / Utility Defensives
+    -- Core Rotation - Arms (Priority: Rend → MS → Overpower → WW → Slam → Execute)
     -------------------------------------------------------------------------------
     {
-        spellID = 3411,  -- Intervene
-        tags = {C.EXTERNAL_DEFENSIVE, C.MOVEMENT_GAP_CLOSE, C.MOVEMENT},
-        cooldown = 30,
-        specs = nil,  -- All specs (mobility + save ally)
-    },
-
-    -------------------------------------------------------------------------------
-    -- CC Break
-    -------------------------------------------------------------------------------
-    {
-        spellID = 18499,  -- Berserker Rage
-        tags = {C.CC_BREAK, C.CC_IMMUNITY, C.TRACK_BUFF},
-        cooldown = 30,
-        duration = 10,
-        specs = nil,  -- All specs (essential PvP)
-    },
-
-    -------------------------------------------------------------------------------
-    -- Core Rotation - Arms
-    -------------------------------------------------------------------------------
-    {
-        spellID = 12294,  -- Mortal Strike
-        tags = {C.CORE_ROTATION, C.DEBUFF},
-        cooldown = 6,
-        duration = 10,
-        talent = true,
-        ranks = {12294, 21551, 21552, 21553},
+        spellID = 772,  -- Rend (apply first for Deep Wounds/Trauma)
+        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE},
+        cooldown = 0,
+        duration = 15,
+        priority = 1,
+        ranks = {772, 6546, 6547, 6548, 11572, 11573, 11574, 25208},
         specs = {"ARMS"},
     },
     {
-        spellID = 7384,  -- Overpower
-        tags = {C.CORE_ROTATION, C.REACTIVE},
+        spellID = 12294,  -- Mortal Strike (highest damage, use on CD)
+        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE_PVP},
+        cooldown = 6,
+        duration = 10,
+        priority = 2,
+        talent = true,
+        ranks = {12294, 21551, 21552, 21553, 25248, 30330},
+        specs = {"ARMS"},
+    },
+    {
+        spellID = 7384,  -- Overpower (use when proc available)
+        tags = {C.CORE_ROTATION, C.REACTIVE, C.PVE_PVP},
         cooldown = 5,
+        priority = 3,
         ranks = {7384, 7887, 11584, 11585},
-        specs = {"ARMS"},  -- Arms primary, procs off dodge
+        specs = {"ARMS"},
+    },
+    {
+        spellID = 1680,  -- Whirlwind (after MS, strong damage)
+        tags = {C.CORE_ROTATION, C.PVE_PVP},
+        cooldown = 10,
+        priority = 4,
+        specs = {"FURY", "ARMS"},
+    },
+    {
+        spellID = 1464,  -- Slam (filler between abilities)
+        tags = {C.CORE_ROTATION, C.PVE},
+        cooldown = 0,
+        priority = 5,
+        ranks = {1464, 8820, 11604, 11605, 25241, 25242},
+        specs = {"ARMS"},
+    },
+    {
+        spellID = 5308,  -- Execute (sub-20% finisher)
+        tags = {C.CORE_ROTATION, C.FINISHER, C.REACTIVE, C.PVE_PVP},
+        cooldown = 0,
+        priority = 6,
+        ranks = {5308, 20658, 20660, 20661, 20662, 25234, 25236},
+        specs = {"ARMS", "FURY"},
+    },
+    {
+        spellID = 34428,  -- Victory Rush (TBC, usable after killing blow)
+        tags = {C.CORE_ROTATION, C.REACTIVE, C.HEAL_SINGLE, C.PVE_PVP},
+        cooldown = 0,
+        priority = 7,
+        specs = {"ARMS", "FURY"},
     },
 
     -------------------------------------------------------------------------------
-    -- Core Rotation - Fury
+    -- Core Rotation - Fury (Priority: BT → WW → HS dump → Execute)
     -------------------------------------------------------------------------------
     {
-        spellID = 23881,  -- Bloodthirst
-        tags = {C.CORE_ROTATION},
+        spellID = 23881,  -- Bloodthirst (use on CD)
+        tags = {C.CORE_ROTATION, C.PVE},
         cooldown = 6,
+        priority = 1,
         talent = true,
-        ranks = {23881, 23892, 23893, 23894},
+        ranks = {23881, 23892, 23893, 23894, 25251, 30335},
         specs = {"FURY"},
     },
     {
-        spellID = 1680,  -- Whirlwind
-        tags = {C.CORE_ROTATION},
-        cooldown = 10,
-        specs = {"FURY", "ARMS"},  -- Both DPS specs
-    },
-
-    -------------------------------------------------------------------------------
-    -- Core Rotation - Protection
-    -------------------------------------------------------------------------------
-    {
-        spellID = 23922,  -- Shield Slam
-        tags = {C.CORE_ROTATION},
-        cooldown = 6,
+        spellID = 29801,  -- Rampage (critical buff to maintain, procs on crit)
+        tags = {C.CORE_ROTATION, C.BUFF, C.TRACK_BUFF, C.REACTIVE, C.PVE},
+        cooldown = 0,
+        duration = 30,
+        priority = 2,
         talent = true,
-        ranks = {23922, 23923, 23924, 23925},
-        specs = {"PROTECTION"},
+        specs = {"FURY"},
+        appliesAura = {
+            spellID = 30031,  -- Rampage buff ID (different from ability ID)
+            type = "BUFF",
+            onPlayer = true,
+        },
     },
     {
-        spellID = 6572,  -- Revenge
-        tags = {C.CORE_ROTATION, C.REACTIVE},
-        cooldown = 5,
-        ranks = {6572, 6574, 7379, 11600, 11601, 25288},
-        specs = {"PROTECTION"},
+        spellID = 78,  -- Heroic Strike (rage dump)
+        tags = {C.CORE_ROTATION, C.PVE},
+        cooldown = 0,
+        priority = 3,
+        ranks = {78, 284, 285, 1608, 11564, 11565, 11566, 11567, 25286, 29707},
+        specs = nil,
+    },
+    {
+        spellID = 845,  -- Cleave (AoE rage dump)
+        tags = {C.CORE_ROTATION, C.PVE},
+        cooldown = 0,
+        priority = 4,
+        ranks = {845, 7369, 11608, 11609, 20569, 25231},
+        specs = nil,
     },
 
     -------------------------------------------------------------------------------
-    -- Core Rotation - Shared
+    -- Core Rotation - Protection (Priority: Shield Block → Revenge → Shield Slam → Devastate → TC)
     -------------------------------------------------------------------------------
     {
-        spellID = 78,  -- Heroic Strike
-        tags = {C.CORE_ROTATION, C.FILLER},
-        cooldown = 0,
-        ranks = {78, 284, 285, 1608, 11564, 11565, 11566, 11567, 25286},
-        specs = nil,  -- All specs (rage dump)
+        spellID = 2565,  -- Shield Block (use on CD for survivability)
+        tags = {C.CORE_ROTATION, C.PERSONAL_DEFENSIVE, C.TRACK_BUFF, C.PVE},
+        cooldown = 5,
+        duration = 5,
+        priority = 1,
+        specs = {"PROTECTION"},
     },
     {
-        spellID = 845,  -- Cleave
-        tags = {C.CORE_ROTATION, C.FILLER},
-        cooldown = 0,
-        ranks = {845, 7369, 11608, 11609, 20569},
-        specs = nil,  -- All specs (AoE rage dump)
+        spellID = 6572,  -- Revenge (highest threat when proc'd)
+        tags = {C.CORE_ROTATION, C.REACTIVE, C.PVE},
+        cooldown = 5,
+        priority = 2,
+        ranks = {6572, 6574, 7379, 11600, 11601, 25288, 25269, 30357},
+        specs = {"PROTECTION"},
     },
     {
-        spellID = 6343,  -- Thunder Clap
-        tags = {C.CORE_ROTATION, C.DEBUFF, C.CC_SOFT},
+        spellID = 23922,  -- Shield Slam (high threat on CD)
+        tags = {C.CORE_ROTATION, C.PVE},
+        cooldown = 6,
+        priority = 3,
+        talent = true,
+        ranks = {23922, 23923, 23924, 23925, 25258, 30356},
+        specs = {"PROTECTION"},
+    },
+    {
+        spellID = 20243,  -- Devastate (filler, stacks Sunder)
+        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE},
+        cooldown = 0,
+        priority = 4,
+        talent = true,
+        ranks = {20243, 30016, 30022},
+        specs = {"PROTECTION"},
+    },
+    {
+        spellID = 6343,  -- Thunder Clap (maintain debuff)
+        tags = {C.CORE_ROTATION, C.DEBUFF, C.CC_SOFT, C.PVE},
         cooldown = 4,
         duration = 30,
-        ranks = {6343, 8198, 8204, 8205, 11580, 11581},
-        specs = {"PROTECTION"},  -- Tanks primarily
-    },
-    {
-        spellID = 772,  -- Rend
-        tags = {C.CORE_ROTATION, C.DEBUFF},
-        cooldown = 0,
-        duration = 15,
-        ranks = {772, 6546, 6547, 6548, 11572, 11573, 11574},
-        specs = {"ARMS"},  -- Arms (trauma synergy)
-    },
-    {
-        spellID = 1464,  -- Slam
-        tags = {C.CORE_ROTATION, C.FILLER},
-        cooldown = 0,
-        ranks = {1464, 8820, 11604, 11605},
-        specs = {"ARMS"},  -- Arms slam build
-    },
-    {
-        spellID = 5308,  -- Execute
-        tags = {C.CORE_ROTATION, C.FINISHER, C.REACTIVE},
-        cooldown = 0,
-        ranks = {5308, 20658, 20660, 20661, 20662},
-        specs = {"ARMS", "FURY"},  -- DPS specs
+        priority = 5,
+        ranks = {6343, 8198, 8204, 8205, 11580, 11581, 25264},
+        specs = {"PROTECTION"},
     },
 
     -------------------------------------------------------------------------------

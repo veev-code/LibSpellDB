@@ -40,7 +40,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 2637,  -- Hibernate
-        tags = {C.CC_HARD},
+        tags = {C.CC_HARD, C.FILLER},  -- Spammable CC
         cooldown = 0,
         duration = 40,
         ranks = {2637, 18657, 18658},
@@ -74,14 +74,8 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 17116,  -- Nature's Swiftness
-        tags = {C.HEALING_CD, C.TRACK_BUFF},
+        tags = {C.HEALING_CD, C.TRACK_BUFF, C.PVE_PVP},
         cooldown = 180,
-        talent = true,
-    },
-    {
-        spellID = 18562,  -- Swiftmend
-        tags = {C.HEALING_CD, C.HEAL_SINGLE},
-        cooldown = 15,
         talent = true,
     },
 
@@ -171,14 +165,194 @@ lib:RegisterSpells({
     },
 
     -------------------------------------------------------------------------------
-    -- Offensive
+    -- Core Rotation - Balance (Priority: MF → IS → Starfire → FoN)
     -------------------------------------------------------------------------------
     {
-        spellID = 16914,  -- Hurricane
-        tags = {C.CORE_ROTATION, C.CC_SOFT},
+        spellID = 8921,  -- Moonfire (apply first, instant)
+        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE_PVP},
+        cooldown = 0,
+        duration = 12,
+        priority = 1,
+        ranks = {8921, 8924, 8925, 8926, 8927, 8928, 8929, 9833, 9834, 9835, 26987, 26988},
+    },
+    {
+        spellID = 5570,  -- Insect Swarm (maintain DoT)
+        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE},
+        cooldown = 0,
+        duration = 12,
+        priority = 2,
+        talent = true,
+        ranks = {5570, 24974, 24975, 24976, 24977, 27013},
+        specs = {"BALANCE"},
+    },
+    {
+        spellID = 2912,  -- Starfire (main nuke)
+        tags = {C.CORE_ROTATION, C.FILLER, C.PVE},
+        cooldown = 0,
+        priority = 3,
+        ranks = {2912, 8949, 8950, 8951, 9875, 9876, 25298, 26986},
+        specs = {"BALANCE"},
+    },
+    {
+        spellID = 33831,  -- Force of Nature (use on CD)
+        tags = {C.OFFENSIVE_CD, C.PET_SUMMON, C.PVE},
+        cooldown = 180,
+        duration = 30,
+        priority = 4,
+        talent = true,
+        specs = {"BALANCE"},
+    },
+    {
+        spellID = 16914,  -- Hurricane (AoE)
+        tags = {C.CORE_ROTATION, C.CC_SOFT, C.PVE},
         cooldown = 60,
         duration = 10,
-        ranks = {16914, 17401, 17402},
+        priority = 5,
+        ranks = {16914, 17401, 17402, 27012},
+        specs = {"BALANCE"},
+    },
+    {
+        spellID = 770,  -- Faerie Fire (armor debuff)
+        tags = {C.DEBUFF, C.UTILITY, C.PVE_PVP},
+        cooldown = 0,
+        duration = 40,
+        priority = 6,
+        ranks = {770, 778, 9749, 9907, 26993},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Core Rotation - Feral Cat (Priority: Mangle → Shred → Rip → FB)
+    -------------------------------------------------------------------------------
+    {
+        spellID = 33983,  -- Mangle (Cat) (apply debuff first)
+        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE_PVP},
+        cooldown = 0,
+        priority = 1,
+        talent = true,
+        specs = {"FERAL"},
+    },
+    {
+        spellID = 27002,  -- Shred (main CP builder from behind)
+        tags = {C.CORE_ROTATION, C.PVE},
+        cooldown = 0,
+        priority = 2,
+        ranks = {5221, 6800, 8992, 9829, 9830, 27001, 27002},
+        specs = {"FERAL"},
+    },
+    {
+        spellID = 1079,  -- Rip (maintain at 5 CP)
+        tags = {C.CORE_ROTATION, C.FINISHER, C.DEBUFF, C.PVE},
+        cooldown = 0,
+        duration = 12,
+        priority = 3,
+        ranks = {1079, 9492, 9493, 9752, 9894, 9896, 27008},
+        specs = {"FERAL"},
+    },
+    {
+        spellID = 22568,  -- Ferocious Bite (dump excess CP/energy)
+        tags = {C.CORE_ROTATION, C.FINISHER, C.PVE_PVP},
+        cooldown = 0,
+        priority = 4,
+        ranks = {22568, 22827, 22828, 22829, 31018, 24248},
+        specs = {"FERAL"},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Core Rotation - Feral Bear (Priority: Mangle → Lacerate → Swipe → Maul)
+    -------------------------------------------------------------------------------
+    {
+        spellID = 33987,  -- Mangle (Bear) (highest threat on CD)
+        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE_PVP},
+        cooldown = 6,
+        priority = 1,
+        talent = true,
+        specs = {"FERAL"},
+    },
+    {
+        spellID = 33745,  -- Lacerate (stack and maintain)
+        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE},
+        cooldown = 0,
+        duration = 15,
+        priority = 2,
+        specs = {"FERAL"},
+    },
+    {
+        spellID = 779,  -- Swipe (AoE threat)
+        tags = {C.CORE_ROTATION, C.PVE_PVP},
+        cooldown = 0,
+        priority = 3,
+        ranks = {779, 780, 769, 9754, 9908, 26997},
+        specs = {"FERAL"},
+    },
+    {
+        spellID = 6807,  -- Maul (rage dump, queued)
+        tags = {C.CORE_ROTATION, C.PVE},
+        cooldown = 0,
+        priority = 4,
+        ranks = {6807, 6808, 6809, 8972, 9745, 9880, 9881, 26996},
+        specs = {"FERAL"},
+    },
+    {
+        spellID = 99,  -- Demoralizing Roar (maintain debuff)
+        tags = {C.DEBUFF, C.UTILITY, C.PVE},
+        cooldown = 0,
+        duration = 30,
+        priority = 5,
+        ranks = {99, 1735, 9490, 9747, 9898, 26998},
+        specs = {"FERAL"},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Core Rotation - Restoration (Priority: LB x3 → Rejuv → Regrowth → SM)
+    -------------------------------------------------------------------------------
+    {
+        spellID = 33763,  -- Lifebloom (stack to 3, maintain)
+        tags = {C.CORE_ROTATION, C.HOT, C.HEAL_SINGLE, C.PVE},
+        cooldown = 0,
+        duration = 7,
+        priority = 1,
+        specs = {"RESTORATION"},
+    },
+    {
+        spellID = 774,  -- Rejuvenation (maintain on targets)
+        tags = {C.CORE_ROTATION, C.HOT, C.HEAL_SINGLE, C.PVE_PVP},
+        cooldown = 0,
+        duration = 12,
+        priority = 2,
+        ranks = {774, 1058, 1430, 2090, 2091, 3627, 8910, 9839, 9840, 9841, 25299, 26981, 26982},
+        specs = {"RESTORATION"},
+    },
+    {
+        spellID = 8936,  -- Regrowth (spot heal + HoT)
+        tags = {C.CORE_ROTATION, C.HEAL_SINGLE, C.HOT, C.PVE_PVP},
+        cooldown = 0,
+        duration = 21,
+        priority = 3,
+        ranks = {8936, 8938, 8939, 8940, 8941, 9750, 9856, 9857, 9858, 26980},
+        specs = {"RESTORATION"},
+    },
+    {
+        spellID = 18562,  -- Swiftmend (emergency heal)
+        tags = {C.HEALING_CD, C.HEAL_SINGLE, C.CORE_ROTATION, C.PVE_PVP},
+        cooldown = 15,
+        priority = 4,
+        talent = true,
+        specs = {"RESTORATION"},
+    },
+    {
+        spellID = 5185,  -- Healing Touch (big heal / NS combo)
+        tags = {C.HEAL_SINGLE, C.FILLER, C.PVE_PVP},
+        cooldown = 0,
+        priority = 5,
+        ranks = {5185, 5186, 5187, 5188, 5189, 6778, 8903, 9758, 9888, 9889, 25297, 26978, 26979},
+    },
+    {
+        spellID = 33891,  -- Tree of Life (maintain form)
+        tags = {C.SHAPESHIFT, C.BUFF, C.PVE},
+        cooldown = 0,
+        priority = 0,  -- Pre-combat form
+        talent = true,
+        specs = {"RESTORATION"},
     },
 
 }, "DRUID")

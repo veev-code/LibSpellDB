@@ -32,7 +32,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 6770,  -- Sap
-        tags = {C.CC_HARD, C.DISORIENT},
+        tags = {C.CC_HARD, C.DISORIENT, C.FILLER},  -- Spammable (stealth-only)
         cooldown = 0,
         duration = 45,
         ranks = {6770, 2070, 11297},
@@ -78,6 +78,17 @@ lib:RegisterSpells({
         tags = {C.PERSONAL_DEFENSIVE, C.IMMUNITY, C.TRACK_BUFF},
         cooldown = 90,
         duration = 5,
+    },
+
+    -------------------------------------------------------------------------------
+    -- Reactive Abilities
+    -------------------------------------------------------------------------------
+    {
+        spellID = 14251,  -- Riposte (usable after parry)
+        tags = {C.CORE_ROTATION, C.REACTIVE, C.PVP},
+        cooldown = 6,
+        talent = true,
+        specs = {"COMBAT"},
     },
 
     -------------------------------------------------------------------------------
@@ -145,46 +156,69 @@ lib:RegisterSpells({
     },
 
     -------------------------------------------------------------------------------
-    -- Core Rotation
+    -- Core Rotation (Priority: SnD → Expose → Rupture → Builder → Evis)
     -------------------------------------------------------------------------------
     {
-        spellID = 1752,  -- Sinister Strike
-        tags = {C.CORE_ROTATION, C.FILLER},
-        cooldown = 0,
-        ranks = {1752, 1757, 1758, 1759, 1760, 8621, 11293, 11294},
-    },
-    {
-        spellID = 2098,  -- Eviscerate
-        tags = {C.CORE_ROTATION, C.FINISHER},
-        cooldown = 0,
-        ranks = {2098, 6760, 6761, 6762, 8623, 8624, 11299, 11300},
-    },
-    {
-        spellID = 1943,  -- Rupture
-        tags = {C.CORE_ROTATION, C.FINISHER, C.DEBUFF},
-        cooldown = 0,
-        duration = 22,  -- Max at 5 CP
-        ranks = {1943, 8639, 8640, 11273, 11274, 11275},
-    },
-    {
-        spellID = 5171,  -- Slice and Dice
-        tags = {C.CORE_ROTATION, C.FINISHER, C.BUFF, C.TRACK_BUFF},
+        spellID = 5171,  -- Slice and Dice (maintain first, #1 priority)
+        tags = {C.CORE_ROTATION, C.FINISHER, C.BUFF, C.TRACK_BUFF, C.PVE},
         cooldown = 0,
         duration = 21,  -- Max at 5 CP
+        priority = 1,
         ranks = {5171, 6774},
     },
     {
-        spellID = 16511,  -- Hemorrhage
-        tags = {C.CORE_ROTATION, C.DEBUFF},
+        spellID = 8647,  -- Expose Armor (if no warrior, before damage)
+        tags = {C.CORE_ROTATION, C.FINISHER, C.DEBUFF, C.PVE},
         cooldown = 0,
-        talent = true,
-        ranks = {16511, 17347, 17348},
+        duration = 30,
+        priority = 2,
+        ranks = {8647, 8649, 8650, 11197, 11198, 26866},
     },
     {
-        spellID = 1329,  -- Mutilate (TBC+)
-        tags = {C.CORE_ROTATION},
+        spellID = 1943,  -- Rupture (maintain DoT)
+        tags = {C.CORE_ROTATION, C.FINISHER, C.DEBUFF, C.PVE},
         cooldown = 0,
+        duration = 22,  -- Max at 5 CP
+        priority = 3,
+        ranks = {1943, 8639, 8640, 11273, 11274, 11275, 26867},
+    },
+    {
+        spellID = 1752,  -- Sinister Strike (CP builder)
+        tags = {C.CORE_ROTATION, C.PVE},
+        cooldown = 0,
+        priority = 4,
+        ranks = {1752, 1757, 1758, 1759, 1760, 8621, 11293, 11294, 26861, 26862},
+        specs = {"COMBAT"},
+    },
+    {
+        spellID = 2098,  -- Eviscerate (dump excess CP)
+        tags = {C.CORE_ROTATION, C.FINISHER, C.PVE_PVP},
+        cooldown = 0,
+        priority = 5,
+        ranks = {2098, 6760, 6761, 6762, 8623, 8624, 11299, 11300, 31016, 26865},
+    },
+    {
+        spellID = 5938,  -- Shiv (apply poisons / utility)
+        tags = {C.CORE_ROTATION, C.UTILITY, C.PVE_PVP},
+        cooldown = 0,
+        priority = 6,
+    },
+    {
+        spellID = 1329,  -- Mutilate (Assassination builder)
+        tags = {C.CORE_ROTATION, C.PVE},
+        cooldown = 0,
+        priority = 4,
         talent = true,
+        specs = {"ASSASSINATION"},
+    },
+    {
+        spellID = 16511,  -- Hemorrhage (Subtlety builder)
+        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE_PVP},
+        cooldown = 0,
+        priority = 4,
+        talent = true,
+        specs = {"SUBTLETY"},
+        ranks = {16511, 17347, 17348, 26864},
     },
 
     -------------------------------------------------------------------------------

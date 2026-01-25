@@ -25,7 +25,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 118,  -- Polymorph
-        tags = {C.CC_HARD, C.DISORIENT},
+        tags = {C.CC_HARD, C.DISORIENT, C.FILLER},  -- Spammable CC
         cooldown = 0,
         duration = 50,
         ranks = {118, 12824, 12825, 12826},
@@ -89,28 +89,95 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 12042,  -- Arcane Power
-        tags = {C.OFFENSIVE_CD, C.TRACK_BUFF},
+        tags = {C.OFFENSIVE_CD, C.TRACK_BUFF, C.PVE},
         cooldown = 180,
         duration = 15,
         talent = true,
+        specs = {"ARCANE"},
     },
     {
         spellID = 12043,  -- Presence of Mind
-        tags = {C.OFFENSIVE_CD, C.TRACK_BUFF},
+        tags = {C.OFFENSIVE_CD, C.TRACK_BUFF, C.PVE_PVP},
         cooldown = 180,
         talent = true,
+        specs = {"ARCANE"},
     },
     {
         spellID = 11129,  -- Combustion
-        tags = {C.OFFENSIVE_CD, C.TRACK_BUFF},
+        tags = {C.OFFENSIVE_CD, C.TRACK_BUFF, C.PVE},
         cooldown = 180,
         talent = true,
+        specs = {"FIRE"},
     },
     {
-        spellID = 12472,  -- Icy Veins / Cold Snap
-        tags = {C.OFFENSIVE_CD, C.UTILITY},
+        spellID = 12472,  -- Icy Veins (TBC)
+        tags = {C.OFFENSIVE_CD, C.TRACK_BUFF, C.PVE},
+        cooldown = 180,
+        duration = 20,
+        talent = true,
+        specs = {"FROST", "ARCANE", "FIRE"},  -- Used by all specs in TBC
+    },
+    {
+        spellID = 11958,  -- Cold Snap
+        tags = {C.OFFENSIVE_CD, C.UTILITY, C.PVE_PVP},
         cooldown = 600,  -- Resets frost cooldowns
         talent = true,
+        specs = {"FROST"},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Core Rotation - Fire (Priority: Scorch debuff → Fireball → Fire Blast)
+    -------------------------------------------------------------------------------
+    {
+        spellID = 2948,  -- Scorch (maintain Improved Scorch debuff first)
+        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE},
+        cooldown = 0,
+        priority = 1,
+        ranks = {2948, 8444, 8445, 8446, 10205, 10206, 10207, 27073, 27074},
+        specs = {"FIRE"},
+    },
+    {
+        spellID = 133,  -- Fireball (main nuke)
+        tags = {C.CORE_ROTATION, C.FILLER, C.PVE},
+        cooldown = 0,
+        priority = 2,
+        ranks = {133, 143, 145, 3140, 8400, 8401, 8402, 10148, 10149, 10150, 10151, 25306, 27070},
+        specs = {"FIRE"},
+    },
+    {
+        spellID = 2136,  -- Fire Blast (instant, use while moving)
+        tags = {C.CORE_ROTATION, C.PVE_PVP},
+        cooldown = 8,
+        priority = 3,
+        ranks = {2136, 2137, 2138, 8412, 8413, 10197, 10199, 27078, 27079},
+        specs = {"FIRE"},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Core Rotation - Arcane (Priority: Arcane Blast → Frostbolt/Missiles filler)
+    -------------------------------------------------------------------------------
+    {
+        spellID = 30451,  -- Arcane Blast (main nuke, build stacks)
+        tags = {C.CORE_ROTATION, C.PVE},
+        cooldown = 0,
+        priority = 1,
+        specs = {"ARCANE"},
+    },
+    {
+        spellID = 116,  -- Frostbolt (filler/mana conservation)
+        tags = {C.CORE_ROTATION, C.FILLER, C.PVE_PVP},
+        cooldown = 0,
+        priority = 2,
+        ranks = {116, 205, 837, 7322, 8406, 8407, 8408, 10179, 10180, 10181, 25304, 27071, 27072},
+        specs = {"FROST", "ARCANE"},
+    },
+    {
+        spellID = 5143,  -- Arcane Missiles (Clearcasting proc / filler)
+        tags = {C.CORE_ROTATION, C.FILLER, C.PVE},
+        cooldown = 0,
+        priority = 3,
+        ranks = {5143, 5144, 5145, 8416, 8417, 10211, 10212, 25345, 27075, 38699, 38704},
+        specs = {"ARCANE"},
     },
 
     -------------------------------------------------------------------------------
@@ -137,7 +204,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 130,  -- Slow Fall
-        tags = {C.UTILITY, C.MOVEMENT},
+        tags = {C.UTILITY, C.MOVEMENT, C.OUT_OF_COMBAT},
         cooldown = 0,
         duration = 30,
     },
