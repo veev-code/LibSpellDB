@@ -209,8 +209,8 @@ lib:RegisterSpells({
         duration = 30,
     },
     {
-        spellID = 11113,  -- Blast Wave
-        tags = {C.CORE_ROTATION, C.CC_SOFT, C.KNOCKBACK},
+        spellID = 11113,  -- Blast Wave (AoE, situational)
+        tags = {C.SITUATIONAL, C.CC_SOFT, C.KNOCKBACK},
         cooldown = 45,
         talent = true,
         ranks = {11113, 13018, 13019, 13020, 13021},

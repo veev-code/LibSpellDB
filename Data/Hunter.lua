@@ -216,17 +216,19 @@ lib:RegisterSpells({
         specs = nil,
     },
     {
-        spellID = 75,  -- Auto Shot (weave between Steady)
-        tags = {C.CORE_ROTATION},
-        cooldown = 0,
-        priority = 5,
+        spellID = 2643,  -- Multi-Shot (AoE / cleave - situational in ST)
+        tags = {C.SITUATIONAL, C.PVE_PVP},
+        cooldown = 10,
+        priority = 10,
+        ranks = {2643, 14288, 14289, 14290, 25294, 27021},
     },
     {
-        spellID = 2643,  -- Multi-Shot (use on CD in rotation)
-        tags = {C.CORE_ROTATION, C.PVE_PVP},
-        cooldown = 10,
-        priority = 6,
-        ranks = {2643, 14288, 14289, 14290, 25294, 27021},
+        spellID = 1510,  -- Volley (AoE)
+        tags = {C.SITUATIONAL, C.PVE},
+        cooldown = 0,
+        duration = 6,
+        priority = 11,
+        ranks = {1510, 14294, 14295, 27022},
     },
     {
         spellID = 3044,  -- Arcane Shot (mana dump / BM rotation)

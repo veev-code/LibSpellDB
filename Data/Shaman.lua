@@ -20,8 +20,8 @@ lib:RegisterSpells({
         duration = 45,
     },
     {
-        spellID = 8056,  -- Frost Shock
-        tags = {C.CC_SOFT, C.CORE_ROTATION},
+        spellID = 8056,  -- Frost Shock (slow/CC utility)
+        tags = {C.CC_SOFT},
         cooldown = 6,
         duration = 8,
         ranks = {8056, 8058, 10472, 10473},
@@ -242,10 +242,10 @@ lib:RegisterSpells({
         specs = {"ELEMENTAL"},
     },
     {
-        spellID = 421,  -- Chain Lightning (use on CD / AoE)
-        tags = {C.CORE_ROTATION, C.PVE_PVP},
+        spellID = 421,  -- Chain Lightning (AoE / cleave - situational in ST)
+        tags = {C.SITUATIONAL, C.PVE_PVP},
         cooldown = 6,
-        priority = 3,
+        priority = 10,
         ranks = {421, 930, 2860, 10605, 25439, 25442},
         specs = {"ELEMENTAL"},
     },
@@ -262,8 +262,8 @@ lib:RegisterSpells({
     -- Totems (Fire)
     -------------------------------------------------------------------------------
     {
-        spellID = 3599,  -- Searing Totem
-        tags = {C.CORE_ROTATION, C.UTILITY},
+        spellID = 3599,  -- Searing Totem (utility, not core rotation)
+        tags = {C.UTILITY},
         cooldown = 0,
         duration = 55,
         ranks = {3599, 6363, 6364, 6365, 10437, 10438},

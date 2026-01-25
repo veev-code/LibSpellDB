@@ -114,7 +114,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 1715,  -- Hamstring
-        tags = {C.CC_SOFT, C.CORE_ROTATION},
+        tags = {C.CC_SOFT},
         cooldown = 0,
         duration = 15,
         priority = 5,  -- Soft CC
@@ -171,6 +171,11 @@ lib:RegisterSpells({
         duration = 10,
         priority = 7,  -- Resource
         specs = nil,
+        appliesAura = {
+            spellID = 29131,  -- Bloodrage buff ID (different from ability ID)
+            type = "BUFF",
+            onPlayer = true,
+        },
     },
 
     -------------------------------------------------------------------------------
@@ -193,12 +198,12 @@ lib:RegisterSpells({
         specs = {"FURY"},
     },
     {
-        spellID = 12328,  -- Sweeping Strikes
+        spellID = 12328,  -- Sweeping Strikes (Fury talent in TBC/Anniversary)
         tags = {C.OFFENSIVE_CD, C.TRACK_BUFF},
         cooldown = 30,
         duration = 10,
         talent = true,
-        specs = {"ARMS"},
+        specs = {"FURY"},  -- Fury tree talent in TBC
     },
     {
         spellID = 20230,  -- Retaliation
@@ -298,18 +303,18 @@ lib:RegisterSpells({
         },
     },
     {
-        spellID = 78,  -- Heroic Strike (rage dump)
-        tags = {C.CORE_ROTATION, C.PVE},
+        spellID = 78,  -- Heroic Strike (rage dump, use when >50 rage)
+        tags = {C.SITUATIONAL, C.PVE},
         cooldown = 0,
-        priority = 3,
+        priority = 10,  -- Lower priority (situational)
         ranks = {78, 284, 285, 1608, 11564, 11565, 11566, 11567, 25286, 29707},
         specs = nil,
     },
     {
         spellID = 845,  -- Cleave (AoE rage dump)
-        tags = {C.CORE_ROTATION, C.PVE},
+        tags = {C.SITUATIONAL, C.PVE},
         cooldown = 0,
-        priority = 4,
+        priority = 11,  -- Lower priority (situational)
         ranks = {845, 7369, 11608, 11609, 20569, 25231},
         specs = nil,
     },

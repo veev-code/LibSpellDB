@@ -203,11 +203,11 @@ lib:RegisterSpells({
         specs = {"BALANCE"},
     },
     {
-        spellID = 16914,  -- Hurricane (AoE)
-        tags = {C.CORE_ROTATION, C.CC_SOFT, C.PVE},
+        spellID = 16914,  -- Hurricane (AoE - situational)
+        tags = {C.SITUATIONAL, C.CC_SOFT, C.PVE},
         cooldown = 60,
         duration = 10,
-        priority = 5,
+        priority = 10,
         ranks = {16914, 17401, 17402, 27012},
         specs = {"BALANCE"},
     },
@@ -285,10 +285,10 @@ lib:RegisterSpells({
         specs = {"FERAL"},
     },
     {
-        spellID = 6807,  -- Maul (rage dump, queued)
-        tags = {C.CORE_ROTATION, C.PVE},
+        spellID = 6807,  -- Maul (rage dump - situational)
+        tags = {C.SITUATIONAL, C.PVE},
         cooldown = 0,
-        priority = 4,
+        priority = 10,
         ranks = {6807, 6808, 6809, 8972, 9745, 9880, 9881, 26996},
         specs = {"FERAL"},
     },

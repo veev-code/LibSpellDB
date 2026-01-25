@@ -131,10 +131,10 @@ lib:RegisterSpells({
         ranks = {17, 592, 600, 3747, 6065, 6066, 10898, 10899, 10900, 10901, 25217, 25218},
     },
     {
-        spellID = 34866,  -- Circle of Healing (instant AoE heal)
-        tags = {C.HEAL_AOE, C.CORE_ROTATION, C.PVE},
+        spellID = 34866,  -- Circle of Healing (instant AoE heal - situational)
+        tags = {C.HEAL_AOE, C.SITUATIONAL, C.PVE},
         cooldown = 0,
-        priority = 3,
+        priority = 10,
         talent = true,
         specs = {"HOLY"},
     },
@@ -324,8 +324,8 @@ lib:RegisterSpells({
         ranks = {976, 10957, 10958},
     },
     {
-        spellID = 15237,  -- Holy Nova
-        tags = {C.HEAL_AOE, C.CORE_ROTATION, C.FILLER},
+        spellID = 15237,  -- Holy Nova (AoE, situational)
+        tags = {C.HEAL_AOE, C.SITUATIONAL, C.FILLER},
         cooldown = 0,
         talent = true,
         ranks = {15237, 15430, 15431, 27799, 27800, 27801},

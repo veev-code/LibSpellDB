@@ -167,11 +167,11 @@ lib:RegisterSpells({
         ranks = {5171, 6774},
     },
     {
-        spellID = 8647,  -- Expose Armor (if no warrior, before damage)
-        tags = {C.CORE_ROTATION, C.FINISHER, C.DEBUFF, C.PVE},
+        spellID = 8647,  -- Expose Armor (situational - only if no warrior)
+        tags = {C.SITUATIONAL, C.FINISHER, C.DEBUFF, C.PVE},
         cooldown = 0,
         duration = 30,
-        priority = 2,
+        priority = 10,
         ranks = {8647, 8649, 8650, 11197, 11198, 26866},
     },
     {
@@ -198,10 +198,10 @@ lib:RegisterSpells({
         ranks = {2098, 6760, 6761, 6762, 8623, 8624, 11299, 11300, 31016, 26865},
     },
     {
-        spellID = 5938,  -- Shiv (apply poisons / utility)
-        tags = {C.CORE_ROTATION, C.UTILITY, C.PVE_PVP},
+        spellID = 5938,  -- Shiv (apply poisons / utility - situational)
+        tags = {C.SITUATIONAL, C.UTILITY, C.PVE_PVP},
         cooldown = 0,
-        priority = 6,
+        priority = 11,
     },
     {
         spellID = 1329,  -- Mutilate (Assassination builder)

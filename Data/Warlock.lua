@@ -233,27 +233,50 @@ lib:RegisterSpells({
         ranks = {5676, 17919, 17920, 17921, 17922, 17923, 27210},
     },
     {
-        spellID = 6353,  -- Soul Fire (opener/finisher)
-        tags = {C.CORE_ROTATION, C.OFFENSIVE_CD, C.PVE},
+        spellID = 6353,  -- Soul Fire (opener/finisher - situational)
+        tags = {C.SITUATIONAL, C.OFFENSIVE_CD, C.PVE},
         cooldown = 60,
-        priority = 7,
+        priority = 10,
         ranks = {6353, 17924, 27211},
     },
     {
-        spellID = 1120,  -- Drain Soul (execute phase / shard)
-        tags = {C.CORE_ROTATION, C.UTILITY, C.RESOURCE, C.PVE},
+        spellID = 1120,  -- Drain Soul (execute phase / shard - situational)
+        tags = {C.SITUATIONAL, C.UTILITY, C.RESOURCE, C.PVE},
         cooldown = 0,
         duration = 15,
-        priority = 8,
+        priority = 11,
         ranks = {1120, 8288, 8289, 11675, 27217},
     },
     {
-        spellID = 689,  -- Drain Life (self-sustain)
-        tags = {C.CORE_ROTATION, C.HEAL_SINGLE, C.PVP},
+        spellID = 689,  -- Drain Life (self-sustain - situational)
+        tags = {C.SITUATIONAL, C.HEAL_SINGLE, C.PVP},
         cooldown = 0,
         duration = 5,
-        priority = 9,
+        priority = 12,
         ranks = {689, 699, 709, 7651, 11699, 11700, 27219, 27220},
+    },
+    {
+        spellID = 27243,  -- Seed of Corruption (AoE)
+        tags = {C.SITUATIONAL, C.DEBUFF, C.PVE},
+        cooldown = 0,
+        duration = 18,
+        priority = 13,
+    },
+    {
+        spellID = 5740,  -- Rain of Fire (AoE)
+        tags = {C.SITUATIONAL, C.PVE},
+        cooldown = 0,
+        duration = 8,
+        priority = 14,
+        ranks = {5740, 6219, 11677, 11678, 27212},
+    },
+    {
+        spellID = 1949,  -- Hellfire (AoE)
+        tags = {C.SITUATIONAL, C.PVE},
+        cooldown = 0,
+        duration = 15,
+        priority = 15,
+        ranks = {1949, 11683, 11684, 27213},
     },
     {
         spellID = 5138,  -- Drain Mana (PvP utility)

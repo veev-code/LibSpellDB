@@ -177,10 +177,10 @@ lib:RegisterSpells({
         specs = {"RETRIBUTION"},
     },
     {
-        spellID = 879,  -- Exorcism (vs Undead/Demon)
-        tags = {C.CORE_ROTATION, C.PVE},
+        spellID = 879,  -- Exorcism (vs Undead/Demon only - situational)
+        tags = {C.SITUATIONAL, C.PVE},
         cooldown = 15,
-        priority = 6,
+        priority = 10,
         ranks = {879, 5614, 5615, 10312, 10313, 10314, 27138},
     },
 

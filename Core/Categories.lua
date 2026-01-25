@@ -14,7 +14,8 @@ if not lib then return end
 -- Category constants for type safety and autocomplete
 lib.Categories = {
     -- Rotational / Core
-    CORE_ROTATION       = "CORE_ROTATION",       -- Primary rotational abilities
+    CORE_ROTATION       = "CORE_ROTATION",       -- Primary single-target rotational abilities (Row 1)
+    SITUATIONAL         = "SITUATIONAL",         -- Big CDs, AoE abilities, resource dumps (Row 2)
     FILLER              = "FILLER",              -- Mana-based spammables (excluded from HUD by default)
     OUT_OF_COMBAT       = "OUT_OF_COMBAT",       -- Abilities only used out of combat (excluded from HUD)
     LONG_BUFF           = "LONG_BUFF",           -- Long-duration buffs cast out of combat (excluded from HUD)
@@ -112,9 +113,15 @@ lib.Categories = {
 lib.CategoryInfo = {
     [lib.Categories.CORE_ROTATION] = {
         name = "Core Rotation",
-        description = "Primary rotational abilities used frequently",
+        description = "Primary single-target rotational abilities",
         color = {1.0, 0.8, 0.0},  -- Gold
         priority = 100,
+    },
+    [lib.Categories.SITUATIONAL] = {
+        name = "Situational",
+        description = "Big cooldowns, AoE abilities, resource dumps",
+        color = {1.0, 0.5, 0.0},  -- Orange
+        priority = 95,
     },
     [lib.Categories.OFFENSIVE_CD] = {
         name = "Offensive Cooldowns",
