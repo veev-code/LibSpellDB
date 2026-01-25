@@ -1,0 +1,14 @@
+package-as: LibSpellDB
+
+enable-nolib-creation: no
+
+ignore:
+  - README.md
+  - .github
+  - .git
+  - .gitignore
+  - "*.md"
+
+manual-changelog:
+  filename: CHANGELOG.md
+  markup-type: markdown

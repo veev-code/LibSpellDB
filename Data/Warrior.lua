@@ -287,6 +287,7 @@ lib:RegisterSpells({
         talent = true,
         ranks = {23881, 23892, 23893, 23894, 25251, 30335},
         specs = {"FURY"},
+        ignoreAura = true,  -- Buff (healing on next 5 hits) is longer than CD and not worth tracking
     },
     {
         spellID = 29801,  -- Rampage (critical buff to maintain, procs on crit)
