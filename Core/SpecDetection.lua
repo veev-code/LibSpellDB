@@ -251,7 +251,10 @@ function lib:IsSpellRelevantForSpec(spellID)
     -- Check if current spec is in the spell's specs list
     local currentSpec = self.playerSpec
     if not currentSpec then
-        return false  -- Spec not detected yet
+        -- Spec not detected (e.g., level 1 with no talents)
+        -- Be permissive: show all class spells since player could be any spec
+        -- The spell is still filtered by IsSpellKnown, so only learnable spells show
+        return true
     end
     
     for _, spec in ipairs(spellData.specs) do
