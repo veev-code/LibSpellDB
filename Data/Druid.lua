@@ -186,7 +186,14 @@ lib:RegisterSpells({
         specs = {"BALANCE"},
     },
     {
-        spellID = 2912,  -- Starfire (main nuke)
+        spellID = 5176,  -- Wrath (filler nuke - mana-based, not shown on HUD by default)
+        tags = {C.DPS, C.FILLER, C.PVE_PVP},
+        cooldown = 0,
+        priority = 4,
+        ranks = {5176, 5177, 5178, 5179, 5180, 6780, 8905, 9912, 26984, 26985},
+    },
+    {
+        spellID = 2912,  -- Starfire (main nuke - Balance spec filler)
         tags = {C.DPS, C.FILLER, C.PVE},
         cooldown = 0,
         priority = 3,

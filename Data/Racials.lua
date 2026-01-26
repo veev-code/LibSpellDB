@@ -1,10 +1,12 @@
 --[[
-    LibSpellDB - Racial Abilities & PvP Trinkets (Anniversary Edition / Classic)
+    LibSpellDB - Racial Abilities & PvP Trinkets (TBC Anniversary Edition)
     
     Racials are categorized by FUNCTION, not by being racials.
     Each racial has a 'race' field to filter by player's race.
     
-    Race IDs: 1=Human, 2=Orc, 3=Dwarf, 4=NightElf, 5=Undead, 6=Tauren, 7=Gnome, 8=Troll
+    Race constants (from UnitRace API):
+    Alliance: Human, Dwarf, NightElf, Gnome, Draenei
+    Horde: Orc, Scourge (Undead), Tauren, Troll, BloodElf
 ]]
 
 local MAJOR = "LibSpellDB-1.0"
@@ -13,7 +15,7 @@ if not lib then return end
 
 local C = lib.Categories
 
--- Race constants for clarity
+-- Race constants for clarity (must match UnitRace("player") return values)
 local HUMAN = "Human"
 local ORC = "Orc"
 local DWARF = "Dwarf"
@@ -22,6 +24,9 @@ local UNDEAD = "Scourge"  -- Internal name for Undead
 local TAUREN = "Tauren"
 local GNOME = "Gnome"
 local TROLL = "Troll"
+-- TBC Races
+local BLOODELF = "BloodElf"
+local DRAENEI = "Draenei"
 
 -------------------------------------------------------------------------------
 -- CC Breaks (will appear in "CC Breaks" row)
@@ -80,7 +85,7 @@ lib:RegisterSpells({
 })
 
 -------------------------------------------------------------------------------
--- CC Abilities (will appear in "CC & Interrupts" row)
+-- CC Abilities / Interrupts (will appear in Utility row)
 -------------------------------------------------------------------------------
 
 lib:RegisterSpells({
@@ -91,6 +96,59 @@ lib:RegisterSpells({
         cooldown = 120,
         duration = 2,
         race = TAUREN,
+    },
+
+    -- Blood Elf - Arcane Torrent (AoE silence + resource restore)
+    -- Different spellIDs per class, but all share same base functionality
+    {
+        spellID = 28730,  -- Mage/Warlock/Priest version (restores mana)
+        tags = {C.SILENCE, C.INTERRUPT, C.RESOURCE},
+        cooldown = 120,
+        duration = 2,
+        race = BLOODELF,
+    },
+    {
+        spellID = 25046,  -- Rogue version (restores energy)
+        tags = {C.SILENCE, C.INTERRUPT, C.RESOURCE},
+        cooldown = 120,
+        duration = 2,
+        race = BLOODELF,
+    },
+    {
+        spellID = 28734,  -- Warrior version (restores rage... sort of)
+        tags = {C.SILENCE, C.INTERRUPT},
+        cooldown = 120,
+        duration = 2,
+        race = BLOODELF,
+    },
+    {
+        spellID = 28733,  -- Hunter version
+        tags = {C.SILENCE, C.INTERRUPT, C.RESOURCE},
+        cooldown = 120,
+        duration = 2,
+        race = BLOODELF,
+    },
+    {
+        spellID = 28732,  -- Paladin version (restores mana)
+        tags = {C.SILENCE, C.INTERRUPT, C.RESOURCE},
+        cooldown = 120,
+        duration = 2,
+        race = BLOODELF,
+    },
+})
+
+-------------------------------------------------------------------------------
+-- Healing Abilities
+-------------------------------------------------------------------------------
+
+lib:RegisterSpells({
+    -- Draenei - Gift of the Naaru (HoT on self or ally)
+    {
+        spellID = 28880,
+        tags = {C.HEAL, C.HEAL_SINGLE, C.HOT, C.EXTERNAL_DEFENSIVE},
+        cooldown = 180,
+        duration = 15,
+        race = DRAENEI,
     },
 })
 
