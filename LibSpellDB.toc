@@ -1,4 +1,4 @@
-## Interface: 11508
+## Interface: 20505
 ## Title: Lib: SpellDB
 ## Notes: Shared spell database library for WoW addon developers.
 ## Author: Veev
