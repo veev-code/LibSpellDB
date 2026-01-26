@@ -35,6 +35,11 @@ lib:RegisterSpells({
         priority = 2,  -- Movement
         ranks = {100, 6178, 11578},
         specs = nil,
+        appliesAura = {
+            spellID = 7922,  -- Charge Stun
+            type = "DEBUFF",
+            onTarget = true,
+        },
     },
     {
         spellID = 20252,  -- Intercept (next to Charge)
@@ -44,6 +49,11 @@ lib:RegisterSpells({
         priority = 2,  -- Movement
         ranks = {20252, 20616, 20617},
         specs = nil,
+        appliesAura = {
+            spellID = 20615,  -- Intercept Stun
+            type = "DEBUFF",
+            onTarget = true,
+        },
     },
     {
         spellID = 3411,  -- Intervene (movement utility, intercepts next attack)
