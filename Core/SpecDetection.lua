@@ -158,6 +158,10 @@ function lib:DetectPlayerSpec()
             self.playerSpec = sigSpec
             return self.playerSpec, points
         end
+        -- No talents and no signature spells - can't determine spec
+        -- Return nil to indicate "unknown spec" (triggers permissive filtering)
+        self.playerSpec = nil
+        return nil, points
     end
     
     -- Determine spec from talent tree
