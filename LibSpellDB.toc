@@ -6,6 +6,7 @@
 ## IconTexture: Interface\Icons\INV_Misc_Book_09
 ## X-Category: Library
 ## X-License: MIT
+## X-Curse-Project-ID: 1444022
 ## X-Website: https://github.com/veev-code/LibSpellDB
 ## X-Twitch: https://www.twitch.tv/veev
 ## X-Twitter: https://x.com/VeevTSG
