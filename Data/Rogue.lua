@@ -59,23 +59,23 @@ lib:RegisterSpells({
     },
 
     -------------------------------------------------------------------------------
-    -- Personal Defensives
+    -- Personal Defensives (Utility row - not throughput)
     -------------------------------------------------------------------------------
     {
         spellID = 5277,  -- Evasion
-        tags = {C.PERSONAL_DEFENSIVE, C.HAS_BUFF},
+        tags = {C.DEFENSIVE, C.MAJOR, C.HAS_BUFF},
         cooldown = 300,
         duration = 15,
     },
     {
         spellID = 1856,  -- Vanish
-        tags = {C.PERSONAL_DEFENSIVE, C.MOVEMENT_ESCAPE, C.STEALTH},
+        tags = {C.DEFENSIVE, C.MAJOR, C.MOVEMENT_ESCAPE, C.STEALTH},
         cooldown = 300,
         ranks = {1856, 1857},
     },
     {
-        spellID = 31224,  -- Cloak of Shadows (TBC+, may not exist in Classic)
-        tags = {C.PERSONAL_DEFENSIVE, C.IMMUNITY, C.HAS_BUFF},
+        spellID = 31224,  -- Cloak of Shadows (TBC+)
+        tags = {C.DEFENSIVE, C.MAJOR, C.IMMUNITY, C.HAS_BUFF},
         cooldown = 90,
         duration = 5,
     },
@@ -85,51 +85,51 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 14251,  -- Riposte (usable after parry)
-        tags = {C.CORE_ROTATION, C.REACTIVE, C.PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.REACTIVE, C.PVP},
         cooldown = 6,
         talent = true,
         specs = {"COMBAT"},
     },
 
     -------------------------------------------------------------------------------
-    -- Offensive Cooldowns
+    -- Offensive Cooldowns (Secondary Row - throughput)
     -------------------------------------------------------------------------------
     {
         spellID = 13750,  -- Adrenaline Rush
-        tags = {C.OFFENSIVE_CD, C.HAS_BUFF},
+        tags = {C.DPS, C.MAJOR, C.HAS_BUFF},
         cooldown = 300,
         duration = 15,
         talent = true,
     },
     {
         spellID = 13877,  -- Blade Flurry
-        tags = {C.OFFENSIVE_CD, C.HAS_BUFF},
+        tags = {C.DPS, C.MAJOR, C.AOE, C.HAS_BUFF},
         cooldown = 120,
         duration = 15,
         talent = true,
     },
     {
         spellID = 14177,  -- Cold Blood
-        tags = {C.OFFENSIVE_CD, C.HAS_BUFF},
+        tags = {C.DPS, C.MAJOR, C.HAS_BUFF},
         cooldown = 180,
         talent = true,
     },
     {
-        spellID = 14185,  -- Preparation
-        tags = {C.OFFENSIVE_CD, C.UTILITY},
+        spellID = 14185,  -- Preparation (resets CDs - utility, not throughput)
+        tags = {C.UTILITY},
         cooldown = 600,
         talent = true,
     },
     {
-        spellID = 14278,  -- Ghostly Strike
-        tags = {C.OFFENSIVE_CD_MINOR, C.PERSONAL_DEFENSIVE},
+        spellID = 14278,  -- Ghostly Strike (damage + dodge, minor throughput)
+        tags = {C.DPS, C.MINOR, C.DEFENSIVE},
         cooldown = 20,
         duration = 7,
         talent = true,
     },
     {
-        spellID = 14183,  -- Premeditation
-        tags = {C.OFFENSIVE_CD_MINOR, C.RESOURCE},
+        spellID = 14183,  -- Premeditation (CP generation)
+        tags = {C.DPS, C.MINOR, C.RESOURCE},
         cooldown = 120,
         talent = true,
     },
@@ -160,7 +160,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 5171,  -- Slice and Dice (maintain first, #1 priority)
-        tags = {C.CORE_ROTATION, C.FINISHER, C.BUFF, C.HAS_BUFF, C.PVE},
+        tags = {C.DPS, C.ROTATIONAL, C.FINISHER, C.BUFF, C.HAS_BUFF, C.PVE},
         cooldown = 0,
         duration = 21,  -- Max at 5 CP
         priority = 1,
@@ -168,7 +168,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 8647,  -- Expose Armor (situational - only if no warrior)
-        tags = {C.SITUATIONAL, C.FINISHER, C.DEBUFF, C.PVE},
+        tags = {C.DPS, C.MAINTENANCE, C.FINISHER, C.DEBUFF, C.PVE},
         cooldown = 0,
         duration = 30,
         priority = 10,
@@ -176,7 +176,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 1943,  -- Rupture (maintain DoT)
-        tags = {C.CORE_ROTATION, C.FINISHER, C.DEBUFF, C.PVE},
+        tags = {C.DPS, C.ROTATIONAL, C.FINISHER, C.DEBUFF, C.PVE},
         cooldown = 0,
         duration = 22,  -- Max at 5 CP
         priority = 3,
@@ -184,7 +184,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 1752,  -- Sinister Strike (CP builder)
-        tags = {C.CORE_ROTATION, C.PVE},
+        tags = {C.DPS, C.ROTATIONAL, C.PVE},
         cooldown = 0,
         priority = 4,
         ranks = {1752, 1757, 1758, 1759, 1760, 8621, 11293, 11294, 26861, 26862},
@@ -192,20 +192,20 @@ lib:RegisterSpells({
     },
     {
         spellID = 2098,  -- Eviscerate (dump excess CP)
-        tags = {C.CORE_ROTATION, C.FINISHER, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.FINISHER, C.PVE_PVP},
         cooldown = 0,
         priority = 5,
         ranks = {2098, 6760, 6761, 6762, 8623, 8624, 11299, 11300, 31016, 26865},
     },
     {
         spellID = 5938,  -- Shiv (apply poisons / utility - situational)
-        tags = {C.SITUATIONAL, C.UTILITY, C.PVE_PVP},
+        tags = {C.DPS, C.MINOR, C.UTILITY, C.PVE_PVP},
         cooldown = 0,
         priority = 11,
     },
     {
         spellID = 1329,  -- Mutilate (Assassination builder)
-        tags = {C.CORE_ROTATION, C.PVE},
+        tags = {C.DPS, C.ROTATIONAL, C.PVE},
         cooldown = 0,
         priority = 4,
         talent = true,
@@ -213,7 +213,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 16511,  -- Hemorrhage (Subtlety builder)
-        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE_PVP},
         cooldown = 0,
         priority = 4,
         talent = true,

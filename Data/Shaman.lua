@@ -28,11 +28,11 @@ lib:RegisterSpells({
     },
 
     -------------------------------------------------------------------------------
-    -- Personal Defensives
+    -- Personal Defensives (Utility row)
     -------------------------------------------------------------------------------
     {
         spellID = 30823,  -- Shamanistic Rage (TBC+)
-        tags = {C.PERSONAL_DEFENSIVE, C.RESOURCE, C.HAS_BUFF},
+        tags = {C.DEFENSIVE, C.MAJOR, C.RESOURCE, C.HAS_BUFF},
         cooldown = 120,
         duration = 15,
         talent = true,
@@ -59,7 +59,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 17364,  -- Stormstrike (use on CD, top priority)
-        tags = {C.CORE_ROTATION, C.OFFENSIVE_CD_MINOR, C.DEBUFF, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE_PVP},
         cooldown = 10,  -- 10s with talents in TBC
         duration = 12,
         priority = 1,
@@ -73,7 +73,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 8042,  -- Earth Shock (interrupt / damage)
-        tags = {C.INTERRUPT, C.CORE_ROTATION, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.INTERRUPT, C.PVE_PVP},
         cooldown = 6,
         duration = 2,
         priority = 2,
@@ -82,7 +82,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 8056,  -- Frost Shock (kiting / PvP)
-        tags = {C.CC_SOFT, C.CORE_ROTATION, C.PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.CC_SOFT, C.PVP},
         cooldown = 6,
         duration = 8,
         priority = 3,
@@ -90,11 +90,11 @@ lib:RegisterSpells({
     },
 
     -------------------------------------------------------------------------------
-    -- Offensive Cooldowns
+    -- Offensive Cooldowns (Secondary Row - throughput)
     -------------------------------------------------------------------------------
     {
         spellID = 16166,  -- Elemental Mastery
-        tags = {C.OFFENSIVE_CD, C.HAS_BUFF, C.PVE_PVP},
+        tags = {C.DPS, C.MAJOR, C.HAS_BUFF, C.PVE_PVP},
         cooldown = 180,
         talent = true,
         specs = {"ELEMENTAL"},
@@ -105,25 +105,25 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 2825,  -- Bloodlust (Horde)
-        tags = {C.OFFENSIVE_CD, C.RAID_DEFENSIVE, C.HAS_BUFF},
+        tags = {C.DPS, C.MAJOR, C.RAID_DEFENSIVE, C.HAS_BUFF},
         cooldown = 600,
         duration = 40,
     },
     {
         spellID = 32182,  -- Heroism (Alliance) - TBC+
-        tags = {C.OFFENSIVE_CD, C.RAID_DEFENSIVE, C.HAS_BUFF},
+        tags = {C.DPS, C.MAJOR, C.RAID_DEFENSIVE, C.HAS_BUFF},
         cooldown = 600,
         duration = 40,
     },
     {
         spellID = 2894,  -- Fire Elemental Totem
-        tags = {C.OFFENSIVE_CD, C.PET_SUMMON},
+        tags = {C.DPS, C.MAJOR, C.PET_SUMMON},
         cooldown = 1200,
         duration = 120,
     },
     {
         spellID = 2062,  -- Earth Elemental Totem
-        tags = {C.PERSONAL_DEFENSIVE, C.PET_SUMMON, C.TAUNT},
+        tags = {C.DEFENSIVE, C.MAJOR, C.PET_SUMMON, C.TAUNT},
         cooldown = 1200,
         duration = 120,
     },
@@ -133,7 +133,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 32594,  -- Earth Shield (maintain on tank)
-        tags = {C.CORE_ROTATION, C.HEAL_SINGLE, C.HAS_BUFF, C.PVE},
+        tags = {C.HEAL, C.ROTATIONAL, C.HEAL_SINGLE, C.HAS_BUFF, C.PVE},
         cooldown = 0,
         duration = 600,
         priority = 1,
@@ -142,42 +142,42 @@ lib:RegisterSpells({
     },
     {
         spellID = 33736,  -- Water Shield (maintain on self)
-        tags = {C.BUFF, C.RESOURCE, C.HAS_BUFF, C.CORE_ROTATION, C.PVE_PVP},
+        tags = {C.HEAL, C.MAINTENANCE, C.BUFF, C.RESOURCE, C.HAS_BUFF, C.PVE_PVP},
         cooldown = 0,
         duration = 600,
         priority = 2,
     },
     {
         spellID = 1064,  -- Chain Heal (main heal, bounces)
-        tags = {C.HEAL_AOE, C.CORE_ROTATION, C.FILLER, C.PVE},
+        tags = {C.HEAL, C.ROTATIONAL, C.HEAL_AOE, C.FILLER, C.PVE},
         cooldown = 0,
         priority = 3,
         ranks = {1064, 10622, 10623, 25422, 25423},
     },
     {
         spellID = 331,  -- Healing Wave (big single target)
-        tags = {C.HEAL_SINGLE, C.CORE_ROTATION, C.FILLER, C.PVE_PVP},
+        tags = {C.HEAL, C.FILLER, C.HEAL_SINGLE, C.PVE_PVP},
         cooldown = 0,
         priority = 4,
         ranks = {331, 332, 547, 913, 939, 959, 8005, 10395, 10396, 25357, 25391, 25396},
     },
     {
         spellID = 8004,  -- Lesser Healing Wave (fast heal)
-        tags = {C.HEAL_SINGLE, C.CORE_ROTATION, C.FILLER, C.PVE_PVP},
+        tags = {C.HEAL, C.FILLER, C.HEAL_SINGLE, C.PVE_PVP},
         cooldown = 0,
         priority = 5,
         ranks = {8004, 8008, 8010, 10466, 10467, 10468, 25420},
     },
     {
-        spellID = 16188,  -- Nature's Swiftness (emergency)
-        tags = {C.HEALING_CD, C.HAS_BUFF, C.PVE_PVP},
+        spellID = 16188,  -- Nature's Swiftness (emergency - throughput CD)
+        tags = {C.HEAL, C.MAJOR, C.HAS_BUFF, C.PVE_PVP},
         cooldown = 180,
         priority = 6,
         talent = true,
     },
     {
-        spellID = 16190,  -- Mana Tide Totem (mana CD)
-        tags = {C.HEALING_CD, C.RESOURCE, C.RAID_DEFENSIVE, C.PVE},
+        spellID = 16190,  -- Mana Tide Totem (mana CD - throughput via sustain)
+        tags = {C.HEAL, C.MAJOR, C.RESOURCE, C.RAID_DEFENSIVE, C.PVE},
         cooldown = 300,
         duration = 12,
         priority = 7,
@@ -190,7 +190,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 30706,  -- Totem of Wrath (maintain)
-        tags = {C.BUFF, C.RAID_DEFENSIVE, C.CORE_ROTATION, C.PVE},
+        tags = {C.DPS, C.MAINTENANCE, C.BUFF, C.RAID_DEFENSIVE, C.PVE},
         cooldown = 0,
         duration = 120,
         priority = 1,
@@ -235,15 +235,15 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 403,  -- Lightning Bolt (main nuke)
-        tags = {C.CORE_ROTATION, C.FILLER, C.PVE_PVP},
+        tags = {C.DPS, C.FILLER, C.PVE_PVP},
         cooldown = 0,
         priority = 2,
         ranks = {403, 529, 548, 915, 943, 6041, 10391, 10392, 15207, 15208, 25448, 25449},
         specs = {"ELEMENTAL"},
     },
     {
-        spellID = 421,  -- Chain Lightning (AoE / cleave - situational in ST)
-        tags = {C.SITUATIONAL, C.PVE_PVP},
+        spellID = 421,  -- Chain Lightning (AoE / cleave - used in rotation when available)
+        tags = {C.DPS, C.ROTATIONAL, C.AOE, C.PVE_PVP},
         cooldown = 6,
         priority = 10,
         ranks = {421, 930, 2860, 10605, 25439, 25442},
@@ -251,7 +251,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 8050,  -- Flame Shock (maintain DoT)
-        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE_PVP},
         cooldown = 6,
         duration = 12,
         priority = 4,
@@ -288,7 +288,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 8512,  -- Windfury Totem
-        tags = {C.BUFF, C.OFFENSIVE_CD_MINOR, C.RAID_DEFENSIVE},
+        tags = {C.BUFF, C.DPS, C.RAID_DEFENSIVE},
         cooldown = 0,
         duration = 120,
         ranks = {8512, 10613, 10614},

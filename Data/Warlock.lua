@@ -33,7 +33,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 6789,  -- Death Coil
-        tags = {C.CC_HARD, C.FEAR, C.HEAL_SINGLE, C.OFFENSIVE_CD_MINOR},
+        tags = {C.CC_HARD, C.FEAR, C.HEAL_SINGLE, C.DPS, C.MINOR},
         cooldown = 120,
         duration = 3,
         ranks = {6789, 17925, 17926},
@@ -86,52 +86,52 @@ lib:RegisterSpells({
     },
 
     -------------------------------------------------------------------------------
-    -- Personal Defensives
+    -- Personal Defensives (Utility row)
     -------------------------------------------------------------------------------
     {
         spellID = 6229,  -- Shadow Ward
-        tags = {C.PERSONAL_DEFENSIVE, C.HAS_BUFF},
+        tags = {C.DEFENSIVE, C.MINOR, C.HAS_BUFF},
         cooldown = 30,
         duration = 30,
         ranks = {6229, 11739, 11740, 28610},
     },
     {
         spellID = 7812,  -- Sacrifice (Voidwalker)
-        tags = {C.PERSONAL_DEFENSIVE, C.PET, C.HAS_BUFF},
+        tags = {C.DEFENSIVE, C.MAJOR, C.PET, C.HAS_BUFF},
         cooldown = 0,
         duration = 30,
         ranks = {7812, 19438, 19440, 19441, 19442, 19443},
     },
 
     -------------------------------------------------------------------------------
-    -- Offensive Cooldowns
+    -- Offensive Cooldowns (Secondary Row - throughput)
     -------------------------------------------------------------------------------
     {
         spellID = 18288,  -- Amplify Curse
-        tags = {C.OFFENSIVE_CD, C.HAS_BUFF},
+        tags = {C.DPS, C.MAJOR, C.HAS_BUFF},
         cooldown = 180,
         talent = true,
     },
     {
         spellID = 17962,  -- Conflagrate
-        tags = {C.CORE_ROTATION, C.OFFENSIVE_CD_MINOR},
+        tags = {C.DPS, C.ROTATIONAL},
         cooldown = 10,
         talent = true,
     },
     {
         spellID = 1122,  -- Inferno (Summon Infernal)
-        tags = {C.OFFENSIVE_CD, C.PET_SUMMON},
+        tags = {C.DPS, C.MAJOR, C.PET_SUMMON},
         cooldown = 3600,
         duration = 300,
     },
     {
         spellID = 18540,  -- Ritual of Doom (Summon Doomguard)
-        tags = {C.OFFENSIVE_CD, C.PET_SUMMON},
+        tags = {C.DPS, C.MAJOR, C.PET_SUMMON},
         cooldown = 3600,
     },
     {
         spellID = 17877,  -- Shadowburn
-        tags = {C.CORE_ROTATION, C.FINISHER},
+        tags = {C.DPS, C.ROTATIONAL, C.FINISHER},
         cooldown = 15,
         talent = true,
         ranks = {17877, 18867, 18868, 18869, 18870, 18871},
@@ -152,14 +152,14 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 603,  -- Curse of Doom (on long boss fights)
-        tags = {C.CORE_ROTATION, C.DEBUFF, C.OFFENSIVE_CD, C.PVE},
+        tags = {C.DPS, C.MAINTENANCE, C.DEBUFF, C.PVE},
         cooldown = 60,
         duration = 60,
         priority = 1,
     },
     {
         spellID = 980,  -- Curse of Agony (shorter fights)
-        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE_PVP},
         cooldown = 0,
         duration = 24,
         priority = 1,
@@ -167,7 +167,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 30108,  -- Unstable Affliction (apply early)
-        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE},
+        tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE},
         cooldown = 0,
         duration = 18,
         priority = 2,
@@ -177,7 +177,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 172,  -- Corruption (maintain)
-        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE_PVP},
         cooldown = 0,
         duration = 18,
         priority = 3,
@@ -185,7 +185,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 18265,  -- Siphon Life (maintain if talented)
-        tags = {C.CORE_ROTATION, C.DEBUFF, C.HEAL_SINGLE, C.PVE},
+        tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.HEAL_SINGLE, C.PVE},
         cooldown = 0,
         duration = 30,
         priority = 4,
@@ -199,7 +199,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 348,  -- Immolate (apply first for Conflag/Incinerate)
-        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE},
+        tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE},
         cooldown = 0,
         duration = 15,
         priority = 1,
@@ -208,7 +208,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 29722,  -- Incinerate (main nuke with Immolate up)
-        tags = {C.CORE_ROTATION, C.FILLER, C.PVE},
+        tags = {C.DPS, C.FILLER, C.PVE},
         cooldown = 0,
         priority = 2,
         ranks = {29722, 32231},
@@ -220,28 +220,28 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 686,  -- Shadow Bolt (main filler)
-        tags = {C.CORE_ROTATION, C.FILLER, C.PVE_PVP},
+        tags = {C.DPS, C.FILLER, C.PVE_PVP},
         cooldown = 0,
         priority = 5,
         ranks = {686, 695, 705, 1088, 1106, 7641, 11659, 11660, 11661, 25307, 27209},
     },
     {
         spellID = 5676,  -- Searing Pain (threat issues / low rank snipe)
-        tags = {C.CORE_ROTATION, C.FILLER, C.PVP},
+        tags = {C.DPS, C.FILLER, C.PVP},
         cooldown = 0,
         priority = 6,
         ranks = {5676, 17919, 17920, 17921, 17922, 17923, 27210},
     },
     {
         spellID = 6353,  -- Soul Fire (opener/finisher - situational)
-        tags = {C.SITUATIONAL, C.OFFENSIVE_CD, C.PVE},
+        tags = {C.DPS, C.MINOR, C.PVE},
         cooldown = 60,
         priority = 10,
         ranks = {6353, 17924, 27211},
     },
     {
         spellID = 1120,  -- Drain Soul (execute phase / shard - situational)
-        tags = {C.SITUATIONAL, C.UTILITY, C.RESOURCE, C.PVE},
+        tags = {C.DPS, C.MINOR, C.UTILITY, C.RESOURCE, C.PVE},
         cooldown = 0,
         duration = 15,
         priority = 11,
@@ -249,7 +249,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 689,  -- Drain Life (self-sustain - situational)
-        tags = {C.SITUATIONAL, C.HEAL_SINGLE, C.PVP},
+        tags = {C.DPS, C.MINOR, C.HEAL_SINGLE, C.PVP},
         cooldown = 0,
         duration = 5,
         priority = 12,
@@ -257,14 +257,14 @@ lib:RegisterSpells({
     },
     {
         spellID = 27243,  -- Seed of Corruption (AoE)
-        tags = {C.SITUATIONAL, C.DEBUFF, C.PVE},
+        tags = {C.DPS, C.AOE, C.DEBUFF, C.PVE},
         cooldown = 0,
         duration = 18,
         priority = 13,
     },
     {
         spellID = 5740,  -- Rain of Fire (AoE)
-        tags = {C.SITUATIONAL, C.PVE},
+        tags = {C.DPS, C.AOE, C.PVE},
         cooldown = 0,
         duration = 8,
         priority = 14,
@@ -272,7 +272,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 1949,  -- Hellfire (AoE)
-        tags = {C.SITUATIONAL, C.PVE},
+        tags = {C.DPS, C.AOE, C.PVE},
         cooldown = 0,
         duration = 15,
         priority = 15,
@@ -394,21 +394,21 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 706,  -- Demon Armor
-        tags = {C.BUFF, C.PERSONAL_DEFENSIVE, C.LONG_BUFF},
+        tags = {C.BUFF, C.DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
         duration = 1800,
         ranks = {706, 1086, 11733, 11734, 11735},
     },
     {
         spellID = 687,  -- Demon Skin
-        tags = {C.BUFF, C.PERSONAL_DEFENSIVE, C.LONG_BUFF},
+        tags = {C.BUFF, C.DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
         duration = 1800,
         ranks = {687, 696},
     },
     {
         spellID = 28176,  -- Fel Armor (TBC+)
-        tags = {C.BUFF, C.PERSONAL_DEFENSIVE, C.LONG_BUFF},
+        tags = {C.BUFF, C.DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
         duration = 1800,
     },

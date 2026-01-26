@@ -74,40 +74,40 @@ lib:RegisterSpells({
     },
 
     -------------------------------------------------------------------------------
-    -- Personal Defensives
+    -- Personal Defensives (Utility row)
     -------------------------------------------------------------------------------
     {
         spellID = 19263,  -- Deterrence
-        tags = {C.PERSONAL_DEFENSIVE, C.HAS_BUFF},
+        tags = {C.DEFENSIVE, C.MAJOR, C.HAS_BUFF},
         cooldown = 300,
         duration = 10,
         talent = true,
     },
     {
         spellID = 5384,  -- Feign Death
-        tags = {C.PERSONAL_DEFENSIVE, C.UTILITY},
+        tags = {C.DEFENSIVE, C.MINOR, C.UTILITY},
         cooldown = 30,
     },
 
     -------------------------------------------------------------------------------
-    -- Offensive Cooldowns
+    -- Offensive Cooldowns (Secondary Row - throughput)
     -------------------------------------------------------------------------------
     {
         spellID = 19574,  -- Bestial Wrath
-        tags = {C.OFFENSIVE_CD, C.HAS_BUFF, C.PET},
+        tags = {C.DPS, C.MAJOR, C.HAS_BUFF, C.PET},
         cooldown = 120,
         duration = 18,
         talent = true,
     },
     {
         spellID = 3045,  -- Rapid Fire
-        tags = {C.OFFENSIVE_CD, C.HAS_BUFF},
+        tags = {C.DPS, C.MAJOR, C.HAS_BUFF},
         cooldown = 300,
         duration = 15,
     },
     {
-        spellID = 23989,  -- Readiness
-        tags = {C.OFFENSIVE_CD, C.UTILITY},
+        spellID = 23989,  -- Readiness (resets CDs - utility aspect but DPS gain)
+        tags = {C.DPS, C.MAJOR, C.UTILITY},
         cooldown = 300,
         talent = true,
     },
@@ -167,13 +167,13 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 13795,  -- Immolation Trap
-        tags = {C.OFFENSIVE_CD_MINOR, C.DEBUFF},
+        tags = {C.DPS, C.MINOR, C.DEBUFF},
         cooldown = 15,
         ranks = {13795, 14302, 14303, 14304, 14305},
     },
     {
         spellID = 13813,  -- Explosive Trap
-        tags = {C.OFFENSIVE_CD_MINOR},
+        tags = {C.DPS, C.MINOR, C.AOE},
         cooldown = 15,
         ranks = {13813, 14316, 14317},
     },
@@ -195,7 +195,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 1978,  -- Serpent Sting (maintain DoT)
-        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE_PVP},
         cooldown = 0,
         duration = 15,
         priority = 2,
@@ -203,28 +203,28 @@ lib:RegisterSpells({
     },
     {
         spellID = 34026,  -- Kill Command (use on CD with pet)
-        tags = {C.CORE_ROTATION, C.OFFENSIVE_CD_MINOR, C.PVE},
+        tags = {C.DPS, C.ROTATIONAL, C.PVE},
         cooldown = 5,
         priority = 3,
         specs = nil,
     },
     {
         spellID = 34120,  -- Steady Shot (main shot, weave with Auto)
-        tags = {C.CORE_ROTATION, C.PVE},
+        tags = {C.DPS, C.ROTATIONAL, C.PVE},
         cooldown = 0,
         priority = 4,
         specs = nil,
     },
     {
-        spellID = 2643,  -- Multi-Shot (AoE / cleave - situational in ST)
-        tags = {C.SITUATIONAL, C.PVE_PVP},
+        spellID = 2643,  -- Multi-Shot (AoE / cleave - used in both ST and AoE)
+        tags = {C.DPS, C.ROTATIONAL, C.AOE, C.PVE_PVP},
         cooldown = 10,
         priority = 10,
         ranks = {2643, 14288, 14289, 14290, 25294, 27021},
     },
     {
-        spellID = 1510,  -- Volley (AoE)
-        tags = {C.SITUATIONAL, C.PVE},
+        spellID = 1510,  -- Volley (AoE only)
+        tags = {C.DPS, C.AOE, C.PVE},
         cooldown = 0,
         duration = 6,
         priority = 11,
@@ -232,14 +232,14 @@ lib:RegisterSpells({
     },
     {
         spellID = 3044,  -- Arcane Shot (mana dump / BM rotation)
-        tags = {C.CORE_ROTATION, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
         cooldown = 6,
         priority = 7,
         ranks = {3044, 14281, 14282, 14283, 14284, 14285, 14286, 14287, 27019},
     },
     {
         spellID = 19434,  -- Aimed Shot (when procs / opener)
-        tags = {C.CORE_ROTATION, C.PVE},
+        tags = {C.DPS, C.ROTATIONAL, C.PVE},
         cooldown = 6,
         priority = 8,
         talent = true,
@@ -272,12 +272,12 @@ lib:RegisterSpells({
     },
     {
         spellID = 13163,  -- Aspect of the Monkey
-        tags = {C.BUFF, C.PERSONAL_DEFENSIVE, C.LONG_BUFF},
+        tags = {C.BUFF, C.DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
     },
     {
         spellID = 13165,  -- Aspect of the Hawk
-        tags = {C.BUFF, C.OFFENSIVE_CD_MINOR, C.LONG_BUFF},
+        tags = {C.BUFF, C.DPS, C.LONG_BUFF},
         cooldown = 0,
         ranks = {13165, 14318, 14319, 14320, 14321, 14322, 25296},
     },

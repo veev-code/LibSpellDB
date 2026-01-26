@@ -36,54 +36,54 @@ lib:RegisterSpells({
     },
 
     -------------------------------------------------------------------------------
-    -- Immunities
+    -- Immunities (Utility row - defensive, not throughput)
     -------------------------------------------------------------------------------
     {
         spellID = 642,  -- Divine Shield
-        tags = {C.IMMUNITY, C.PERSONAL_DEFENSIVE, C.HAS_BUFF},
+        tags = {C.DEFENSIVE, C.MAJOR, C.IMMUNITY, C.HAS_BUFF},
         cooldown = 300,
         duration = 12,
         ranks = {642, 1020},
     },
     {
         spellID = 498,  -- Divine Protection
-        tags = {C.IMMUNITY, C.PERSONAL_DEFENSIVE, C.HAS_BUFF},
+        tags = {C.DEFENSIVE, C.MAJOR, C.IMMUNITY, C.HAS_BUFF},
         cooldown = 300,
         duration = 8,
         ranks = {498, 5573},
     },
 
     -------------------------------------------------------------------------------
-    -- External Defensives
+    -- External Defensives (Utility row)
     -------------------------------------------------------------------------------
     {
         spellID = 1022,  -- Blessing of Protection
-        tags = {C.EXTERNAL_DEFENSIVE, C.IMMUNITY, C.HAS_BUFF},
+        tags = {C.DEFENSIVE, C.MAJOR, C.EXTERNAL_DEFENSIVE, C.IMMUNITY, C.HAS_BUFF},
         cooldown = 300,
         duration = 10,
         ranks = {1022, 5599, 10278},
     },
     {
         spellID = 6940,  -- Blessing of Sacrifice
-        tags = {C.EXTERNAL_DEFENSIVE, C.HAS_BUFF},
+        tags = {C.DEFENSIVE, C.MINOR, C.EXTERNAL_DEFENSIVE, C.HAS_BUFF},
         cooldown = 0,  -- No CD in Classic
         duration = 30,
         ranks = {6940, 20729},
     },
     {
         spellID = 1044,  -- Blessing of Freedom
-        tags = {C.EXTERNAL_DEFENSIVE, C.CC_BREAK, C.HAS_BUFF},
+        tags = {C.DEFENSIVE, C.MINOR, C.CC_BREAK, C.HAS_BUFF},
         cooldown = 20,
         duration = 10,
     },
     {
         spellID = 19752,  -- Divine Intervention
-        tags = {C.EXTERNAL_DEFENSIVE, C.UTILITY},
+        tags = {C.DEFENSIVE, C.MAJOR, C.UTILITY},
         cooldown = 3600,
     },
     {
-        spellID = 20216,  -- Divine Favor
-        tags = {C.HEALING_CD, C.HAS_BUFF},
+        spellID = 20216,  -- Divine Favor (throughput CD for healing)
+        tags = {C.HEAL, C.MAJOR, C.HAS_BUFF},
         cooldown = 120,
         talent = true,
     },
@@ -93,7 +93,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 633,  -- Lay on Hands
-        tags = {C.PERSONAL_DEFENSIVE, C.EXTERNAL_DEFENSIVE, C.HEAL_SINGLE, C.HEALING_CD},
+        tags = {C.HEAL, C.MAJOR, C.EXTERNAL_DEFENSIVE, C.HEAL_SINGLE},
         cooldown = 3600,
         ranks = {633, 2800, 10310},
     },
@@ -103,7 +103,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 20473,  -- Holy Shock (instant, use on CD)
-        tags = {C.HEAL_SINGLE, C.CORE_ROTATION, C.OFFENSIVE_CD_MINOR, C.PVE_PVP},
+        tags = {C.HEAL, C.ROTATIONAL, C.HEAL_SINGLE, C.PVE_PVP},
         cooldown = 30,
         priority = 1,
         talent = true,
@@ -112,21 +112,21 @@ lib:RegisterSpells({
     },
     {
         spellID = 19750,  -- Flash of Light (efficient, fast)
-        tags = {C.HEAL_SINGLE, C.CORE_ROTATION, C.FILLER, C.PVE_PVP},
+        tags = {C.HEAL, C.FILLER, C.HEAL_SINGLE, C.PVE_PVP},
         cooldown = 0,
         priority = 2,
         ranks = {19750, 19939, 19940, 19941, 19942, 19943, 27137},
     },
     {
         spellID = 635,  -- Holy Light (big heal when needed)
-        tags = {C.HEAL_SINGLE, C.CORE_ROTATION, C.FILLER, C.PVE},
+        tags = {C.HEAL, C.FILLER, C.HEAL_SINGLE, C.PVE},
         cooldown = 0,
         priority = 3,
         ranks = {635, 639, 647, 1026, 1042, 3472, 10328, 10329, 25292, 27135, 27136},
     },
     {
-        spellID = 31842,  -- Divine Illumination (mana CD)
-        tags = {C.HEALING_CD, C.RESOURCE, C.HAS_BUFF, C.PVE},
+        spellID = 31842,  -- Divine Illumination (mana CD - throughput via sustain)
+        tags = {C.HEAL, C.MAJOR, C.RESOURCE, C.HAS_BUFF, C.PVE},
         cooldown = 180,
         duration = 15,
         priority = 4,
@@ -139,7 +139,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 31892,  -- Seal of Blood (maintain, Horde)
-        tags = {C.BUFF, C.CORE_ROTATION, C.PVE},
+        tags = {C.DPS, C.MAINTENANCE, C.BUFF, C.PVE},
         cooldown = 0,
         duration = 30,
         priority = 1,
@@ -147,7 +147,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 35395,  -- Crusader Strike (use on CD)
-        tags = {C.CORE_ROTATION, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
         cooldown = 6,
         priority = 2,
         talent = true,
@@ -155,13 +155,13 @@ lib:RegisterSpells({
     },
     {
         spellID = 20271,  -- Judgement (use on CD)
-        tags = {C.CORE_ROTATION, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
         cooldown = 10,
         priority = 3,
     },
     {
-        spellID = 26573,  -- Consecration (use on CD)
-        tags = {C.CORE_ROTATION, C.PVE_PVP},
+        spellID = 26573,  -- Consecration (use on CD - both ST and AoE)
+        tags = {C.DPS, C.ROTATIONAL, C.AOE, C.PVE_PVP},
         cooldown = 8,
         duration = 8,
         priority = 4,
@@ -170,7 +170,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 24275,  -- Hammer of Wrath (sub-20% execute)
-        tags = {C.CORE_ROTATION, C.FINISHER, C.REACTIVE, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.FINISHER, C.REACTIVE, C.PVE_PVP},
         cooldown = 6,
         priority = 5,
         ranks = {24275, 24274, 24239, 27180},
@@ -178,7 +178,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 879,  -- Exorcism (vs Undead/Demon only - situational)
-        tags = {C.SITUATIONAL, C.PVE},
+        tags = {C.DPS, C.MINOR, C.PVE},
         cooldown = 15,
         priority = 10,
         ranks = {879, 5614, 5615, 10312, 10313, 10314, 27138},
@@ -189,7 +189,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 20925,  -- Holy Shield (maintain for block)
-        tags = {C.PERSONAL_DEFENSIVE, C.HAS_BUFF, C.CORE_ROTATION, C.PVE},
+        tags = {C.TANK, C.ROTATIONAL, C.DEFENSIVE, C.HAS_BUFF, C.PVE},
         cooldown = 10,
         duration = 10,
         priority = 1,
@@ -199,15 +199,15 @@ lib:RegisterSpells({
     },
     {
         spellID = 31935,  -- Avenger's Shield (pull / on CD)
-        tags = {C.CORE_ROTATION, C.CC_SOFT, C.PVE},
+        tags = {C.TANK, C.ROTATIONAL, C.CC_SOFT, C.PVE},
         cooldown = 30,
         priority = 2,
         talent = true,
         specs = {"PROTECTION"},
     },
     {
-        spellID = 31884,  -- Avenging Wrath (DPS CD)
-        tags = {C.OFFENSIVE_CD, C.HAS_BUFF, C.PVE_PVP},
+        spellID = 31884,  -- Avenging Wrath (DPS CD - throughput)
+        tags = {C.DPS, C.MAJOR, C.HAS_BUFF, C.PVE_PVP},
         cooldown = 180,
         duration = 20,
         priority = 7,
@@ -229,7 +229,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 7294,  -- Retribution Aura
-        tags = {C.BUFF, C.OFFENSIVE_CD_MINOR, C.LONG_BUFF},
+        tags = {C.BUFF, C.DPS, C.LONG_BUFF},
         cooldown = 0,
         ranks = {7294, 10298, 10299, 10300, 10301},
     },
@@ -253,7 +253,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 20218,  -- Sanctity Aura
-        tags = {C.BUFF, C.OFFENSIVE_CD_MINOR, C.LONG_BUFF},
+        tags = {C.BUFF, C.DPS, C.LONG_BUFF},
         cooldown = 0,
         talent = true,
     },
@@ -309,14 +309,14 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 20154,  -- Seal of Righteousness
-        tags = {C.BUFF, C.CORE_ROTATION},
+        tags = {C.BUFF, C.DPS, C.MAINTENANCE},
         cooldown = 0,
         duration = 30,
         ranks = {20154, 20287, 20288, 20289, 20290, 20291, 20292, 20293},
     },
     {
         spellID = 20375,  -- Seal of Command
-        tags = {C.BUFF, C.CORE_ROTATION},
+        tags = {C.BUFF, C.DPS, C.MAINTENANCE},
         cooldown = 0,
         duration = 30,
         talent = true,
@@ -328,7 +328,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 2812,  -- Holy Wrath
-        tags = {C.OFFENSIVE_CD_MINOR},
+        tags = {C.DPS, C.AOE},
         cooldown = 60,
         ranks = {2812, 10318, 27139},
     },

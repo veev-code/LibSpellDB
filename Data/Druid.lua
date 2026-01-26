@@ -47,34 +47,34 @@ lib:RegisterSpells({
     },
 
     -------------------------------------------------------------------------------
-    -- Personal Defensives
+    -- Personal Defensives (Utility row)
     -------------------------------------------------------------------------------
     {
         spellID = 22812,  -- Barkskin
-        tags = {C.PERSONAL_DEFENSIVE, C.DAMAGE_REDUCTION, C.HAS_BUFF},
+        tags = {C.DEFENSIVE, C.MINOR, C.DAMAGE_REDUCTION, C.HAS_BUFF},
         cooldown = 60,
         duration = 12,
     },
     {
         spellID = 22842,  -- Frenzied Regeneration
-        tags = {C.PERSONAL_DEFENSIVE, C.HEAL_SINGLE, C.HAS_BUFF},
+        tags = {C.DEFENSIVE, C.MAJOR, C.HEAL_SINGLE, C.HAS_BUFF},
         cooldown = 180,
         duration = 10,
     },
     {
         spellID = 16689,  -- Nature's Grasp
-        tags = {C.PERSONAL_DEFENSIVE, C.ROOT, C.HAS_BUFF},
+        tags = {C.DEFENSIVE, C.MINOR, C.ROOT, C.HAS_BUFF},
         cooldown = 60,
         duration = 45,
         ranks = {16689, 16810, 16811, 16812, 16813, 17329},
     },
 
     -------------------------------------------------------------------------------
-    -- Healing Cooldowns
+    -- Healing/DPS Cooldowns (Secondary Row - throughput)
     -------------------------------------------------------------------------------
     {
         spellID = 17116,  -- Nature's Swiftness
-        tags = {C.HEALING_CD, C.HAS_BUFF, C.PVE_PVP},
+        tags = {C.HEAL, C.MAJOR, C.HAS_BUFF, C.PVE_PVP},
         cooldown = 180,
         talent = true,
     },
@@ -84,14 +84,14 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 740,  -- Tranquility
-        tags = {C.RAID_DEFENSIVE, C.HEAL_AOE, C.HEALING_CD},
+        tags = {C.HEAL, C.MAJOR, C.HEAL_AOE},
         cooldown = 300,
         duration = 10,
         ranks = {740, 8918, 9862, 9863},
     },
     {
         spellID = 29166,  -- Innervate
-        tags = {C.EXTERNAL_DEFENSIVE, C.RESOURCE, C.UTILITY, C.HAS_BUFF},
+        tags = {C.HEAL, C.MAJOR, C.RESOURCE, C.HAS_BUFF},
         cooldown = 360,
         duration = 20,
     },
@@ -138,7 +138,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 24858,  -- Moonkin Form
-        tags = {C.SHAPESHIFT, C.OFFENSIVE_CD},
+        tags = {C.SHAPESHIFT, C.DPS},
         cooldown = 0,
         talent = true,
     },
@@ -169,7 +169,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 8921,  -- Moonfire (apply first, instant)
-        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE_PVP},
         cooldown = 0,
         duration = 12,
         priority = 1,
@@ -177,7 +177,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 5570,  -- Insect Swarm (maintain DoT)
-        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE},
+        tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE},
         cooldown = 0,
         duration = 12,
         priority = 2,
@@ -187,15 +187,15 @@ lib:RegisterSpells({
     },
     {
         spellID = 2912,  -- Starfire (main nuke)
-        tags = {C.CORE_ROTATION, C.FILLER, C.PVE},
+        tags = {C.DPS, C.FILLER, C.PVE},
         cooldown = 0,
         priority = 3,
         ranks = {2912, 8949, 8950, 8951, 9875, 9876, 25298, 26986},
         specs = {"BALANCE"},
     },
     {
-        spellID = 33831,  -- Force of Nature (use on CD)
-        tags = {C.OFFENSIVE_CD, C.PET_SUMMON, C.PVE},
+        spellID = 33831,  -- Force of Nature (use on CD - throughput CD)
+        tags = {C.DPS, C.MAJOR, C.PET_SUMMON, C.PVE},
         cooldown = 180,
         duration = 30,
         priority = 4,
@@ -203,8 +203,8 @@ lib:RegisterSpells({
         specs = {"BALANCE"},
     },
     {
-        spellID = 16914,  -- Hurricane (AoE - situational)
-        tags = {C.SITUATIONAL, C.CC_SOFT, C.PVE},
+        spellID = 16914,  -- Hurricane (AoE)
+        tags = {C.DPS, C.AOE, C.CC_SOFT, C.PVE},
         cooldown = 60,
         duration = 10,
         priority = 10,
@@ -225,7 +225,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 33983,  -- Mangle (Cat) (apply debuff first)
-        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE_PVP},
         cooldown = 0,
         priority = 1,
         talent = true,
@@ -233,7 +233,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 27002,  -- Shred (main CP builder from behind)
-        tags = {C.CORE_ROTATION, C.PVE},
+        tags = {C.DPS, C.ROTATIONAL, C.PVE},
         cooldown = 0,
         priority = 2,
         ranks = {5221, 6800, 8992, 9829, 9830, 27001, 27002},
@@ -241,7 +241,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 1079,  -- Rip (maintain at 5 CP)
-        tags = {C.CORE_ROTATION, C.FINISHER, C.DEBUFF, C.PVE},
+        tags = {C.DPS, C.ROTATIONAL, C.FINISHER, C.DEBUFF, C.PVE},
         cooldown = 0,
         duration = 12,
         priority = 3,
@@ -250,7 +250,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 22568,  -- Ferocious Bite (dump excess CP/energy)
-        tags = {C.CORE_ROTATION, C.FINISHER, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.FINISHER, C.PVE_PVP},
         cooldown = 0,
         priority = 4,
         ranks = {22568, 22827, 22828, 22829, 31018, 24248},
@@ -262,7 +262,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 33987,  -- Mangle (Bear) (highest threat on CD)
-        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE_PVP},
+        tags = {C.TANK, C.ROTATIONAL, C.DEBUFF, C.PVE_PVP},
         cooldown = 6,
         priority = 1,
         talent = true,
@@ -270,7 +270,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 33745,  -- Lacerate (stack and maintain)
-        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE},
+        tags = {C.TANK, C.ROTATIONAL, C.DEBUFF, C.PVE},
         cooldown = 0,
         duration = 15,
         priority = 2,
@@ -278,7 +278,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 779,  -- Swipe (AoE threat)
-        tags = {C.CORE_ROTATION, C.PVE_PVP},
+        tags = {C.TANK, C.ROTATIONAL, C.AOE, C.PVE_PVP},
         cooldown = 0,
         priority = 3,
         ranks = {779, 780, 769, 9754, 9908, 26997},
@@ -286,7 +286,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 6807,  -- Maul (rage dump - situational)
-        tags = {C.SITUATIONAL, C.PVE},
+        tags = {C.TANK, C.MINOR, C.PVE},
         cooldown = 0,
         priority = 10,
         ranks = {6807, 6808, 6809, 8972, 9745, 9880, 9881, 26996},
@@ -307,7 +307,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 33763,  -- Lifebloom (stack to 3, maintain)
-        tags = {C.CORE_ROTATION, C.HOT, C.HEAL_SINGLE, C.PVE},
+        tags = {C.HEAL, C.ROTATIONAL, C.HOT, C.HEAL_SINGLE, C.PVE},
         cooldown = 0,
         duration = 7,
         priority = 1,
@@ -315,7 +315,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 774,  -- Rejuvenation (maintain on targets)
-        tags = {C.CORE_ROTATION, C.HOT, C.HEAL_SINGLE, C.PVE_PVP},
+        tags = {C.HEAL, C.ROTATIONAL, C.HOT, C.HEAL_SINGLE, C.PVE_PVP},
         cooldown = 0,
         duration = 12,
         priority = 2,
@@ -324,7 +324,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 8936,  -- Regrowth (spot heal + HoT)
-        tags = {C.CORE_ROTATION, C.HEAL_SINGLE, C.HOT, C.PVE_PVP},
+        tags = {C.HEAL, C.ROTATIONAL, C.HEAL_SINGLE, C.HOT, C.PVE_PVP},
         cooldown = 0,
         duration = 21,
         priority = 3,
@@ -333,7 +333,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 18562,  -- Swiftmend (emergency heal)
-        tags = {C.HEALING_CD, C.HEAL_SINGLE, C.CORE_ROTATION, C.PVE_PVP},
+        tags = {C.HEAL, C.ROTATIONAL, C.HEAL_SINGLE, C.PVE_PVP},
         cooldown = 15,
         priority = 4,
         talent = true,

@@ -55,41 +55,41 @@ lib:RegisterSpells({
     },
 
     -------------------------------------------------------------------------------
-    -- Personal Defensives
+    -- Personal Defensives (Utility row)
     -------------------------------------------------------------------------------
     {
         spellID = 586,  -- Fade
-        tags = {C.PERSONAL_DEFENSIVE, C.UTILITY},
+        tags = {C.DEFENSIVE, C.MINOR, C.UTILITY},
         cooldown = 30,
         duration = 10,
         ranks = {586, 9578, 9579, 9592, 10941, 10942},
     },
     {
         spellID = 15286,  -- Vampiric Embrace
-        tags = {C.PERSONAL_DEFENSIVE, C.BUFF, C.HAS_BUFF},
+        tags = {C.DPS, C.MAINTENANCE, C.BUFF, C.HAS_BUFF},
         cooldown = 0,
         duration = 60,  -- Buff on self, heals based on shadow damage
         talent = true,
     },
     {
         spellID = 15473,  -- Shadowform
-        tags = {C.PERSONAL_DEFENSIVE, C.SHAPESHIFT, C.OFFENSIVE_CD},
+        tags = {C.DPS, C.MAJOR, C.SHAPESHIFT},
         cooldown = 1.5,
         talent = true,
     },
     {
         spellID = 6346,  -- Fear Ward
-        tags = {C.PERSONAL_DEFENSIVE, C.EXTERNAL_DEFENSIVE, C.CC_IMMUNITY, C.HAS_BUFF},
+        tags = {C.DEFENSIVE, C.MINOR, C.EXTERNAL_DEFENSIVE, C.CC_IMMUNITY, C.HAS_BUFF},
         cooldown = 30,
         duration = 180,
     },
 
     -------------------------------------------------------------------------------
-    -- External Defensives
+    -- External Defensives (Utility row - not throughput)
     -------------------------------------------------------------------------------
     {
         spellID = 33206,  -- Pain Suppression (Discipline talent)
-        tags = {C.EXTERNAL_DEFENSIVE, C.SITUATIONAL, C.HAS_BUFF, C.PVE_PVP},
+        tags = {C.DEFENSIVE, C.MAJOR, C.EXTERNAL_DEFENSIVE, C.HAS_BUFF, C.PVE_PVP},
         cooldown = 120,
         duration = 8,
         talent = true,
@@ -97,7 +97,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 13908,  -- Desperate Prayer (Dwarf/Human racial talent)
-        tags = {C.PERSONAL_DEFENSIVE, C.HEAL_SINGLE},
+        tags = {C.HEAL, C.MAJOR, C.HEAL_SINGLE},
         cooldown = 600,
         ranks = {13908, 19236, 19238, 19240, 19241, 19242, 19243},
     },
@@ -111,18 +111,18 @@ lib:RegisterSpells({
     },
 
     -------------------------------------------------------------------------------
-    -- Healing Cooldowns
+    -- Healing/DPS Cooldowns (Secondary Row - throughput)
     -------------------------------------------------------------------------------
     {
         spellID = 14751,  -- Inner Focus
-        tags = {C.HEALING_CD, C.RESOURCE, C.HAS_BUFF},
+        tags = {C.HEAL, C.MAJOR, C.RESOURCE, C.HAS_BUFF},
         cooldown = 180,
         duration = 0,  -- Next spell only
         talent = true,
     },
     {
         spellID = 10060,  -- Power Infusion
-        tags = {C.HEALING_CD, C.OFFENSIVE_CD, C.EXTERNAL_DEFENSIVE, C.HAS_BUFF},
+        tags = {C.DPS, C.HEAL, C.MAJOR, C.HAS_BUFF},
         cooldown = 180,
         duration = 15,
         talent = true,
@@ -133,7 +133,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 33076,  -- Prayer of Mending (use on pull/CD)
-        tags = {C.HEAL_SINGLE, C.CORE_ROTATION, C.PVE_PVP},
+        tags = {C.HEAL, C.ROTATIONAL, C.HEAL_SINGLE, C.PVE_PVP},
         cooldown = 10,
         duration = 30,
         priority = 1,
@@ -141,7 +141,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 17,  -- Power Word: Shield (prevent damage)
-        tags = {C.EXTERNAL_DEFENSIVE, C.PERSONAL_DEFENSIVE, C.HEAL_SINGLE, C.HAS_BUFF, C.CORE_ROTATION},
+        tags = {C.HEAL, C.ROTATIONAL, C.EXTERNAL_DEFENSIVE, C.HEAL_SINGLE, C.HAS_BUFF},
         cooldown = 0,
         duration = 30,
         priority = 2,
@@ -151,8 +151,8 @@ lib:RegisterSpells({
         targetLockoutDebuff = 6788,
     },
     {
-        spellID = 34866,  -- Circle of Healing (instant AoE heal - situational)
-        tags = {C.HEAL_AOE, C.SITUATIONAL, C.PVE},
+        spellID = 34866,  -- Circle of Healing (instant AoE heal)
+        tags = {C.HEAL, C.AOE, C.HEAL_AOE, C.PVE},
         cooldown = 0,
         priority = 10,
         talent = true,
@@ -160,7 +160,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 139,  -- Renew (maintain on tank)
-        tags = {C.HOT, C.HEAL_SINGLE, C.CORE_ROTATION, C.PVE_PVP},
+        tags = {C.HEAL, C.ROTATIONAL, C.HOT, C.HEAL_SINGLE, C.PVE_PVP},
         cooldown = 0,
         duration = 15,
         priority = 4,
@@ -169,28 +169,28 @@ lib:RegisterSpells({
     },
     {
         spellID = 2060,  -- Greater Heal (big heal)
-        tags = {C.HEAL_SINGLE, C.CORE_ROTATION, C.FILLER, C.PVE},
+        tags = {C.HEAL, C.FILLER, C.HEAL_SINGLE, C.PVE},
         cooldown = 0,
         priority = 5,
         ranks = {2060, 10963, 10964, 10965, 25314, 25210},
     },
     {
         spellID = 2061,  -- Flash Heal (fast heal)
-        tags = {C.HEAL_SINGLE, C.CORE_ROTATION, C.FILLER, C.PVE_PVP},
+        tags = {C.HEAL, C.FILLER, C.HEAL_SINGLE, C.PVE_PVP},
         cooldown = 0,
         priority = 6,
         ranks = {2061, 9472, 9473, 9474, 10915, 10916, 10917, 25233, 25235},
     },
     {
         spellID = 32546,  -- Binding Heal (heal self + target)
-        tags = {C.HEAL_SINGLE, C.CORE_ROTATION, C.PVE_PVP},
+        tags = {C.HEAL, C.ROTATIONAL, C.HEAL_SINGLE, C.PVE_PVP},
         cooldown = 0,
         priority = 7,
         specs = {"HOLY", "DISCIPLINE"},
     },
     {
         spellID = 596,  -- Prayer of Healing (group AoE)
-        tags = {C.HEAL_AOE, C.CORE_ROTATION, C.FILLER, C.PVE},
+        tags = {C.HEAL, C.AOE, C.HEAL_AOE, C.FILLER, C.PVE},
         cooldown = 0,
         priority = 8,
         ranks = {596, 996, 10960, 10961, 25316, 25308},
@@ -236,7 +236,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 34914,  -- Vampiric Touch (apply first for mana)
-        tags = {C.CORE_ROTATION, C.DEBUFF, C.RESOURCE, C.PVE},
+        tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.RESOURCE, C.PVE},
         cooldown = 0,
         duration = 15,
         priority = 1,
@@ -246,7 +246,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 589,  -- Shadow Word: Pain (maintain DoT)
-        tags = {C.CORE_ROTATION, C.DEBUFF, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE_PVP},
         cooldown = 0,
         duration = 18,
         priority = 2,
@@ -255,7 +255,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 8092,  -- Mind Blast (use on CD)
-        tags = {C.CORE_ROTATION, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
         cooldown = 8,
         priority = 3,
         ranks = {8092, 8102, 8103, 8104, 8105, 8106, 10945, 10946, 10947, 25372, 25375},
@@ -263,7 +263,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 15407,  -- Mind Flay (filler between MBs)
-        tags = {C.CORE_ROTATION, C.CC_SOFT, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.CC_SOFT, C.PVE_PVP},
         cooldown = 0,
         duration = 3,
         priority = 4,
@@ -273,7 +273,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 32996,  -- Shadow Word: Death (execute / finisher)
-        tags = {C.CORE_ROTATION, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
         cooldown = 12,
         priority = 5,
         ranks = {32996, 32379},
@@ -281,7 +281,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 2944,  -- Devouring Plague (Undead racial, extra DoT)
-        tags = {C.CORE_ROTATION, C.DEBUFF, C.PERSONAL_DEFENSIVE, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.HEAL_SINGLE, C.PVE_PVP},
         cooldown = 180,
         duration = 24,
         priority = 6,
@@ -294,13 +294,13 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 14914,  -- Holy Fire (opener)
-        tags = {C.CORE_ROTATION, C.PVE},
+        tags = {C.DPS, C.ROTATIONAL, C.PVE},
         cooldown = 10,
         ranks = {14914, 15262, 15263, 15264, 15265, 15266, 15267, 15261, 25384},
     },
     {
         spellID = 585,  -- Smite (filler)
-        tags = {C.CORE_ROTATION, C.FILLER, C.PVE},
+        tags = {C.DPS, C.FILLER, C.PVE},
         cooldown = 0,
         ranks = {585, 591, 598, 984, 1004, 6060, 10933, 10934, 25363, 25364},
     },
@@ -345,7 +345,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 15237,  -- Holy Nova (AoE, situational)
-        tags = {C.HEAL_AOE, C.SITUATIONAL, C.FILLER},
+        tags = {C.HEAL, C.AOE, C.HEAL_AOE, C.FILLER},
         cooldown = 0,
         talent = true,
         ranks = {15237, 15430, 15431, 27799, 27800, 27801},
@@ -372,7 +372,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 588,  -- Inner Fire
-        tags = {C.BUFF, C.PERSONAL_DEFENSIVE, C.LONG_BUFF},
+        tags = {C.BUFF, C.DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
         duration = 600,
         ranks = {588, 7128, 602, 1006, 10951, 10952},

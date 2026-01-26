@@ -48,7 +48,7 @@ lib:RegisterSpells({
     -- Dwarf - Stoneform (removes poison/disease/bleed + armor bonus)
     {
         spellID = 20594,
-        tags = {C.CC_BREAK, C.PERSONAL_DEFENSIVE, C.DISPEL_POISON, C.DISPEL_DISEASE},
+        tags = {C.CC_BREAK, C.DEFENSIVE, C.MINOR, C.DISPEL_POISON, C.DISPEL_DISEASE},
         cooldown = 180,
         duration = 8,
         race = DWARF,
@@ -56,14 +56,14 @@ lib:RegisterSpells({
 })
 
 -------------------------------------------------------------------------------
--- Offensive Cooldowns (will appear in "Major Cooldowns" row)
+-- Offensive Cooldowns (Secondary Row - throughput)
 -------------------------------------------------------------------------------
 
 lib:RegisterSpells({
     -- Orc - Blood Fury (+AP, healing debuff on self)
     {
         spellID = 20572,
-        tags = {C.OFFENSIVE_CD, C.HAS_BUFF},
+        tags = {C.DPS, C.MAJOR, C.HAS_BUFF},
         cooldown = 120,
         duration = 15,
         race = ORC,
@@ -72,7 +72,7 @@ lib:RegisterSpells({
     -- Troll - Berserking (attack/cast speed)
     {
         spellID = 26297,
-        tags = {C.OFFENSIVE_CD, C.HAS_BUFF},
+        tags = {C.DPS, C.MAJOR, C.HAS_BUFF},
         cooldown = 180,
         duration = 10,
         race = TROLL,
