@@ -78,8 +78,8 @@ lib:RegisterSpells({
         talent = true,
     },
     {
-        spellID = 6346,  -- Fear Ward
-        tags = {C.DEFENSIVE, C.MINOR, C.EXTERNAL_DEFENSIVE, C.CC_IMMUNITY, C.HAS_BUFF},
+        spellID = 6346,  -- Fear Ward (preventative buff, not reactive CD)
+        tags = {C.CC_BREAK, C.CC_IMMUNITY, C.HAS_BUFF},
         cooldown = 30,
         duration = 180,
     },
@@ -89,7 +89,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 33206,  -- Pain Suppression (Discipline talent)
-        tags = {C.DEFENSIVE, C.MAJOR, C.EXTERNAL_DEFENSIVE, C.HAS_BUFF, C.PVE_PVP},
+        tags = {C.EXTERNAL_DEFENSIVE, C.MAJOR, C.HAS_BUFF, C.PVE_PVP},
         cooldown = 120,
         duration = 8,
         talent = true,

@@ -58,14 +58,14 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 1022,  -- Blessing of Protection
-        tags = {C.DEFENSIVE, C.MAJOR, C.EXTERNAL_DEFENSIVE, C.IMMUNITY, C.HAS_BUFF},
+        tags = {C.EXTERNAL_DEFENSIVE, C.MAJOR, C.IMMUNITY, C.HAS_BUFF},
         cooldown = 300,
         duration = 10,
         ranks = {1022, 5599, 10278},
     },
     {
         spellID = 6940,  -- Blessing of Sacrifice
-        tags = {C.DEFENSIVE, C.MINOR, C.EXTERNAL_DEFENSIVE, C.HAS_BUFF},
+        tags = {C.EXTERNAL_DEFENSIVE, C.MINOR, C.HAS_BUFF},
         cooldown = 0,  -- No CD in Classic
         duration = 30,
         ranks = {6940, 20729},

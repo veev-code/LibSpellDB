@@ -46,8 +46,8 @@ lib:RegisterSpells({
         specs = nil,
     },
     {
-        spellID = 3411,  -- Intervene (movement utility)
-        tags = {C.EXTERNAL_DEFENSIVE, C.MOVEMENT_GAP_CLOSE, C.MOVEMENT},
+        spellID = 3411,  -- Intervene (movement utility, intercepts next attack)
+        tags = {C.MOVEMENT_GAP_CLOSE, C.MOVEMENT},
         cooldown = 30,
         priority = 2,  -- Movement
         specs = nil,
