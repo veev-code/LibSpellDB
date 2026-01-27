@@ -411,6 +411,7 @@ lib:RegisterSpells({
         tags = {C.TAUNT},
         cooldown = 120,
         duration = 6,
+        ranks = {694, 7814, 7815, 7816, 20559, 20560, 25266},
         specs = {"PROTECTION"},
     },
 
