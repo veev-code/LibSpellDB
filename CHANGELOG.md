@@ -1,5 +1,13 @@
 # LibSpellDB Changelog
 
+## [1.0.6] - 2026-01-27
+
+### Added
+- `GetAllRankIDs(spellID)` - Returns set of all rank spell IDs for a spell
+- `GetHighestKnownRank(spellID)` - Returns highest rank the player knows
+
+These utility functions enable addons to accurately determine spell costs and usability for ranked spells.
+
 ## [1.0.5] - 2026-01-27
 
 ### Changed
