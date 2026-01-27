@@ -515,3 +515,69 @@ function lib:GetProcInfo(spellID)
     end
     return nil
 end
+
+-------------------------------------------------------------------------------
+-- Spell Rank Utilities
+-------------------------------------------------------------------------------
+
+--[[
+    Get all spell IDs for a spell (base + all ranks)
+
+    @param spellID (number) - Base spell ID or any rank ID
+    @return (table) - Set of spell IDs (keys are IDs, values are true)
+]]
+function lib:GetAllRankIDs(spellID)
+    local canonicalID = self.rankToCanonical[spellID] or spellID
+    local spellData = self.spells[canonicalID]
+    
+    local rankSet = {[canonicalID] = true}
+    
+    if spellData and spellData.ranks then
+        for _, rankID in ipairs(spellData.ranks) do
+            rankSet[rankID] = true
+        end
+    end
+    
+    return rankSet
+end
+
+--[[
+    Get the highest known rank of a spell
+    
+    Note: This is a stateless query that calls IsSpellKnown for each rank.
+    Consider caching results at the application level if called frequently.
+
+    @param spellID (number) - Base spell ID or any rank ID
+    @return (number) - Spell ID of highest known rank, or input ID if none found
+]]
+function lib:GetHighestKnownRank(spellID)
+    local canonicalID = self.rankToCanonical[spellID] or spellID
+    local spellData = self.spells[canonicalID]
+    
+    if not spellData or not spellData.ranks then
+        -- No rank data, check if the spell is known
+        if IsSpellKnown and IsSpellKnown(canonicalID) then
+            return canonicalID
+        end
+        return spellID
+    end
+    
+    -- Check ranks from highest to lowest (ranks array is ordered low to high)
+    local highestKnown = nil
+    for i = #spellData.ranks, 1, -1 do
+        local rankID = spellData.ranks[i]
+        if IsSpellKnown and IsSpellKnown(rankID) then
+            highestKnown = rankID
+            break
+        end
+    end
+    
+    -- If no ranks known, check if base spell is known
+    if not highestKnown then
+        if IsSpellKnown and IsSpellKnown(canonicalID) then
+            highestKnown = canonicalID
+        end
+    end
+    
+    return highestKnown or spellID
+end
