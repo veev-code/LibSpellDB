@@ -1,5 +1,30 @@
 # LibSpellDB Changelog
 
+## [1.0.5] - 2026-01-27
+
+### Changed
+- Updated changelog for CurseForge
+
+## [1.0.4] - 2026-01-27
+
+### Fixed
+- Added Mocking Blow ranks for proper debuff tracking
+
+## [1.0.3] - 2026-01-25
+
+### Fixed
+- Added Charge Stun and Intercept Stun aura mappings for Warriors
+
+## [1.0.2] - 2026-01-25
+
+### Fixed
+- CurseForge publishing configuration
+
+## [1.0.1] - 2026-01-24
+
+### Fixed
+- TBC Classic interface version
+
 ## [1.0.0] - 2025-01-24
 
 ### Added
