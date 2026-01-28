@@ -1,5 +1,15 @@
 # LibSpellDB Changelog
 
+## [1.0.7] - 2026-01-27
+
+### Added
+- `lib.Specs` constants for type-safe spec tagging in data files
+- All spells now have explicit `specs` field (no more implicit "all specs" behavior)
+
+### Changed
+- Data files now use `S.ARMS`, `S.SHADOW`, etc. instead of string literals
+- Reduces typo risk and enables IDE autocomplete for spec names
+
 ## [1.0.6] - 2026-01-27
 
 ### Added
