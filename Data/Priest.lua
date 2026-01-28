@@ -1,5 +1,8 @@
 --[[
     LibSpellDB - Priest Spells (Anniversary Edition / Classic)
+    
+    All spells must have explicit specs field listing which specs the ability is relevant for.
+    Class-wide abilities should list all specs: {S.DISCIPLINE, S.HOLY, S.SHADOW}
 ]]
 
 local MAJOR = "LibSpellDB-1.0"
@@ -7,6 +10,7 @@ local lib = LibStub and LibStub:GetLibrary(MAJOR, true)
 if not lib then return end
 
 local C = lib.Categories
+local S = lib.Specs
 
 lib:RegisterSpells({
     -------------------------------------------------------------------------------
@@ -19,7 +23,7 @@ lib:RegisterSpells({
         duration = 2,
         talent = true,
         ranks = {44041, 44043, 44044, 44045, 44046},
-        -- No spec restriction - show if player has the talent
+        specs = {S.HOLY},
     },
     {
         spellID = 8122,  -- Psychic Scream
@@ -27,6 +31,7 @@ lib:RegisterSpells({
         cooldown = 30,
         duration = 8,
         ranks = {8122, 8124, 10888, 10890},
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
     {
         spellID = 605,  -- Mind Control
@@ -34,6 +39,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 60,
         ranks = {605, 10911, 10912},
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
     {
         spellID = 9484,  -- Shackle Undead
@@ -41,6 +47,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 50,
         ranks = {9484, 9485, 10955},
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
 
     -------------------------------------------------------------------------------
@@ -52,6 +59,7 @@ lib:RegisterSpells({
         cooldown = 45,
         duration = 5,
         talent = true,
+        specs = {S.SHADOW},
     },
 
     -------------------------------------------------------------------------------
@@ -63,6 +71,7 @@ lib:RegisterSpells({
         cooldown = 30,
         duration = 10,
         ranks = {586, 9578, 9579, 9592, 10941, 10942},
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
     {
         spellID = 15286,  -- Vampiric Embrace
@@ -70,18 +79,21 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 60,  -- Buff on self, heals based on shadow damage
         talent = true,
+        specs = {S.SHADOW},
     },
     {
         spellID = 15473,  -- Shadowform
         tags = {C.DPS, C.MAJOR, C.SHAPESHIFT},
         cooldown = 1.5,
         talent = true,
+        specs = {S.SHADOW},
     },
     {
         spellID = 6346,  -- Fear Ward (preventative buff, not reactive CD)
         tags = {C.CC_BREAK, C.CC_IMMUNITY, C.HAS_BUFF},
         cooldown = 30,
         duration = 180,
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
 
     -------------------------------------------------------------------------------
@@ -93,13 +105,14 @@ lib:RegisterSpells({
         cooldown = 120,
         duration = 8,
         talent = true,
-        specs = {"DISCIPLINE"},
+        specs = {S.DISCIPLINE},
     },
     {
         spellID = 13908,  -- Desperate Prayer (Dwarf/Human racial talent)
         tags = {C.HEAL, C.MAJOR, C.HEAL_SINGLE},
         cooldown = 600,
         ranks = {13908, 19236, 19238, 19240, 19241, 19242, 19243},
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
     {
         spellID = 724,  -- Lightwell
@@ -108,6 +121,7 @@ lib:RegisterSpells({
         duration = 180,
         talent = true,
         ranks = {724, 27870, 27871},
+        specs = {S.HOLY},
     },
 
     -------------------------------------------------------------------------------
@@ -119,6 +133,7 @@ lib:RegisterSpells({
         cooldown = 180,
         duration = 0,  -- Next spell only
         talent = true,
+        specs = {S.DISCIPLINE},
     },
     {
         spellID = 10060,  -- Power Infusion
@@ -126,6 +141,7 @@ lib:RegisterSpells({
         cooldown = 180,
         duration = 15,
         talent = true,
+        specs = {S.DISCIPLINE},
     },
 
     -------------------------------------------------------------------------------
@@ -137,11 +153,12 @@ lib:RegisterSpells({
         cooldown = 10,
         duration = 30,
         priority = 1,
-        specs = {"HOLY", "DISCIPLINE"},
+        specs = {S.HOLY, S.DISCIPLINE},
     },
     {
         spellID = 17,  -- Power Word: Shield (prevent damage)
         tags = {C.HEAL, C.ROTATIONAL, C.EXTERNAL_DEFENSIVE, C.HEAL_SINGLE, C.HAS_BUFF},
+        specs = {S.DISCIPLINE, S.HOLY},
         cooldown = 0,
         duration = 30,
         priority = 2,
@@ -156,7 +173,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 10,
         talent = true,
-        specs = {"HOLY"},
+        specs = {S.HOLY},
     },
     {
         spellID = 139,  -- Renew (maintain on tank)
@@ -165,7 +182,7 @@ lib:RegisterSpells({
         duration = 15,
         priority = 4,
         ranks = {139, 6074, 6075, 6076, 6077, 6078, 10927, 10928, 10929, 25315, 25221, 25222},
-        specs = {"HOLY", "DISCIPLINE"},
+        specs = {S.HOLY, S.DISCIPLINE},
     },
     {
         spellID = 2060,  -- Greater Heal (big heal)
@@ -173,6 +190,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 5,
         ranks = {2060, 10963, 10964, 10965, 25314, 25210},
+        specs = {S.DISCIPLINE, S.HOLY},
     },
     {
         spellID = 2061,  -- Flash Heal (fast heal)
@@ -180,13 +198,14 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 6,
         ranks = {2061, 9472, 9473, 9474, 10915, 10916, 10917, 25233, 25235},
+        specs = {S.DISCIPLINE, S.HOLY},
     },
     {
         spellID = 32546,  -- Binding Heal (heal self + target)
         tags = {C.HEAL, C.ROTATIONAL, C.HEAL_SINGLE, C.PVE_PVP},
         cooldown = 0,
         priority = 7,
-        specs = {"HOLY", "DISCIPLINE"},
+        specs = {S.HOLY, S.DISCIPLINE},
     },
     {
         spellID = 596,  -- Prayer of Healing (group AoE)
@@ -194,6 +213,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 8,
         ranks = {596, 996, 10960, 10961, 25316, 25308},
+        specs = {S.DISCIPLINE, S.HOLY},
     },
     {
         spellID = 2054,  -- Heal (downranked efficiency)
@@ -201,6 +221,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 9,
         ranks = {2054, 2055, 6063, 6064},
+        specs = {S.DISCIPLINE, S.HOLY},
     },
     {
         spellID = 2050,  -- Lesser Heal (leveling only)
@@ -208,6 +229,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 10,
         ranks = {2050, 2052, 2053},
+        specs = {S.DISCIPLINE, S.HOLY},
     },
 
     -------------------------------------------------------------------------------
@@ -218,17 +240,20 @@ lib:RegisterSpells({
         tags = {C.DISPEL_MAGIC, C.PURGE, C.FILLER},
         cooldown = 0,
         ranks = {527, 988},
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
     {
         spellID = 552,  -- Abolish Disease
         tags = {C.DISPEL_DISEASE, C.FILLER},
         cooldown = 0,
         duration = 20,
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
     {
         spellID = 528,  -- Cure Disease
         tags = {C.DISPEL_DISEASE, C.FILLER},
         cooldown = 0,
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
 
     -------------------------------------------------------------------------------
@@ -242,7 +267,7 @@ lib:RegisterSpells({
         priority = 1,
         talent = true,
         ranks = {34914, 34916, 34917},
-        specs = {"SHADOW"},
+        specs = {S.SHADOW},
     },
     {
         spellID = 589,  -- Shadow Word: Pain (maintain DoT)
@@ -251,7 +276,7 @@ lib:RegisterSpells({
         duration = 18,
         priority = 2,
         ranks = {589, 594, 970, 992, 2767, 10892, 10893, 10894, 25367, 25368},
-        specs = {"SHADOW"},
+        specs = {S.SHADOW},
     },
     {
         spellID = 8092,  -- Mind Blast (use on CD)
@@ -259,7 +284,7 @@ lib:RegisterSpells({
         cooldown = 8,
         priority = 3,
         ranks = {8092, 8102, 8103, 8104, 8105, 8106, 10945, 10946, 10947, 25372, 25375},
-        specs = {"SHADOW"},
+        specs = {S.SHADOW},
     },
     {
         spellID = 15407,  -- Mind Flay (filler between MBs)
@@ -269,7 +294,7 @@ lib:RegisterSpells({
         priority = 4,
         talent = true,
         ranks = {15407, 17311, 17312, 17313, 17314, 18807, 25387},
-        specs = {"SHADOW"},
+        specs = {S.SHADOW},
     },
     {
         spellID = 32996,  -- Shadow Word: Death (execute / finisher)
@@ -277,7 +302,7 @@ lib:RegisterSpells({
         cooldown = 12,
         priority = 5,
         ranks = {32996, 32379},
-        specs = {"SHADOW"},
+        specs = {S.SHADOW},
     },
     {
         spellID = 2944,  -- Devouring Plague (Undead racial, extra DoT)
@@ -286,23 +311,25 @@ lib:RegisterSpells({
         duration = 24,
         priority = 6,
         ranks = {2944, 19276, 19277, 19278, 19279, 19280, 25467},
-        specs = {"SHADOW"},
+        specs = {S.SHADOW},
     },
 
     -------------------------------------------------------------------------------
-    -- Offensive - Holy/Smite (less common)
+    -- Offensive - Holy/Smite (less common, not part of any core TBC rotation)
     -------------------------------------------------------------------------------
     {
-        spellID = 14914,  -- Holy Fire (opener)
-        tags = {C.DPS, C.ROTATIONAL, C.PVE},
+        spellID = 14914,  -- Holy Fire (opener for Smite weaving / solo)
+        tags = {C.DPS, C.MINOR, C.PVE},  -- Not ROTATIONAL - no Smite DPS spec in TBC
         cooldown = 10,
         ranks = {14914, 15262, 15263, 15264, 15265, 15266, 15267, 15261, 25384},
+        specs = {S.DISCIPLINE, S.HOLY},  -- Exclude from Shadow
     },
     {
         spellID = 585,  -- Smite (filler)
         tags = {C.DPS, C.FILLER, C.PVE},
         cooldown = 0,
         ranks = {585, 591, 598, 984, 1004, 6060, 10933, 10934, 25363, 25364},
+        specs = {S.DISCIPLINE, S.HOLY},
     },
 
     -------------------------------------------------------------------------------
@@ -313,6 +340,7 @@ lib:RegisterSpells({
         tags = {C.UTILITY, C.MOVEMENT, C.OUT_OF_COMBAT},
         cooldown = 0,
         duration = 120,
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
     {
         spellID = 14752,  -- Divine Spirit
@@ -321,6 +349,7 @@ lib:RegisterSpells({
         duration = 1800,
         talent = true,
         ranks = {14752, 14818, 14819, 27841},
+        specs = {S.DISCIPLINE},
     },
     {
         spellID = 21562,  -- Prayer of Fortitude
@@ -328,6 +357,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 3600,
         ranks = {21562, 21564},
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
     {
         spellID = 1243,  -- Power Word: Fortitude
@@ -335,6 +365,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 1800,
         ranks = {1243, 1244, 1245, 2791, 10937, 10938},
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
     {
         spellID = 976,  -- Shadow Protection
@@ -342,6 +373,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 600,
         ranks = {976, 10957, 10958},
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
     {
         spellID = 15237,  -- Holy Nova (AoE, situational)
@@ -349,12 +381,14 @@ lib:RegisterSpells({
         cooldown = 0,
         talent = true,
         ranks = {15237, 15430, 15431, 27799, 27800, 27801},
+        specs = {S.DISCIPLINE, S.HOLY},
     },
     {
         spellID = 8129,  -- Mana Burn
         tags = {C.UTILITY, C.RESOURCE, C.FILLER},  -- Spammable
         cooldown = 0,
         ranks = {8129, 8131, 10874, 10875, 10876},
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
 
     -------------------------------------------------------------------------------
@@ -365,6 +399,7 @@ lib:RegisterSpells({
         tags = {C.RESURRECT, C.UTILITY, C.OUT_OF_COMBAT},
         cooldown = 0,
         ranks = {2006, 2010, 10880, 10881, 20770},
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
 
     -------------------------------------------------------------------------------
@@ -376,6 +411,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 600,
         ranks = {588, 7128, 602, 1006, 10951, 10952},
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
 
 }, "PRIEST")

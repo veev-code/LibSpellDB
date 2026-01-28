@@ -1,6 +1,8 @@
 --[[
     LibSpellDB - Hunter Spells (Anniversary Edition / Classic)
-    TODO: Populate with full spell list
+    
+    All spells must have explicit specs field listing which specs the ability is relevant for.
+    Class-wide abilities should list all specs: {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL}
 ]]
 
 local MAJOR = "LibSpellDB-1.0"
@@ -8,6 +10,7 @@ local lib = LibStub and LibStub:GetLibrary(MAJOR, true)
 if not lib then return end
 
 local C = lib.Categories
+local S = lib.Specs
 
 lib:RegisterSpells({
     -------------------------------------------------------------------------------
@@ -19,6 +22,7 @@ lib:RegisterSpells({
         cooldown = 30,
         duration = 4,
         talent = true,
+        specs = {S.MARKSMANSHIP},
     },
     {
         spellID = 3355,  -- Freezing Trap
@@ -26,6 +30,7 @@ lib:RegisterSpells({
         cooldown = 0,  -- Trap has arming time, shared with other traps
         duration = 20,
         ranks = {3355, 14308, 14309},
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {
         spellID = 19386,  -- Wyvern Sting
@@ -34,6 +39,7 @@ lib:RegisterSpells({
         duration = 12,
         talent = true,
         ranks = {19386, 24132, 24133},
+        specs = {S.SURVIVAL},
     },
     {
         spellID = 19577,  -- Intimidation
@@ -41,6 +47,7 @@ lib:RegisterSpells({
         cooldown = 60,
         duration = 3,
         talent = true,
+        specs = {S.BEAST_MASTERY},
     },
     {
         spellID = 1513,  -- Scare Beast
@@ -48,12 +55,14 @@ lib:RegisterSpells({
         cooldown = 30,
         duration = 20,
         ranks = {1513, 14326, 14327},
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {
         spellID = 1499,  -- Freezing Trap (the trap itself)
         tags = {C.CC_HARD, C.UTILITY},
         cooldown = 15,  -- Trap cooldown
         ranks = {1499, 14310, 14311},
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
 
     -------------------------------------------------------------------------------
@@ -64,6 +73,7 @@ lib:RegisterSpells({
         tags = {C.CC_SOFT},
         cooldown = 12,
         duration = 4,
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {
         spellID = 2974,  -- Wing Clip
@@ -71,6 +81,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 10,
         ranks = {2974, 14267, 14268},
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
 
     -------------------------------------------------------------------------------
@@ -82,11 +93,13 @@ lib:RegisterSpells({
         cooldown = 300,
         duration = 10,
         talent = true,
+        specs = {S.SURVIVAL},
     },
     {
         spellID = 5384,  -- Feign Death
         tags = {C.DEFENSIVE, C.MINOR, C.UTILITY},
         cooldown = 30,
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
 
     -------------------------------------------------------------------------------
@@ -98,18 +111,21 @@ lib:RegisterSpells({
         cooldown = 120,
         duration = 18,
         talent = true,
+        specs = {S.BEAST_MASTERY},
     },
     {
         spellID = 3045,  -- Rapid Fire
         tags = {C.DPS, C.MAJOR, C.HAS_BUFF},
         cooldown = 300,
         duration = 15,
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {
         spellID = 23989,  -- Readiness (resets CDs - utility aspect but DPS gain)
         tags = {C.DPS, C.MAJOR, C.UTILITY},
         cooldown = 300,
         talent = true,
+        specs = {S.MARKSMANSHIP},
     },
 
     -------------------------------------------------------------------------------
@@ -120,16 +136,19 @@ lib:RegisterSpells({
         tags = {C.UTILITY},
         cooldown = 5,
         ranks = {781, 14272, 14273},
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {
         spellID = 5118,  -- Aspect of the Cheetah
         tags = {C.MOVEMENT, C.MOVEMENT_SPEED, C.LONG_BUFF},
         cooldown = 0,
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {
         spellID = 13159,  -- Aspect of the Pack
         tags = {C.MOVEMENT, C.MOVEMENT_SPEED, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
 
     -------------------------------------------------------------------------------
@@ -139,6 +158,7 @@ lib:RegisterSpells({
         spellID = 19801,  -- Tranquilizing Shot
         tags = {C.PURGE, C.DISPEL_MAGIC},
         cooldown = 20,
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
 
     -------------------------------------------------------------------------------
@@ -148,11 +168,13 @@ lib:RegisterSpells({
         spellID = 2641,  -- Dismiss Pet
         tags = {C.PET_CONTROL, C.UTILITY},
         cooldown = 0,
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {
         spellID = 883,  -- Call Pet
         tags = {C.PET_SUMMON, C.UTILITY},
         cooldown = 0,
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {
         spellID = 136,  -- Mend Pet
@@ -160,6 +182,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 15,
         ranks = {136, 3111, 3661, 3662, 13542, 13543, 13544},
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
 
     -------------------------------------------------------------------------------
@@ -170,17 +193,20 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MINOR, C.DEBUFF},
         cooldown = 15,
         ranks = {13795, 14302, 14303, 14304, 14305},
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {
         spellID = 13813,  -- Explosive Trap
         tags = {C.DPS, C.MINOR, C.AOE},
         cooldown = 15,
         ranks = {13813, 14316, 14317},
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {
         spellID = 13809,  -- Frost Trap
         tags = {C.CC_SOFT, C.UTILITY},
         cooldown = 15,
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
 
     -------------------------------------------------------------------------------
@@ -192,6 +218,7 @@ lib:RegisterSpells({
         cooldown = 120,
         duration = 30,
         priority = 1,
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {
         spellID = 1978,  -- Serpent Sting (maintain DoT)
@@ -200,20 +227,21 @@ lib:RegisterSpells({
         duration = 15,
         priority = 2,
         ranks = {1978, 13549, 13550, 13551, 13552, 13553, 13554, 13555, 25295, 27016},
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {
         spellID = 34026,  -- Kill Command (use on CD with pet)
         tags = {C.DPS, C.ROTATIONAL, C.PVE},
         cooldown = 5,
         priority = 3,
-        specs = nil,
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {
         spellID = 34120,  -- Steady Shot (main shot, weave with Auto)
         tags = {C.DPS, C.ROTATIONAL, C.PVE},
         cooldown = 0,
         priority = 4,
-        specs = nil,
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {
         spellID = 2643,  -- Multi-Shot (AoE / cleave - used in both ST and AoE)
@@ -221,6 +249,7 @@ lib:RegisterSpells({
         cooldown = 10,
         priority = 10,
         ranks = {2643, 14288, 14289, 14290, 25294, 27021},
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {
         spellID = 1510,  -- Volley (AoE only)
@@ -229,6 +258,7 @@ lib:RegisterSpells({
         duration = 6,
         priority = 11,
         ranks = {1510, 14294, 14295, 27022},
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {
         spellID = 3044,  -- Arcane Shot (mana dump / BM rotation)
@@ -236,6 +266,7 @@ lib:RegisterSpells({
         cooldown = 6,
         priority = 7,
         ranks = {3044, 14281, 14282, 14283, 14284, 14285, 14286, 14287, 27019},
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {
         spellID = 19434,  -- Aimed Shot (when procs / opener)
@@ -244,6 +275,7 @@ lib:RegisterSpells({
         priority = 8,
         talent = true,
         ranks = {19434, 20900, 20901, 20902, 20903, 20904, 27065},
+        specs = {S.MARKSMANSHIP},
     },
 
     -------------------------------------------------------------------------------
@@ -254,32 +286,32 @@ lib:RegisterSpells({
         tags = {C.UTILITY, C.STEALTH_BREAK},
         cooldown = 15,
         duration = 30,
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {
         spellID = 1462,  -- Beast Lore
         tags = {C.UTILITY},
         cooldown = 0,
-    },
-    {
-        spellID = 5118,  -- Aspect of the Cheetah
-        tags = {C.BUFF, C.MOVEMENT_SPEED, C.LONG_BUFF},
-        cooldown = 0,
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {
         spellID = 13161,  -- Aspect of the Beast
         tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {
         spellID = 13163,  -- Aspect of the Monkey
         tags = {C.BUFF, C.DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {
         spellID = 13165,  -- Aspect of the Hawk
         tags = {C.BUFF, C.DPS, C.LONG_BUFF},
         cooldown = 0,
         ranks = {13165, 14318, 14319, 14320, 14321, 14322, 25296},
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
 
 }, "HUNTER")

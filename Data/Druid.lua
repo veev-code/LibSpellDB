@@ -1,6 +1,8 @@
 --[[
     LibSpellDB - Druid Spells (Anniversary Edition / Classic)
-    TODO: Populate with full spell list
+    
+    All spells must have explicit specs field listing which specs the ability is relevant for.
+    Class-wide abilities should list all specs: {S.BALANCE, S.FERAL, S.RESTORATION}
 ]]
 
 local MAJOR = "LibSpellDB-1.0"
@@ -8,6 +10,7 @@ local lib = LibStub and LibStub:GetLibrary(MAJOR, true)
 if not lib then return end
 
 local C = lib.Categories
+local S = lib.Specs
 
 lib:RegisterSpells({
     -------------------------------------------------------------------------------
@@ -19,6 +22,7 @@ lib:RegisterSpells({
         cooldown = 15,
         duration = 4,  -- Interrupt lockout
         talent = true,
+        specs = {S.FERAL},
     },
     {
         spellID = 5211,  -- Bash
@@ -26,6 +30,7 @@ lib:RegisterSpells({
         cooldown = 60,
         duration = 4,
         ranks = {5211, 6798, 8983},
+        specs = {S.FERAL},
     },
 
     -------------------------------------------------------------------------------
@@ -37,6 +42,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 27,
         ranks = {339, 1062, 5195, 5196, 9852, 9853},
+        specs = {S.BALANCE, S.FERAL, S.RESTORATION},
     },
     {
         spellID = 2637,  -- Hibernate
@@ -44,6 +50,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 40,
         ranks = {2637, 18657, 18658},
+        specs = {S.BALANCE, S.FERAL, S.RESTORATION},
     },
 
     -------------------------------------------------------------------------------
@@ -54,12 +61,14 @@ lib:RegisterSpells({
         tags = {C.DEFENSIVE, C.MINOR, C.DAMAGE_REDUCTION, C.HAS_BUFF},
         cooldown = 60,
         duration = 12,
+        specs = {S.BALANCE, S.FERAL, S.RESTORATION},
     },
     {
         spellID = 22842,  -- Frenzied Regeneration
         tags = {C.DEFENSIVE, C.MAJOR, C.HEAL_SINGLE, C.HAS_BUFF},
         cooldown = 180,
         duration = 10,
+        specs = {S.FERAL},
     },
     {
         spellID = 16689,  -- Nature's Grasp
@@ -67,6 +76,7 @@ lib:RegisterSpells({
         cooldown = 60,
         duration = 45,
         ranks = {16689, 16810, 16811, 16812, 16813, 17329},
+        specs = {S.BALANCE, S.FERAL, S.RESTORATION},
     },
 
     -------------------------------------------------------------------------------
@@ -77,6 +87,7 @@ lib:RegisterSpells({
         tags = {C.HEAL, C.MAJOR, C.HAS_BUFF, C.PVE_PVP},
         cooldown = 180,
         talent = true,
+        specs = {S.RESTORATION},
     },
 
     -------------------------------------------------------------------------------
@@ -88,12 +99,14 @@ lib:RegisterSpells({
         cooldown = 300,
         duration = 10,
         ranks = {740, 8918, 9862, 9863},
+        specs = {S.BALANCE, S.FERAL, S.RESTORATION},
     },
     {
         spellID = 29166,  -- Innervate
         tags = {C.HEAL, C.MAJOR, C.RESOURCE, C.HAS_BUFF},
         cooldown = 360,
         duration = 20,
+        specs = {S.BALANCE, S.FERAL, S.RESTORATION},
     },
 
     -------------------------------------------------------------------------------
@@ -105,12 +118,14 @@ lib:RegisterSpells({
         cooldown = 300,
         duration = 15,
         ranks = {1850, 9821},
+        specs = {S.FERAL},
     },
     {
         spellID = 5215,  -- Prowl
         tags = {C.STEALTH},
         cooldown = 10,
         ranks = {5215, 6783, 9913},
+        specs = {S.FERAL},
     },
 
     -------------------------------------------------------------------------------
@@ -120,27 +135,32 @@ lib:RegisterSpells({
         spellID = 768,  -- Cat Form
         tags = {C.SHAPESHIFT},
         cooldown = 0,
+        specs = {S.FERAL},
     },
     {
         spellID = 5487,  -- Bear Form
         tags = {C.SHAPESHIFT},
         cooldown = 0,
+        specs = {S.FERAL},
     },
     {
         spellID = 9634,  -- Dire Bear Form
         tags = {C.SHAPESHIFT},
         cooldown = 0,
+        specs = {S.FERAL},
     },
     {
         spellID = 783,  -- Travel Form
         tags = {C.SHAPESHIFT, C.MOVEMENT},
         cooldown = 0,
+        specs = {S.BALANCE, S.FERAL, S.RESTORATION},
     },
     {
         spellID = 24858,  -- Moonkin Form
         tags = {C.SHAPESHIFT, C.DPS},
         cooldown = 0,
         talent = true,
+        specs = {S.BALANCE},
     },
 
     -------------------------------------------------------------------------------
@@ -151,17 +171,20 @@ lib:RegisterSpells({
         tags = {C.BATTLE_REZ, C.RESURRECT, C.UTILITY},
         cooldown = 1800,
         ranks = {20484, 20739, 20742, 20747, 20748},
+        specs = {S.BALANCE, S.FERAL, S.RESTORATION},
     },
     {
         spellID = 5209,  -- Challenging Roar
         tags = {C.TAUNT},
         cooldown = 600,
         duration = 6,
+        specs = {S.FERAL},
     },
     {
         spellID = 6795,  -- Growl
         tags = {C.TAUNT},
         cooldown = 10,
+        specs = {S.FERAL},
     },
 
     -------------------------------------------------------------------------------
@@ -174,6 +197,7 @@ lib:RegisterSpells({
         duration = 12,
         priority = 1,
         ranks = {8921, 8924, 8925, 8926, 8927, 8928, 8929, 9833, 9834, 9835, 26987, 26988},
+        specs = {S.BALANCE},
     },
     {
         spellID = 5570,  -- Insect Swarm (maintain DoT)
@@ -183,7 +207,7 @@ lib:RegisterSpells({
         priority = 2,
         talent = true,
         ranks = {5570, 24974, 24975, 24976, 24977, 27013},
-        specs = {"BALANCE"},
+        specs = {S.BALANCE},
     },
     {
         spellID = 5176,  -- Wrath (filler nuke - mana-based, not shown on HUD by default)
@@ -191,6 +215,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 4,
         ranks = {5176, 5177, 5178, 5179, 5180, 6780, 8905, 9912, 26984, 26985},
+        specs = {S.BALANCE},
     },
     {
         spellID = 2912,  -- Starfire (main nuke - Balance spec filler)
@@ -198,7 +223,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 3,
         ranks = {2912, 8949, 8950, 8951, 9875, 9876, 25298, 26986},
-        specs = {"BALANCE"},
+        specs = {S.BALANCE},
     },
     {
         spellID = 33831,  -- Force of Nature (use on CD - throughput CD)
@@ -207,7 +232,7 @@ lib:RegisterSpells({
         duration = 30,
         priority = 4,
         talent = true,
-        specs = {"BALANCE"},
+        specs = {S.BALANCE},
     },
     {
         spellID = 16914,  -- Hurricane (AoE)
@@ -216,7 +241,7 @@ lib:RegisterSpells({
         duration = 10,
         priority = 10,
         ranks = {16914, 17401, 17402, 27012},
-        specs = {"BALANCE"},
+        specs = {S.BALANCE},
     },
     {
         spellID = 770,  -- Faerie Fire (armor debuff)
@@ -225,6 +250,7 @@ lib:RegisterSpells({
         duration = 40,
         priority = 6,
         ranks = {770, 778, 9749, 9907, 26993},
+        specs = {S.BALANCE, S.FERAL, S.RESTORATION},
     },
 
     -------------------------------------------------------------------------------
@@ -236,7 +262,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 1,
         talent = true,
-        specs = {"FERAL"},
+        specs = {S.FERAL},
     },
     {
         spellID = 27002,  -- Shred (main CP builder from behind)
@@ -244,7 +270,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 2,
         ranks = {5221, 6800, 8992, 9829, 9830, 27001, 27002},
-        specs = {"FERAL"},
+        specs = {S.FERAL},
     },
     {
         spellID = 1079,  -- Rip (maintain at 5 CP)
@@ -253,7 +279,7 @@ lib:RegisterSpells({
         duration = 12,
         priority = 3,
         ranks = {1079, 9492, 9493, 9752, 9894, 9896, 27008},
-        specs = {"FERAL"},
+        specs = {S.FERAL},
     },
     {
         spellID = 22568,  -- Ferocious Bite (dump excess CP/energy)
@@ -261,7 +287,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 4,
         ranks = {22568, 22827, 22828, 22829, 31018, 24248},
-        specs = {"FERAL"},
+        specs = {S.FERAL},
     },
 
     -------------------------------------------------------------------------------
@@ -273,7 +299,7 @@ lib:RegisterSpells({
         cooldown = 6,
         priority = 1,
         talent = true,
-        specs = {"FERAL"},
+        specs = {S.FERAL},
     },
     {
         spellID = 33745,  -- Lacerate (stack and maintain)
@@ -281,7 +307,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 15,
         priority = 2,
-        specs = {"FERAL"},
+        specs = {S.FERAL},
     },
     {
         spellID = 779,  -- Swipe (AoE threat)
@@ -289,7 +315,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 3,
         ranks = {779, 780, 769, 9754, 9908, 26997},
-        specs = {"FERAL"},
+        specs = {S.FERAL},
     },
     {
         spellID = 6807,  -- Maul (rage dump - situational)
@@ -297,7 +323,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 10,
         ranks = {6807, 6808, 6809, 8972, 9745, 9880, 9881, 26996},
-        specs = {"FERAL"},
+        specs = {S.FERAL},
     },
     {
         spellID = 99,  -- Demoralizing Roar (maintain debuff)
@@ -306,7 +332,7 @@ lib:RegisterSpells({
         duration = 30,
         priority = 5,
         ranks = {99, 1735, 9490, 9747, 9898, 26998},
-        specs = {"FERAL"},
+        specs = {S.FERAL},
     },
 
     -------------------------------------------------------------------------------
@@ -318,7 +344,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 7,
         priority = 1,
-        specs = {"RESTORATION"},
+        specs = {S.RESTORATION},
     },
     {
         spellID = 774,  -- Rejuvenation (maintain on targets)
@@ -327,7 +353,7 @@ lib:RegisterSpells({
         duration = 12,
         priority = 2,
         ranks = {774, 1058, 1430, 2090, 2091, 3627, 8910, 9839, 9840, 9841, 25299, 26981, 26982},
-        specs = {"RESTORATION"},
+        specs = {S.RESTORATION},
     },
     {
         spellID = 8936,  -- Regrowth (spot heal + HoT)
@@ -336,7 +362,7 @@ lib:RegisterSpells({
         duration = 21,
         priority = 3,
         ranks = {8936, 8938, 8939, 8940, 8941, 9750, 9856, 9857, 9858, 26980},
-        specs = {"RESTORATION"},
+        specs = {S.RESTORATION},
     },
     {
         spellID = 18562,  -- Swiftmend (emergency heal)
@@ -344,7 +370,7 @@ lib:RegisterSpells({
         cooldown = 15,
         priority = 4,
         talent = true,
-        specs = {"RESTORATION"},
+        specs = {S.RESTORATION},
     },
     {
         spellID = 5185,  -- Healing Touch (big heal / NS combo)
@@ -352,6 +378,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 5,
         ranks = {5185, 5186, 5187, 5188, 5189, 6778, 8903, 9758, 9888, 9889, 25297, 26978, 26979},
+        specs = {S.RESTORATION},
     },
     {
         spellID = 33891,  -- Tree of Life (maintain form)
@@ -359,7 +386,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 0,  -- Pre-combat form
         talent = true,
-        specs = {"RESTORATION"},
+        specs = {S.RESTORATION},
     },
 
 }, "DRUID")

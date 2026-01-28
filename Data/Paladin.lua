@@ -1,6 +1,8 @@
 --[[
     LibSpellDB - Paladin Spells (Anniversary Edition / Classic)
-    TODO: Populate with full spell list
+    
+    All spells must have explicit specs field listing which specs the ability is relevant for.
+    Class-wide abilities should list all specs: {S.HOLY, S.PROTECTION, S.RETRIBUTION}
 ]]
 
 local MAJOR = "LibSpellDB-1.0"
@@ -8,6 +10,7 @@ local lib = LibStub and LibStub:GetLibrary(MAJOR, true)
 if not lib then return end
 
 local C = lib.Categories
+local S = lib.Specs
 
 lib:RegisterSpells({
     -------------------------------------------------------------------------------
@@ -19,6 +22,7 @@ lib:RegisterSpells({
         cooldown = 60,
         duration = 6,
         ranks = {853, 5588, 5589, 10308},
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
         spellID = 20066,  -- Repentance
@@ -26,6 +30,7 @@ lib:RegisterSpells({
         cooldown = 60,
         duration = 6,
         talent = true,
+        specs = {S.RETRIBUTION},
     },
     {
         spellID = 2878,  -- Turn Undead
@@ -33,6 +38,7 @@ lib:RegisterSpells({
         cooldown = 30,
         duration = 20,
         ranks = {2878, 5627, 10326},
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
 
     -------------------------------------------------------------------------------
@@ -44,6 +50,7 @@ lib:RegisterSpells({
         cooldown = 300,
         duration = 12,
         ranks = {642, 1020},
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
         spellID = 498,  -- Divine Protection
@@ -51,6 +58,7 @@ lib:RegisterSpells({
         cooldown = 300,
         duration = 8,
         ranks = {498, 5573},
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
 
     -------------------------------------------------------------------------------
@@ -62,6 +70,7 @@ lib:RegisterSpells({
         cooldown = 300,
         duration = 10,
         ranks = {1022, 5599, 10278},
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
         spellID = 6940,  -- Blessing of Sacrifice
@@ -69,23 +78,27 @@ lib:RegisterSpells({
         cooldown = 0,  -- No CD in Classic
         duration = 30,
         ranks = {6940, 20729},
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
         spellID = 1044,  -- Blessing of Freedom
         tags = {C.DEFENSIVE, C.MINOR, C.CC_BREAK, C.HAS_BUFF},
         cooldown = 20,
         duration = 10,
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
         spellID = 19752,  -- Divine Intervention
         tags = {C.DEFENSIVE, C.MAJOR, C.UTILITY},
         cooldown = 3600,
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
         spellID = 20216,  -- Divine Favor (throughput CD for healing)
         tags = {C.HEAL, C.MAJOR, C.HAS_BUFF},
         cooldown = 120,
         talent = true,
+        specs = {S.HOLY},
     },
 
     -------------------------------------------------------------------------------
@@ -96,6 +109,7 @@ lib:RegisterSpells({
         tags = {C.HEAL, C.MAJOR, C.EXTERNAL_DEFENSIVE, C.HEAL_SINGLE},
         cooldown = 3600,
         ranks = {633, 2800, 10310},
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
 
     -------------------------------------------------------------------------------
@@ -108,7 +122,7 @@ lib:RegisterSpells({
         priority = 1,
         talent = true,
         ranks = {20473, 20929, 20930, 27174, 33072},
-        specs = {"HOLY"},
+        specs = {S.HOLY},
     },
     {
         spellID = 19750,  -- Flash of Light (efficient, fast)
@@ -116,6 +130,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 2,
         ranks = {19750, 19939, 19940, 19941, 19942, 19943, 27137},
+        specs = {S.HOLY},
     },
     {
         spellID = 635,  -- Holy Light (big heal when needed)
@@ -123,6 +138,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 3,
         ranks = {635, 639, 647, 1026, 1042, 3472, 10328, 10329, 25292, 27135, 27136},
+        specs = {S.HOLY},
     },
     {
         spellID = 31842,  -- Divine Illumination (mana CD - throughput via sustain)
@@ -131,7 +147,7 @@ lib:RegisterSpells({
         duration = 15,
         priority = 4,
         talent = true,
-        specs = {"HOLY"},
+        specs = {S.HOLY},
     },
 
     -------------------------------------------------------------------------------
@@ -143,7 +159,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 30,
         priority = 1,
-        specs = {"RETRIBUTION"},
+        specs = {S.RETRIBUTION},
     },
     {
         spellID = 35395,  -- Crusader Strike (use on CD)
@@ -151,13 +167,14 @@ lib:RegisterSpells({
         cooldown = 6,
         priority = 2,
         talent = true,
-        specs = {"RETRIBUTION"},
+        specs = {S.RETRIBUTION},
     },
     {
         spellID = 20271,  -- Judgement (use on CD)
         tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
         cooldown = 10,
         priority = 3,
+        specs = {S.RETRIBUTION, S.PROTECTION},
     },
     {
         spellID = 26573,  -- Consecration (use on CD - both ST and AoE)
@@ -167,6 +184,7 @@ lib:RegisterSpells({
         priority = 4,
         talent = true,
         ranks = {26573, 20116, 20922, 20923, 20924, 27173},
+        specs = {S.RETRIBUTION, S.PROTECTION},
     },
     {
         spellID = 24275,  -- Hammer of Wrath (sub-20% execute)
@@ -174,7 +192,7 @@ lib:RegisterSpells({
         cooldown = 6,
         priority = 5,
         ranks = {24275, 24274, 24239, 27180},
-        specs = {"RETRIBUTION"},
+        specs = {S.RETRIBUTION},
     },
     {
         spellID = 879,  -- Exorcism (vs Undead/Demon only - situational)
@@ -182,6 +200,7 @@ lib:RegisterSpells({
         cooldown = 15,
         priority = 10,
         ranks = {879, 5614, 5615, 10312, 10313, 10314, 27138},
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
 
     -------------------------------------------------------------------------------
@@ -195,7 +214,7 @@ lib:RegisterSpells({
         priority = 1,
         talent = true,
         ranks = {20925, 20927, 20928, 27179},
-        specs = {"PROTECTION"},
+        specs = {S.PROTECTION},
     },
     {
         spellID = 31935,  -- Avenger's Shield (pull / on CD)
@@ -203,7 +222,7 @@ lib:RegisterSpells({
         cooldown = 30,
         priority = 2,
         talent = true,
-        specs = {"PROTECTION"},
+        specs = {S.PROTECTION},
     },
     {
         spellID = 31884,  -- Avenging Wrath (DPS CD - throughput)
@@ -211,6 +230,7 @@ lib:RegisterSpells({
         cooldown = 180,
         duration = 20,
         priority = 7,
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
 
     -------------------------------------------------------------------------------
@@ -221,41 +241,48 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.RAID_DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
         ranks = {465, 10290, 643, 10291, 1032, 10292, 10293},
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
         spellID = 19746,  -- Concentration Aura
         tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
         spellID = 7294,  -- Retribution Aura
         tags = {C.BUFF, C.DPS, C.LONG_BUFF},
         cooldown = 0,
         ranks = {7294, 10298, 10299, 10300, 10301},
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
         spellID = 19891,  -- Fire Resistance Aura
         tags = {C.BUFF, C.RAID_DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
         ranks = {19891, 19899, 19900},
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
         spellID = 19888,  -- Frost Resistance Aura
         tags = {C.BUFF, C.RAID_DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
         ranks = {19888, 19897, 19898},
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
         spellID = 19876,  -- Shadow Resistance Aura
         tags = {C.BUFF, C.RAID_DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
         ranks = {19876, 19895, 19896},
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
         spellID = 20218,  -- Sanctity Aura
         tags = {C.BUFF, C.DPS, C.LONG_BUFF},
         cooldown = 0,
         talent = true,
+        specs = {S.RETRIBUTION},
     },
 
     -------------------------------------------------------------------------------
@@ -267,6 +294,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 300,
         ranks = {19740, 19834, 19835, 19836, 19837, 19838, 25291},
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
         spellID = 20217,  -- Blessing of Kings
@@ -274,6 +302,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 300,
         talent = true,
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
         spellID = 19742,  -- Blessing of Wisdom
@@ -281,6 +310,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 300,
         ranks = {19742, 19850, 19852, 19853, 19854, 25290},
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
         spellID = 20911,  -- Blessing of Sanctuary
@@ -289,12 +319,14 @@ lib:RegisterSpells({
         duration = 300,
         talent = true,
         ranks = {20911, 20912, 20913, 20914},
+        specs = {S.PROTECTION},
     },
     {
         spellID = 1038,  -- Blessing of Salvation
         tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
         duration = 300,
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
         spellID = 25782,  -- Greater Blessing of Might
@@ -302,6 +334,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 900,
         ranks = {25782, 25916},
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
 
     -------------------------------------------------------------------------------
@@ -313,6 +346,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 30,
         ranks = {20154, 20287, 20288, 20289, 20290, 20291, 20292, 20293},
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
         spellID = 20375,  -- Seal of Command
@@ -321,6 +355,7 @@ lib:RegisterSpells({
         duration = 30,
         talent = true,
         ranks = {20375, 20915, 20918, 20919, 20920},
+        specs = {S.RETRIBUTION},
     },
 
     -------------------------------------------------------------------------------
@@ -331,6 +366,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.AOE},
         cooldown = 60,
         ranks = {2812, 10318, 27139},
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
 
     -------------------------------------------------------------------------------
@@ -340,6 +376,7 @@ lib:RegisterSpells({
         spellID = 31789,  -- Righteous Defense (TBC+)
         tags = {C.TAUNT},
         cooldown = 15,
+        specs = {S.PROTECTION},
     },
 
     -------------------------------------------------------------------------------
@@ -349,11 +386,13 @@ lib:RegisterSpells({
         spellID = 4987,  -- Cleanse
         tags = {C.DISPEL_MAGIC, C.DISPEL_POISON, C.DISPEL_DISEASE, C.FILLER},
         cooldown = 0,
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
         spellID = 1152,  -- Purify
         tags = {C.DISPEL_POISON, C.DISPEL_DISEASE, C.FILLER},
         cooldown = 0,
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
 
 }, "PALADIN")

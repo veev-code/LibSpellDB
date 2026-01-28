@@ -1,6 +1,8 @@
 --[[
     LibSpellDB - Shaman Spells (Anniversary Edition / Classic)
-    TODO: Populate with full spell list
+    
+    All spells must have explicit specs field listing which specs the ability is relevant for.
+    Class-wide abilities should list all specs: {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION}
 ]]
 
 local MAJOR = "LibSpellDB-1.0"
@@ -8,6 +10,7 @@ local lib = LibStub and LibStub:GetLibrary(MAJOR, true)
 if not lib then return end
 
 local C = lib.Categories
+local S = lib.Specs
 
 lib:RegisterSpells({
     -------------------------------------------------------------------------------
@@ -18,6 +21,7 @@ lib:RegisterSpells({
         tags = {C.CC_SOFT, C.UTILITY},
         cooldown = 15,
         duration = 45,
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 8056,  -- Frost Shock (slow/CC utility)
@@ -25,6 +29,7 @@ lib:RegisterSpells({
         cooldown = 6,
         duration = 8,
         ranks = {8056, 8058, 10472, 10473},
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
 
     -------------------------------------------------------------------------------
@@ -36,6 +41,7 @@ lib:RegisterSpells({
         cooldown = 120,
         duration = 15,
         talent = true,
+        specs = {S.ENHANCEMENT},
     },
 
     -------------------------------------------------------------------------------
@@ -46,12 +52,14 @@ lib:RegisterSpells({
         tags = {C.CC_IMMUNITY, C.UTILITY},
         cooldown = 15,
         duration = 45,
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 8143,  -- Tremor Totem
         tags = {C.CC_BREAK, C.UTILITY},
         cooldown = 0,
         duration = 120,
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
 
     -------------------------------------------------------------------------------
@@ -64,7 +72,7 @@ lib:RegisterSpells({
         duration = 12,
         priority = 1,
         talent = true,
-        specs = {"ENHANCEMENT"},
+        specs = {S.ENHANCEMENT},
         appliesAura = {
             spellID = 17364,  -- Stormstrike debuff (same ID in TBC)
             type = "DEBUFF",
@@ -78,7 +86,7 @@ lib:RegisterSpells({
         duration = 2,
         priority = 2,
         ranks = {8042, 8044, 8045, 8046, 10412, 10413, 10414, 25454},
-        specs = {"ENHANCEMENT"},
+        specs = {S.ENHANCEMENT},
     },
     {
         spellID = 8056,  -- Frost Shock (kiting / PvP)
@@ -87,6 +95,7 @@ lib:RegisterSpells({
         duration = 8,
         priority = 3,
         ranks = {8056, 8058, 10472, 10473, 25464},
+        specs = {S.ENHANCEMENT},
     },
 
     -------------------------------------------------------------------------------
@@ -97,7 +106,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MAJOR, C.HAS_BUFF, C.PVE_PVP},
         cooldown = 180,
         talent = true,
-        specs = {"ELEMENTAL"},
+        specs = {S.ELEMENTAL},
     },
 
     -------------------------------------------------------------------------------
@@ -108,24 +117,28 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MAJOR, C.RAID_DEFENSIVE, C.HAS_BUFF},
         cooldown = 600,
         duration = 40,
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 32182,  -- Heroism (Alliance) - TBC+
         tags = {C.DPS, C.MAJOR, C.RAID_DEFENSIVE, C.HAS_BUFF},
         cooldown = 600,
         duration = 40,
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 2894,  -- Fire Elemental Totem
         tags = {C.DPS, C.MAJOR, C.PET_SUMMON},
         cooldown = 1200,
         duration = 120,
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 2062,  -- Earth Elemental Totem
         tags = {C.DEFENSIVE, C.MAJOR, C.PET_SUMMON, C.TAUNT},
         cooldown = 1200,
         duration = 120,
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
 
     -------------------------------------------------------------------------------
@@ -138,7 +151,7 @@ lib:RegisterSpells({
         duration = 600,
         priority = 1,
         talent = true,
-        specs = {"RESTORATION"},
+        specs = {S.RESTORATION},
     },
     {
         spellID = 33736,  -- Water Shield (maintain on self)
@@ -146,6 +159,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 600,
         priority = 2,
+        specs = {S.RESTORATION},
     },
     {
         spellID = 1064,  -- Chain Heal (main heal, bounces)
@@ -153,6 +167,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 3,
         ranks = {1064, 10622, 10623, 25422, 25423},
+        specs = {S.RESTORATION},
     },
     {
         spellID = 331,  -- Healing Wave (big single target)
@@ -160,6 +175,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 4,
         ranks = {331, 332, 547, 913, 939, 959, 8005, 10395, 10396, 25357, 25391, 25396},
+        specs = {S.RESTORATION},
     },
     {
         spellID = 8004,  -- Lesser Healing Wave (fast heal)
@@ -167,6 +183,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 5,
         ranks = {8004, 8008, 8010, 10466, 10467, 10468, 25420},
+        specs = {S.RESTORATION},
     },
     {
         spellID = 16188,  -- Nature's Swiftness (emergency - throughput CD)
@@ -174,6 +191,7 @@ lib:RegisterSpells({
         cooldown = 180,
         priority = 6,
         talent = true,
+        specs = {S.RESTORATION},
     },
     {
         spellID = 16190,  -- Mana Tide Totem (mana CD - throughput via sustain)
@@ -182,7 +200,7 @@ lib:RegisterSpells({
         duration = 12,
         priority = 7,
         talent = true,
-        specs = {"RESTORATION"},
+        specs = {S.RESTORATION},
     },
 
     -------------------------------------------------------------------------------
@@ -195,7 +213,7 @@ lib:RegisterSpells({
         duration = 120,
         priority = 1,
         talent = true,
-        specs = {"ELEMENTAL"},
+        specs = {S.ELEMENTAL},
     },
 
     -------------------------------------------------------------------------------
@@ -206,28 +224,33 @@ lib:RegisterSpells({
         tags = {C.PURGE, C.DISPEL_MAGIC, C.FILLER},
         cooldown = 0,
         ranks = {370, 8012},
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 526,  -- Cure Poison
         tags = {C.DISPEL_POISON, C.FILLER},
         cooldown = 0,
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 2870,  -- Cure Disease
         tags = {C.DISPEL_DISEASE, C.FILLER},
         cooldown = 0,
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 8170,  -- Disease Cleansing Totem
         tags = {C.DISPEL_DISEASE, C.UTILITY, C.FILLER},
         cooldown = 0,
         duration = 120,
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 8166,  -- Poison Cleansing Totem
         tags = {C.DISPEL_POISON, C.UTILITY, C.FILLER},
         cooldown = 0,
         duration = 120,
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
 
     -------------------------------------------------------------------------------
@@ -239,7 +262,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 2,
         ranks = {403, 529, 548, 915, 943, 6041, 10391, 10392, 15207, 15208, 25448, 25449},
-        specs = {"ELEMENTAL"},
+        specs = {S.ELEMENTAL},
     },
     {
         spellID = 421,  -- Chain Lightning (AoE / cleave - used in rotation when available)
@@ -247,7 +270,7 @@ lib:RegisterSpells({
         cooldown = 6,
         priority = 10,
         ranks = {421, 930, 2860, 10605, 25439, 25442},
-        specs = {"ELEMENTAL"},
+        specs = {S.ELEMENTAL},
     },
     {
         spellID = 8050,  -- Flame Shock (maintain DoT)
@@ -256,6 +279,7 @@ lib:RegisterSpells({
         duration = 12,
         priority = 4,
         ranks = {8050, 8052, 8053, 10447, 10448, 29228, 25457},
+        specs = {S.ELEMENTAL, S.ENHANCEMENT},
     },
 
     -------------------------------------------------------------------------------
@@ -267,6 +291,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 55,
         ranks = {3599, 6363, 6364, 6365, 10437, 10438},
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 8181,  -- Frost Resistance Totem
@@ -274,6 +299,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 120,
         ranks = {8181, 10478, 10479},
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 8227,  -- Flametongue Totem
@@ -281,6 +307,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 120,
         ranks = {8227, 8249, 10526, 16387},
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
 
     -------------------------------------------------------------------------------
@@ -292,6 +319,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 120,
         ranks = {8512, 10613, 10614},
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 8835,  -- Grace of Air Totem
@@ -299,18 +327,21 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 120,
         ranks = {8835, 10627, 25359},
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 6495,  -- Sentry Totem
         tags = {C.UTILITY},
         cooldown = 0,
         duration = 300,
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 8835,  -- Tranquil Air Totem
         tags = {C.BUFF, C.UTILITY},
         cooldown = 0,
         duration = 120,
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
 
     -------------------------------------------------------------------------------
@@ -322,6 +353,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 60,
         ranks = {5394, 6375, 6377, 10462, 10463},
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 5675,  -- Mana Spring Totem
@@ -329,6 +361,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 60,
         ranks = {5675, 10495, 10496, 10497},
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
 
     -------------------------------------------------------------------------------
@@ -340,6 +373,7 @@ lib:RegisterSpells({
         cooldown = 30,
         duration = 15,
         ranks = {5730, 6390, 6391, 6392, 10427, 10428},
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 8071,  -- Stoneskin Totem
@@ -347,6 +381,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 120,
         ranks = {8071, 8154, 8155, 10406, 10407, 10408},
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 8075,  -- Strength of Earth Totem
@@ -354,6 +389,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 120,
         ranks = {8075, 8160, 8161, 10442, 25361},
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
 
     -------------------------------------------------------------------------------
@@ -365,6 +401,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 1800,
         ranks = {8024, 8027, 8030, 16339, 16341, 16342},
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 8232,  -- Windfury Weapon
@@ -372,6 +409,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 1800,
         ranks = {8232, 8235, 10486, 16362},
+        specs = {S.ENHANCEMENT},
     },
     {
         spellID = 8033,  -- Frostbrand Weapon
@@ -379,6 +417,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 1800,
         ranks = {8033, 8038, 10456, 16355, 16356},
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 8017,  -- Rockbiter Weapon
@@ -386,6 +425,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 1800,
         ranks = {8017, 8018, 8019, 10399, 16314, 16315, 16316},
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
 
     -------------------------------------------------------------------------------
@@ -395,28 +435,33 @@ lib:RegisterSpells({
         spellID = 20608,  -- Reincarnation
         tags = {C.RESURRECT, C.UTILITY},
         cooldown = 3600,
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 546,  -- Water Walking
         tags = {C.UTILITY, C.MOVEMENT, C.OUT_OF_COMBAT},
         cooldown = 0,
         duration = 600,
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 131,  -- Water Breathing
         tags = {C.UTILITY, C.OUT_OF_COMBAT},
         cooldown = 0,
         duration = 600,
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 2645,  -- Ghost Wolf
         tags = {C.MOVEMENT, C.MOVEMENT_SPEED, C.SHAPESHIFT},
         cooldown = 0,
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 556,  -- Astral Recall
         tags = {C.UTILITY},
         cooldown = 900,
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
 
 }, "SHAMAN")

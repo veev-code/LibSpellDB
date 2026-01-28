@@ -8,6 +8,51 @@ local MAJOR = "LibSpellDB-1.0"
 local lib = LibStub and LibStub:GetLibrary(MAJOR, true)
 if not lib then return end
 
+-------------------------------------------------------------------------------
+-- Spec Constants (for type safety and autocomplete in data files)
+-------------------------------------------------------------------------------
+
+lib.Specs = {
+    -- Warrior
+    ARMS = "ARMS",
+    FURY = "FURY",
+    -- Paladin / Warrior share PROTECTION
+    PROTECTION = "PROTECTION",
+    -- Paladin
+    HOLY = "HOLY",  -- Also used by Priest
+    RETRIBUTION = "RETRIBUTION",
+    -- Hunter
+    BEAST_MASTERY = "BEAST_MASTERY",
+    MARKSMANSHIP = "MARKSMANSHIP",
+    SURVIVAL = "SURVIVAL",
+    -- Rogue
+    ASSASSINATION = "ASSASSINATION",
+    COMBAT = "COMBAT",
+    SUBTLETY = "SUBTLETY",
+    -- Priest
+    DISCIPLINE = "DISCIPLINE",
+    SHADOW = "SHADOW",
+    -- Shaman / Druid share some
+    ELEMENTAL = "ELEMENTAL",
+    ENHANCEMENT = "ENHANCEMENT",
+    RESTORATION = "RESTORATION",  -- Shaman and Druid
+    -- Mage
+    ARCANE = "ARCANE",
+    FIRE = "FIRE",
+    FROST = "FROST",
+    -- Warlock
+    AFFLICTION = "AFFLICTION",
+    DEMONOLOGY = "DEMONOLOGY",
+    DESTRUCTION = "DESTRUCTION",
+    -- Druid
+    BALANCE = "BALANCE",
+    FERAL = "FERAL",
+}
+
+-------------------------------------------------------------------------------
+-- Class-to-Specs mapping (indexed by talent tree 1, 2, 3)
+-------------------------------------------------------------------------------
+
 -- Spec names by class (indexed by talent tree 1, 2, 3)
 lib.CLASS_SPECS = {
     WARRIOR = {"ARMS", "FURY", "PROTECTION"},

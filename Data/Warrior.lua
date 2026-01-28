@@ -1,8 +1,8 @@
 --[[
     LibSpellDB - Warrior Spells (Anniversary Edition / Classic)
     
-    specs field: nil = all specs, or list specific specs where ability is RELEVANT
-    Note: Relevance != exclusive. Arms can use Shield Wall, it's just more relevant for Prot.
+    All spells must have explicit specs field listing which specs the ability is relevant for.
+    Class-wide abilities should list all specs: {S.ARMS, S.FURY, S.PROTECTION}
 ]]
 
 local MAJOR = "LibSpellDB-1.0"
@@ -10,6 +10,7 @@ local lib = LibStub and LibStub:GetLibrary(MAJOR, true)
 if not lib then return end
 
 local C = lib.Categories
+local S = lib.Specs
 
 lib:RegisterSpells({
     -------------------------------------------------------------------------------
@@ -21,7 +22,7 @@ lib:RegisterSpells({
         cooldown = 30,
         duration = 10,
         priority = 1,  -- CC break = highest utility priority
-        specs = nil,
+        specs = {S.ARMS, S.FURY, S.PROTECTION},
     },
 
     -------------------------------------------------------------------------------
@@ -34,7 +35,7 @@ lib:RegisterSpells({
         duration = 1,
         priority = 2,  -- Movement
         ranks = {100, 6178, 11578},
-        specs = nil,
+        specs = {S.ARMS, S.FURY, S.PROTECTION},
         appliesAura = {
             spellID = 7922,  -- Charge Stun
             type = "DEBUFF",
@@ -48,7 +49,7 @@ lib:RegisterSpells({
         duration = 3,
         priority = 2,  -- Movement
         ranks = {20252, 20616, 20617},
-        specs = nil,
+        specs = {S.ARMS, S.FURY, S.PROTECTION},
         appliesAura = {
             spellID = 20615,  -- Intercept Stun
             type = "DEBUFF",
@@ -60,7 +61,7 @@ lib:RegisterSpells({
         tags = {C.MOVEMENT_GAP_CLOSE, C.MOVEMENT},
         cooldown = 30,
         priority = 2,  -- Movement
-        specs = nil,
+        specs = {S.ARMS, S.FURY, S.PROTECTION},
     },
 
     -------------------------------------------------------------------------------
@@ -72,7 +73,7 @@ lib:RegisterSpells({
         cooldown = 180,
         duration = 8,
         priority = 3,  -- Hard CC
-        specs = nil,
+        specs = {S.ARMS, S.FURY, S.PROTECTION},
         appliesAura = {
             spellID = 20511,
             type = "DEBUFF",
@@ -86,7 +87,7 @@ lib:RegisterSpells({
         duration = 5,
         priority = 3,  -- Hard CC
         talent = true,
-        specs = {"PROTECTION"},
+        specs = {S.PROTECTION},
     },
     {
         spellID = 676,  -- Disarm
@@ -94,7 +95,7 @@ lib:RegisterSpells({
         cooldown = 60,
         duration = 10,
         priority = 3,  -- Hard CC
-        specs = nil,
+        specs = {S.ARMS, S.FURY, S.PROTECTION},
     },
 
     -------------------------------------------------------------------------------
@@ -107,7 +108,7 @@ lib:RegisterSpells({
         duration = 4,
         priority = 4,  -- Interrupt
         ranks = {6552, 6554},
-        specs = {"ARMS", "FURY"},
+        specs = {S.ARMS, S.FURY},
     },
     {
         spellID = 72,  -- Shield Bash
@@ -116,7 +117,7 @@ lib:RegisterSpells({
         duration = 6,
         priority = 4,  -- Interrupt
         ranks = {72, 1671, 1672},
-        specs = {"PROTECTION"},
+        specs = {S.PROTECTION},
     },
 
     -------------------------------------------------------------------------------
@@ -129,7 +130,7 @@ lib:RegisterSpells({
         duration = 15,
         priority = 5,  -- Soft CC
         ranks = {1715, 7372, 7373},
-        specs = nil,
+        specs = {S.ARMS, S.FURY, S.PROTECTION},
     },
     {
         spellID = 12323,  -- Piercing Howl
@@ -138,7 +139,7 @@ lib:RegisterSpells({
         duration = 6,
         priority = 5,  -- Soft CC
         talent = true,
-        specs = {"FURY"},
+        specs = {S.FURY},
     },
 
     -------------------------------------------------------------------------------
@@ -150,7 +151,7 @@ lib:RegisterSpells({
         cooldown = 1800,
         duration = 10,
         priority = 6,  -- Personal defensive
-        specs = {"PROTECTION"},
+        specs = {S.PROTECTION},
         sharedCooldownGroup = "WARRIOR_30MIN_CD",
     },
     {
@@ -160,7 +161,7 @@ lib:RegisterSpells({
         duration = 20,
         priority = 6,  -- Personal defensive
         talent = true,
-        specs = {"PROTECTION"},
+        specs = {S.PROTECTION},
     },
     {
         spellID = 23920,  -- Spell Reflection
@@ -168,7 +169,7 @@ lib:RegisterSpells({
         cooldown = 10,
         duration = 5,
         priority = 6,  -- Personal defensive
-        specs = nil,
+        specs = {S.ARMS, S.FURY, S.PROTECTION},
     },
 
     -------------------------------------------------------------------------------
@@ -180,7 +181,7 @@ lib:RegisterSpells({
         cooldown = 60,
         duration = 10,
         priority = 7,  -- Resource
-        specs = nil,
+        specs = {S.ARMS, S.FURY, S.PROTECTION},
         appliesAura = {
             spellID = 29131,  -- Bloodrage buff ID (different from ability ID)
             type = "BUFF",
@@ -196,7 +197,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MAJOR, C.HAS_BUFF},
         cooldown = 1800,
         duration = 15,
-        specs = {"FURY"},
+        specs = {S.FURY},
         sharedCooldownGroup = "WARRIOR_30MIN_CD",
     },
     {
@@ -205,7 +206,7 @@ lib:RegisterSpells({
         cooldown = 180,
         duration = 30,
         talent = true,
-        specs = {"FURY"},
+        specs = {S.FURY},
     },
     {
         spellID = 12328,  -- Sweeping Strikes (Fury talent in TBC/Anniversary)
@@ -213,14 +214,14 @@ lib:RegisterSpells({
         cooldown = 30,
         duration = 10,
         talent = true,
-        specs = {"FURY"},  -- Fury tree talent in TBC
+        specs = {S.FURY},  -- Fury tree talent in TBC
     },
     {
         spellID = 20230,  -- Retaliation
         tags = {C.DPS, C.MAJOR, C.DEFENSIVE, C.HAS_BUFF},
         cooldown = 1800,
         duration = 15,
-        specs = {"ARMS"},
+        specs = {S.ARMS},
         sharedCooldownGroup = "WARRIOR_30MIN_CD",
     },
 
@@ -235,7 +236,7 @@ lib:RegisterSpells({
         duration = 15,
         priority = 1,
         ranks = {772, 6546, 6547, 6548, 11572, 11573, 11574, 25208},
-        specs = {"ARMS"},
+        specs = {S.ARMS},
     },
     {
         spellID = 12294,  -- Mortal Strike (highest damage, use on CD)
@@ -245,7 +246,7 @@ lib:RegisterSpells({
         priority = 2,
         talent = true,
         ranks = {12294, 21551, 21552, 21553, 25248, 30330},
-        specs = {"ARMS"},
+        specs = {S.ARMS},
     },
     {
         spellID = 7384,  -- Overpower (use when proc available)
@@ -253,14 +254,14 @@ lib:RegisterSpells({
         cooldown = 5,
         priority = 3,
         ranks = {7384, 7887, 11584, 11585},
-        specs = {"ARMS"},
+        specs = {S.ARMS},
     },
     {
         spellID = 1680,  -- Whirlwind (after MS, strong damage - used in both ST and AoE)
         tags = {C.DPS, C.ROTATIONAL, C.AOE, C.PVE_PVP},
         cooldown = 10,
         priority = 4,
-        specs = {"FURY", "ARMS"},
+        specs = {S.FURY, S.ARMS},
     },
     {
         spellID = 1464,  -- Slam (filler between abilities)
@@ -268,7 +269,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 5,
         ranks = {1464, 8820, 11604, 11605, 25241, 25242},
-        specs = {"ARMS"},
+        specs = {S.ARMS},
     },
     {
         spellID = 5308,  -- Execute (sub-20% finisher)
@@ -276,14 +277,14 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 6,
         ranks = {5308, 20658, 20660, 20661, 20662, 25234, 25236},
-        specs = {"ARMS", "FURY"},
+        specs = {S.ARMS, S.FURY},
     },
     {
         spellID = 34428,  -- Victory Rush (TBC, usable after killing blow)
         tags = {C.DPS, C.ROTATIONAL, C.REACTIVE, C.HEAL_SINGLE, C.PVE_PVP},
         cooldown = 0,
         priority = 7,
-        specs = {"ARMS", "FURY"},
+        specs = {S.ARMS, S.FURY},
     },
 
     -------------------------------------------------------------------------------
@@ -296,7 +297,7 @@ lib:RegisterSpells({
         priority = 1,
         talent = true,
         ranks = {23881, 23892, 23893, 23894, 25251, 30335},
-        specs = {"FURY"},
+        specs = {S.FURY},
         ignoreAura = true,  -- Buff (healing on next 5 hits) is longer than CD and not worth tracking
     },
     {
@@ -306,7 +307,7 @@ lib:RegisterSpells({
         duration = 30,
         priority = 2,
         talent = true,
-        specs = {"FURY"},
+        specs = {S.FURY},
         appliesAura = {
             spellID = 30031,  -- Rampage buff ID (different from ability ID)
             type = "BUFF",
@@ -319,7 +320,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 10,  -- Lower priority (situational)
         ranks = {78, 284, 285, 1608, 11564, 11565, 11566, 11567, 25286, 29707},
-        specs = nil,
+        specs = {S.ARMS, S.FURY, S.PROTECTION},
     },
     {
         spellID = 845,  -- Cleave (AoE rage dump)
@@ -327,7 +328,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 11,  -- Lower priority (situational)
         ranks = {845, 7369, 11608, 11609, 20569, 25231},
-        specs = nil,
+        specs = {S.ARMS, S.FURY, S.PROTECTION},
     },
 
     -------------------------------------------------------------------------------
@@ -339,7 +340,7 @@ lib:RegisterSpells({
         cooldown = 5,
         duration = 5,
         priority = 1,
-        specs = {"PROTECTION"},
+        specs = {S.PROTECTION},
     },
     {
         spellID = 6572,  -- Revenge (highest threat when proc'd)
@@ -347,7 +348,7 @@ lib:RegisterSpells({
         cooldown = 5,
         priority = 2,
         ranks = {6572, 6574, 7379, 11600, 11601, 25288, 25269, 30357},
-        specs = {"PROTECTION"},
+        specs = {S.PROTECTION},
     },
     {
         spellID = 23922,  -- Shield Slam (high threat on CD)
@@ -356,7 +357,7 @@ lib:RegisterSpells({
         priority = 3,
         talent = true,
         ranks = {23922, 23923, 23924, 23925, 25258, 30356},
-        specs = {"PROTECTION"},
+        specs = {S.PROTECTION},
     },
     {
         spellID = 20243,  -- Devastate (filler, stacks Sunder)
@@ -365,7 +366,7 @@ lib:RegisterSpells({
         priority = 4,
         talent = true,
         ranks = {20243, 30016, 30022},
-        specs = {"PROTECTION"},
+        specs = {S.PROTECTION},
     },
 
     -------------------------------------------------------------------------------
@@ -378,7 +379,7 @@ lib:RegisterSpells({
         duration = 30,
         priority = 5,
         ranks = {6343, 8198, 8204, 8205, 11580, 11581, 25264},
-        specs = {"PROTECTION"},
+        specs = {S.PROTECTION},
     },
     {
         spellID = 1160,  -- Demoralizing Shout (maintain AP reduction debuff)
@@ -387,7 +388,7 @@ lib:RegisterSpells({
         duration = 30,
         priority = 6,
         ranks = {1160, 6190, 11554, 11555, 11556, 25202, 25203},
-        specs = {"PROTECTION"},
+        specs = {S.PROTECTION},
     },
 
     -------------------------------------------------------------------------------
@@ -397,14 +398,14 @@ lib:RegisterSpells({
         spellID = 355,  -- Taunt
         tags = {C.TAUNT},
         cooldown = 10,
-        specs = {"PROTECTION"},
+        specs = {S.PROTECTION},
     },
     {
         spellID = 1161,  -- Challenging Shout
         tags = {C.TAUNT},
         cooldown = 600,
         duration = 6,
-        specs = {"PROTECTION"},
+        specs = {S.PROTECTION},
     },
     {
         spellID = 694,  -- Mocking Blow
@@ -412,7 +413,7 @@ lib:RegisterSpells({
         cooldown = 120,
         duration = 6,
         ranks = {694, 7814, 7815, 7816, 20559, 20560, 25266},
-        specs = {"PROTECTION"},
+        specs = {S.PROTECTION},
     },
 
     -------------------------------------------------------------------------------
@@ -424,7 +425,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 30,
         ranks = {7386, 7405, 8380, 11596, 11597},
-        specs = {"PROTECTION"},
+        specs = {S.PROTECTION},
     },
 
 }, "WARRIOR")
