@@ -1,5 +1,11 @@
 # LibSpellDB Changelog
 
+## [1.0.8] - 2026-01-28
+
+### Added
+- Deep Wounds proc tracking for Warriors (target debuff)
+- `ignoreAura` flag for spells where cooldown tracking is more relevant than debuff tracking (e.g., Mortal Strike)
+
 ## [1.0.7] - 2026-01-27
 
 ### Added
