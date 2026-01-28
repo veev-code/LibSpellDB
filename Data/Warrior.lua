@@ -247,6 +247,7 @@ lib:RegisterSpells({
         talent = true,
         ranks = {12294, 21551, 21552, 21553, 25248, 30330},
         specs = {S.ARMS},
+        ignoreAura = true,  -- Debuff (healing reduction) is longer than CD and not worth tracking
     },
     {
         spellID = 7384,  -- Overpower (use when proc available)

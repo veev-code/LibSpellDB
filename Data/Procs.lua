@@ -44,6 +44,19 @@ lib:RegisterSpells({
             consumedOnHit = true,
         },
     },
+    -- Deep Wounds (Arms talent) - debuff applied to target on melee crit
+    {
+        spellID = 12721,  -- Deep Wounds debuff (all ranks use this buff ID)
+        tags = {C.PROC, C.DEBUFF},
+        cooldown = 0,
+        duration = 12,
+        talent = true,
+        procInfo = {
+            description = "Bleed damage over 12 sec",
+            stacks = false,
+            onTarget = true,  -- This is a debuff on target, not a buff on player
+        },
+    },
 }, "WARRIOR")
 
 -------------------------------------------------------------------------------
