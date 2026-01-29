@@ -1,5 +1,10 @@
 # LibSpellDB Changelog
 
+## [1.0.11] - 2026-01-29
+
+### Fixed
+- Vampiric Embrace now correctly tagged as HAS_DEBUFF (it's a debuff on target, not a buff on self)
+
 ## [1.0.10] - 2026-01-28
 
 ### Added

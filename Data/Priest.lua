@@ -75,9 +75,9 @@ lib:RegisterSpells({
     },
     {
         spellID = 15286,  -- Vampiric Embrace
-        tags = {C.DPS, C.MAINTENANCE, C.BUFF, C.HAS_BUFF},
+        tags = {C.DPS, C.MAINTENANCE, C.HAS_DEBUFF},
         cooldown = 0,
-        duration = 60,  -- Buff on self, heals based on shadow damage
+        duration = 60,  -- Debuff on target, heals party based on shadow damage
         talent = true,
         specs = {S.SHADOW},
     },
