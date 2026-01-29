@@ -1,5 +1,11 @@
 # LibSpellDB Changelog
 
+## [1.0.10] - 2026-01-28
+
+### Added
+- Forbearance lockout tracking for Paladin immunity spells (Divine Shield, Divine Protection, Blessing of Protection, Avenging Wrath)
+- Uses `targetLockoutDebuff` field to indicate spells blocked by Forbearance debuff
+
 ## [1.0.9] - 2026-01-28
 
 ### Fixed

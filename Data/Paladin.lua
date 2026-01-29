@@ -51,6 +51,8 @@ lib:RegisterSpells({
         duration = 12,
         ranks = {642, 1020},
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        -- Forbearance debuff prevents casting for 1 min
+        targetLockoutDebuff = 25771,
     },
     {
         spellID = 498,  -- Divine Protection
@@ -59,6 +61,8 @@ lib:RegisterSpells({
         duration = 8,
         ranks = {498, 5573},
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        -- Forbearance debuff prevents casting for 1 min
+        targetLockoutDebuff = 25771,
     },
 
     -------------------------------------------------------------------------------
@@ -71,6 +75,8 @@ lib:RegisterSpells({
         duration = 10,
         ranks = {1022, 5599, 10278},
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        -- Forbearance debuff prevents casting on same target for 1 min
+        targetLockoutDebuff = 25771,
     },
     {
         spellID = 6940,  -- Blessing of Sacrifice
@@ -231,6 +237,8 @@ lib:RegisterSpells({
         duration = 20,
         priority = 7,
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        -- Forbearance debuff prevents casting for 1 min
+        targetLockoutDebuff = 25771,
     },
 
     -------------------------------------------------------------------------------
