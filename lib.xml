@@ -10,4 +10,7 @@
     <Script file="Core\SpecDetection.lua"/>
     <Script file="Core\Commands.lua"/>
 
+    <!-- Spell Data (required for embedded use) -->
+    <Include file="Data\Data.xml"/>
+
 </Ui>

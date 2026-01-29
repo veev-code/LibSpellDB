@@ -2,12 +2,13 @@
 ## Title: Lib: SpellDB
 ## Notes: Shared spell database library for WoW addon developers.
 ## Author: Veev
-## Version: 1.0.8
+## Version: 1.0.9
 ## IconTexture: Interface\Icons\INV_Misc_Book_09
 ## X-Category: Library
 ## X-License: MIT
 ## X-Curse-Project-ID: 1444022
 ## X-Website: https://github.com/veev-code/LibSpellDB
+## X-Discord: https://discord.gg/HuSXTa5XNq
 ## X-Twitch: https://www.twitch.tv/veev
 ## X-Twitter: https://x.com/VeevTSG
 ## X-Description: LibSpellDB is a shared spell database library for World of Warcraft addon developers. It provides a centralized, curated repository of spell data including cooldowns, durations, resource costs, buff/debuff associations, proc information, and extensive tagging for categorization (CC, interrupts, defensives, mobility, rotational abilities, etc.). Spells are filterable by class, spec, and custom tags. The library eliminates the need for addon authors to maintain their own spell databases, ensuring consistency and reducing duplication across addons. Includes full coverage for all TBC Classic classes with PvE/PvP rotation data, shared cooldown groups, and reactive ability detection.

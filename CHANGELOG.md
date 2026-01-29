@@ -1,5 +1,11 @@
 # LibSpellDB Changelog
 
+## [1.0.9] - 2026-01-28
+
+### Fixed
+- Include spell data files in `lib.xml` so embedded copies (e.g., bundled with VeevHUD) load correctly
+- Previously, only the core library loaded when embedded, resulting in zero spells being registered
+
 ## [1.0.8] - 2026-01-28
 
 ### Added
