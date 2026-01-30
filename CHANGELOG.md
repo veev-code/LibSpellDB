@@ -1,5 +1,20 @@
 # LibSpellDB Changelog
 
+## [1.0.12] - 2026-01-30
+
+### Added
+- **triggersAuras array** for spells that apply multiple auras (e.g., Pounce applies both stun and bleed)
+- Each triggered aura can have its own tags, type (BUFF/DEBUFF), and targeting rules
+- Reverse index `auraToSource` for efficient lookup of source spell from aura ID
+- New APIs: `GetAuraInfo()`, `GetAuraSourceSpellID()`, `GetAuraTags()`, `AuraHasTag()`
+- **Comprehensive TBC spell ranks** from wago.tools data for all 9 classes
+- Missing trigger mappings for spells with different aura IDs (Wyvern Sting DoTs, Pounce Bleeds, Nature's Grasp roots, etc.)
+- New spells: Mage Cone of Cold, Dragon's Breath, Flamestrike, Blizzard, Slow; Rogue Backstab
+- Audit script (`Tools/audit_existing.py`) for comparing LibSpellDB against wago.tools exports
+
+### Changed
+- Replaced `appliesAura` with `triggersAuras` array structure for multi-aura support
+
 ## [1.0.11] - 2026-01-29
 
 ### Fixed

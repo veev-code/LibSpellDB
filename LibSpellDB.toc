@@ -2,7 +2,7 @@
 ## Title: Lib: SpellDB
 ## Notes: Shared spell database library for WoW addon developers.
 ## Author: Veev
-## Version: 1.0.11
+## Version: 1.0.12
 ## IconTexture: Interface\Icons\INV_Misc_Book_09
 ## X-Category: Library
 ## X-License: MIT
