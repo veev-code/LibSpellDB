@@ -36,10 +36,13 @@ lib:RegisterSpells({
         priority = 2,  -- Movement
         ranks = {100, 6178, 11578},
         specs = {S.ARMS, S.FURY, S.PROTECTION},
-        appliesAura = {
-            spellID = 7922,  -- Charge Stun
-            type = "DEBUFF",
-            onTarget = true,
+        triggersAuras = {
+            {
+                spellID = 7922,  -- Charge Stun
+                tags = {C.CC_HARD},
+                type = "DEBUFF",
+                onTarget = true,
+            },
         },
     },
     {
@@ -50,10 +53,13 @@ lib:RegisterSpells({
         priority = 2,  -- Movement
         ranks = {20252, 20616, 20617},
         specs = {S.ARMS, S.FURY, S.PROTECTION},
-        appliesAura = {
-            spellID = 20615,  -- Intercept Stun
-            type = "DEBUFF",
-            onTarget = true,
+        triggersAuras = {
+            {
+                spellID = 20615,  -- Intercept Stun
+                tags = {C.CC_HARD},
+                type = "DEBUFF",
+                onTarget = true,
+            },
         },
     },
     {
@@ -74,10 +80,13 @@ lib:RegisterSpells({
         duration = 8,
         priority = 3,  -- Hard CC
         specs = {S.ARMS, S.FURY, S.PROTECTION},
-        appliesAura = {
-            spellID = 20511,
-            type = "DEBUFF",
-            onTarget = true,
+        triggersAuras = {
+            {
+                spellID = 20511,  -- Intimidating Shout (Cower) on main target
+                tags = {C.CC_HARD},
+                type = "DEBUFF",
+                onTarget = true,
+            },
         },
     },
     {
@@ -182,10 +191,13 @@ lib:RegisterSpells({
         duration = 10,
         priority = 7,  -- Resource
         specs = {S.ARMS, S.FURY, S.PROTECTION},
-        appliesAura = {
-            spellID = 29131,  -- Bloodrage buff ID (different from ability ID)
-            type = "BUFF",
-            onPlayer = true,
+        triggersAuras = {
+            {
+                spellID = 29131,  -- Bloodrage buff ID (different from ability ID)
+                tags = {C.BUFF, C.RESOURCE},
+                type = "BUFF",
+                onTarget = false,
+            },
         },
     },
 
@@ -308,11 +320,13 @@ lib:RegisterSpells({
         duration = 30,
         priority = 2,
         talent = true,
+        ranks = {29801, 30030, 30033},  -- Rank 1, 2, 3
         specs = {S.FURY},
-        appliesAura = {
-            spellID = 30031,  -- Rampage buff ID (different from ability ID)
-            type = "BUFF",
-            onPlayer = true,
+        -- All ability ranks check all buff ranks (resolved via canonical ID)
+        triggersAuras = {
+            { spellID = 30029, tags = {C.BUFF, C.DPS}, type = "BUFF", onTarget = false },  -- Buff R1
+            { spellID = 30031, tags = {C.BUFF, C.DPS}, type = "BUFF", onTarget = false },  -- Buff R2
+            { spellID = 30032, tags = {C.BUFF, C.DPS}, type = "BUFF", onTarget = false },  -- Buff R3
         },
     },
     {

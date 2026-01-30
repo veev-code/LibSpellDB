@@ -20,9 +20,17 @@ lib:RegisterSpells({
         spellID = 16979,  -- Feral Charge
         tags = {C.INTERRUPT, C.MOVEMENT_GAP_CLOSE, C.MOVEMENT},
         cooldown = 15,
-        duration = 4,  -- Interrupt lockout
+        duration = 4,  -- Interrupt lockout / root duration
         talent = true,
         specs = {S.FERAL},
+        triggersAuras = {
+            {
+                spellID = 45334,  -- Feral Charge Effect (root/immobilize)
+                tags = {C.ROOT, C.CC_SOFT},
+                type = "DEBUFF",
+                onTarget = true,
+            },
+        },
     },
     {
         spellID = 5211,  -- Bash
@@ -31,6 +39,23 @@ lib:RegisterSpells({
         duration = 4,
         ranks = {5211, 6798, 8983},
         specs = {S.FERAL},
+    },
+    {
+        spellID = 9005,  -- Pounce
+        tags = {C.CC_HARD},
+        cooldown = 0,
+        duration = 2,  -- Stun duration
+        ranks = {9005, 9823, 9827},
+        specs = {S.FERAL},
+        triggersAuras = {
+            {
+                spellID = 9007,  -- Pounce Bleed (Rank 1)
+                tags = {C.HAS_DOT, C.DEBUFF},
+                type = "DEBUFF",
+                onTarget = true,
+            },
+            -- Note: Higher ranks use different bleed IDs (9824, 9826) but same pattern
+        },
     },
 
     -------------------------------------------------------------------------------
@@ -77,6 +102,14 @@ lib:RegisterSpells({
         duration = 45,
         ranks = {16689, 16810, 16811, 16812, 16813, 17329},
         specs = {S.BALANCE, S.FERAL, S.RESTORATION},
+        triggersAuras = {
+            {
+                spellID = 19975,  -- Nature's Grasp (Root) on attackers
+                tags = {C.ROOT, C.CC_SOFT},
+                type = "DEBUFF",
+                onTarget = true,
+            },
+        },
     },
 
     -------------------------------------------------------------------------------

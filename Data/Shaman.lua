@@ -22,6 +22,14 @@ lib:RegisterSpells({
         cooldown = 15,
         duration = 45,
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
+        triggersAuras = {
+            {
+                spellID = 3600,  -- Earthbind (slow effect applied to enemies)
+                tags = {C.CC_SOFT},
+                type = "DEBUFF",
+                onTarget = true,
+            },
+        },
     },
     {
         spellID = 8056,  -- Frost Shock (slow/CC utility)
@@ -73,10 +81,13 @@ lib:RegisterSpells({
         priority = 1,
         talent = true,
         specs = {S.ENHANCEMENT},
-        appliesAura = {
-            spellID = 17364,  -- Stormstrike debuff (same ID in TBC)
-            type = "DEBUFF",
-            onTarget = true,
+        triggersAuras = {
+            {
+                spellID = 17364,  -- Stormstrike debuff (same ID in TBC)
+                tags = {C.DEBUFF, C.DPS},
+                type = "DEBUFF",
+                onTarget = true,
+            },
         },
     },
     {

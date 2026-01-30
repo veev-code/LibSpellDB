@@ -40,6 +40,15 @@ lib:RegisterSpells({
         talent = true,
         ranks = {19386, 24132, 24133},
         specs = {S.SURVIVAL},
+        triggersAuras = {
+            {
+                spellID = 24131,  -- Wyvern Sting DoT (after sleep ends) Rank 1
+                tags = {C.HAS_DOT, C.DEBUFF},
+                type = "DEBUFF",
+                onTarget = true,
+            },
+            -- Note: Ranks 2/3 trigger 24134/24135 respectively
+        },
     },
     {
         spellID = 19577,  -- Intimidation
@@ -48,6 +57,14 @@ lib:RegisterSpells({
         duration = 3,
         talent = true,
         specs = {S.BEAST_MASTERY},
+        triggersAuras = {
+            {
+                spellID = 24394,  -- Intimidation (stun effect from pet)
+                tags = {C.CC_HARD},
+                type = "DEBUFF",
+                onTarget = true,
+            },
+        },
     },
     {
         spellID = 1513,  -- Scare Beast

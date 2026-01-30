@@ -34,6 +34,9 @@ lib.spellIDToTags = lib.spellIDToTags or {}
 -- Rank mappings: any rank spellID -> canonical spellID
 lib.rankToCanonical = lib.rankToCanonical or {}
 
+-- Aura mappings: auraSpellID -> {sourceSpellID, tags, type, onTarget, ...}
+lib.auraToSource = lib.auraToSource or {}
+
 -- Game version detection
 lib.gameVersion = lib.gameVersion or "unknown"
 
@@ -162,6 +165,21 @@ function lib:RegisterSpell(spellData)
         end
     end
     self.rankToCanonical[spellID] = spellID
+
+    -- Handle triggered auras - build reverse index
+    if spellData.triggersAuras then
+        for _, auraInfo in ipairs(spellData.triggersAuras) do
+            if auraInfo.spellID then
+                self.auraToSource[auraInfo.spellID] = {
+                    sourceSpellID = spellID,
+                    tags = auraInfo.tags or {},
+                    type = auraInfo.type or "DEBUFF",
+                    onTarget = auraInfo.onTarget,
+                    duration = auraInfo.duration,
+                }
+            end
+        end
+    end
 
     return true
 end
@@ -341,6 +359,64 @@ end
 ]]
 function lib:GetCanonicalSpellID(spellID)
     return self.rankToCanonical[spellID]
+end
+
+-------------------------------------------------------------------------------
+-- Aura Query API
+-------------------------------------------------------------------------------
+
+--[[
+    Get aura info for a triggered aura spell ID
+    
+    This is used when a spell applies an aura with a different spell ID.
+    For example, Charge (100) triggers Charge Stun (7922).
+    
+    @param auraSpellID (number) - The aura/buff/debuff spell ID
+    @return (table or nil) - Aura info: {sourceSpellID, tags, type, onTarget, duration}
+]]
+function lib:GetAuraInfo(auraSpellID)
+    return self.auraToSource[auraSpellID]
+end
+
+--[[
+    Get the source spell ID for a triggered aura
+    
+    @param auraSpellID (number) - The aura/buff/debuff spell ID
+    @return (number or nil) - The spell ID that triggers this aura
+]]
+function lib:GetAuraSourceSpellID(auraSpellID)
+    local auraInfo = self.auraToSource[auraSpellID]
+    return auraInfo and auraInfo.sourceSpellID
+end
+
+--[[
+    Get tags for a triggered aura
+    
+    @param auraSpellID (number) - The aura/buff/debuff spell ID
+    @return (table) - Array of tags, or empty table if not found
+]]
+function lib:GetAuraTags(auraSpellID)
+    local auraInfo = self.auraToSource[auraSpellID]
+    return auraInfo and auraInfo.tags or {}
+end
+
+--[[
+    Check if an aura has a specific tag
+    
+    @param auraSpellID (number) - The aura/buff/debuff spell ID
+    @param tag (string) - The tag to check for
+    @return (boolean) - True if aura has the tag
+]]
+function lib:AuraHasTag(auraSpellID, tag)
+    local auraInfo = self.auraToSource[auraSpellID]
+    if auraInfo and auraInfo.tags then
+        for _, t in ipairs(auraInfo.tags) do
+            if t == tag then
+                return true
+            end
+        end
+    end
+    return false
 end
 
 -------------------------------------------------------------------------------
