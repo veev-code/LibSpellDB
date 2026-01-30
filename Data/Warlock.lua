@@ -33,7 +33,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD, C.FEAR},
         cooldown = 0,
         duration = 20,
-        ranks = {5782, 6213, 6215},
+        ranks = {5782, 6213, 6215, 27228},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
@@ -41,7 +41,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD, C.FEAR, C.HEAL_SINGLE, C.DPS, C.MINOR},
         cooldown = 120,
         duration = 3,
-        ranks = {6789, 17925, 17926},
+        ranks = {6789, 17925, 17926, 27223},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
@@ -113,7 +113,7 @@ lib:RegisterSpells({
         tags = {C.DEFENSIVE, C.MAJOR, C.PET, C.HAS_BUFF},
         cooldown = 0,
         duration = 30,
-        ranks = {7812, 19438, 19440, 19441, 19442, 19443},
+        ranks = {7812, 19438, 19440, 19441, 19442, 19443, 27273},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
 
@@ -152,7 +152,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.ROTATIONAL, C.FINISHER},
         cooldown = 15,
         talent = true,
-        ranks = {17877, 18867, 18868, 18869, 18870, 18871},
+        ranks = {17877, 18867, 18868, 18869, 18870, 18871, 30546},
         specs = {S.DESTRUCTION},
     },
 
@@ -163,7 +163,7 @@ lib:RegisterSpells({
         spellID = 19505,  -- Devour Magic (Felhunter)
         tags = {C.DISPEL_MAGIC, C.PET},
         cooldown = 8,
-        ranks = {19505, 19731, 19734, 19736},
+        ranks = {19505, 19731, 19734, 19736, 27276},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
 
@@ -176,6 +176,7 @@ lib:RegisterSpells({
         cooldown = 60,
         duration = 60,
         priority = 1,
+        ranks = {603, 30910},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
@@ -360,7 +361,7 @@ lib:RegisterSpells({
         spellID = 20707,  -- Soulstone Resurrection
         tags = {C.RESURRECT, C.BATTLE_REZ, C.UTILITY},
         cooldown = 1800,
-        ranks = {20707, 20762, 20763, 20764, 20765},
+        ranks = {20707, 20762, 20763, 20764, 20765, 27238, 27239},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
@@ -391,14 +392,6 @@ lib:RegisterSpells({
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
-        spellID = 1098,  -- Enslave Demon (duplicate removed - already above)
-        tags = {C.CC_HARD, C.PET_CONTROL, C.FILLER},
-        cooldown = 0,
-        duration = 300,
-        ranks = {1098, 11725, 11726},
-        specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
-    },
-    {
         spellID = 18094,  -- Nightfall (proc tracking)
         tags = {C.PROC, C.HAS_BUFF},
         talent = true,
@@ -409,7 +402,7 @@ lib:RegisterSpells({
         tags = {C.DEBUFF, C.UTILITY},
         cooldown = 0,
         duration = 120,
-        ranks = {702, 1108, 6205, 7646, 11707, 11708},
+        ranks = {702, 1108, 6205, 7646, 11707, 11708, 27224},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
@@ -417,7 +410,7 @@ lib:RegisterSpells({
         tags = {C.DEBUFF, C.UTILITY, C.RAID_DEFENSIVE},
         cooldown = 0,
         duration = 300,
-        ranks = {1490, 11721, 11722},
+        ranks = {1490, 11721, 11722, 27229},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
@@ -433,7 +426,7 @@ lib:RegisterSpells({
         tags = {C.DEBUFF, C.UTILITY, C.CC_BREAK},
         cooldown = 0,
         duration = 120,
-        ranks = {704, 7658, 7659, 11717},
+        ranks = {704, 7658, 7659, 11717, 27226},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
 
@@ -445,7 +438,7 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
         duration = 1800,
-        ranks = {706, 1086, 11733, 11734, 11735},
+        ranks = {706, 1086, 11733, 11734, 11735, 27260},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
@@ -461,6 +454,7 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
         duration = 1800,
+        ranks = {28176, 28189},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
 

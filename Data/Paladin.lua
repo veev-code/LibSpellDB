@@ -21,7 +21,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD},
         cooldown = 60,
         duration = 6,
-        ranks = {853, 5588, 5589, 10308},
+        ranks = {853, 5588, 5589, 10308, 27148},
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
@@ -114,7 +114,7 @@ lib:RegisterSpells({
         spellID = 633,  -- Lay on Hands
         tags = {C.HEAL, C.MAJOR, C.EXTERNAL_DEFENSIVE, C.HEAL_SINGLE},
         cooldown = 3600,
-        ranks = {633, 2800, 10310},
+        ranks = {633, 2800, 10310, 27154},
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
 
@@ -189,7 +189,7 @@ lib:RegisterSpells({
         duration = 8,
         priority = 4,
         talent = true,
-        ranks = {26573, 20116, 20922, 20923, 20924, 27173},
+        ranks = {20116, 20922, 20923, 20924, 26573, 27173},
         specs = {S.RETRIBUTION, S.PROTECTION},
     },
     {
@@ -197,7 +197,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.ROTATIONAL, C.FINISHER, C.REACTIVE, C.PVE_PVP},
         cooldown = 6,
         priority = 5,
-        ranks = {24275, 24274, 24239, 27180},
+        ranks = {24275, 24274, 24239, 27180, 32772},
         specs = {S.RETRIBUTION},
     },
     {
@@ -205,7 +205,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MINOR, C.PVE},
         cooldown = 15,
         priority = 10,
-        ranks = {879, 5614, 5615, 10312, 10313, 10314, 27138},
+        ranks = {879, 5614, 5615, 10312, 10313, 10314, 27138, 33632},
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
 
@@ -219,7 +219,7 @@ lib:RegisterSpells({
         duration = 10,
         priority = 1,
         talent = true,
-        ranks = {20925, 20927, 20928, 27179},
+        ranks = {20925, 20927, 20928, 27179, 32778},
         specs = {S.PROTECTION},
     },
     {
@@ -248,7 +248,7 @@ lib:RegisterSpells({
         spellID = 465,  -- Devotion Aura
         tags = {C.BUFF, C.RAID_DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
-        ranks = {465, 10290, 643, 10291, 1032, 10292, 10293},
+        ranks = {465, 643, 1032, 10290, 10291, 10292, 10293, 27149},
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
@@ -261,28 +261,28 @@ lib:RegisterSpells({
         spellID = 7294,  -- Retribution Aura
         tags = {C.BUFF, C.DPS, C.LONG_BUFF},
         cooldown = 0,
-        ranks = {7294, 10298, 10299, 10300, 10301},
+        ranks = {7294, 10298, 10299, 10300, 10301, 27150},
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
         spellID = 19891,  -- Fire Resistance Aura
         tags = {C.BUFF, C.RAID_DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
-        ranks = {19891, 19899, 19900},
+        ranks = {19891, 19899, 19900, 27153},
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
         spellID = 19888,  -- Frost Resistance Aura
         tags = {C.BUFF, C.RAID_DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
-        ranks = {19888, 19897, 19898},
+        ranks = {19888, 19897, 19898, 27152},
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
         spellID = 19876,  -- Shadow Resistance Aura
         tags = {C.BUFF, C.RAID_DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
-        ranks = {19876, 19895, 19896},
+        ranks = {19876, 19895, 19896, 27151},
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
@@ -301,7 +301,7 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
         duration = 300,
-        ranks = {19740, 19834, 19835, 19836, 19837, 19838, 25291},
+        ranks = {19740, 19834, 19835, 19836, 19837, 19838, 25291, 27140},
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
@@ -317,7 +317,7 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.UTILITY, C.RESOURCE, C.LONG_BUFF},
         cooldown = 0,
         duration = 300,
-        ranks = {19742, 19850, 19852, 19853, 19854, 25290},
+        ranks = {19742, 19850, 19852, 19853, 19854, 25290, 27142},
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
@@ -326,7 +326,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 300,
         talent = true,
-        ranks = {20911, 20912, 20913, 20914},
+        ranks = {20911, 20912, 20913, 20914, 27168},
         specs = {S.PROTECTION},
     },
     {
@@ -341,7 +341,7 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
         duration = 900,
-        ranks = {25782, 25916},
+        ranks = {25782, 25916, 27141},
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
 
@@ -353,7 +353,7 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.DPS, C.MAINTENANCE},
         cooldown = 0,
         duration = 30,
-        ranks = {20154, 20287, 20288, 20289, 20290, 20291, 20292, 20293},
+        ranks = {20154, 20287, 20288, 20289, 20290, 20291, 20292, 20293, 27155},
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
@@ -362,7 +362,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 30,
         talent = true,
-        ranks = {20375, 20915, 20918, 20919, 20920},
+        ranks = {20375, 20915, 20918, 20919, 20920, 27170},
         specs = {S.RETRIBUTION},
     },
 

@@ -116,7 +116,7 @@ lib:RegisterSpells({
         cooldown = 10,
         duration = 4,
         priority = 4,  -- Interrupt
-        ranks = {6552, 6554},
+        ranks = {6552, 6554, 13491},
         specs = {S.ARMS, S.FURY},
     },
     {
@@ -125,7 +125,7 @@ lib:RegisterSpells({
         cooldown = 12,
         duration = 6,
         priority = 4,  -- Interrupt
-        ranks = {72, 1671, 1672},
+        ranks = {72, 1671, 1672, 29704},
         specs = {S.PROTECTION},
     },
 
@@ -138,7 +138,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 15,
         priority = 5,  -- Soft CC
-        ranks = {1715, 7372, 7373},
+        ranks = {1715, 7372, 7373, 25212, 27584},
         specs = {S.ARMS, S.FURY, S.PROTECTION},
     },
     {
@@ -170,6 +170,7 @@ lib:RegisterSpells({
         duration = 20,
         priority = 6,  -- Personal defensive
         talent = true,
+        ranks = {12975, 12976},
         specs = {S.PROTECTION},
     },
     {
@@ -226,6 +227,7 @@ lib:RegisterSpells({
         cooldown = 30,
         duration = 10,
         talent = true,
+        ranks = {12328, 12723, 26654},
         specs = {S.FURY},  -- Fury tree talent in TBC
     },
     {
@@ -233,6 +235,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MAJOR, C.DEFENSIVE, C.HAS_BUFF},
         cooldown = 1800,
         duration = 15,
+        ranks = {20230, 20240},
         specs = {S.ARMS},
         sharedCooldownGroup = "WARRIOR_30MIN_CD",
     },
@@ -257,7 +260,7 @@ lib:RegisterSpells({
         duration = 10,
         priority = 2,
         talent = true,
-        ranks = {12294, 21551, 21552, 21553, 25248, 30330},
+        ranks = {12294, 21551, 21552, 21553, 25248, 27580, 30330},
         specs = {S.ARMS},
         ignoreAura = true,  -- Debuff (healing reduction) is longer than CD and not worth tracking
     },
@@ -289,7 +292,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.ROTATIONAL, C.FINISHER, C.REACTIVE, C.PVE_PVP},
         cooldown = 0,
         priority = 6,
-        ranks = {5308, 20658, 20660, 20661, 20662, 25234, 25236},
+        ranks = {5308, 7160, 20658, 20660, 20661, 20662, 25234, 25236},
         specs = {S.ARMS, S.FURY},
     },
     {
@@ -334,7 +337,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MINOR, C.PVE},
         cooldown = 0,
         priority = 10,  -- Lower priority (situational)
-        ranks = {78, 284, 285, 1608, 11564, 11565, 11566, 11567, 25286, 29707},
+        ranks = {78, 284, 285, 1608, 11564, 11565, 11566, 11567, 25286, 25712, 29707, 30324},
         specs = {S.ARMS, S.FURY, S.PROTECTION},
     },
     {
@@ -393,7 +396,7 @@ lib:RegisterSpells({
         cooldown = 4,
         duration = 30,
         priority = 5,
-        ranks = {6343, 8198, 8204, 8205, 11580, 11581, 25264},
+        ranks = {6343, 8198, 8204, 8205, 11580, 11581, 13532, 25264},
         specs = {S.PROTECTION},
     },
     {
@@ -402,7 +405,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 30,
         priority = 6,
-        ranks = {1160, 6190, 11554, 11555, 11556, 25202, 25203},
+        ranks = {1160, 6190, 11554, 11555, 11556, 25202, 25203, 27579},
         specs = {S.PROTECTION},
     },
 
@@ -427,7 +430,7 @@ lib:RegisterSpells({
         tags = {C.TAUNT},
         cooldown = 120,
         duration = 6,
-        ranks = {694, 7814, 7815, 7816, 20559, 20560, 25266},
+        ranks = {694, 7400, 7402, 7814, 7815, 7816, 20559, 20560, 25266},
         specs = {S.PROTECTION},
     },
 
@@ -439,7 +442,7 @@ lib:RegisterSpells({
         tags = {C.DEBUFF, C.UTILITY},
         cooldown = 0,
         duration = 30,
-        ranks = {7386, 7405, 8380, 11596, 11597},
+        ranks = {7386, 7405, 8380, 11596, 11597, 25225},
         specs = {S.PROTECTION},
     },
 

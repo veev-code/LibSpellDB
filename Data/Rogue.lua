@@ -21,7 +21,7 @@ lib:RegisterSpells({
         tags = {C.INTERRUPT},
         cooldown = 10,
         duration = 5,  -- Lockout duration
-        ranks = {1766, 1767, 1768, 1769},
+        ranks = {1766, 1767, 1768, 1769, 27613},
         specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
     },
 
@@ -40,7 +40,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD, C.DISORIENT, C.FILLER},  -- Spammable (stealth-only)
         cooldown = 0,
         duration = 45,
-        ranks = {6770, 2070, 11297},
+        ranks = {2070, 6770, 11297, 51724},
         specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
     },
     {
@@ -48,7 +48,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD, C.DISORIENT},
         cooldown = 10,
         duration = 4,
-        ranks = {1776, 1777, 8629, 11285, 11286},
+        ranks = {1776, 1777, 8629, 11285, 11286, 38764},
         specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
     },
     {
@@ -75,13 +75,14 @@ lib:RegisterSpells({
         tags = {C.DEFENSIVE, C.MAJOR, C.HAS_BUFF},
         cooldown = 300,
         duration = 15,
+        ranks = {5277, 26669},
         specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
     },
     {
         spellID = 1856,  -- Vanish
         tags = {C.DEFENSIVE, C.MAJOR, C.MOVEMENT_ESCAPE, C.STEALTH},
         cooldown = 300,
-        ranks = {1856, 1857},
+        ranks = {1856, 1857, 26889},
         specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
     },
     {
@@ -160,7 +161,7 @@ lib:RegisterSpells({
         tags = {C.MOVEMENT, C.MOVEMENT_SPEED, C.HAS_BUFF},
         cooldown = 300,
         duration = 15,
-        ranks = {2983, 8696, 11305},
+        ranks = {2983, 8696, 11305, 27621},
         specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
     },
 
@@ -229,6 +230,14 @@ lib:RegisterSpells({
         specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
     },
     {
+        spellID = 53,  -- Backstab (from behind)
+        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 0,
+        priority = 4,
+        ranks = {53, 2589, 2590, 2591, 8721, 11279, 11280, 11281, 25300, 26863},
+        specs = {S.ASSASSINATION, S.SUBTLETY},
+    },
+    {
         spellID = 1329,  -- Mutilate (Assassination builder)
         tags = {C.DPS, C.ROTATIONAL, C.PVE},
         cooldown = 0,
@@ -260,7 +269,7 @@ lib:RegisterSpells({
         spellID = 1966,  -- Feint
         tags = {C.UTILITY},
         cooldown = 10,
-        ranks = {1966, 6768, 8637, 11303},
+        ranks = {1966, 6768, 8637, 11303, 25302, 27448},
         specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
     },
 

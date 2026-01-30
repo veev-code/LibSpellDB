@@ -37,7 +37,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD},
         cooldown = 60,
         duration = 4,
-        ranks = {5211, 6798, 8983},
+        ranks = {5211, 6798, 8983, 25515},
         specs = {S.FERAL},
     },
     {
@@ -45,16 +45,13 @@ lib:RegisterSpells({
         tags = {C.CC_HARD},
         cooldown = 0,
         duration = 2,  -- Stun duration
-        ranks = {9005, 9823, 9827},
+        ranks = {9005, 9823, 9827, 27006},
         specs = {S.FERAL},
         triggersAuras = {
-            {
-                spellID = 9007,  -- Pounce Bleed (Rank 1)
-                tags = {C.HAS_DOT, C.DEBUFF},
-                type = "DEBUFF",
-                onTarget = true,
-            },
-            -- Note: Higher ranks use different bleed IDs (9824, 9826) but same pattern
+            { spellID = 9007, tags = {C.HAS_DOT, C.DEBUFF}, type = "DEBUFF", onTarget = true },  -- Pounce Bleed R1
+            { spellID = 9824, tags = {C.HAS_DOT, C.DEBUFF}, type = "DEBUFF", onTarget = true },  -- Pounce Bleed R2
+            { spellID = 9826, tags = {C.HAS_DOT, C.DEBUFF}, type = "DEBUFF", onTarget = true },  -- Pounce Bleed R3
+            { spellID = 27007, tags = {C.HAS_DOT, C.DEBUFF}, type = "DEBUFF", onTarget = true },  -- Pounce Bleed R4
         },
     },
 
@@ -66,7 +63,7 @@ lib:RegisterSpells({
         tags = {C.ROOT, C.CC_SOFT},
         cooldown = 0,
         duration = 27,
-        ranks = {339, 1062, 5195, 5196, 9852, 9853},
+        ranks = {339, 1062, 5195, 5196, 9852, 9853, 26989},
         specs = {S.BALANCE, S.FERAL, S.RESTORATION},
     },
     {
@@ -93,6 +90,7 @@ lib:RegisterSpells({
         tags = {C.DEFENSIVE, C.MAJOR, C.HEAL_SINGLE, C.HAS_BUFF},
         cooldown = 180,
         duration = 10,
+        ranks = {22842, 22895, 22896, 26999},
         specs = {S.FERAL},
     },
     {
@@ -100,15 +98,16 @@ lib:RegisterSpells({
         tags = {C.DEFENSIVE, C.MINOR, C.ROOT, C.HAS_BUFF},
         cooldown = 60,
         duration = 45,
-        ranks = {16689, 16810, 16811, 16812, 16813, 17329},
+        ranks = {16689, 16810, 16811, 16812, 16813, 17329, 27009},
         specs = {S.BALANCE, S.FERAL, S.RESTORATION},
         triggersAuras = {
-            {
-                spellID = 19975,  -- Nature's Grasp (Root) on attackers
-                tags = {C.ROOT, C.CC_SOFT},
-                type = "DEBUFF",
-                onTarget = true,
-            },
+            { spellID = 19975, tags = {C.ROOT, C.CC_SOFT}, type = "DEBUFF", onTarget = true },  -- Nature's Grasp Root R1
+            { spellID = 19974, tags = {C.ROOT, C.CC_SOFT}, type = "DEBUFF", onTarget = true },  -- R2
+            { spellID = 19973, tags = {C.ROOT, C.CC_SOFT}, type = "DEBUFF", onTarget = true },  -- R3
+            { spellID = 19972, tags = {C.ROOT, C.CC_SOFT}, type = "DEBUFF", onTarget = true },  -- R4
+            { spellID = 19971, tags = {C.ROOT, C.CC_SOFT}, type = "DEBUFF", onTarget = true },  -- R5
+            { spellID = 19970, tags = {C.ROOT, C.CC_SOFT}, type = "DEBUFF", onTarget = true },  -- R6
+            { spellID = 27010, tags = {C.ROOT, C.CC_SOFT}, type = "DEBUFF", onTarget = true },  -- R7
         },
     },
 
@@ -131,7 +130,7 @@ lib:RegisterSpells({
         tags = {C.HEAL, C.MAJOR, C.HEAL_AOE},
         cooldown = 300,
         duration = 10,
-        ranks = {740, 8918, 9862, 9863},
+        ranks = {740, 8918, 9862, 9863, 26983},
         specs = {S.BALANCE, S.FERAL, S.RESTORATION},
     },
     {
@@ -150,7 +149,7 @@ lib:RegisterSpells({
         tags = {C.MOVEMENT, C.MOVEMENT_SPEED, C.HAS_BUFF},
         cooldown = 300,
         duration = 15,
-        ranks = {1850, 9821},
+        ranks = {1850, 9821, 33357},
         specs = {S.FERAL},
     },
     {
@@ -194,6 +193,9 @@ lib:RegisterSpells({
         cooldown = 0,
         talent = true,
         specs = {S.BALANCE},
+        triggersAuras = {
+            { spellID = 24907, tags = {C.BUFF}, type = "BUFF", onTarget = false },  -- Moonkin Aura
+        },
     },
 
     -------------------------------------------------------------------------------
@@ -203,7 +205,7 @@ lib:RegisterSpells({
         spellID = 20484,  -- Rebirth
         tags = {C.BATTLE_REZ, C.RESURRECT, C.UTILITY},
         cooldown = 1800,
-        ranks = {20484, 20739, 20742, 20747, 20748},
+        ranks = {20484, 20739, 20742, 20747, 20748, 26994},
         specs = {S.BALANCE, S.FERAL, S.RESTORATION},
     },
     {
@@ -229,7 +231,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 12,
         priority = 1,
-        ranks = {8921, 8924, 8925, 8926, 8927, 8928, 8929, 9833, 9834, 9835, 26987, 26988},
+        ranks = {563, 8921, 8924, 8925, 8926, 8927, 8928, 8929, 9833, 9834, 9835, 26987, 26988},
         specs = {S.BALANCE},
     },
     {
@@ -295,6 +297,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 1,
         talent = true,
+        ranks = {33876, 33982, 33983},
         specs = {S.FERAL},
     },
     {
@@ -302,7 +305,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.ROTATIONAL, C.PVE},
         cooldown = 0,
         priority = 2,
-        ranks = {5221, 6800, 8992, 9829, 9830, 27001, 27002},
+        ranks = {5221, 6800, 8992, 9829, 9830, 27001, 27002, 27555},
         specs = {S.FERAL},
     },
     {
@@ -332,6 +335,7 @@ lib:RegisterSpells({
         cooldown = 6,
         priority = 1,
         talent = true,
+        ranks = {33878, 33986, 33987},
         specs = {S.FERAL},
     },
     {
@@ -355,7 +359,7 @@ lib:RegisterSpells({
         tags = {C.TANK, C.MINOR, C.PVE},
         cooldown = 0,
         priority = 10,
-        ranks = {6807, 6808, 6809, 8972, 9745, 9880, 9881, 26996},
+        ranks = {6807, 6808, 6809, 7092, 8972, 9745, 9880, 9881, 26996},
         specs = {S.FERAL},
     },
     {
@@ -377,6 +381,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 7,
         priority = 1,
+        ranks = {33763, 33778},
         specs = {S.RESTORATION},
     },
     {

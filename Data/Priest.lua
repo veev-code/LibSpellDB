@@ -30,7 +30,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD, C.FEAR},
         cooldown = 30,
         duration = 8,
-        ranks = {8122, 8124, 10888, 10890},
+        ranks = {8122, 8124, 10888, 10890, 27610},
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
     {
@@ -38,7 +38,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD, C.FILLER},  -- Spammable CC, exclude from HUD
         cooldown = 0,
         duration = 60,
-        ranks = {605, 10911, 10912},
+        ranks = {605, 10911, 10912, 27620},
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
     {
@@ -46,7 +46,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD, C.FILLER},  -- Spammable CC, exclude from HUD
         cooldown = 0,
         duration = 50,
-        ranks = {9484, 9485, 10955},
+        ranks = {9484, 9485, 10955, 27655},
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
 
@@ -70,7 +70,7 @@ lib:RegisterSpells({
         tags = {C.DEFENSIVE, C.MINOR, C.UTILITY},
         cooldown = 30,
         duration = 10,
-        ranks = {586, 9578, 9579, 9592, 10941, 10942},
+        ranks = {586, 9578, 9579, 9592, 10941, 10942, 27614},
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
     {
@@ -111,7 +111,7 @@ lib:RegisterSpells({
         spellID = 13908,  -- Desperate Prayer (Dwarf/Human racial talent)
         tags = {C.HEAL, C.MAJOR, C.HEAL_SINGLE},
         cooldown = 600,
-        ranks = {13908, 19236, 19238, 19240, 19241, 19242, 19243},
+        ranks = {13908, 19236, 19238, 19240, 19241, 19242, 19243, 25437},
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
     {
@@ -120,7 +120,7 @@ lib:RegisterSpells({
         cooldown = 600,
         duration = 180,
         talent = true,
-        ranks = {724, 27870, 27871},
+        ranks = {724, 27870, 27871, 28276},
         specs = {S.HOLY},
     },
 
@@ -168,11 +168,12 @@ lib:RegisterSpells({
         targetLockoutDebuff = 6788,
     },
     {
-        spellID = 34866,  -- Circle of Healing (instant AoE heal)
+        spellID = 34861,  -- Circle of Healing (instant AoE heal)
         tags = {C.HEAL, C.AOE, C.HEAL_AOE, C.PVE},
         cooldown = 0,
         priority = 10,
         talent = true,
+        ranks = {34861, 34863, 34864, 34865, 34866},
         specs = {S.HOLY},
     },
     {
@@ -266,7 +267,7 @@ lib:RegisterSpells({
         duration = 15,
         priority = 1,
         talent = true,
-        ranks = {34914, 34916, 34917},
+        ranks = {34914, 34916, 34917, 34918, 34919},
         specs = {S.SHADOW},
     },
     {
@@ -301,7 +302,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
         cooldown = 12,
         priority = 5,
-        ranks = {32996, 32379},
+        ranks = {32379, 32380, 32996},
         specs = {S.SHADOW},
     },
     {
@@ -348,7 +349,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 1800,
         talent = true,
-        ranks = {14752, 14818, 14819, 27841},
+        ranks = {14752, 14818, 14819, 27841, 32999},
         specs = {S.DISCIPLINE},
     },
     {
@@ -356,7 +357,7 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
         duration = 3600,
-        ranks = {21562, 21564},
+        ranks = {21562, 21564, 25392},
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
     {
@@ -364,7 +365,7 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
         duration = 1800,
-        ranks = {1243, 1244, 1245, 2791, 10937, 10938},
+        ranks = {1243, 1244, 1245, 2791, 10937, 10938, 25389},
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
     {
@@ -372,7 +373,7 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
         duration = 600,
-        ranks = {976, 10957, 10958},
+        ranks = {976, 10957, 10958, 25433},
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
     {
@@ -387,7 +388,7 @@ lib:RegisterSpells({
         spellID = 8129,  -- Mana Burn
         tags = {C.UTILITY, C.RESOURCE, C.FILLER},  -- Spammable
         cooldown = 0,
-        ranks = {8129, 8131, 10874, 10875, 10876},
+        ranks = {8129, 8131, 10874, 10875, 10876, 25379, 25380},
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
 
@@ -398,7 +399,7 @@ lib:RegisterSpells({
         spellID = 2006,  -- Resurrection
         tags = {C.RESURRECT, C.UTILITY, C.OUT_OF_COMBAT},
         cooldown = 0,
-        ranks = {2006, 2010, 10880, 10881, 20770},
+        ranks = {2006, 2010, 10880, 10881, 20770, 25435},
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
 
@@ -410,7 +411,7 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
         duration = 600,
-        ranks = {588, 7128, 602, 1006, 10951, 10952},
+        ranks = {588, 602, 1006, 7128, 10951, 10952, 25431},
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
 

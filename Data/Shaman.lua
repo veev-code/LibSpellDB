@@ -156,20 +156,22 @@ lib:RegisterSpells({
     -- Core Rotation - Restoration (Priority: ES → WS → CH → HW/LHW)
     -------------------------------------------------------------------------------
     {
-        spellID = 32594,  -- Earth Shield (maintain on tank)
+        spellID = 974,  -- Earth Shield (maintain on tank)
         tags = {C.HEAL, C.ROTATIONAL, C.HEAL_SINGLE, C.HAS_BUFF, C.PVE},
         cooldown = 0,
         duration = 600,
         priority = 1,
         talent = true,
+        ranks = {974, 32593, 32594},
         specs = {S.RESTORATION},
     },
     {
-        spellID = 33736,  -- Water Shield (maintain on self)
+        spellID = 24398,  -- Water Shield (maintain on self)
         tags = {C.HEAL, C.MAINTENANCE, C.BUFF, C.RESOURCE, C.HAS_BUFF, C.PVE_PVP},
         cooldown = 0,
         duration = 600,
         priority = 2,
+        ranks = {24398, 33736},
         specs = {S.RESTORATION},
     },
     {
@@ -234,7 +236,7 @@ lib:RegisterSpells({
         spellID = 370,  -- Purge
         tags = {C.PURGE, C.DISPEL_MAGIC, C.FILLER},
         cooldown = 0,
-        ranks = {370, 8012},
+        ranks = {370, 8012, 27626},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
@@ -301,7 +303,7 @@ lib:RegisterSpells({
         tags = {C.UTILITY},
         cooldown = 0,
         duration = 55,
-        ranks = {3599, 6363, 6364, 6365, 10437, 10438},
+        ranks = {3599, 6363, 6364, 6365, 10437, 10438, 25533},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
@@ -309,7 +311,7 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.RAID_DEFENSIVE},
         cooldown = 0,
         duration = 120,
-        ranks = {8181, 10478, 10479},
+        ranks = {8181, 10478, 10479, 25560},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
@@ -317,7 +319,7 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.UTILITY},
         cooldown = 0,
         duration = 120,
-        ranks = {8227, 8249, 10526, 16387},
+        ranks = {8227, 8249, 10526, 16387, 25557},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
 
@@ -329,7 +331,7 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.DPS, C.RAID_DEFENSIVE},
         cooldown = 0,
         duration = 120,
-        ranks = {8512, 10613, 10614},
+        ranks = {8512, 10613, 10614, 25585, 25587},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
@@ -363,7 +365,7 @@ lib:RegisterSpells({
         tags = {C.HEAL_AOE, C.UTILITY},
         cooldown = 0,
         duration = 60,
-        ranks = {5394, 6375, 6377, 10462, 10463},
+        ranks = {5394, 6375, 6377, 10462, 10463, 25567},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
@@ -371,7 +373,7 @@ lib:RegisterSpells({
         tags = {C.RESOURCE, C.UTILITY},
         cooldown = 0,
         duration = 60,
-        ranks = {5675, 10495, 10496, 10497},
+        ranks = {5675, 10495, 10496, 10497, 25569, 25570},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
 
@@ -383,7 +385,7 @@ lib:RegisterSpells({
         tags = {C.UTILITY, C.TAUNT},
         cooldown = 30,
         duration = 15,
-        ranks = {5730, 6390, 6391, 6392, 10427, 10428},
+        ranks = {5730, 6390, 6391, 6392, 10427, 10428, 25525},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
@@ -391,7 +393,7 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.RAID_DEFENSIVE},
         cooldown = 0,
         duration = 120,
-        ranks = {8071, 8154, 8155, 10406, 10407, 10408},
+        ranks = {8071, 8154, 8155, 10406, 10407, 10408, 25508, 25509},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
@@ -399,7 +401,7 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.UTILITY},
         cooldown = 0,
         duration = 120,
-        ranks = {8075, 8160, 8161, 10442, 25361},
+        ranks = {8075, 8160, 8161, 10442, 25361, 25528},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
 
@@ -411,7 +413,7 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
         duration = 1800,
-        ranks = {8024, 8027, 8030, 16339, 16341, 16342},
+        ranks = {8024, 8027, 8030, 16339, 16341, 16342, 25489},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
@@ -419,7 +421,7 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
         duration = 1800,
-        ranks = {8232, 8235, 10486, 16362},
+        ranks = {8232, 8235, 10486, 16362, 25505},
         specs = {S.ENHANCEMENT},
     },
     {
@@ -427,7 +429,7 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.UTILITY, C.CC_SOFT, C.LONG_BUFF},
         cooldown = 0,
         duration = 1800,
-        ranks = {8033, 8038, 10456, 16355, 16356},
+        ranks = {8033, 8038, 10456, 16355, 16356, 25500},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
@@ -435,7 +437,7 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
         duration = 1800,
-        ranks = {8017, 8018, 8019, 10399, 16314, 16315, 16316},
+        ranks = {8017, 8018, 8019, 10399, 16314, 16315, 16316, 25479},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
 

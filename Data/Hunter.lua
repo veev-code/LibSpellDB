@@ -23,13 +23,16 @@ lib:RegisterSpells({
         duration = 4,
         talent = true,
         specs = {S.MARKSMANSHIP},
+        triggersAuras = {
+            { spellID = 37506, tags = {C.CC_HARD, C.DISORIENT}, type = "DEBUFF", onTarget = true },  -- Scatter Shot effect
+        },
     },
     {
         spellID = 3355,  -- Freezing Trap
         tags = {C.CC_HARD},
         cooldown = 0,  -- Trap has arming time, shared with other traps
         duration = 20,
-        ranks = {3355, 14308, 14309},
+        ranks = {3355, 14308, 14309, 31932},
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {
@@ -38,16 +41,13 @@ lib:RegisterSpells({
         cooldown = 120,
         duration = 12,
         talent = true,
-        ranks = {19386, 24132, 24133},
+        ranks = {19386, 24132, 24133, 27068},
         specs = {S.SURVIVAL},
         triggersAuras = {
-            {
-                spellID = 24131,  -- Wyvern Sting DoT (after sleep ends) Rank 1
-                tags = {C.HAS_DOT, C.DEBUFF},
-                type = "DEBUFF",
-                onTarget = true,
-            },
-            -- Note: Ranks 2/3 trigger 24134/24135 respectively
+            { spellID = 24131, tags = {C.HAS_DOT, C.DEBUFF}, type = "DEBUFF", onTarget = true },  -- Wyvern Sting DoT R1
+            { spellID = 24134, tags = {C.HAS_DOT, C.DEBUFF}, type = "DEBUFF", onTarget = true },  -- Wyvern Sting DoT R2
+            { spellID = 24135, tags = {C.HAS_DOT, C.DEBUFF}, type = "DEBUFF", onTarget = true },  -- Wyvern Sting DoT R3
+            { spellID = 27069, tags = {C.HAS_DOT, C.DEBUFF}, type = "DEBUFF", onTarget = true },  -- Wyvern Sting DoT R4
         },
     },
     {
@@ -78,7 +78,7 @@ lib:RegisterSpells({
         spellID = 1499,  -- Freezing Trap (the trap itself)
         tags = {C.CC_HARD, C.UTILITY},
         cooldown = 15,  -- Trap cooldown
-        ranks = {1499, 14310, 14311},
+        ranks = {1499, 14310, 14311, 27753},
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
 
@@ -97,7 +97,7 @@ lib:RegisterSpells({
         tags = {C.CC_SOFT},
         cooldown = 0,
         duration = 10,
-        ranks = {2974, 14267, 14268},
+        ranks = {2974, 14267, 14268, 27633},
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
 
@@ -152,7 +152,7 @@ lib:RegisterSpells({
         spellID = 781,  -- Disengage (Classic version - threat drop)
         tags = {C.UTILITY},
         cooldown = 5,
-        ranks = {781, 14272, 14273},
+        ranks = {781, 14272, 14273, 27015},
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {
@@ -198,7 +198,7 @@ lib:RegisterSpells({
         tags = {C.PET, C.HEAL_SINGLE},
         cooldown = 0,
         duration = 15,
-        ranks = {136, 3111, 3661, 3662, 13542, 13543, 13544},
+        ranks = {136, 3111, 3661, 3662, 13542, 13543, 13544, 27046},
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
 
@@ -209,14 +209,14 @@ lib:RegisterSpells({
         spellID = 13795,  -- Immolation Trap
         tags = {C.DPS, C.MINOR, C.DEBUFF},
         cooldown = 15,
-        ranks = {13795, 14302, 14303, 14304, 14305},
+        ranks = {13795, 14302, 14303, 14304, 14305, 27023},
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {
         spellID = 13813,  -- Explosive Trap
         tags = {C.DPS, C.MINOR, C.AOE},
         cooldown = 15,
-        ranks = {13813, 14316, 14317},
+        ranks = {13813, 14316, 14317, 27025},
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {
@@ -235,7 +235,11 @@ lib:RegisterSpells({
         cooldown = 120,
         duration = 30,
         priority = 1,
+        ranks = {34477, 35079},
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
+        triggersAuras = {
+            { spellID = 35079, tags = {C.BUFF}, type = "BUFF", onTarget = true },  -- Misdirection on target
+        },
     },
     {
         spellID = 1978,  -- Serpent Sting (maintain DoT)
@@ -291,7 +295,7 @@ lib:RegisterSpells({
         cooldown = 6,
         priority = 8,
         talent = true,
-        ranks = {19434, 20900, 20901, 20902, 20903, 20904, 27065},
+        ranks = {19434, 20900, 20901, 20902, 20903, 20904, 27065, 27632},
         specs = {S.MARKSMANSHIP},
     },
 
@@ -327,7 +331,7 @@ lib:RegisterSpells({
         spellID = 13165,  -- Aspect of the Hawk
         tags = {C.BUFF, C.DPS, C.LONG_BUFF},
         cooldown = 0,
-        ranks = {13165, 14318, 14319, 14320, 14321, 14322, 25296},
+        ranks = {13165, 14318, 14319, 14320, 14321, 14322, 25296, 27044},
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
 

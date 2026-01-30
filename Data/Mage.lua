@@ -32,7 +32,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD, C.DISORIENT, C.FILLER},  -- Spammable CC
         cooldown = 0,
         duration = 50,
-        ranks = {118, 12824, 12825, 12826},
+        ranks = {118, 12824, 12825, 12826, 28270, 28271, 28272},
         specs = {S.ARCANE, S.FIRE, S.FROST},
     },
     {
@@ -40,7 +40,7 @@ lib:RegisterSpells({
         tags = {C.ROOT, C.CC_SOFT},
         cooldown = 25,
         duration = 8,
-        ranks = {122, 865, 6131, 10230},
+        ranks = {122, 865, 6131, 10230, 27088},
         specs = {S.ARCANE, S.FIRE, S.FROST},
     },
 
@@ -68,7 +68,7 @@ lib:RegisterSpells({
         cooldown = 30,
         duration = 60,
         talent = true,
-        ranks = {11426, 13031, 13032, 13033},
+        ranks = {11426, 13031, 13032, 13033, 27134, 33405},
         specs = {S.FROST},
     },
     {
@@ -76,7 +76,7 @@ lib:RegisterSpells({
         tags = {C.DEFENSIVE, C.MINOR, C.HAS_BUFF},
         cooldown = 30,
         duration = 30,
-        ranks = {543, 8457, 8458, 10223, 10225},
+        ranks = {543, 8457, 8458, 10223, 10225, 27128},
         specs = {S.ARCANE, S.FIRE, S.FROST},
     },
     {
@@ -84,7 +84,7 @@ lib:RegisterSpells({
         tags = {C.DEFENSIVE, C.MINOR, C.HAS_BUFF},
         cooldown = 30,
         duration = 30,
-        ranks = {6143, 8461, 8462, 10177, 28609},
+        ranks = {6143, 8461, 8462, 10177, 28609, 32796},
         specs = {S.ARCANE, S.FIRE, S.FROST},
     },
     {
@@ -92,7 +92,7 @@ lib:RegisterSpells({
         tags = {C.DEFENSIVE, C.MINOR, C.HAS_BUFF},
         cooldown = 0,
         duration = 60,
-        ranks = {1463, 8494, 8495, 10191, 10192, 10193},
+        ranks = {1463, 8494, 8495, 10191, 10192, 10193, 27131},
         specs = {S.ARCANE, S.FIRE, S.FROST},
     },
 
@@ -153,7 +153,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.FILLER, C.PVE},
         cooldown = 0,
         priority = 2,
-        ranks = {133, 143, 145, 3140, 8400, 8401, 8402, 10148, 10149, 10150, 10151, 25306, 27070},
+        ranks = {133, 143, 145, 3140, 8400, 8401, 8402, 10148, 10149, 10150, 10151, 25306, 27070, 38692},
         specs = {S.FIRE},
     },
     {
@@ -161,7 +161,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
         cooldown = 8,
         priority = 3,
-        ranks = {2136, 2137, 2138, 8412, 8413, 10197, 10199, 27078, 27079},
+        ranks = {2136, 2137, 2138, 8412, 8413, 10197, 10199, 27078, 27079, 33938},
         specs = {S.FIRE},
     },
 
@@ -180,7 +180,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.FILLER, C.PVE_PVP},
         cooldown = 0,
         priority = 2,
-        ranks = {116, 205, 837, 7322, 8406, 8407, 8408, 10179, 10180, 10181, 25304, 27071, 27072},
+        ranks = {116, 205, 837, 7322, 8406, 8407, 8408, 10179, 10180, 10181, 25304, 27071, 27072, 38697},
         specs = {S.FROST, S.ARCANE},
     },
     {
@@ -214,6 +214,43 @@ lib:RegisterSpells({
     },
 
     -------------------------------------------------------------------------------
+    -- AoE / Soft CC
+    -------------------------------------------------------------------------------
+    {
+        spellID = 120,  -- Cone of Cold
+        tags = {C.DPS, C.AOE, C.CC_SOFT},
+        cooldown = 10,
+        duration = 8,
+        ranks = {120, 8492, 10159, 10160, 10161, 27087},
+        specs = {S.ARCANE, S.FIRE, S.FROST},
+    },
+    {
+        spellID = 31661,  -- Dragon's Breath
+        tags = {C.DPS, C.AOE, C.CC_HARD, C.DISORIENT},
+        cooldown = 20,
+        duration = 3,
+        talent = true,
+        ranks = {31661, 33041, 33042, 33043},
+        specs = {S.FIRE},
+    },
+    {
+        spellID = 2120,  -- Flamestrike
+        tags = {C.DPS, C.AOE, C.PVE},
+        cooldown = 0,
+        duration = 8,
+        ranks = {2120, 2121, 8422, 8423, 10215, 10216, 27086},
+        specs = {S.FIRE},
+    },
+    {
+        spellID = 10,  -- Blizzard
+        tags = {C.DPS, C.AOE, C.PVE},
+        cooldown = 0,
+        duration = 8,
+        ranks = {10, 6141, 8427, 10185, 10186, 10187, 27085},
+        specs = {S.FROST},
+    },
+
+    -------------------------------------------------------------------------------
     -- Utility
     -------------------------------------------------------------------------------
     {
@@ -224,11 +261,19 @@ lib:RegisterSpells({
         specs = {S.ARCANE, S.FIRE, S.FROST},
     },
     {
+        spellID = 31589,  -- Slow
+        tags = {C.CC_SOFT, C.UTILITY},
+        cooldown = 0,
+        duration = 15,
+        talent = true,
+        specs = {S.ARCANE},
+    },
+    {
         spellID = 11113,  -- Blast Wave (AoE, situational)
         tags = {C.DPS, C.AOE, C.CC_SOFT, C.KNOCKBACK},
         cooldown = 45,
         talent = true,
-        ranks = {11113, 13018, 13019, 13020, 13021},
+        ranks = {11113, 13018, 13019, 13020, 13021, 27133, 33933},
         specs = {S.FIRE},
     },
 
