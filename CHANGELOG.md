@@ -1,5 +1,10 @@
 # LibSpellDB Changelog
 
+## [1.0.13] - 2026-01-30
+
+### Changed
+- Hemorrhage now uses `ignoreAura = true` — debuff tracking was hiding the cooldown display; cooldown visibility is more useful for rotation tracking
+
 ## [1.0.12] - 2026-01-30
 
 ### Added
