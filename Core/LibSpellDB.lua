@@ -115,9 +115,6 @@ function lib:RegisterSpell(spellData)
 
     if not spellName then
         -- Spell doesn't exist in this game version, log warning and skip
-        if not self.invalidSpellsLogged then
-            self.invalidSpellsLogged = {}
-        end
         if not self.invalidSpellsLogged[spellID] then
             self.invalidSpellsLogged[spellID] = true
             -- Only print in debug mode or first load
@@ -283,11 +280,16 @@ function lib:GetSpellsByAllTags(tags)
 
     for spellID, spellData in pairs(firstTagSpells) do
         local hasAllTags = true
-        for i = 2, #tags do
-            if not self.spellIDToTags[spellID][tags[i]] then
-                hasAllTags = false
-                break
+        local spellTags = self.spellIDToTags[spellID]
+        if spellTags then
+            for i = 2, #tags do
+                if not spellTags[tags[i]] then
+                    hasAllTags = false
+                    break
+                end
             end
+        else
+            hasAllTags = false
         end
         if hasAllTags then
             result[spellID] = spellData

@@ -22,7 +22,7 @@ lib:RegisterSpells({
     -- Enrage (Fury talent) - procs when taking damage after crit
     {
         spellID = 14204,
-        tags = {C.PROC, C.OFFENSIVE_CD_MINOR},
+        tags = {C.PROC, C.DPS, C.MINOR},
         cooldown = 0,
         duration = 12,
         talent = true,
@@ -34,7 +34,7 @@ lib:RegisterSpells({
     -- Flurry (Fury talent) - procs on melee crit
     {
         spellID = 12970,
-        tags = {C.PROC, C.OFFENSIVE_CD_MINOR},
+        tags = {C.PROC, C.DPS, C.MINOR},
         cooldown = 0,
         duration = 15,
         talent = true,
@@ -70,7 +70,7 @@ lib:RegisterSpells({
     -- Blade Flurry buff (from ability)
     {
         spellID = 13877,
-        tags = {C.PROC, C.OFFENSIVE_CD},
+        tags = {C.PROC, C.DPS, C.MAJOR},
         cooldown = 120,
         duration = 15,
         talent = true,
@@ -82,7 +82,7 @@ lib:RegisterSpells({
     -- Adrenaline Rush buff (from ability)
     {
         spellID = 13750,
-        tags = {C.PROC, C.OFFENSIVE_CD},
+        tags = {C.PROC, C.DPS, C.MAJOR},
         cooldown = 300,
         duration = 15,
         talent = true,
@@ -114,7 +114,7 @@ lib:RegisterSpells({
     -- Arcane Power buff
     {
         spellID = 12042,
-        tags = {C.PROC, C.OFFENSIVE_CD},
+        tags = {C.PROC, C.DPS, C.MAJOR},
         cooldown = 180,
         duration = 15,
         talent = true,
@@ -126,7 +126,7 @@ lib:RegisterSpells({
     -- Icy Veins buff
     {
         spellID = 12472,
-        tags = {C.PROC, C.OFFENSIVE_CD},
+        tags = {C.PROC, C.DPS, C.MAJOR},
         cooldown = 180,
         duration = 20,
         talent = true,
@@ -138,7 +138,7 @@ lib:RegisterSpells({
     -- Presence of Mind buff
     {
         spellID = 12043,
-        tags = {C.PROC, C.OFFENSIVE_CD_MINOR},
+        tags = {C.PROC, C.DPS, C.MINOR},
         cooldown = 180,
         duration = 0, -- Until used
         talent = true,
@@ -158,7 +158,7 @@ lib:RegisterSpells({
     -- Shadow Trance (Nightfall proc)
     {
         spellID = 17941,
-        tags = {C.PROC, C.OFFENSIVE_CD_MINOR},
+        tags = {C.PROC, C.DPS, C.MINOR},
         cooldown = 0,
         duration = 10,
         talent = true,
@@ -171,7 +171,7 @@ lib:RegisterSpells({
     -- Backlash (Destruction talent proc)
     {
         spellID = 34939,
-        tags = {C.PROC, C.OFFENSIVE_CD_MINOR},
+        tags = {C.PROC, C.DPS, C.MINOR},
         cooldown = 0,
         duration = 8,
         talent = true,
@@ -203,7 +203,7 @@ lib:RegisterSpells({
     -- Surge of Light (Holy talent proc) - Note: may need ID verification
     {
         spellID = 33154,
-        tags = {C.PROC, C.HEALING_CD_MINOR},
+        tags = {C.PROC, C.HEAL, C.MINOR},
         cooldown = 0,
         duration = 10,
         talent = true,
@@ -248,7 +248,7 @@ lib:RegisterSpells({
     -- Unleashed Rage (Enhancement talent, on crit)
     {
         spellID = 30802,
-        tags = {C.PROC, C.OFFENSIVE_CD_MINOR},
+        tags = {C.PROC, C.DPS, C.MINOR},
         cooldown = 0,
         duration = 10,
         talent = true,
@@ -280,7 +280,7 @@ lib:RegisterSpells({
     -- Nature's Grace (Balance talent, on crit)
     {
         spellID = 16886,
-        tags = {C.PROC, C.OFFENSIVE_CD_MINOR},
+        tags = {C.PROC, C.DPS, C.MINOR},
         cooldown = 0,
         duration = 15,
         talent = true,
@@ -300,7 +300,7 @@ lib:RegisterSpells({
     -- Vengeance (Retribution talent, stacking on crit)
     {
         spellID = 20055,
-        tags = {C.PROC, C.OFFENSIVE_CD_MINOR},
+        tags = {C.PROC, C.DPS, C.MINOR},
         cooldown = 0,
         duration = 8,
         talent = true,
@@ -319,7 +319,7 @@ lib:RegisterSpells({
     -- Quick Shots (Improved Aspect of the Hawk proc)
     {
         spellID = 6150,
-        tags = {C.PROC, C.OFFENSIVE_CD_MINOR},
+        tags = {C.PROC, C.DPS, C.MINOR},
         cooldown = 0,
         duration = 12,
         talent = true,
@@ -331,7 +331,7 @@ lib:RegisterSpells({
     -- The Beast Within (BM talent CD buff)
     {
         spellID = 34471,
-        tags = {C.PROC, C.OFFENSIVE_CD, C.CC_IMMUNITY},
+        tags = {C.PROC, C.DPS, C.MAJOR, C.CC_IMMUNITY},
         cooldown = 120,
         duration = 18,
         talent = true,

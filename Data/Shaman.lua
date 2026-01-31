@@ -36,7 +36,7 @@ lib:RegisterSpells({
         tags = {C.CC_SOFT},
         cooldown = 6,
         duration = 8,
-        ranks = {8056, 8058, 10472, 10473},
+        ranks = {8056, 8058, 10472, 10473, 25464},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
 
@@ -97,15 +97,6 @@ lib:RegisterSpells({
         duration = 2,
         priority = 2,
         ranks = {8042, 8044, 8045, 8046, 10412, 10413, 10414, 25454},
-        specs = {S.ENHANCEMENT},
-    },
-    {
-        spellID = 8056,  -- Frost Shock (kiting / PvP)
-        tags = {C.DPS, C.ROTATIONAL, C.CC_SOFT, C.PVP},
-        cooldown = 6,
-        duration = 8,
-        priority = 3,
-        ranks = {8056, 8058, 10472, 10473, 25464},
         specs = {S.ENHANCEMENT},
     },
 
@@ -358,7 +349,7 @@ lib:RegisterSpells({
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
-        spellID = 8835,  -- Tranquil Air Totem
+        spellID = 25908,  -- Tranquil Air Totem
         tags = {C.BUFF, C.UTILITY},
         cooldown = 0,
         duration = 120,
