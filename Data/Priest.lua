@@ -14,17 +14,21 @@ local S = lib.Specs
 
 lib:RegisterSpells({
     -------------------------------------------------------------------------------
-    -- Crowd Control - Hard CC
+    -- Crowd Control - Soft CC
     -------------------------------------------------------------------------------
     {
         spellID = 44046,  -- Chastise (Holy talent, Humanoids only)
-        tags = {C.CC_HARD, C.ROOT},
+        tags = {C.CC_SOFT, C.ROOT},
         cooldown = 30,
         duration = 2,
         talent = true,
         ranks = {44041, 44043, 44044, 44045, 44046},
-        specs = {S.HOLY},
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
+
+    -------------------------------------------------------------------------------
+    -- Crowd Control - Hard CC
+    -------------------------------------------------------------------------------
     {
         spellID = 8122,  -- Psychic Scream
         tags = {C.CC_HARD, C.FEAR},
