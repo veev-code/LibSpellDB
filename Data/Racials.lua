@@ -65,9 +65,30 @@ lib:RegisterSpells({
 -------------------------------------------------------------------------------
 
 lib:RegisterSpells({
-    -- Orc - Blood Fury (+AP, healing debuff on self)
+    -- Orc - Blood Fury (Attack Power version)
+    -- Used by: Warriors, Hunters, Rogues
     {
         spellID = 20572,
+        tags = {C.DPS, C.MAJOR, C.HAS_BUFF},
+        cooldown = 120,
+        duration = 15,
+        race = ORC,
+    },
+    
+    -- Orc - Blood Fury (Attack Power + Spell Power version)
+    -- Used by: Shamans (Enhancement and Elemental benefit from both)
+    {
+        spellID = 33697,
+        tags = {C.DPS, C.MAJOR, C.HAS_BUFF},
+        cooldown = 120,
+        duration = 15,
+        race = ORC,
+    },
+    
+    -- Orc - Blood Fury (Spell Power version)
+    -- Used by: Warlocks, Mages
+    {
+        spellID = 33702,
         tags = {C.DPS, C.MAJOR, C.HAS_BUFF},
         cooldown = 120,
         duration = 15,
