@@ -307,6 +307,14 @@ lib:RegisterSpells({
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
+        spellID = 1535,  -- Fire Nova Totem (AoE damage totem, 15s CD)
+        tags = {C.DPS, C.AOE, C.MINOR},
+        cooldown = 15,
+        duration = 5,  -- Explodes after 5 seconds (4 with Improved Fire Totems talent)
+        ranks = {1535, 8498, 8499, 11314, 11315, 25546, 25547},
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
+    },
+    {
         spellID = 8181,  -- Frost Resistance Totem
         tags = {C.BUFF, C.RAID_DEFENSIVE},
         cooldown = 0,

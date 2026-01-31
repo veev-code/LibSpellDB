@@ -1,5 +1,14 @@
 # LibSpellDB Changelog
 
+## [1.0.14] - 2026-01-30
+
+### Added
+- **Orc Blood Fury variants** for all caster classes:
+  - 20572: Attack Power version (Warriors, Hunters, Rogues)
+  - 33697: Attack Power + Spell Power (Shamans)
+  - 33702: Spell Power only (Warlocks, Mages)
+- **Fire Nova Totem** (all 7 ranks: 1535-25547) — AoE fire totem with 15s cooldown
+
 ## [1.0.13] - 2026-01-30
 
 ### Changed
