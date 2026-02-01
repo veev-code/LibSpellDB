@@ -16,7 +16,7 @@
 ]]
 
 local MAJOR, MINOR = "LibSpellDB-1.0", 1
-local lib, oldminor = LibStub:NewLibrary(MAJOR, MINOR)
+local lib, _ = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
 -------------------------------------------------------------------------------

@@ -1,5 +1,19 @@
 # LibSpellDB Changelog
 
+## [1.0.15] - 2026-01-31
+
+### Added
+- **Chastise** soft CC for all Priest specs (Holy, Discipline, Shadow)
+
+### Fixed
+- Duplicate spell IDs in data files causing registration warnings
+- Nil access bug when querying unregistered spells
+- Migrated deprecated tag names to current conventions
+
+### Changed
+- Removed unused `TBC_SpellAuraMappings.lua` reference file from Tools folder
+- Minor code cleanup (unused variable warning)
+
 ## [1.0.14] - 2026-01-30
 
 ### Added
