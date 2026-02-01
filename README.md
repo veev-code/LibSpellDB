@@ -100,6 +100,44 @@ if LibSpellDB:HasTag(6552, "INTERRUPT") then
 end
 ```
 
+## Spell Data Structure
+
+Each spell entry supports the following fields:
+
+```lua
+{
+    spellID = 12345,           -- Required: Primary spell ID
+    class = "WARRIOR",         -- Required: Class token (or "SHARED" for racials)
+    tags = {"DPS", "ROTATIONAL"},  -- Required: Category tags
+    cooldown = 10,             -- Optional: Base cooldown in seconds
+    duration = 5,              -- Optional: Buff/effect duration
+    priority = 1,              -- Optional: Sort priority within rows
+    talent = true,             -- Optional: Requires talent
+    ranks = {100, 101, 102},   -- Optional: All rank spell IDs (low to high)
+    specs = {"ARMS", "FURY"},  -- Optional: Which specs use this (nil = all)
+    race = "Orc",              -- Optional: Race restriction for racials
+    selfOnly = true,           -- Optional: Buff can ONLY target self (default: inferred from tags)
+    ignoreAura = true,         -- Optional: Don't track this spell's buff/debuff
+    triggersAuras = {...},     -- Optional: Auras this spell triggers (with different IDs)
+    targetLockoutDebuff = 6788,-- Optional: Debuff that blocks re-casting (e.g., Weakened Soul)
+    sharedCooldownGroup = "...",  -- Optional: Shared CD group name
+}
+```
+
+### The `selfOnly` Field
+
+The `selfOnly` field controls how buff tracking behaves when targeting friendly players:
+
+*   `selfOnly = true` — Buff always displays your own status, regardless of target
+*   `selfOnly = false` — Buff checks the relevant friendly target (ally if targeting one)
+*   `selfOnly = nil` (default) — Inferred from tags:
+    *   Spells with `HEAL_SINGLE`, `HOT`, `HAS_HOT`, `HEAL_AOE`, or `EXTERNAL_DEFENSIVE` → can target others
+    *   All other buffs → self-only
+
+**Examples:**
+*   Power Word: Shield, Renew, Blessing of Protection → can target others (check ally when targeting them)
+*   Recklessness, Shadowform, Stealth → self-only (always show your own buff)
+
 ## Current Coverage
 
 LibSpellDB currently includes comprehensive spell data for all TBC Classic classes. Each class includes rotational abilities, cooldowns, utility, CC, defensives, and more — all properly tagged for flexible querying.

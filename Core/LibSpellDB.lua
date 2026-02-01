@@ -345,6 +345,87 @@ function lib:GetTagsForSpell(spellID)
 end
 
 --[[
+    Determine if a spell can only target self (vs. targeting other friendly players)
+    
+    Used for buff tracking to determine whether to check self or the current friendly target.
+    
+    Priority:
+    1. Explicit selfOnly field in spell data (highest priority)
+    2. triggersAuras[1].onTarget == false (explicit self-only aura)
+    3. Tags indicating spell can target others: HEAL_SINGLE, HOT, HAS_HOT, HEAL_AOE, EXTERNAL_DEFENSIVE
+    4. Default: self-only (for buffs like Recklessness, Shadowform, Stealth)
+    
+    @param spellID (number) - Spell ID (or spell data table)
+    @return (boolean) - true if spell can ONLY target self, false if it can target others
+]]
+function lib:IsSelfOnly(spellID)
+    -- Accept either spell ID or spell data table
+    local spellData
+    if type(spellID) == "table" then
+        spellData = spellID
+    else
+        spellData = self:GetSpellInfo(spellID)
+    end
+    
+    if not spellData then return true end  -- Default to self-only if no data
+    
+    -- Explicit selfOnly field takes precedence
+    if spellData.selfOnly ~= nil then
+        return spellData.selfOnly
+    end
+    
+    -- Check triggersAuras for explicit onTarget = false
+    if spellData.triggersAuras and spellData.triggersAuras[1] then
+        if spellData.triggersAuras[1].onTarget == false then
+            return true  -- Explicitly self-only
+        end
+    end
+    
+    -- Check tags - these indicate the spell can target other friendly players
+    if spellData.tags then
+        for _, tag in ipairs(spellData.tags) do
+            if tag == "HEAL_SINGLE" or tag == "HOT" or tag == "HAS_HOT" 
+               or tag == "HEAL_AOE" or tag == "EXTERNAL_DEFENSIVE" then
+                return false  -- Can target others
+            end
+        end
+    end
+    
+    -- Default: self-only (buffs like Recklessness, Shadowform, Stealth)
+    return true
+end
+
+--[[
+    Check if a spell is rotational (core rotation, used frequently)
+    
+    Used by VeevHUD to determine buff tracking behavior:
+    - ROTATIONAL spells follow target context (check ally if targeting ally)
+    - Non-ROTATIONAL spells always track the buff regardless of current target
+    
+    @param spellID (number) - Spell ID (or spell data table)
+    @return (boolean) - true if spell has ROTATIONAL tag
+]]
+function lib:IsRotational(spellID)
+    -- Accept either spell ID or spell data table
+    local spellData
+    if type(spellID) == "table" then
+        spellData = spellID
+    else
+        spellData = self:GetSpellInfo(spellID)
+    end
+    
+    if not spellData or not spellData.tags then return false end
+    
+    for _, tag in ipairs(spellData.tags) do
+        if tag == "ROTATIONAL" then
+            return true
+        end
+    end
+    
+    return false
+end
+
+--[[
     Get all registered spells
 
     @return (table) - Dictionary of spellID -> spellData
