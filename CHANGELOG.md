@@ -1,5 +1,11 @@
 # LibSpellDB Changelog
 
+## [1.0.16] - 2026-01-31
+
+### Added
+- `IsSelfOnly(spellID)` - Check if a spell can only target self (vs. other friendly players)
+- `IsRotational(spellID)` - Check if a spell has the ROTATIONAL tag (for smart buff tracking)
+
 ## [1.0.15] - 2026-01-31
 
 ### Added
