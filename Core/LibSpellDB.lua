@@ -385,7 +385,8 @@ function lib:IsSelfOnly(spellID)
     if spellData.tags then
         for _, tag in ipairs(spellData.tags) do
             if tag == "HEAL_SINGLE" or tag == "HOT" or tag == "HAS_HOT" 
-               or tag == "HEAL_AOE" or tag == "EXTERNAL_DEFENSIVE" then
+               or tag == "HEAL_AOE" or tag == "EXTERNAL_DEFENSIVE"
+               or tag == "HAS_BUFF" or tag == "CC_IMMUNITY" then
                 return false  -- Can target others
             end
         end

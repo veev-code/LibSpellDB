@@ -1,5 +1,10 @@
 # LibSpellDB Changelog
 
+## [1.0.17] - 2026-02-03
+
+### Fixed
+- `IsSelfOnly()` now correctly identifies `HAS_BUFF` and `CC_IMMUNITY` tagged spells as abilities that can target others
+
 ## [1.0.16] - 2026-01-31
 
 ### Added
