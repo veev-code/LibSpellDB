@@ -11,6 +11,7 @@ if not lib then return end
 
 local C = lib.Categories
 local S = lib.Specs
+local AT = lib.AuraTarget
 
 lib:RegisterSpells({
     -------------------------------------------------------------------------------
@@ -53,6 +54,7 @@ lib:RegisterSpells({
         cooldown = 300,
         duration = 10,
         talent = true,
+        auraTarget = AT.SELF,
         specs = {S.FROST},
     },
     {
@@ -60,6 +62,7 @@ lib:RegisterSpells({
         tags = {C.DEFENSIVE, C.MAJOR, C.IMMUNITY, C.HAS_BUFF},
         cooldown = 300,
         duration = 10,
+        auraTarget = AT.SELF,
         specs = {S.ARCANE, S.FIRE, S.FROST},
     },
     {
@@ -69,6 +72,7 @@ lib:RegisterSpells({
         duration = 60,
         talent = true,
         ranks = {11426, 13031, 13032, 13033, 27134, 33405},
+        auraTarget = AT.SELF,
         specs = {S.FROST},
     },
     {
@@ -77,6 +81,7 @@ lib:RegisterSpells({
         cooldown = 30,
         duration = 30,
         ranks = {543, 8457, 8458, 10223, 10225, 27128},
+        auraTarget = AT.SELF,
         specs = {S.ARCANE, S.FIRE, S.FROST},
     },
     {
@@ -85,6 +90,7 @@ lib:RegisterSpells({
         cooldown = 30,
         duration = 30,
         ranks = {6143, 8461, 8462, 10177, 28609, 32796},
+        auraTarget = AT.SELF,
         specs = {S.ARCANE, S.FIRE, S.FROST},
     },
     {
@@ -93,6 +99,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 60,
         ranks = {1463, 8494, 8495, 10191, 10192, 10193, 27131},
+        auraTarget = AT.SELF,
         specs = {S.ARCANE, S.FIRE, S.FROST},
     },
 
@@ -105,6 +112,7 @@ lib:RegisterSpells({
         cooldown = 180,
         duration = 15,
         talent = true,
+        auraTarget = AT.SELF,
         specs = {S.ARCANE},
     },
     {
@@ -112,6 +120,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MAJOR, C.HAS_BUFF, C.PVE_PVP},
         cooldown = 180,
         talent = true,
+        auraTarget = AT.SELF,
         specs = {S.ARCANE},
     },
     {
@@ -119,6 +128,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MAJOR, C.HAS_BUFF, C.PVE},
         cooldown = 180,
         talent = true,
+        auraTarget = AT.SELF,
         specs = {S.FIRE},
     },
     {
@@ -127,6 +137,7 @@ lib:RegisterSpells({
         cooldown = 180,
         duration = 20,
         talent = true,
+        auraTarget = AT.SELF,
         specs = {S.FROST, S.ARCANE, S.FIRE},  -- Used by all specs in TBC
     },
     {

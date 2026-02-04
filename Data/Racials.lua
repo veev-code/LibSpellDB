@@ -14,6 +14,7 @@ local lib = LibStub and LibStub:GetLibrary(MAJOR, true)
 if not lib then return end
 
 local C = lib.Categories
+local AT = lib.AuraTarget
 
 -- Race constants for clarity (must match UnitRace("player") return values)
 local HUMAN = "Human"
@@ -72,6 +73,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MAJOR, C.HAS_BUFF},
         cooldown = 120,
         duration = 15,
+        auraTarget = AT.SELF,
         race = ORC,
     },
     
@@ -82,6 +84,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MAJOR, C.HAS_BUFF},
         cooldown = 120,
         duration = 15,
+        auraTarget = AT.SELF,
         race = ORC,
     },
     
@@ -92,6 +95,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MAJOR, C.HAS_BUFF},
         cooldown = 120,
         duration = 15,
+        auraTarget = AT.SELF,
         race = ORC,
     },
 
@@ -101,6 +105,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MAJOR, C.HAS_BUFF},
         cooldown = 180,
         duration = 10,
+        auraTarget = AT.SELF,
         race = TROLL,
     },
 })
@@ -169,6 +174,7 @@ lib:RegisterSpells({
         tags = {C.HEAL, C.HEAL_SINGLE, C.HOT, C.EXTERNAL_DEFENSIVE},
         cooldown = 180,
         duration = 15,
+        auraTarget = AT.ALLY,  -- Can target other players
         race = DRAENEI,
     },
 })

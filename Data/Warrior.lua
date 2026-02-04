@@ -11,6 +11,7 @@ if not lib then return end
 
 local C = lib.Categories
 local S = lib.Specs
+local AT = lib.AuraTarget
 
 lib:RegisterSpells({
     -------------------------------------------------------------------------------
@@ -22,6 +23,7 @@ lib:RegisterSpells({
         cooldown = 30,
         duration = 10,
         priority = 1,  -- CC break = highest utility priority
+        auraTarget = AT.SELF,
         specs = {S.ARMS, S.FURY, S.PROTECTION},
     },
 
@@ -300,6 +302,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.ROTATIONAL, C.REACTIVE, C.HEAL_SINGLE, C.PVE_PVP},
         cooldown = 0,
         priority = 7,
+        auraTarget = AT.SELF,  -- Self-heal on kill
         specs = {S.ARMS, S.FURY},
     },
 

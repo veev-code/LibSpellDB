@@ -11,6 +11,7 @@ if not lib then return end
 
 local C = lib.Categories
 local S = lib.Specs
+local AT = lib.AuraTarget
 
 lib:RegisterSpells({
     -------------------------------------------------------------------------------
@@ -76,6 +77,7 @@ lib:RegisterSpells({
         cooldown = 300,
         duration = 15,
         ranks = {5277, 26669},
+        auraTarget = AT.SELF,
         specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
     },
     {
@@ -90,6 +92,7 @@ lib:RegisterSpells({
         tags = {C.DEFENSIVE, C.MAJOR, C.IMMUNITY, C.HAS_BUFF},
         cooldown = 90,
         duration = 5,
+        auraTarget = AT.SELF,
         specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
     },
 
@@ -113,6 +116,7 @@ lib:RegisterSpells({
         cooldown = 300,
         duration = 15,
         talent = true,
+        auraTarget = AT.SELF,
         specs = {S.COMBAT},
     },
     {
@@ -121,6 +125,7 @@ lib:RegisterSpells({
         cooldown = 120,
         duration = 15,
         talent = true,
+        auraTarget = AT.SELF,
         specs = {S.COMBAT},
     },
     {
@@ -128,6 +133,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MAJOR, C.HAS_BUFF},
         cooldown = 180,
         talent = true,
+        auraTarget = AT.SELF,
         specs = {S.ASSASSINATION},
     },
     {
@@ -162,6 +168,7 @@ lib:RegisterSpells({
         cooldown = 300,
         duration = 15,
         ranks = {2983, 8696, 11305, 27621},
+        auraTarget = AT.SELF,
         specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
     },
 
@@ -186,6 +193,7 @@ lib:RegisterSpells({
         duration = 21,  -- Max at 5 CP
         priority = 1,
         ranks = {5171, 6774},
+        auraTarget = AT.SELF,
         specs = {S.COMBAT, S.ASSASSINATION, S.SUBTLETY},
     },
     {

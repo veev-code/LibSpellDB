@@ -11,6 +11,7 @@ if not lib then return end
 
 local C = lib.Categories
 local S = lib.Specs
+local AT = lib.AuraTarget
 
 lib:RegisterSpells({
     -------------------------------------------------------------------------------
@@ -83,6 +84,7 @@ lib:RegisterSpells({
         tags = {C.DEFENSIVE, C.MINOR, C.DAMAGE_REDUCTION, C.HAS_BUFF},
         cooldown = 60,
         duration = 12,
+        auraTarget = AT.SELF,
         specs = {S.BALANCE, S.FERAL, S.RESTORATION},
     },
     {
@@ -91,6 +93,7 @@ lib:RegisterSpells({
         cooldown = 180,
         duration = 10,
         ranks = {22842, 22895, 22896, 26999},
+        auraTarget = AT.SELF,
         specs = {S.FERAL},
     },
     {
@@ -99,6 +102,7 @@ lib:RegisterSpells({
         cooldown = 60,
         duration = 45,
         ranks = {16689, 16810, 16811, 16812, 16813, 17329, 27009},
+        auraTarget = AT.SELF,
         specs = {S.BALANCE, S.FERAL, S.RESTORATION},
         triggersAuras = {
             { spellID = 19975, tags = {C.ROOT, C.CC_SOFT}, type = "DEBUFF", onTarget = true },  -- Nature's Grasp Root R1
@@ -119,6 +123,7 @@ lib:RegisterSpells({
         tags = {C.HEAL, C.MAJOR, C.HAS_BUFF, C.PVE_PVP},
         cooldown = 180,
         talent = true,
+        auraTarget = AT.SELF,
         specs = {S.RESTORATION},
     },
 
@@ -131,6 +136,7 @@ lib:RegisterSpells({
         cooldown = 300,
         duration = 10,
         ranks = {740, 8918, 9862, 9863, 26983},
+        auraTarget = AT.SELF,  -- Channeled, heals party around caster
         specs = {S.BALANCE, S.FERAL, S.RESTORATION},
     },
     {
@@ -138,6 +144,7 @@ lib:RegisterSpells({
         tags = {C.HEAL, C.MAJOR, C.RESOURCE, C.HAS_BUFF},
         cooldown = 360,
         duration = 20,
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.BALANCE, S.FERAL, S.RESTORATION},
     },
 
@@ -150,6 +157,7 @@ lib:RegisterSpells({
         cooldown = 300,
         duration = 15,
         ranks = {1850, 9821, 33357},
+        auraTarget = AT.SELF,
         specs = {S.FERAL},
     },
     {
@@ -382,6 +390,7 @@ lib:RegisterSpells({
         duration = 7,
         priority = 1,
         ranks = {33763, 33778},
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.RESTORATION},
     },
     {
@@ -391,6 +400,7 @@ lib:RegisterSpells({
         duration = 12,
         priority = 2,
         ranks = {774, 1058, 1430, 2090, 2091, 3627, 8910, 9839, 9840, 9841, 25299, 26981, 26982},
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.RESTORATION},
     },
     {
@@ -400,6 +410,7 @@ lib:RegisterSpells({
         duration = 21,
         priority = 3,
         ranks = {8936, 8938, 8939, 8940, 8941, 9750, 9856, 9857, 9858, 26980},
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.RESTORATION},
     },
     {
@@ -408,6 +419,7 @@ lib:RegisterSpells({
         cooldown = 15,
         priority = 4,
         talent = true,
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.RESTORATION},
     },
     {
@@ -416,6 +428,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 5,
         ranks = {5185, 5186, 5187, 5188, 5189, 6778, 8903, 9758, 9888, 9889, 25297, 26978, 26979},
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.RESTORATION},
     },
     {

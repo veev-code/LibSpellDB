@@ -359,6 +359,32 @@ end
     @return (boolean) - true if spell can ONLY target self, false if it can target others
 ]]
 function lib:IsSelfOnly(spellID)
+    local auraTarget = self:GetAuraTarget(spellID)
+    -- "self" and "none" are both considered "self-only" for backwards compatibility
+    -- "ally" and "pet" can target others
+    return auraTarget == "self" or auraTarget == "none"
+end
+
+--[[
+    Get the aura target type for a spell
+    
+    Returns where the buff/effect appears for tracking purposes:
+    - "self": Buff appears on caster only (Barkskin, Evasion, Ice Block)
+    - "ally": Can target other friendly players (Renew, BoP, PWS)
+    - "pet": Targets pet (Mend Pet)
+    - "none": No unit to track - AoE around caster, totems, placed objects
+    
+    Priority:
+    1. Explicit auraTarget field
+    2. Legacy selfOnly field (converted to "self"/"ally")
+    3. triggersAuras onTarget = false -> "self"
+    4. Tags indicating spell can target others -> "ally"
+    5. Default: "self"
+    
+    @param spellID (number) - Spell ID (or spell data table)
+    @return (string) - "self", "ally", "pet", or "none"
+]]
+function lib:GetAuraTarget(spellID)
     -- Accept either spell ID or spell data table
     local spellData
     if type(spellID) == "table" then
@@ -367,17 +393,22 @@ function lib:IsSelfOnly(spellID)
         spellData = self:GetSpellInfo(spellID)
     end
     
-    if not spellData then return true end  -- Default to self-only if no data
+    if not spellData then return "self" end  -- Default to self if no data
     
-    -- Explicit selfOnly field takes precedence
+    -- Explicit auraTarget field takes precedence
+    if spellData.auraTarget then
+        return spellData.auraTarget
+    end
+    
+    -- Legacy selfOnly field support (convert to auraTarget values)
     if spellData.selfOnly ~= nil then
-        return spellData.selfOnly
+        return spellData.selfOnly and "self" or "ally"
     end
     
     -- Check triggersAuras for explicit onTarget = false
     if spellData.triggersAuras and spellData.triggersAuras[1] then
         if spellData.triggersAuras[1].onTarget == false then
-            return true  -- Explicitly self-only
+            return "self"
         end
     end
     
@@ -385,15 +416,14 @@ function lib:IsSelfOnly(spellID)
     if spellData.tags then
         for _, tag in ipairs(spellData.tags) do
             if tag == "HEAL_SINGLE" or tag == "HOT" or tag == "HAS_HOT" 
-               or tag == "HEAL_AOE" or tag == "EXTERNAL_DEFENSIVE"
-               or tag == "HAS_BUFF" or tag == "CC_IMMUNITY" then
-                return false  -- Can target others
+               or tag == "HEAL_AOE" or tag == "EXTERNAL_DEFENSIVE" then
+                return "ally"
             end
         end
     end
     
-    -- Default: self-only (buffs like Recklessness, Shadowform, Stealth)
-    return true
+    -- Default: self
+    return "self"
 end
 
 --[[

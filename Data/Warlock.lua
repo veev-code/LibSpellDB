@@ -11,6 +11,7 @@ if not lib then return end
 
 local C = lib.Categories
 local S = lib.Specs
+local AT = lib.AuraTarget
 
 lib:RegisterSpells({
     -------------------------------------------------------------------------------
@@ -106,6 +107,7 @@ lib:RegisterSpells({
         cooldown = 30,
         duration = 30,
         ranks = {6229, 11739, 11740, 28610},
+        auraTarget = AT.SELF,
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
@@ -114,6 +116,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 30,
         ranks = {7812, 19438, 19440, 19441, 19442, 19443, 27273},
+        auraTarget = AT.SELF,
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
 
@@ -125,6 +128,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MAJOR, C.HAS_BUFF},
         cooldown = 180,
         talent = true,
+        auraTarget = AT.SELF,
         specs = {S.AFFLICTION},
     },
     {
@@ -395,6 +399,7 @@ lib:RegisterSpells({
         spellID = 18094,  -- Nightfall (proc tracking)
         tags = {C.PROC, C.HAS_BUFF},
         talent = true,
+        auraTarget = AT.SELF,
         specs = {S.AFFLICTION},
     },
     {

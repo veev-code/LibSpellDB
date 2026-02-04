@@ -11,6 +11,7 @@ if not lib then return end
 
 local C = lib.Categories
 local S = lib.Specs
+local AT = lib.AuraTarget
 
 lib:RegisterSpells({
     -------------------------------------------------------------------------------
@@ -50,6 +51,7 @@ lib:RegisterSpells({
         cooldown = 300,
         duration = 12,
         ranks = {642, 1020},
+        auraTarget = AT.SELF,
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
         -- Forbearance debuff prevents casting for 1 min
         targetLockoutDebuff = 25771,
@@ -60,6 +62,7 @@ lib:RegisterSpells({
         cooldown = 300,
         duration = 8,
         ranks = {498, 5573},
+        auraTarget = AT.SELF,
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
         -- Forbearance debuff prevents casting for 1 min
         targetLockoutDebuff = 25771,
@@ -74,6 +77,7 @@ lib:RegisterSpells({
         cooldown = 300,
         duration = 10,
         ranks = {1022, 5599, 10278},
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
         -- Forbearance debuff prevents casting on same target for 1 min
         targetLockoutDebuff = 25771,
@@ -84,6 +88,7 @@ lib:RegisterSpells({
         cooldown = 0,  -- No CD in Classic
         duration = 30,
         ranks = {6940, 20729},
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
@@ -91,6 +96,7 @@ lib:RegisterSpells({
         tags = {C.DEFENSIVE, C.MINOR, C.CC_BREAK, C.HAS_BUFF},
         cooldown = 20,
         duration = 10,
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
@@ -104,6 +110,7 @@ lib:RegisterSpells({
         tags = {C.HEAL, C.MAJOR, C.HAS_BUFF},
         cooldown = 120,
         talent = true,
+        auraTarget = AT.SELF,
         specs = {S.HOLY},
     },
 
@@ -115,6 +122,7 @@ lib:RegisterSpells({
         tags = {C.HEAL, C.MAJOR, C.EXTERNAL_DEFENSIVE, C.HEAL_SINGLE},
         cooldown = 3600,
         ranks = {633, 2800, 10310, 27154},
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
 
@@ -128,6 +136,7 @@ lib:RegisterSpells({
         priority = 1,
         talent = true,
         ranks = {20473, 20929, 20930, 27174, 33072},
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.HOLY},
     },
     {
@@ -136,6 +145,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 2,
         ranks = {19750, 19939, 19940, 19941, 19942, 19943, 27137},
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.HOLY},
     },
     {
@@ -144,6 +154,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 3,
         ranks = {635, 639, 647, 1026, 1042, 3472, 10328, 10329, 25292, 27135, 27136},
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.HOLY},
     },
     {
@@ -153,6 +164,7 @@ lib:RegisterSpells({
         duration = 15,
         priority = 4,
         talent = true,
+        auraTarget = AT.SELF,
         specs = {S.HOLY},
     },
 
@@ -165,6 +177,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 30,
         priority = 1,
+        auraTarget = AT.SELF,
         specs = {S.RETRIBUTION},
     },
     {
@@ -220,6 +233,7 @@ lib:RegisterSpells({
         priority = 1,
         talent = true,
         ranks = {20925, 20927, 20928, 27179, 32778},
+        auraTarget = AT.SELF,
         specs = {S.PROTECTION},
     },
     {
@@ -236,6 +250,7 @@ lib:RegisterSpells({
         cooldown = 180,
         duration = 20,
         priority = 7,
+        auraTarget = AT.SELF,
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
         -- Forbearance debuff prevents casting for 1 min
         targetLockoutDebuff = 25771,
@@ -327,6 +342,7 @@ lib:RegisterSpells({
         duration = 300,
         talent = true,
         ranks = {20911, 20912, 20913, 20914, 27168},
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.PROTECTION},
     },
     {

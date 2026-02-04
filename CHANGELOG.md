@@ -1,5 +1,20 @@
 # LibSpellDB Changelog
 
+## [1.0.18] - 2026-02-04
+
+### Added
+- **AuraTarget system** — New `auraTarget` field and `lib.AuraTarget` constants for specifying where a spell's buff appears:
+  - `SELF`: Buff appears on caster only (Barkskin, Evasion, Ice Block)
+  - `ALLY`: Can target other friendly players (Renew, BoP, PWS)
+  - `PET`: Targets pet (Mend Pet)
+  - `NONE`: No unit to track (AoE around caster, totems, placed objects)
+- **`GetAuraTarget(spellID)`** — New API function returning "self", "ally", "pet", or "none"
+- Added `auraTarget` field to spells across all classes (Druid, Hunter, Mage, Paladin, Priest, Rogue, Shaman, Warlock, Warrior, Racials)
+
+### Changed
+- `IsSelfOnly()` now uses `GetAuraTarget()` internally — returns true for "self" or "none", false for "ally" or "pet"
+- Removed `HAS_BUFF` and `CC_IMMUNITY` tag-based inference from `IsSelfOnly()` in favor of explicit `auraTarget` fields
+
 ## [1.0.17] - 2026-02-03
 
 ### Fixed

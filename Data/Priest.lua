@@ -11,6 +11,7 @@ if not lib then return end
 
 local C = lib.Categories
 local S = lib.Specs
+local AT = lib.AuraTarget
 
 lib:RegisterSpells({
     -------------------------------------------------------------------------------
@@ -97,6 +98,7 @@ lib:RegisterSpells({
         tags = {C.CC_BREAK, C.CC_IMMUNITY, C.HAS_BUFF},
         cooldown = 30,
         duration = 180,
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
 
@@ -109,6 +111,7 @@ lib:RegisterSpells({
         cooldown = 120,
         duration = 8,
         talent = true,
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.DISCIPLINE},
     },
     {
@@ -116,6 +119,7 @@ lib:RegisterSpells({
         tags = {C.HEAL, C.MAJOR, C.HEAL_SINGLE},
         cooldown = 600,
         ranks = {13908, 19236, 19238, 19240, 19241, 19242, 19243, 25437},
+        auraTarget = AT.SELF,  -- Self-heal only
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
     {
@@ -125,6 +129,7 @@ lib:RegisterSpells({
         duration = 180,
         talent = true,
         ranks = {724, 27870, 27871, 28276},
+        auraTarget = AT.NONE,  -- Placed object, no unit target
         specs = {S.HOLY},
     },
 
@@ -137,6 +142,7 @@ lib:RegisterSpells({
         cooldown = 180,
         duration = 0,  -- Next spell only
         talent = true,
+        auraTarget = AT.SELF,
         specs = {S.DISCIPLINE},
     },
     {
@@ -145,6 +151,7 @@ lib:RegisterSpells({
         cooldown = 180,
         duration = 15,
         talent = true,
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.DISCIPLINE},
     },
 
@@ -157,6 +164,7 @@ lib:RegisterSpells({
         cooldown = 10,
         duration = 30,
         priority = 1,
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.HOLY, S.DISCIPLINE},
     },
     {
@@ -167,6 +175,7 @@ lib:RegisterSpells({
         duration = 30,
         priority = 2,
         ranks = {17, 592, 600, 3747, 6065, 6066, 10898, 10899, 10900, 10901, 25217, 25218},
+        auraTarget = AT.ALLY,  -- Can target other players
         -- Weakened Soul debuff prevents casting PWS on same target for 15s
         -- Check friendly target first, fallback to self if targeting enemy
         targetLockoutDebuff = 6788,
@@ -178,6 +187,7 @@ lib:RegisterSpells({
         priority = 10,
         talent = true,
         ranks = {34861, 34863, 34864, 34865, 34866},
+        auraTarget = AT.ALLY,  -- Heals target's group
         specs = {S.HOLY},
     },
     {
@@ -187,6 +197,7 @@ lib:RegisterSpells({
         duration = 15,
         priority = 4,
         ranks = {139, 6074, 6075, 6076, 6077, 6078, 10927, 10928, 10929, 25315, 25221, 25222},
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.HOLY, S.DISCIPLINE},
     },
     {
@@ -195,6 +206,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 5,
         ranks = {2060, 10963, 10964, 10965, 25314, 25210},
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.DISCIPLINE, S.HOLY},
     },
     {
@@ -203,6 +215,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 6,
         ranks = {2061, 9472, 9473, 9474, 10915, 10916, 10917, 25233, 25235},
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.DISCIPLINE, S.HOLY},
     },
     {
@@ -210,6 +223,7 @@ lib:RegisterSpells({
         tags = {C.HEAL, C.ROTATIONAL, C.HEAL_SINGLE, C.PVE_PVP},
         cooldown = 0,
         priority = 7,
+        auraTarget = AT.ALLY,  -- Can target other players (heals both)
         specs = {S.HOLY, S.DISCIPLINE},
     },
     {
@@ -218,6 +232,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 8,
         ranks = {596, 996, 10960, 10961, 25316, 25308},
+        auraTarget = AT.ALLY,  -- Heals group
         specs = {S.DISCIPLINE, S.HOLY},
     },
     {
@@ -226,6 +241,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 9,
         ranks = {2054, 2055, 6063, 6064},
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.DISCIPLINE, S.HOLY},
     },
     {
@@ -234,6 +250,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 10,
         ranks = {2050, 2052, 2053},
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.DISCIPLINE, S.HOLY},
     },
 
@@ -386,6 +403,7 @@ lib:RegisterSpells({
         cooldown = 0,
         talent = true,
         ranks = {15237, 15430, 15431, 27799, 27800, 27801},
+        auraTarget = AT.NONE,  -- AoE around caster, no unit target
         specs = {S.DISCIPLINE, S.HOLY},
     },
     {
@@ -416,6 +434,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 600,
         ranks = {588, 602, 1006, 7128, 10951, 10952, 25431},
+        auraTarget = AT.SELF,
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
 

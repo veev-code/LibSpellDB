@@ -136,6 +136,17 @@ lib.Categories = {
 }
 
 -------------------------------------------------------------------------------
+-- Aura Target Types (where the buff/effect appears for tracking purposes)
+-------------------------------------------------------------------------------
+
+lib.AuraTarget = {
+    SELF = "self",   -- Buff appears on caster only (Barkskin, Evasion, Ice Block)
+    ALLY = "ally",   -- Can target other friendly players (Renew, BoP, PWS)
+    PET  = "pet",    -- Targets pet (Mend Pet)
+    NONE = "none",   -- No unit to track - AoE around caster, totems, placed objects
+}
+
+-------------------------------------------------------------------------------
 -- Category Metadata
 -------------------------------------------------------------------------------
 

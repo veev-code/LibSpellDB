@@ -11,6 +11,7 @@ if not lib then return end
 
 local C = lib.Categories
 local S = lib.Specs
+local AT = lib.AuraTarget
 
 lib:RegisterSpells({
     -------------------------------------------------------------------------------
@@ -49,6 +50,7 @@ lib:RegisterSpells({
         cooldown = 120,
         duration = 15,
         talent = true,
+        auraTarget = AT.SELF,
         specs = {S.ENHANCEMENT},
     },
 
@@ -108,6 +110,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MAJOR, C.HAS_BUFF, C.PVE_PVP},
         cooldown = 180,
         talent = true,
+        auraTarget = AT.SELF,
         specs = {S.ELEMENTAL},
     },
 
@@ -119,6 +122,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MAJOR, C.RAID_DEFENSIVE, C.HAS_BUFF},
         cooldown = 600,
         duration = 40,
+        auraTarget = AT.SELF,  -- Buff appears on self, affects raid
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
@@ -126,6 +130,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MAJOR, C.RAID_DEFENSIVE, C.HAS_BUFF},
         cooldown = 600,
         duration = 40,
+        auraTarget = AT.SELF,  -- Buff appears on self, affects raid
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
@@ -154,6 +159,7 @@ lib:RegisterSpells({
         priority = 1,
         talent = true,
         ranks = {974, 32593, 32594},
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.RESTORATION},
     },
     {
@@ -163,6 +169,7 @@ lib:RegisterSpells({
         duration = 600,
         priority = 2,
         ranks = {24398, 33736},
+        auraTarget = AT.SELF,
         specs = {S.RESTORATION},
     },
     {
@@ -171,6 +178,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 3,
         ranks = {1064, 10622, 10623, 25422, 25423},
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.RESTORATION},
     },
     {
@@ -179,6 +187,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 4,
         ranks = {331, 332, 547, 913, 939, 959, 8005, 10395, 10396, 25357, 25391, 25396},
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.RESTORATION},
     },
     {
@@ -187,6 +196,7 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 5,
         ranks = {8004, 8008, 8010, 10466, 10467, 10468, 25420},
+        auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.RESTORATION},
     },
     {
@@ -195,6 +205,7 @@ lib:RegisterSpells({
         cooldown = 180,
         priority = 6,
         talent = true,
+        auraTarget = AT.SELF,
         specs = {S.RESTORATION},
     },
     {
@@ -204,6 +215,7 @@ lib:RegisterSpells({
         duration = 12,
         priority = 7,
         talent = true,
+        auraTarget = AT.NONE,  -- Totem placed at caster location
         specs = {S.RESTORATION},
     },
 
@@ -365,6 +377,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 60,
         ranks = {5394, 6375, 6377, 10462, 10463, 25567},
+        auraTarget = AT.NONE,  -- Totem placed at caster location
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {

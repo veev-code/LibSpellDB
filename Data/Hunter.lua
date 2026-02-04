@@ -11,6 +11,7 @@ if not lib then return end
 
 local C = lib.Categories
 local S = lib.Specs
+local AT = lib.AuraTarget
 
 lib:RegisterSpells({
     -------------------------------------------------------------------------------
@@ -110,6 +111,7 @@ lib:RegisterSpells({
         cooldown = 300,
         duration = 10,
         talent = true,
+        auraTarget = AT.SELF,
         specs = {S.SURVIVAL},
     },
     {
@@ -128,6 +130,7 @@ lib:RegisterSpells({
         cooldown = 120,
         duration = 18,
         talent = true,
+        auraTarget = AT.SELF,
         specs = {S.BEAST_MASTERY},
     },
     {
@@ -135,6 +138,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MAJOR, C.HAS_BUFF},
         cooldown = 300,
         duration = 15,
+        auraTarget = AT.SELF,
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {
@@ -199,6 +203,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 15,
         ranks = {136, 3111, 3661, 3662, 13542, 13543, 13544, 27046},
+        auraTarget = AT.PET,  -- Targets pet
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
 
