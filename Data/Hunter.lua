@@ -247,6 +247,15 @@ lib:RegisterSpells({
         },
     },
     {
+        spellID = 1130,  -- Hunter's Mark (maintain on target)
+        tags = {C.DPS, C.MAINTENANCE, C.DEBUFF, C.PVE_PVP},
+        cooldown = 0,
+        duration = 120,
+        priority = 2,
+        ranks = {1130, 14323, 14324, 14325},
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
+    },
+    {
         spellID = 1978,  -- Serpent Sting (maintain DoT)
         tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE_PVP},
         cooldown = 0,
@@ -302,6 +311,24 @@ lib:RegisterSpells({
         talent = true,
         ranks = {19434, 20900, 20901, 20902, 20903, 20904, 27065, 27632},
         specs = {S.MARKSMANSHIP},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Melee / Reactive
+    -------------------------------------------------------------------------------
+    {
+        spellID = 2973,  -- Raptor Strike
+        tags = {C.DPS, C.MINOR, C.PVE_PVP},
+        cooldown = 6,
+        ranks = {2973, 14260, 14261, 14262, 14263, 14264, 14265, 14266, 27014},
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
+    },
+    {
+        spellID = 1495,  -- Mongoose Bite
+        tags = {C.DPS, C.MINOR, C.REACTIVE, C.PVE_PVP},
+        cooldown = 5,
+        ranks = {1495, 14269, 14270, 14271, 36916},
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
 
     -------------------------------------------------------------------------------

@@ -364,7 +364,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 6807,  -- Maul (rage dump - situational)
-        tags = {C.TANK, C.MINOR, C.PVE},
+        tags = {C.TANK, C.ROTATIONAL, C.MINOR, C.PVE},
         cooldown = 0,
         priority = 10,
         ranks = {6807, 6808, 6809, 7092, 8972, 9745, 9880, 9881, 26996},
