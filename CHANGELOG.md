@@ -1,5 +1,12 @@
 # LibSpellDB Changelog
 
+## [1.0.19] - 2026-02-05
+
+### Added
+- **Temporary summon tag** — New `TEMPORARY_SUMMON` tag for short-duration pet abilities (Snake Trap snakes, Mirror Image, etc.)
+- Hunter abilities: Multi-Shot, Volley, Arcane Shot, Steady Shot, Kill Command, and all Snake Trap ranks
+- Fixed Maul missing `ROTATIONAL` tag for Feral Druids
+
 ## [1.0.18] - 2026-02-04
 
 ### Added
