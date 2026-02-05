@@ -110,6 +110,7 @@ lib.Categories = {
     PET                 = "PET",                 -- Pet abilities
     PET_SUMMON          = "PET_SUMMON",          -- Pet summoning
     PET_CONTROL         = "PET_CONTROL",         -- Pet control abilities
+    PET_SUMMON_TEMP     = "PET_SUMMON_TEMP",     -- Temporary pet/guardian summons
 
     -- Stealth
     STEALTH             = "STEALTH",             -- Stealth abilities
@@ -273,6 +274,12 @@ lib.CategoryInfo = {
         description = "General utility abilities",
         color = {0.6, 0.6, 0.6},  -- Gray
         priority = 40,
+    },
+    [lib.Categories.PET_SUMMON_TEMP] = {
+        name = "Temporary Pet Summon",
+        description = "Summons a temporary pet or guardian",
+        color = {0.4, 0.8, 1.0},  -- Light blue
+        priority = 55,
     },
     [lib.Categories.TAUNT] = {
         name = "Taunt",

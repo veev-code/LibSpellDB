@@ -270,7 +270,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 33831,  -- Force of Nature (use on CD - throughput CD)
-        tags = {C.DPS, C.MAJOR, C.PET_SUMMON, C.PVE},
+        tags = {C.DPS, C.MAJOR, C.PET_SUMMON, C.PET_SUMMON_TEMP, C.PVE},
         cooldown = 180,
         duration = 30,
         priority = 4,

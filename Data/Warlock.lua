@@ -140,7 +140,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 1122,  -- Inferno (Summon Infernal)
-        tags = {C.DPS, C.MAJOR, C.PET_SUMMON},
+        tags = {C.DPS, C.MAJOR, C.PET_SUMMON, C.PET_SUMMON_TEMP},
         cooldown = 3600,
         duration = 300,
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},

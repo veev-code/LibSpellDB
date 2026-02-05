@@ -154,6 +154,14 @@ lib:RegisterSpells({
         auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.DISCIPLINE},
     },
+    {
+        spellID = 34433,  -- Shadowfiend
+        tags = {C.DPS, C.MAJOR, C.RESOURCE, C.PET_SUMMON, C.PET_SUMMON_TEMP, C.PVE},
+        cooldown = 300,
+        duration = 15,
+        talent = true,
+        specs = {S.SHADOW},
+    },
 
     -------------------------------------------------------------------------------
     -- Core Rotation - Holy/Disc Healing (Priority: PoM → PW:S → CoH → Renew → GH/FH)

@@ -135,14 +135,14 @@ lib:RegisterSpells({
     },
     {
         spellID = 2894,  -- Fire Elemental Totem
-        tags = {C.DPS, C.MAJOR, C.PET_SUMMON},
+        tags = {C.DPS, C.MAJOR, C.PET_SUMMON, C.PET_SUMMON_TEMP},
         cooldown = 1200,
         duration = 120,
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 2062,  -- Earth Elemental Totem
-        tags = {C.DEFENSIVE, C.MAJOR, C.PET_SUMMON, C.TAUNT},
+        tags = {C.DEFENSIVE, C.MAJOR, C.PET_SUMMON, C.PET_SUMMON_TEMP, C.TAUNT},
         cooldown = 1200,
         duration = 120,
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},

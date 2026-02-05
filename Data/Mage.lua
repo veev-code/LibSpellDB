@@ -149,6 +149,18 @@ lib:RegisterSpells({
     },
 
     -------------------------------------------------------------------------------
+    -- Pet Summons
+    -------------------------------------------------------------------------------
+    {
+        spellID = 31687,  -- Summon Water Elemental
+        tags = {C.DPS, C.MAJOR, C.PET_SUMMON, C.PET_SUMMON_TEMP, C.PVE},
+        cooldown = 180,
+        duration = 45,
+        talent = true,
+        specs = {S.FROST},
+    },
+
+    -------------------------------------------------------------------------------
     -- Core Rotation - Fire (Priority: Scorch debuff → Fireball → Fire Blast)
     -------------------------------------------------------------------------------
     {
