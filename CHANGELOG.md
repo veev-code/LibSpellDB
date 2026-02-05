@@ -1,5 +1,14 @@
 # LibSpellDB Changelog
 
+## [1.0.20] - 2026-02-05
+
+### Added
+- **Faerie Fire (Feral)** — All 5 ranks (16857, 17390, 17391, 17392, 27011) as separate spell from caster Faerie Fire
+
+### Changed
+- **Mangle (Bear)** now uses `ignoreAura = true` — cooldown display is more useful than debuff tracking (you spam on 6s CD, debuff lasts 12s)
+- Caster Faerie Fire no longer shows for Feral spec (use Feral version instead)
+
 ## [1.0.19] - 2026-02-05
 
 ### Added

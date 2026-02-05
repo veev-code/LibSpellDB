@@ -287,13 +287,22 @@ lib:RegisterSpells({
         specs = {S.BALANCE},
     },
     {
-        spellID = 770,  -- Faerie Fire (armor debuff)
+        spellID = 770,  -- Faerie Fire (caster form, armor debuff)
         tags = {C.DEBUFF, C.UTILITY, C.PVE_PVP},
         cooldown = 0,
         duration = 40,
         priority = 6,
         ranks = {770, 778, 9749, 9907, 26993},
-        specs = {S.BALANCE, S.FERAL, S.RESTORATION},
+        specs = {S.BALANCE, S.RESTORATION},
+    },
+    {
+        spellID = 27011,  -- Faerie Fire (Feral) - usable in cat/bear form
+        tags = {C.DEBUFF, C.MAINTENANCE, C.PVE_PVP},
+        cooldown = 0,
+        duration = 40,
+        priority = 5,
+        ranks = {16857, 17390, 17391, 17392, 27011},
+        specs = {S.FERAL},
     },
 
     -------------------------------------------------------------------------------
@@ -345,6 +354,7 @@ lib:RegisterSpells({
         talent = true,
         ranks = {33878, 33986, 33987},
         specs = {S.FERAL},
+        ignoreAura = true,  -- Debuff lasts 12s but you spam on 6s CD; cooldown display is more useful
     },
     {
         spellID = 33745,  -- Lacerate (stack and maintain)
