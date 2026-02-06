@@ -365,6 +365,14 @@ lib:RegisterSpells({
     -- Seals (for reference)
     -------------------------------------------------------------------------------
     {
+        spellID = 21082,  -- Seal of the Crusader
+        tags = {C.BUFF, C.DPS, C.MAINTENANCE},
+        cooldown = 0,
+        duration = 30,
+        ranks = {21082, 20162, 20305, 20306, 20307, 20308, 27158},
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+    },
+    {
         spellID = 20154,  -- Seal of Righteousness
         tags = {C.BUFF, C.DPS, C.MAINTENANCE},
         cooldown = 0,

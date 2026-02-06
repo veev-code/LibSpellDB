@@ -57,6 +57,18 @@ lib:RegisterSpells({
             onTarget = true,  -- This is a debuff on target, not a buff on player
         },
     },
+    -- Blood Craze (Fury talent) - procs after being the victim of a critical strike
+    {
+        spellID = 16491,  -- Blood Craze buff Rank 3 (3% health over 6s)
+        tags = {C.PROC, C.PERSONAL_DEFENSIVE, C.MINOR},
+        cooldown = 0,
+        duration = 6,
+        talent = true,
+        procInfo = {
+            description = "Regenerates 1/2/3% of total health over 6 sec",
+            stacks = false,
+        },
+    },
 }, "WARRIOR")
 
 -------------------------------------------------------------------------------
@@ -225,6 +237,19 @@ lib:RegisterSpells({
             stacks = 3,
         },
     },
+    -- Clearcasting (Holy Concentration proc) - procs on critical heal
+    {
+        spellID = 34754,
+        tags = {C.PROC, C.RESOURCE},
+        cooldown = 0,
+        duration = 15,
+        talent = true,
+        procInfo = {
+            description = "Next Flash Heal, Binding Heal, or Greater Heal costs no mana",
+            stacks = false,
+            consumedOnCast = true,
+        },
+    },
 }, "PRIEST")
 
 -------------------------------------------------------------------------------
@@ -255,6 +280,32 @@ lib:RegisterSpells({
         procInfo = {
             description = "Party melee AP increased by 10%",
             stacks = false,
+        },
+    },
+    -- Shamanistic Focus (Enhancement talent) - procs "Focused" on melee crit
+    {
+        spellID = 43339,  -- "Focused" buff ID
+        tags = {C.PROC, C.RESOURCE},
+        cooldown = 0,
+        duration = 15,
+        talent = true,
+        procInfo = {
+            description = "Next Shock spell costs 60% less mana",
+            stacks = false,
+            consumedOnCast = true,
+        },
+    },
+    -- Flurry (Enhancement talent) - procs on melee crit
+    {
+        spellID = 16280,  -- Flurry buff Rank 5 (30% haste)
+        tags = {C.PROC, C.DPS, C.MINOR},
+        cooldown = 0,
+        duration = 15,
+        talent = true,
+        procInfo = {
+            description = "30% attack speed increase",
+            stacks = 3,
+            consumedOnHit = true,
         },
     },
 }, "SHAMAN")

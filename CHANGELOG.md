@@ -1,5 +1,14 @@
 # LibSpellDB Changelog
 
+## [1.0.21] - 2026-02-06
+
+### Added
+- **Paladin: Seal of the Crusader** — All 7 ranks (21082, 20162, 20305, 20306, 20307, 20308, 27158) added to spell data, available to all specs
+- **Shaman procs: Shamanistic Focus** — "Focused" buff (43339) tracked as a proc; reduces next Shock mana cost by 60%, consumed on cast
+- **Shaman procs: Flurry** — Enhancement Flurry buff (16280) tracked as a proc; 30% attack speed, 3 stacks consumed on hit
+- **Priest procs: Clearcasting** — Holy Concentration proc buff (34754) tracked; next Flash Heal, Binding Heal, or Greater Heal costs no mana
+- **Warrior procs: Blood Craze** — Fury talent proc buff (16491) tracked; regenerates health over 6 sec after taking a critical strike
+
 ## [1.0.20] - 2026-02-05
 
 ### Added
