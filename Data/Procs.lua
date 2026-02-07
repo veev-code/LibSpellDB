@@ -28,7 +28,7 @@ lib:RegisterSpells({
         duration = 12,
         talent = true,
         procInfo = {
-            description = "5% damage increase when enraged",
+            description = "25% damage increase when enraged",
             stacks = false,
         },
     },
@@ -68,7 +68,7 @@ lib:RegisterSpells({
         duration = 6,
         talent = true,
         procInfo = {
-            description = "Regenerates 1/2/3% of total health over 6 sec",
+            description = "Regenerates 3% of total health over 6 sec",
             stacks = false,
         },
     },

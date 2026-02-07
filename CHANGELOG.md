@@ -1,5 +1,11 @@
 # LibSpellDB Changelog
 
+## [1.0.23] - 2026-02-07
+
+### Changed
+- **Proc descriptions updated to max rank** — Enrage description corrected from "5% damage increase" to "25% damage increase" (max rank); Blood Craze corrected from "1/2/3% health" to "3% health" (max rank)
+- **Warrior Execute** — Added `consumesAllResource = true` flag indicating Execute drains all remaining rage (not just base cost)
+
 ## [1.0.22] - 2026-02-07
 
 ### Added
