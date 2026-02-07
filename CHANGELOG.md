@@ -1,5 +1,10 @@
 # LibSpellDB Changelog
 
+## [1.0.22] - 2026-02-07
+
+### Added
+- **Multi-rank proc matching** — Proc entries for Enrage, Flurry (Warrior), Flurry (Shaman), and Blood Craze now include `ranks` arrays with all talent rank spell IDs, enabling dependent addons to match any rank of the proc buff (not just the highest)
+
 ## [1.0.21] - 2026-02-06
 
 ### Added

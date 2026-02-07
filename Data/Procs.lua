@@ -22,6 +22,7 @@ lib:RegisterSpells({
     -- Enrage (Fury talent) - procs when taking damage after crit
     {
         spellID = 14204,
+        ranks = {12880, 14201, 14202, 14203, 14204},
         tags = {C.PROC, C.DPS, C.MINOR},
         cooldown = 0,
         duration = 12,
@@ -34,6 +35,7 @@ lib:RegisterSpells({
     -- Flurry (Fury talent) - procs on melee crit
     {
         spellID = 12970,
+        ranks = {12966, 12967, 12968, 12969, 12970},
         tags = {C.PROC, C.DPS, C.MINOR},
         cooldown = 0,
         duration = 15,
@@ -59,7 +61,8 @@ lib:RegisterSpells({
     },
     -- Blood Craze (Fury talent) - procs after being the victim of a critical strike
     {
-        spellID = 16491,  -- Blood Craze buff Rank 3 (3% health over 6s)
+        spellID = 16491,  -- Blood Craze buff (canonical = Rank 3, 3% health over 6s)
+        ranks = {16488, 16490, 16491},  -- Rank 1 (1%), Rank 2 (2%), Rank 3 (3%)
         tags = {C.PROC, C.PERSONAL_DEFENSIVE, C.MINOR},
         cooldown = 0,
         duration = 6,
@@ -298,6 +301,7 @@ lib:RegisterSpells({
     -- Flurry (Enhancement talent) - procs on melee crit
     {
         spellID = 16280,  -- Flurry buff Rank 5 (30% haste)
+        ranks = {16257, 16277, 16278, 16279, 16280},
         tags = {C.PROC, C.DPS, C.MINOR},
         cooldown = 0,
         duration = 15,
