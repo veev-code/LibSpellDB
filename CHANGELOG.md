@@ -1,5 +1,14 @@
 # LibSpellDB Changelog
 
+## [1.0.24] - 2026-02-07
+
+### Added
+- **Totem tags** — New `TOTEM` category tag for all shaman totems, plus element tags `TOTEM_EARTH`, `TOTEM_FIRE`, `TOTEM_WATER`, `TOTEM_AIR` to classify totems by element slot (only one totem per element can be active). All 22 shaman totems tagged with their element and have duration data for tracking.
+- **`CONSUMES_ALL_RESOURCE` tag** — New category tag for spells that drain all remaining resource (e.g. Execute). Replaces the `consumesAllResource` field.
+
+### Changed
+- **Warrior Execute** — Now uses `CONSUMES_ALL_RESOURCE` tag instead of `consumesAllResource` field (breaking change for addons that read the field directly — use `HasTag()` instead)
+
 ## [1.0.23] - 2026-02-07
 
 ### Changed

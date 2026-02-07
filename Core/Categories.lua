@@ -48,6 +48,7 @@ lib.Categories = {
     -- Ability Mechanics
     -------------------------------------------------------------------------------
     FINISHER            = "FINISHER",            -- Combo point / resource spenders
+    CONSUMES_ALL_RESOURCE = "CONSUMES_ALL_RESOURCE", -- Drains ALL remaining resource, not just base cost (Execute)
 
     -------------------------------------------------------------------------------
     -- Healing Subtypes
@@ -111,6 +112,11 @@ lib.Categories = {
     PET_SUMMON          = "PET_SUMMON",          -- Pet summoning
     PET_CONTROL         = "PET_CONTROL",         -- Pet control abilities
     PET_SUMMON_TEMP     = "PET_SUMMON_TEMP",     -- Temporary pet/guardian summons
+    TOTEM               = "TOTEM",               -- Totem summon (tracks duration via SPELL_SUMMON)
+    TOTEM_EARTH         = "TOTEM_EARTH",         -- Earth totem (only one Earth totem active at a time)
+    TOTEM_FIRE          = "TOTEM_FIRE",          -- Fire totem (only one Fire totem active at a time)
+    TOTEM_WATER         = "TOTEM_WATER",         -- Water totem (only one Water totem active at a time)
+    TOTEM_AIR           = "TOTEM_AIR",           -- Air totem (only one Air totem active at a time)
 
     -- Stealth
     STEALTH             = "STEALTH",             -- Stealth abilities
@@ -279,6 +285,36 @@ lib.CategoryInfo = {
         name = "Temporary Pet Summon",
         description = "Summons a temporary pet or guardian",
         color = {0.4, 0.8, 1.0},  -- Light blue
+        priority = 55,
+    },
+    [lib.Categories.TOTEM] = {
+        name = "Totem",
+        description = "Totem summon with known duration (tracked via SPELL_SUMMON)",
+        color = {0.0, 0.6, 0.8},  -- Teal
+        priority = 55,
+    },
+    [lib.Categories.TOTEM_EARTH] = {
+        name = "Earth Totem",
+        description = "Earth element totem (only one active at a time)",
+        color = {0.6, 0.4, 0.2},  -- Brown
+        priority = 55,
+    },
+    [lib.Categories.TOTEM_FIRE] = {
+        name = "Fire Totem",
+        description = "Fire element totem (only one active at a time)",
+        color = {1.0, 0.4, 0.1},  -- Orange-red
+        priority = 55,
+    },
+    [lib.Categories.TOTEM_WATER] = {
+        name = "Water Totem",
+        description = "Water element totem (only one active at a time)",
+        color = {0.2, 0.5, 1.0},  -- Blue
+        priority = 55,
+    },
+    [lib.Categories.TOTEM_AIR] = {
+        name = "Air Totem",
+        description = "Air element totem (only one active at a time)",
+        color = {0.7, 0.7, 1.0},  -- Light blue-white
         priority = 55,
     },
     [lib.Categories.TAUNT] = {

@@ -291,12 +291,11 @@ lib:RegisterSpells({
     },
     {
         spellID = 5308,  -- Execute (sub-20% finisher)
-        tags = {C.DPS, C.ROTATIONAL, C.FINISHER, C.REACTIVE, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.FINISHER, C.REACTIVE, C.CONSUMES_ALL_RESOURCE, C.PVE_PVP},
         cooldown = 0,
         priority = 6,
         ranks = {5308, 7160, 20658, 20660, 20661, 20662, 25234, 25236},
         specs = {S.ARMS, S.FURY},
-        consumesAllResource = true,  -- Execute consumes ALL remaining rage, not just base cost
     },
     {
         spellID = 34428,  -- Victory Rush (TBC, usable after killing blow)

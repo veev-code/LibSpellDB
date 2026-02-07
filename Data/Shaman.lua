@@ -19,7 +19,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 2484,  -- Earthbind Totem
-        tags = {C.CC_SOFT, C.UTILITY},
+        tags = {C.CC_SOFT, C.UTILITY, C.TOTEM, C.TOTEM_EARTH},
         cooldown = 15,
         duration = 45,
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
@@ -59,14 +59,14 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 8177,  -- Grounding Totem
-        tags = {C.CC_IMMUNITY, C.UTILITY},
+        tags = {C.CC_IMMUNITY, C.UTILITY, C.TOTEM, C.TOTEM_AIR},
         cooldown = 15,
         duration = 45,
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 8143,  -- Tremor Totem
-        tags = {C.CC_BREAK, C.UTILITY},
+        tags = {C.CC_BREAK, C.UTILITY, C.TOTEM, C.TOTEM_EARTH},
         cooldown = 0,
         duration = 120,
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
@@ -135,14 +135,14 @@ lib:RegisterSpells({
     },
     {
         spellID = 2894,  -- Fire Elemental Totem
-        tags = {C.DPS, C.MAJOR, C.PET_SUMMON, C.PET_SUMMON_TEMP},
+        tags = {C.DPS, C.MAJOR, C.PET_SUMMON, C.PET_SUMMON_TEMP, C.TOTEM, C.TOTEM_FIRE},
         cooldown = 1200,
         duration = 120,
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 2062,  -- Earth Elemental Totem
-        tags = {C.DEFENSIVE, C.MAJOR, C.PET_SUMMON, C.PET_SUMMON_TEMP, C.TAUNT},
+        tags = {C.DEFENSIVE, C.MAJOR, C.PET_SUMMON, C.PET_SUMMON_TEMP, C.TOTEM, C.TOTEM_EARTH, C.TAUNT},
         cooldown = 1200,
         duration = 120,
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
@@ -210,7 +210,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 16190,  -- Mana Tide Totem (mana CD - throughput via sustain)
-        tags = {C.HEAL, C.MAJOR, C.RESOURCE, C.RAID_DEFENSIVE, C.PVE},
+        tags = {C.HEAL, C.MAJOR, C.RESOURCE, C.RAID_DEFENSIVE, C.TOTEM, C.TOTEM_WATER, C.PVE},
         cooldown = 300,
         duration = 12,
         priority = 7,
@@ -224,7 +224,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 30706,  -- Totem of Wrath (maintain)
-        tags = {C.DPS, C.MAINTENANCE, C.BUFF, C.RAID_DEFENSIVE, C.PVE},
+        tags = {C.DPS, C.MAINTENANCE, C.BUFF, C.RAID_DEFENSIVE, C.TOTEM, C.TOTEM_FIRE, C.PVE},
         cooldown = 0,
         duration = 120,
         priority = 1,
@@ -256,14 +256,14 @@ lib:RegisterSpells({
     },
     {
         spellID = 8170,  -- Disease Cleansing Totem
-        tags = {C.DISPEL_DISEASE, C.UTILITY, C.FILLER},
+        tags = {C.DISPEL_DISEASE, C.UTILITY, C.TOTEM, C.TOTEM_WATER, C.FILLER},
         cooldown = 0,
         duration = 120,
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 8166,  -- Poison Cleansing Totem
-        tags = {C.DISPEL_POISON, C.UTILITY, C.FILLER},
+        tags = {C.DISPEL_POISON, C.UTILITY, C.TOTEM, C.TOTEM_WATER, C.FILLER},
         cooldown = 0,
         duration = 120,
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
@@ -303,7 +303,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 3599,  -- Searing Totem (utility, not core rotation)
-        tags = {C.UTILITY},
+        tags = {C.UTILITY, C.TOTEM, C.TOTEM_FIRE},
         cooldown = 0,
         duration = 55,
         ranks = {3599, 6363, 6364, 6365, 10437, 10438, 25533},
@@ -311,7 +311,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 1535,  -- Fire Nova Totem (AoE damage totem, 15s CD)
-        tags = {C.DPS, C.AOE, C.MINOR},
+        tags = {C.DPS, C.AOE, C.MINOR, C.TOTEM, C.TOTEM_FIRE},
         cooldown = 15,
         duration = 5,  -- Explodes after 5 seconds (4 with Improved Fire Totems talent)
         ranks = {1535, 8498, 8499, 11314, 11315, 25546, 25547},
@@ -319,7 +319,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 8181,  -- Frost Resistance Totem
-        tags = {C.BUFF, C.RAID_DEFENSIVE},
+        tags = {C.BUFF, C.RAID_DEFENSIVE, C.TOTEM, C.TOTEM_FIRE},
         cooldown = 0,
         duration = 120,
         ranks = {8181, 10478, 10479, 25560},
@@ -327,7 +327,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 8227,  -- Flametongue Totem
-        tags = {C.BUFF, C.UTILITY},
+        tags = {C.BUFF, C.UTILITY, C.TOTEM, C.TOTEM_FIRE},
         cooldown = 0,
         duration = 120,
         ranks = {8227, 8249, 10526, 16387, 25557},
@@ -339,7 +339,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 8512,  -- Windfury Totem
-        tags = {C.BUFF, C.DPS, C.RAID_DEFENSIVE},
+        tags = {C.BUFF, C.DPS, C.RAID_DEFENSIVE, C.TOTEM, C.TOTEM_AIR},
         cooldown = 0,
         duration = 120,
         ranks = {8512, 10613, 10614, 25585, 25587},
@@ -347,7 +347,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 8835,  -- Grace of Air Totem
-        tags = {C.BUFF, C.RAID_DEFENSIVE},
+        tags = {C.BUFF, C.RAID_DEFENSIVE, C.TOTEM, C.TOTEM_AIR},
         cooldown = 0,
         duration = 120,
         ranks = {8835, 10627, 25359},
@@ -355,14 +355,14 @@ lib:RegisterSpells({
     },
     {
         spellID = 6495,  -- Sentry Totem
-        tags = {C.UTILITY},
+        tags = {C.UTILITY, C.TOTEM, C.TOTEM_AIR},
         cooldown = 0,
         duration = 300,
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 25908,  -- Tranquil Air Totem
-        tags = {C.BUFF, C.UTILITY},
+        tags = {C.BUFF, C.UTILITY, C.TOTEM, C.TOTEM_AIR},
         cooldown = 0,
         duration = 120,
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
@@ -373,7 +373,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 5394,  -- Healing Stream Totem
-        tags = {C.HEAL_AOE, C.UTILITY},
+        tags = {C.HEAL_AOE, C.UTILITY, C.TOTEM, C.TOTEM_WATER},
         cooldown = 0,
         duration = 60,
         ranks = {5394, 6375, 6377, 10462, 10463, 25567},
@@ -382,7 +382,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 5675,  -- Mana Spring Totem
-        tags = {C.RESOURCE, C.UTILITY},
+        tags = {C.RESOURCE, C.UTILITY, C.TOTEM, C.TOTEM_WATER},
         cooldown = 0,
         duration = 60,
         ranks = {5675, 10495, 10496, 10497, 25569, 25570},
@@ -394,7 +394,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 5730,  -- Stoneclaw Totem
-        tags = {C.UTILITY, C.TAUNT},
+        tags = {C.UTILITY, C.TAUNT, C.TOTEM, C.TOTEM_EARTH},
         cooldown = 30,
         duration = 15,
         ranks = {5730, 6390, 6391, 6392, 10427, 10428, 25525},
@@ -402,7 +402,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 8071,  -- Stoneskin Totem
-        tags = {C.BUFF, C.RAID_DEFENSIVE},
+        tags = {C.BUFF, C.RAID_DEFENSIVE, C.TOTEM, C.TOTEM_EARTH},
         cooldown = 0,
         duration = 120,
         ranks = {8071, 8154, 8155, 10406, 10407, 10408, 25508, 25509},
@@ -410,7 +410,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 8075,  -- Strength of Earth Totem
-        tags = {C.BUFF, C.UTILITY},
+        tags = {C.BUFF, C.UTILITY, C.TOTEM, C.TOTEM_EARTH},
         cooldown = 0,
         duration = 120,
         ranks = {8075, 8160, 8161, 10442, 25361, 25528},
