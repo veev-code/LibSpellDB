@@ -1,5 +1,25 @@
 # LibSpellDB Changelog
 
+## [1.0.29] - 2026-02-08
+
+### Added
+- **`name` and `description` fields** on all 451 spell entries across 11 data files, sourced from Wowhead TBC tooltip API. Provides AI/developer context for each spell.
+- **Druid: Omen of Clarity** — Added `dispelType = "Magic"` field, enabling consumers to detect it as a purgeable buff.
+- **Audit tooling** (`Tools/wowhead_audit.py`) — Python script for fetching, caching, auditing, and enriching spell data against Wowhead's TBC database. Cached responses in `Tools/wowhead_cache.json`.
+
+### Fixed
+Comprehensive cooldown/duration audit against Wowhead TBC database. All corrections verified against live TBC tooltip data:
+- **Warrior**: Last Stand cd 600→480
+- **Paladin**: All Blessing durations updated to TBC values (5min→10min, 15min→30min), Blessing of Sacrifice cd 0→30, Blessing of Freedom cd 20→25, Holy Shock cd 30→15
+- **Priest**: Fear Ward cd 30→180, Vampiric Embrace cd 0→10, Power Word: Shield cd 0→4, Lightwell cd 600→360, removed incorrect Divine Spirit rank 32999
+- **Mage**: Ice Block spellID corrected (11958→45438), Cold Snap cd 600→480, Counterspell cd 30→24, Blast Wave cd 45→30
+- **Hunter**: Trap cooldowns 15→30 (Freezing, Immolation, Explosive, Frost), Flare cd 15→20 dur 30→20, Volley cd 0→60
+- **Rogue**: Blind cd 300→180, Cloak of Shadows cd 90→60
+- **Warlock**: Howl of Terror dur 15→8
+- **Druid**: Tranquility cd 300→600 dur 10→8, Rebirth cd 1800→1200, Faerie Fire (Feral) cd 0→6, Omen of Clarity dur 600→1800, Pounce dur 2→3
+- **Racials**: Escape Artist cd 60→105, Mana Tap cd 120→30 dur 2→600 + tags corrected, removed bogus spellID 28732 (was Widow's Embrace, not Arcane Torrent)
+- **Procs**: Vengeance dur 8→30
+
 ## [1.0.28] - 2026-02-08
 
 ### Added

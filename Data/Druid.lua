@@ -608,6 +608,7 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
         duration = 1800,
+        dispelType = "Magic",
         talent = true,
         specs = {S.BALANCE, S.FERAL, S.RESTORATION},
     },
