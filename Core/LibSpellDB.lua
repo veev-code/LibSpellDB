@@ -722,6 +722,27 @@ function lib:GetProcInfo(spellID)
     return nil
 end
 
+--[[
+    Get the reactive window duration for a spell.
+
+    Reactive window spells (e.g., Victory Rush) become usable for a limited
+    time when a condition is met (e.g., killing an enemy). This returns the
+    duration of that usability window, or nil if the spell has no reactive window.
+
+    @param spellID (number or table) - Spell ID or spell data table
+    @return (number or nil) - Window duration in seconds, or nil
+]]
+function lib:GetReactiveWindow(spellID)
+    local spellData
+    if type(spellID) == "table" then
+        spellData = spellID
+    else
+        spellData = self:GetSpellInfo(spellID)
+    end
+    if not spellData then return nil end
+    return spellData.reactiveWindow
+end
+
 -------------------------------------------------------------------------------
 -- Spell Rank Utilities
 -------------------------------------------------------------------------------

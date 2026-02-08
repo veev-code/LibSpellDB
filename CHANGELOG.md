@@ -1,5 +1,12 @@
 # LibSpellDB Changelog
 
+## [1.0.27] - 2026-02-08
+
+### Added
+- **Reactive Window** — New `reactiveWindow` and `reactiveWindowEvent` spell data fields for modeling REACTIVE abilities with time-limited usability windows. `reactiveWindow` specifies the duration (seconds) and `reactiveWindowEvent` specifies the CLEU sub-event that triggers or refreshes the window.
+- **`GetReactiveWindow(spellID)` API** — Returns the reactive window duration for a spell, or nil. Accepts spell ID or spell data table.
+- **Warrior: Victory Rush** — Added `reactiveWindow = 20` and `reactiveWindowEvent = "PARTY_KILL"` metadata, enabling consumers to display a 20-second usability countdown after a qualifying killing blow.
+
 ## [1.0.26] - 2026-02-08
 
 ### Added

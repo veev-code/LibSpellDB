@@ -304,6 +304,8 @@ lib:RegisterSpells({
         priority = 7,
         auraTarget = AT.SELF,  -- Self-heal on kill
         specs = {S.ARMS, S.FURY},
+        reactiveWindow = 20,  -- Usable for 20s after killing blow
+        reactiveWindowEvent = "PARTY_KILL",  -- CLEU sub-event that triggers/refreshes the window
     },
 
     -------------------------------------------------------------------------------

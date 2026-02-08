@@ -67,6 +67,8 @@ if not lib then return end
     cooldownPriority = true,            -- Show cooldown/prediction first, then aura when ready
     -- consumesAllResource: REMOVED — use CONSUMES_ALL_RESOURCE tag instead
     targetLockoutDebuff = 6788,         -- Debuff that blocks re-casting (e.g. Weakened Soul)
+    reactiveWindow = 20,                -- Duration (seconds) of usability window for REACTIVE spells
+    reactiveWindowEvent = "PARTY_KILL", -- CLEU sub-event that triggers/refreshes the window
 
     -- Triggered auras (when aura ID differs from spell ID)
     triggersAuras = {
@@ -227,6 +229,7 @@ BALANCE, FERAL,                 -- Druid (RESTORATION shared)
 ### Procs
 - `lib:GetProcs(class)` — Array of proc spell data for class
 - `lib:GetProcInfo(spellID)` — Proc metadata for a spell
+- `lib:GetReactiveWindow(spellID)` — Duration of usability window for reactive spells, or nil
 
 ### Shared Cooldowns
 - `lib:GetSharedCooldownGroup(spellID)` — Group name + info
