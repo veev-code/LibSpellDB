@@ -383,14 +383,14 @@ lib:RegisterSpells({
     },
     {
         spellID = 5697,  -- Unending Breath
-        tags = {C.UTILITY, C.BUFF, C.OUT_OF_COMBAT},
+        tags = {C.UTILITY, C.BUFF, C.OUT_OF_COMBAT, C.LONG_BUFF, C.SITUATIONAL},
         cooldown = 0,
         duration = 600,
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
         spellID = 132,  -- Detect Invisibility
-        tags = {C.UTILITY, C.BUFF, C.OUT_OF_COMBAT},
+        tags = {C.UTILITY, C.BUFF, C.OUT_OF_COMBAT, C.LONG_BUFF, C.SITUATIONAL},
         cooldown = 0,
         duration = 600,
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
@@ -443,24 +443,30 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
         duration = 1800,
+        dispelType = nil,  -- Self-buff, not purgeable
         ranks = {706, 1086, 11733, 11734, 11735, 27260},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+        buffGroup = "WARLOCK_ARMOR",
     },
     {
         spellID = 687,  -- Demon Skin
         tags = {C.BUFF, C.DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
         duration = 1800,
+        dispelType = nil,  -- Self-buff, not purgeable
         ranks = {687, 696},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+        buffGroup = "WARLOCK_ARMOR",
     },
     {
         spellID = 28176,  -- Fel Armor (TBC+)
         tags = {C.BUFF, C.DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
         duration = 1800,
+        dispelType = nil,  -- Self-buff, not purgeable
         ranks = {28176, 28189},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+        buffGroup = "WARLOCK_ARMOR",
     },
 
 }, "WARLOCK")

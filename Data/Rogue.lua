@@ -283,7 +283,7 @@ lib:RegisterSpells({
     },
 
     -------------------------------------------------------------------------------
-    -- Poisons (for tracking application)
+    -- Poisons (weapon enchants, tracked via GetWeaponEnchantInfo)
     -------------------------------------------------------------------------------
     {
         spellID = 3409,  -- Crippling Poison
@@ -291,6 +291,60 @@ lib:RegisterSpells({
         duration = 12,
         ranks = {3409, 11201},
         specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Poison Buffs (long-duration weapon applications for Buff Reminders)
+    -------------------------------------------------------------------------------
+    {
+        spellID = 8679,  -- Instant Poison (MH/OH weapon application)
+        tags = {C.BUFF, C.DPS, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 1800,
+        ranks = {8679, 8686, 8688, 11338, 11339, 11340, 26890},
+        specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
+        buffGroup = "ROGUE_POISONS",
+        weaponEnchant = true,
+    },
+    {
+        spellID = 2823,  -- Deadly Poison (MH/OH weapon application)
+        tags = {C.BUFF, C.DPS, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 1800,
+        ranks = {2823, 2824, 11355, 11356, 25347, 26967, 27186},
+        specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
+        buffGroup = "ROGUE_POISONS",
+        weaponEnchant = true,
+    },
+    {
+        spellID = 13219,  -- Wound Poison (MH/OH weapon application)
+        tags = {C.BUFF, C.DPS, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 1800,
+        ranks = {13219, 13225, 13226, 13227, 27189},
+        specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
+        buffGroup = "ROGUE_POISONS",
+        weaponEnchant = true,
+    },
+    {
+        spellID = 5761,  -- Mind-numbing Poison (MH/OH weapon application)
+        tags = {C.BUFF, C.UTILITY, C.LONG_BUFF, C.SITUATIONAL},
+        cooldown = 0,
+        duration = 1800,
+        ranks = {5761, 8694, 11400},
+        specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
+        buffGroup = "ROGUE_POISONS",
+        weaponEnchant = true,
+    },
+    {
+        spellID = 3408,  -- Crippling Poison (MH/OH weapon application)
+        tags = {C.BUFF, C.UTILITY, C.CC_SOFT, C.LONG_BUFF, C.SITUATIONAL},
+        cooldown = 0,
+        duration = 1800,
+        ranks = {3408, 11202},
+        specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
+        buffGroup = "ROGUE_POISONS",
+        weaponEnchant = true,
     },
 
 }, "ROGUE")

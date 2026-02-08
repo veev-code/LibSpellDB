@@ -33,7 +33,7 @@ lib.Categories = {
     -- Legacy Tags (kept for compatibility, will migrate away)
     -------------------------------------------------------------------------------
     CORE_ROTATION       = "CORE_ROTATION",       -- DEPRECATED: Use ROTATIONAL + role tag
-    SITUATIONAL         = "SITUATIONAL",         -- DEPRECATED: Use MINOR/MAJOR + role tag
+    SITUATIONAL         = "SITUATIONAL",         -- Situational/niche utility (not critical uptime)
     OFFENSIVE_CD        = "OFFENSIVE_CD",        -- DEPRECATED: Use DPS + MAJOR
     OFFENSIVE_CD_MINOR  = "OFFENSIVE_CD_MINOR",  -- DEPRECATED: Use DPS + MINOR
 
@@ -211,7 +211,7 @@ lib.CategoryInfo = {
     },
     [lib.Categories.SITUATIONAL] = {
         name = "Situational",
-        description = "DEPRECATED: Use MINOR/MAJOR + role tag",
+        description = "Situational/niche utility — not critical for general uptime",
         color = {1.0, 0.5, 0.0},  -- Orange
         priority = 95,
     },
@@ -353,6 +353,138 @@ function lib:GetSharedCooldownSpells(spellID)
     local groupName, groupInfo = self:GetSharedCooldownGroup(spellID)
     if groupInfo then
         return groupInfo.spells
+    end
+    return nil
+end
+
+-------------------------------------------------------------------------------
+-- Buff Groups
+-- Spells that are related for buff reminder purposes.
+-- Use buffGroup field in spell data to document these relationships.
+--
+-- Relationship types:
+--   "equivalent" - Different spells providing the same buff (e.g., PW:Fort / Prayer of Fort).
+--                  If ANY version is active on the target, the group is satisfied.
+--   "exclusive"  - Only one can be active from the same caster (e.g., Battle Shout / Commanding Shout).
+--                  If ANY is active, the group is satisfied. Player configures which to prioritize.
+-------------------------------------------------------------------------------
+
+lib.BuffGroups = {
+    -- Equivalent groups (single-target + group version of the same buff)
+    PRIEST_FORTITUDE = {
+        description = "Stamina buff",
+        spells = {1243, 21562},
+        relationship = "equivalent",
+    },
+    PRIEST_SPIRIT = {
+        description = "Spirit buff",
+        spells = {14752, 27681},
+        relationship = "equivalent",
+    },
+    PRIEST_SHADOW_PROT = {
+        description = "Shadow resistance",
+        spells = {976, 27683},
+        relationship = "equivalent",
+    },
+    DRUID_MOTW = {
+        description = "Mark of the Wild",
+        spells = {1126, 21849},
+        relationship = "equivalent",
+    },
+    MAGE_INTELLECT = {
+        description = "Intellect buff",
+        spells = {1459, 23028},
+        relationship = "equivalent",
+    },
+    PALADIN_BLESSINGS = {
+        description = "Paladin blessings",
+        spells = {19740, 19742, 20217, 1038, 20911, 19977, 25782, 25894, 25898, 25895, 25899, 25890},
+        relationship = "exclusive",
+    },
+
+    -- Exclusive groups (same caster can only maintain one at a time)
+    WARRIOR_SHOUTS = {
+        description = "Warrior shouts",
+        spells = {6673, 469},
+        relationship = "exclusive",
+    },
+    WARLOCK_ARMOR = {
+        description = "Warlock armor",
+        spells = {687, 706, 28176},
+        relationship = "exclusive",
+    },
+    MAGE_ARMOR = {
+        description = "Mage armor",
+        spells = {6117, 7302, 30482, 168},
+        relationship = "exclusive",
+    },
+    MAGE_MAGIC_MODIFIER = {
+        description = "Magic modifier",
+        spells = {1008, 604},
+        relationship = "exclusive",
+    },
+    SHAMAN_SHIELD = {
+        description = "Shaman shields",
+        spells = {24398, 324, 974},
+        relationship = "exclusive",
+    },
+    PALADIN_AURAS = {
+        description = "Paladin auras",
+        spells = {465, 19746, 7294, 19891, 19888, 19876, 20218},
+        relationship = "exclusive",
+    },
+    HUNTER_ASPECTS = {
+        description = "Hunter aspects",
+        spells = {13165, 13163, 5118, 13159, 13161, 34074},
+        relationship = "exclusive",
+    },
+
+    -- Weapon enchant groups (tracked via GetWeaponEnchantInfo, not UnitBuff)
+    ROGUE_POISONS = {
+        description = "Rogue poisons",
+        spells = {8679, 2823, 13219, 5761, 3408},
+        relationship = "exclusive",
+        weaponEnchant = true,
+        itemBased = true,   -- Applied via crafted items, not castable spells
+        minLevel = 20,      -- Rogues learn poisons at level 20
+    },
+    SHAMAN_WEAPON_IMBUES = {
+        description = "Shaman weapon imbues",
+        spells = {8024, 8232, 8033, 8017},
+        relationship = "exclusive",
+        weaponEnchant = true,
+    },
+}
+
+-- Get buff group info for a spell
+function lib:GetBuffGroup(spellID)
+    local spellData = self:GetSpellInfo(spellID)
+    if spellData and spellData.buffGroup then
+        return spellData.buffGroup, self.BuffGroups[spellData.buffGroup]
+    end
+    return nil, nil
+end
+
+-- Get all spell IDs in the same buff group as the given spell
+function lib:GetBuffGroupSpells(spellID)
+    local groupName, groupInfo = self:GetBuffGroup(spellID)
+    if groupInfo then
+        return groupInfo.spells
+    end
+    return nil
+end
+
+-- Check if a spell belongs to a buff group
+function lib:IsInBuffGroup(spellID)
+    local spellData = self:GetSpellInfo(spellID)
+    return spellData and spellData.buffGroup ~= nil
+end
+
+-- Get the relationship type for a spell's buff group
+function lib:GetBuffGroupRelationship(spellID)
+    local _, groupInfo = self:GetBuffGroup(spellID)
+    if groupInfo then
+        return groupInfo.relationship
     end
     return nil
 end

@@ -377,33 +377,64 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
         duration = 1800,
+        dispelType = "Magic",
         talent = true,
         ranks = {14752, 14818, 14819, 27841, 32999},
         specs = {S.DISCIPLINE},
+        buffGroup = "PRIEST_SPIRIT",
+    },
+    {
+        spellID = 27681,  -- Prayer of Spirit (raid version of Divine Spirit)
+        tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 3600,
+        dispelType = "Magic",
+        talent = true,
+        ranks = {27681, 32999},
+        auraTarget = AT.NONE,  -- Raid-wide
+        specs = {S.DISCIPLINE},
+        buffGroup = "PRIEST_SPIRIT",
     },
     {
         spellID = 21562,  -- Prayer of Fortitude
         tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
         duration = 3600,
+        dispelType = "Magic",
         ranks = {21562, 21564, 25392},
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
+        buffGroup = "PRIEST_FORTITUDE",
     },
     {
         spellID = 1243,  -- Power Word: Fortitude
         tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
         duration = 1800,
+        dispelType = "Magic",
         ranks = {1243, 1244, 1245, 2791, 10937, 10938, 25389},
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
+        buffGroup = "PRIEST_FORTITUDE",
     },
     {
         spellID = 976,  -- Shadow Protection
         tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
         duration = 600,
+        dispelType = "Magic",
         ranks = {976, 10957, 10958, 25433},
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
+        buffGroup = "PRIEST_SHADOW_PROT",
+    },
+    {
+        spellID = 27683,  -- Prayer of Shadow Protection (raid version)
+        tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 1200,
+        dispelType = "Magic",
+        ranks = {27683, 39374},
+        auraTarget = AT.NONE,  -- Raid-wide
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
+        buffGroup = "PRIEST_SHADOW_PROT",
     },
     {
         spellID = 15237,  -- Holy Nova (AoE, situational)
@@ -441,6 +472,7 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
         duration = 600,
+        dispelType = "Magic",
         ranks = {588, 602, 1006, 7128, 10951, 10952, 25431},
         auraTarget = AT.SELF,
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},

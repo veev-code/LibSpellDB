@@ -449,4 +449,30 @@ lib:RegisterSpells({
         specs = {S.PROTECTION},
     },
 
+    -------------------------------------------------------------------------------
+    -- Long-Duration Buffs (Buff Reminders)
+    -------------------------------------------------------------------------------
+    {
+        spellID = 6673,  -- Battle Shout (party AP buff)
+        tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 120,
+        dispelType = nil,  -- Physical buff, cannot be purged
+        ranks = {6673, 5242, 6192, 11549, 11550, 11551, 25289, 2048},
+        auraTarget = AT.NONE,  -- Affects party, no single target
+        specs = {S.ARMS, S.FURY, S.PROTECTION},
+        buffGroup = "WARRIOR_SHOUTS",
+    },
+    {
+        spellID = 469,  -- Commanding Shout (party HP buff)
+        tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 120,
+        dispelType = nil,  -- Physical buff, cannot be purged
+        ranks = {469, 47439, 47440},
+        auraTarget = AT.NONE,  -- Affects party, no single target
+        specs = {S.ARMS, S.FURY, S.PROTECTION},
+        buffGroup = "WARRIOR_SHOUTS",
+    },
+
 }, "WARRIOR")

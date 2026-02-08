@@ -300,4 +300,96 @@ lib:RegisterSpells({
         specs = {S.FIRE},
     },
 
+    -------------------------------------------------------------------------------
+    -- Long-Duration Buffs (Buff Reminders)
+    -------------------------------------------------------------------------------
+    {
+        spellID = 1459,  -- Arcane Intellect (single ally intellect buff)
+        tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 1800,
+        dispelType = "Magic",
+        ranks = {1459, 1460, 1461, 10156, 10157, 27126},
+        auraTarget = AT.ALLY,
+        specs = {S.ARCANE, S.FIRE, S.FROST},
+        buffGroup = "MAGE_INTELLECT",
+    },
+    {
+        spellID = 23028,  -- Arcane Brilliance (raid intellect buff)
+        tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 3600,
+        dispelType = "Magic",
+        ranks = {23028, 27127},
+        auraTarget = AT.NONE,  -- Raid-wide, no single target
+        specs = {S.ARCANE, S.FIRE, S.FROST},
+        buffGroup = "MAGE_INTELLECT",
+    },
+    {
+        spellID = 6117,  -- Mage Armor (magic resistance + mana regen, cannot be dispelled)
+        tags = {C.BUFF, C.DEFENSIVE, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 1800,
+        dispelType = nil,  -- Mage Armor specifically cannot be dispelled
+        ranks = {6117, 22782, 22783, 27125},
+        auraTarget = AT.SELF,
+        specs = {S.ARCANE, S.FIRE, S.FROST},
+        buffGroup = "MAGE_ARMOR",
+    },
+    {
+        spellID = 7302,  -- Ice Armor (frost resistance + melee slow)
+        tags = {C.BUFF, C.DEFENSIVE, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 1800,
+        dispelType = "Magic",
+        ranks = {7302, 7320, 10219, 10220, 27124},
+        auraTarget = AT.SELF,
+        specs = {S.ARCANE, S.FIRE, S.FROST},
+        buffGroup = "MAGE_ARMOR",
+    },
+    {
+        spellID = 30482,  -- Molten Armor (crit + fire damage on hit, TBC)
+        tags = {C.BUFF, C.DPS, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 1800,
+        dispelType = "Magic",
+        ranks = {30482},
+        auraTarget = AT.SELF,
+        specs = {S.ARCANE, S.FIRE, S.FROST},
+        buffGroup = "MAGE_ARMOR",
+    },
+    {
+        spellID = 168,  -- Frost Armor (pre-Ice Armor, low level)
+        tags = {C.BUFF, C.DEFENSIVE, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 1800,
+        dispelType = "Magic",
+        ranks = {168, 7300, 7301},
+        auraTarget = AT.SELF,
+        specs = {S.ARCANE, S.FIRE, S.FROST},
+        buffGroup = "MAGE_ARMOR",
+    },
+    {
+        spellID = 1008,  -- Amplify Magic (increase healing/magic damage taken)
+        tags = {C.BUFF, C.UTILITY, C.LONG_BUFF, C.SITUATIONAL},
+        cooldown = 0,
+        duration = 600,
+        dispelType = "Magic",
+        ranks = {1008, 8455, 10169, 10170, 27130, 33946},
+        auraTarget = AT.ALLY,
+        specs = {S.ARCANE, S.FIRE, S.FROST},
+        buffGroup = "MAGE_MAGIC_MODIFIER",
+    },
+    {
+        spellID = 604,  -- Dampen Magic (reduce healing/magic damage taken)
+        tags = {C.BUFF, C.UTILITY, C.LONG_BUFF, C.SITUATIONAL},
+        cooldown = 0,
+        duration = 600,
+        dispelType = "Magic",
+        ranks = {604, 8450, 8451, 10173, 10174, 33944},
+        auraTarget = AT.ALLY,
+        specs = {S.ARCANE, S.FIRE, S.FROST},
+        buffGroup = "MAGE_MAGIC_MODIFIER",
+    },
+
 }, "MAGE")

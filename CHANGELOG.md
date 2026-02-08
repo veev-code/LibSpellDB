@@ -1,5 +1,31 @@
 # LibSpellDB Changelog
 
+## [1.0.25] - 2026-02-08
+
+### Added
+- **Buff Groups** — New `BuffGroups` system for modeling relationships between related buffs. Two relationship types:
+  - `equivalent`: Different spells providing the same buff (e.g., Power Word: Fortitude / Prayer of Fortitude)
+  - `exclusive`: Only one can be active from the same caster (e.g., Battle Shout / Commanding Shout)
+- **Buff group definitions** for all classes:
+  - Equivalent: `PRIEST_FORTITUDE`, `PRIEST_SPIRIT`, `PRIEST_SHADOW_PROT`, `DRUID_MOTW`, `MAGE_INTELLECT`
+  - Exclusive: `WARRIOR_SHOUTS`, `WARLOCK_ARMOR`, `MAGE_ARMOR`, `MAGE_MAGIC_MODIFIER`, `SHAMAN_SHIELD`, `PALADIN_AURAS`, `PALADIN_BLESSINGS`, `HUNTER_ASPECTS`, `ROGUE_POISONS`, `SHAMAN_WEAPON_IMBUES`
+- **Buff group API** — `GetBuffGroup()`, `GetBuffGroupSpells()`, `IsInBuffGroup()`, `GetBuffGroupRelationship()`
+- **Weapon enchant support** — Buff groups can be marked with `weaponEnchant = true` for spells tracked via `GetWeaponEnchantInfo()` instead of `UnitBuff()`. Additional fields: `itemBased` (applied via crafted items, not castable spells) and `minLevel` (level gating)
+- **`GetDispelType()` API** — Returns a spell's dispel classification ("Magic", "Curse", "Disease", "Poison", or nil)
+- **`SITUATIONAL` tag** — Un-deprecated and repurposed to mark situational/niche utility spells that are not critical for general uptime
+- **Long-duration buff data** — Comprehensive `LONG_BUFF`-tagged spell data across all classes:
+  - **Druid**: Mark of the Wild, Gift of the Wild, Thorns, Omen of Clarity
+  - **Hunter**: Trueshot Aura, all 6 Aspects (Hawk, Monkey, Cheetah, Pack, Beast, Viper)
+  - **Mage**: Arcane Intellect, Arcane Brilliance, Mage/Ice/Molten/Frost Armor, Amplify/Dampen Magic
+  - **Paladin**: All 6 Blessings + 6 Greater Blessings, Blessing of Light, 7 Auras, Righteous Fury
+  - **Priest**: Power Word: Fortitude, Prayer of Fortitude, Divine Spirit, Prayer of Spirit, Shadow Protection, Prayer of Shadow Protection, Inner Fire
+  - **Rogue**: Instant/Deadly/Wound/Mind-numbing/Crippling Poison
+  - **Shaman**: Water Shield, Lightning Shield, Earth Shield, 4 weapon imbues (Flametongue/Windfury/Frostbrand/Rockbiter), Water Walking, Water Breathing
+  - **Warlock**: Demon Skin, Demon Armor, Fel Armor, Unending Breath, Detect Invisibility
+  - **Warrior**: Battle Shout, Commanding Shout
+- **`dispelType` field** added to all relevant long-duration buff spells for accurate purgeable/non-purgeable classification
+- **`buffGroup` field** added to all grouped spells linking them to their `BuffGroups` definition
+
 ## [1.0.24] - 2026-02-07
 
 ### Added

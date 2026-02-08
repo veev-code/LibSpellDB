@@ -427,6 +427,22 @@ function lib:GetAuraTarget(spellID)
 end
 
 --[[
+    Get the dispel type for a spell's buff effect.
+    Returns "Magic", "Curse", "Disease", "Poison", or nil (physical / not dispellable).
+    This determines whether the buff can be removed by enemy dispel/purge abilities.
+]]
+function lib:GetDispelType(spellID)
+    local spellData
+    if type(spellID) == "table" then
+        spellData = spellID
+    else
+        spellData = self:GetSpellInfo(spellID)
+    end
+    if not spellData then return nil end
+    return spellData.dispelType
+end
+
+--[[
     Check if a spell is rotational (core rotation, used frequently)
     
     Used by VeevHUD to determine buff tracking behavior:

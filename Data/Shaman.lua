@@ -152,25 +152,29 @@ lib:RegisterSpells({
     -- Core Rotation - Restoration (Priority: ES → WS → CH → HW/LHW)
     -------------------------------------------------------------------------------
     {
-        spellID = 974,  -- Earth Shield (maintain on tank)
-        tags = {C.HEAL, C.ROTATIONAL, C.HEAL_SINGLE, C.HAS_BUFF, C.PVE},
+        spellID = 974,  -- Earth Shield (maintain on tank or self)
+        tags = {C.HEAL, C.ROTATIONAL, C.HEAL_SINGLE, C.HAS_BUFF, C.LONG_BUFF, C.PVE},
         cooldown = 0,
         duration = 600,
+        dispelType = "Magic",
         priority = 1,
         talent = true,
         ranks = {974, 32593, 32594},
         auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.RESTORATION},
+        buffGroup = "SHAMAN_SHIELD",
     },
     {
         spellID = 24398,  -- Water Shield (maintain on self)
-        tags = {C.HEAL, C.MAINTENANCE, C.BUFF, C.RESOURCE, C.HAS_BUFF, C.PVE_PVP},
+        tags = {C.HEAL, C.MAINTENANCE, C.BUFF, C.RESOURCE, C.HAS_BUFF, C.LONG_BUFF, C.PVE_PVP},
         cooldown = 0,
         duration = 600,
+        dispelType = nil,  -- Self-only shield, not purgeable
         priority = 2,
         ranks = {24398, 33736},
         auraTarget = AT.SELF,
         specs = {S.RESTORATION},
+        buffGroup = "SHAMAN_SHIELD",
     },
     {
         spellID = 1064,  -- Chain Heal (main heal, bounces)
@@ -418,6 +422,21 @@ lib:RegisterSpells({
     },
 
     -------------------------------------------------------------------------------
+    -- Long-Duration Buffs (Buff Reminders)
+    -------------------------------------------------------------------------------
+    {
+        spellID = 324,  -- Lightning Shield
+        tags = {C.DPS, C.BUFF, C.LONG_BUFF, C.HAS_BUFF},
+        cooldown = 0,
+        duration = 600,
+        dispelType = nil,  -- Self-only shield, not purgeable
+        ranks = {324, 325, 905, 945, 8134, 10431, 10432, 25469, 25472},
+        auraTarget = AT.SELF,
+        specs = {S.ELEMENTAL, S.ENHANCEMENT},
+        buffGroup = "SHAMAN_SHIELD",
+    },
+
+    -------------------------------------------------------------------------------
     -- Weapon Enchants
     -------------------------------------------------------------------------------
     {
@@ -427,6 +446,8 @@ lib:RegisterSpells({
         duration = 1800,
         ranks = {8024, 8027, 8030, 16339, 16341, 16342, 25489},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
+        buffGroup = "SHAMAN_WEAPON_IMBUES",
+        weaponEnchant = true,
     },
     {
         spellID = 8232,  -- Windfury Weapon
@@ -435,6 +456,8 @@ lib:RegisterSpells({
         duration = 1800,
         ranks = {8232, 8235, 10486, 16362, 25505},
         specs = {S.ENHANCEMENT},
+        buffGroup = "SHAMAN_WEAPON_IMBUES",
+        weaponEnchant = true,
     },
     {
         spellID = 8033,  -- Frostbrand Weapon
@@ -443,6 +466,8 @@ lib:RegisterSpells({
         duration = 1800,
         ranks = {8033, 8038, 10456, 16355, 16356, 25500},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
+        buffGroup = "SHAMAN_WEAPON_IMBUES",
+        weaponEnchant = true,
     },
     {
         spellID = 8017,  -- Rockbiter Weapon
@@ -451,6 +476,8 @@ lib:RegisterSpells({
         duration = 1800,
         ranks = {8017, 8018, 8019, 10399, 16314, 16315, 16316, 25479},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
+        buffGroup = "SHAMAN_WEAPON_IMBUES",
+        weaponEnchant = true,
     },
 
     -------------------------------------------------------------------------------
@@ -464,14 +491,14 @@ lib:RegisterSpells({
     },
     {
         spellID = 546,  -- Water Walking
-        tags = {C.UTILITY, C.MOVEMENT, C.OUT_OF_COMBAT},
+        tags = {C.UTILITY, C.MOVEMENT, C.OUT_OF_COMBAT, C.LONG_BUFF, C.SITUATIONAL},
         cooldown = 0,
         duration = 600,
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
         spellID = 131,  -- Water Breathing
-        tags = {C.UTILITY, C.OUT_OF_COMBAT},
+        tags = {C.UTILITY, C.OUT_OF_COMBAT, C.LONG_BUFF, C.SITUATIONAL},
         cooldown = 0,
         duration = 600,
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},

@@ -265,12 +265,14 @@ lib:RegisterSpells({
         cooldown = 0,
         ranks = {465, 643, 1032, 10290, 10291, 10292, 10293, 27149},
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        buffGroup = "PALADIN_AURAS",
     },
     {
         spellID = 19746,  -- Concentration Aura
         tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        buffGroup = "PALADIN_AURAS",
     },
     {
         spellID = 7294,  -- Retribution Aura
@@ -278,6 +280,7 @@ lib:RegisterSpells({
         cooldown = 0,
         ranks = {7294, 10298, 10299, 10300, 10301, 27150},
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        buffGroup = "PALADIN_AURAS",
     },
     {
         spellID = 19891,  -- Fire Resistance Aura
@@ -285,6 +288,7 @@ lib:RegisterSpells({
         cooldown = 0,
         ranks = {19891, 19899, 19900, 27153},
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        buffGroup = "PALADIN_AURAS",
     },
     {
         spellID = 19888,  -- Frost Resistance Aura
@@ -292,6 +296,7 @@ lib:RegisterSpells({
         cooldown = 0,
         ranks = {19888, 19897, 19898, 27152},
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        buffGroup = "PALADIN_AURAS",
     },
     {
         spellID = 19876,  -- Shadow Resistance Aura
@@ -299,6 +304,7 @@ lib:RegisterSpells({
         cooldown = 0,
         ranks = {19876, 19895, 19896, 27151},
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        buffGroup = "PALADIN_AURAS",
     },
     {
         spellID = 20218,  -- Sanctity Aura
@@ -306,6 +312,7 @@ lib:RegisterSpells({
         cooldown = 0,
         talent = true,
         specs = {S.RETRIBUTION},
+        buffGroup = "PALADIN_AURAS",
     },
 
     -------------------------------------------------------------------------------
@@ -316,49 +323,131 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
         duration = 300,
+        dispelType = "Magic",
         ranks = {19740, 19834, 19835, 19836, 19837, 19838, 25291, 27140},
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        buffGroup = "PALADIN_BLESSINGS",
     },
     {
         spellID = 20217,  -- Blessing of Kings
         tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
         duration = 300,
+        dispelType = "Magic",
         talent = true,
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        buffGroup = "PALADIN_BLESSINGS",
     },
     {
         spellID = 19742,  -- Blessing of Wisdom
         tags = {C.BUFF, C.UTILITY, C.RESOURCE, C.LONG_BUFF},
         cooldown = 0,
         duration = 300,
+        dispelType = "Magic",
         ranks = {19742, 19850, 19852, 19853, 19854, 25290, 27142},
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        buffGroup = "PALADIN_BLESSINGS",
     },
     {
         spellID = 20911,  -- Blessing of Sanctuary
         tags = {C.BUFF, C.EXTERNAL_DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
         duration = 300,
+        dispelType = "Magic",
         talent = true,
         ranks = {20911, 20912, 20913, 20914, 27168},
-        auraTarget = AT.ALLY,  -- Can target other players
+        auraTarget = AT.ALLY,
         specs = {S.PROTECTION},
+        buffGroup = "PALADIN_BLESSINGS",
     },
     {
         spellID = 1038,  -- Blessing of Salvation
         tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
         duration = 300,
+        dispelType = "Magic",
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        buffGroup = "PALADIN_BLESSINGS",
     },
     {
         spellID = 25782,  -- Greater Blessing of Might
         tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
         duration = 900,
+        dispelType = "Magic",
         ranks = {25782, 25916, 27141},
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        buffGroup = "PALADIN_BLESSINGS",
+    },
+    {
+        spellID = 25894,  -- Greater Blessing of Wisdom
+        tags = {C.BUFF, C.UTILITY, C.RESOURCE, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 900,
+        dispelType = "Magic",
+        ranks = {25894, 25918, 27143},
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        buffGroup = "PALADIN_BLESSINGS",
+    },
+    {
+        spellID = 25898,  -- Greater Blessing of Kings
+        tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 900,
+        dispelType = "Magic",
+        talent = true,
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        buffGroup = "PALADIN_BLESSINGS",
+    },
+    {
+        spellID = 25899,  -- Greater Blessing of Sanctuary
+        tags = {C.BUFF, C.EXTERNAL_DEFENSIVE, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 900,
+        dispelType = "Magic",
+        talent = true,
+        ranks = {25899, 27169},
+        auraTarget = AT.ALLY,
+        specs = {S.PROTECTION},
+        buffGroup = "PALADIN_BLESSINGS",
+    },
+    {
+        spellID = 25895,  -- Greater Blessing of Salvation
+        tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 900,
+        dispelType = "Magic",
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        buffGroup = "PALADIN_BLESSINGS",
+    },
+    {
+        spellID = 19977,  -- Blessing of Light
+        tags = {C.BUFF, C.HEAL, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 300,
+        dispelType = "Magic",
+        ranks = {19977, 19978, 19979, 27144},
+        auraTarget = AT.ALLY,
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        buffGroup = "PALADIN_BLESSINGS",
+    },
+    {
+        spellID = 25890,  -- Greater Blessing of Light
+        tags = {C.BUFF, C.HEAL, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 900,
+        dispelType = "Magic",
+        ranks = {25890, 27145},
+        auraTarget = AT.ALLY,
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        buffGroup = "PALADIN_BLESSINGS",
+    },
+    {
+        spellID = 25780,  -- Righteous Fury (threat increase)
+        tags = {C.BUFF, C.DEFENSIVE, C.LONG_BUFF, C.SITUATIONAL},
+        cooldown = 0,
+        duration = 1800,
+        specs = {S.PROTECTION},
     },
 
     -------------------------------------------------------------------------------

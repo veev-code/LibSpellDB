@@ -164,12 +164,14 @@ lib:RegisterSpells({
         tags = {C.MOVEMENT, C.MOVEMENT_SPEED, C.LONG_BUFF},
         cooldown = 0,
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
+        buffGroup = "HUNTER_ASPECTS",
     },
     {
         spellID = 13159,  -- Aspect of the Pack
         tags = {C.MOVEMENT, C.MOVEMENT_SPEED, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
+        buffGroup = "HUNTER_ASPECTS",
     },
 
     -------------------------------------------------------------------------------
@@ -352,12 +354,14 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
+        buffGroup = "HUNTER_ASPECTS",
     },
     {
         spellID = 13163,  -- Aspect of the Monkey
         tags = {C.BUFF, C.DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
+        buffGroup = "HUNTER_ASPECTS",
     },
     {
         spellID = 13165,  -- Aspect of the Hawk
@@ -365,6 +369,28 @@ lib:RegisterSpells({
         cooldown = 0,
         ranks = {13165, 14318, 14319, 14320, 14321, 14322, 25296, 27044},
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
+        buffGroup = "HUNTER_ASPECTS",
+    },
+    {
+        spellID = 34074,  -- Aspect of the Viper (mana regen, TBC)
+        tags = {C.BUFF, C.RESOURCE},
+        cooldown = 0,
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
+        buffGroup = "HUNTER_ASPECTS",
+    },
+
+    -------------------------------------------------------------------------------
+    -- Long-Duration Buffs (Buff Reminders)
+    -------------------------------------------------------------------------------
+    {
+        spellID = 19506,  -- Trueshot Aura (party AP buff, permanent)
+        tags = {C.BUFF, C.DPS, C.LONG_BUFF},
+        cooldown = 0,
+        dispelType = nil,  -- Passive aura, not purgeable
+        talent = true,
+        ranks = {19506, 20905, 20906},
+        auraTarget = AT.NONE,  -- Affects party, no single target
+        specs = {S.MARKSMANSHIP},
     },
 
 }, "HUNTER")

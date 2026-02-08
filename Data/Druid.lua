@@ -450,4 +450,48 @@ lib:RegisterSpells({
         specs = {S.RESTORATION},
     },
 
+    -------------------------------------------------------------------------------
+    -- Long-Duration Buffs (Buff Reminders)
+    -------------------------------------------------------------------------------
+    {
+        spellID = 1126,  -- Mark of the Wild (single ally stats + armor + resistances)
+        tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 1800,
+        dispelType = "Magic",
+        ranks = {1126, 5232, 6756, 5234, 8907, 9884, 9885, 26990},
+        auraTarget = AT.ALLY,
+        specs = {S.BALANCE, S.FERAL, S.RESTORATION},
+        buffGroup = "DRUID_MOTW",
+    },
+    {
+        spellID = 21849,  -- Gift of the Wild (raid version of MOTW)
+        tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 3600,
+        dispelType = "Magic",
+        ranks = {21849, 21850, 26991},
+        auraTarget = AT.NONE,  -- Raid-wide, no single target
+        specs = {S.BALANCE, S.FERAL, S.RESTORATION},
+        buffGroup = "DRUID_MOTW",
+    },
+    {
+        spellID = 467,  -- Thorns (damage shield on ally)
+        tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 600,
+        dispelType = "Magic",
+        ranks = {467, 782, 1075, 8914, 9756, 9910, 26992},
+        auraTarget = AT.ALLY,
+        specs = {S.BALANCE, S.FERAL, S.RESTORATION},
+    },
+    {
+        spellID = 16864,  -- Omen of Clarity (Clearcasting proc on melee/spell)
+        tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 600,
+        talent = true,
+        specs = {S.BALANCE, S.FERAL, S.RESTORATION},
+    },
+
 }, "DRUID")
