@@ -1,5 +1,16 @@
 # LibSpellDB Changelog
 
+## [1.0.28] - 2026-02-08
+
+### Added
+- **Shaman: Totemic Call** (36936) — Added with `clearsTotems = true` field for generic totem-recall detection by consumers
+- **`clearsTotems` spell data field** — New boolean field indicating a spell destroys all active totems when cast. Documented in CLAUDE.md.
+
+### Fixed
+- **Searing Totem duration**: 55s → 60s (correct for max-rank TBC)
+- **Healing Stream Totem duration**: 60s → 120s
+- **Mana Spring Totem duration**: 60s → 120s
+
 ## [1.0.27] - 2026-02-08
 
 ### Added
