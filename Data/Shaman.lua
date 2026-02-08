@@ -72,6 +72,14 @@ lib:RegisterSpells({
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
 
+    {
+        spellID = 36936,  -- Totemic Call (destroys all totems, returns partial mana)
+        tags = {C.UTILITY, C.TOTEM},
+        cooldown = 0,
+        clearsTotems = true,
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
+    },
+
     -------------------------------------------------------------------------------
     -- Core Rotation - Enhancement (Priority: SS → ES → FS)
     -------------------------------------------------------------------------------
@@ -309,7 +317,7 @@ lib:RegisterSpells({
         spellID = 3599,  -- Searing Totem (utility, not core rotation)
         tags = {C.UTILITY, C.TOTEM, C.TOTEM_FIRE},
         cooldown = 0,
-        duration = 55,
+        duration = 60,
         ranks = {3599, 6363, 6364, 6365, 10437, 10438, 25533},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
@@ -379,7 +387,7 @@ lib:RegisterSpells({
         spellID = 5394,  -- Healing Stream Totem
         tags = {C.HEAL_AOE, C.UTILITY, C.TOTEM, C.TOTEM_WATER},
         cooldown = 0,
-        duration = 60,
+        duration = 120,
         ranks = {5394, 6375, 6377, 10462, 10463, 25567},
         auraTarget = AT.NONE,  -- Totem placed at caster location
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
@@ -388,7 +396,7 @@ lib:RegisterSpells({
         spellID = 5675,  -- Mana Spring Totem
         tags = {C.RESOURCE, C.UTILITY, C.TOTEM, C.TOTEM_WATER},
         cooldown = 0,
-        duration = 60,
+        duration = 120,
         ranks = {5675, 10495, 10496, 10497, 25569, 25570},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },

@@ -69,6 +69,7 @@ if not lib then return end
     targetLockoutDebuff = 6788,         -- Debuff that blocks re-casting (e.g. Weakened Soul)
     reactiveWindow = 20,                -- Duration (seconds) of usability window for REACTIVE spells
     reactiveWindowEvent = "PARTY_KILL", -- CLEU sub-event that triggers/refreshes the window
+    clearsTotems = true,                -- When cast, destroys all active totems (Totemic Call)
 
     -- Triggered auras (when aura ID differs from spell ID)
     triggersAuras = {
