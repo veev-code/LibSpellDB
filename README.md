@@ -117,7 +117,7 @@ Each spell entry supports the following fields:
     specs = {"ARMS", "FURY"},  -- Optional: Which specs use this (nil = all)
     race = "Orc",              -- Optional: Race restriction for racials
     selfOnly = true,           -- Optional: Buff can ONLY target self (default: inferred from tags)
-    ignoreAura = true,         -- Optional: Don't track this spell's buff/debuff
+    cooldownPriority = true,   -- Optional: Show cooldown/prediction first, then aura when ready
     triggersAuras = {...},     -- Optional: Auras this spell triggers (with different IDs)
     targetLockoutDebuff = 6788,-- Optional: Debuff that blocks re-casting (e.g., Weakened Soul)
     sharedCooldownGroup = "...",  -- Optional: Shared CD group name

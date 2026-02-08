@@ -61,7 +61,7 @@
 - **Faerie Fire (Feral)** — All 5 ranks (16857, 17390, 17391, 17392, 27011) as separate spell from caster Faerie Fire
 
 ### Changed
-- **Mangle (Bear)** now uses `ignoreAura = true` — cooldown display is more useful than debuff tracking (you spam on 6s CD, debuff lasts 12s)
+- **Mangle (Bear)** now uses `cooldownPriority = true` — cooldown display is more useful than debuff tracking (you spam on 6s CD, debuff lasts 12s)
 - Caster Faerie Fire no longer shows for Feral spec (use Feral version instead)
 
 ## [1.0.19] - 2026-02-05
@@ -123,7 +123,7 @@
 ## [1.0.13] - 2026-01-30
 
 ### Changed
-- Hemorrhage now uses `ignoreAura = true` — debuff tracking was hiding the cooldown display; cooldown visibility is more useful for rotation tracking
+- Hemorrhage now uses `cooldownPriority = true` — debuff tracking was hiding the cooldown display; cooldown visibility is more useful for rotation tracking
 
 ## [1.0.12] - 2026-01-30
 
@@ -161,7 +161,7 @@
 
 ### Added
 - Deep Wounds proc tracking for Warriors (target debuff)
-- `ignoreAura` flag for spells where cooldown tracking is more relevant than debuff tracking (e.g., Mortal Strike)
+- `cooldownPriority` flag (renamed from `ignoreAura`) for spells where cooldown/prediction display takes priority over aura tracking (e.g., Mortal Strike, Bloodthirst, Rake)
 
 ## [1.0.7] - 2026-01-27
 

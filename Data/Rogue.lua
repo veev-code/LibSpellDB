@@ -261,7 +261,7 @@ lib:RegisterSpells({
         talent = true,
         specs = {S.SUBTLETY},
         ranks = {16511, 17347, 17348, 26864},
-        ignoreAura = true,  -- Debuff tracking would hide the intelligent cooldown display
+        cooldownPriority = true,  -- Debuff tracking would hide the intelligent cooldown display
     },
 
     -------------------------------------------------------------------------------

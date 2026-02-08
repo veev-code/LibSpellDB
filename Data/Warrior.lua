@@ -264,7 +264,7 @@ lib:RegisterSpells({
         talent = true,
         ranks = {12294, 21551, 21552, 21553, 25248, 27580, 30330},
         specs = {S.ARMS},
-        ignoreAura = true,  -- Debuff (healing reduction) is longer than CD and not worth tracking
+        cooldownPriority = true,  -- Debuff (healing reduction) is longer than CD and not worth tracking
     },
     {
         spellID = 7384,  -- Overpower (use when proc available)
@@ -317,7 +317,7 @@ lib:RegisterSpells({
         talent = true,
         ranks = {23881, 23892, 23893, 23894, 25251, 30335},
         specs = {S.FURY},
-        ignoreAura = true,  -- Buff (healing on next 5 hits) is longer than CD and not worth tracking
+        cooldownPriority = true,  -- Buff (healing on next 5 hits) is longer than CD and not worth tracking
     },
     {
         spellID = 29801,  -- Rampage (critical buff to maintain, procs on crit)

@@ -326,6 +326,24 @@ lib:RegisterSpells({
         specs = {S.FERAL},
     },
     {
+        spellID = 27003,  -- Rake (applies DoT debuff)
+        tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE_PVP},
+        cooldown = 0,
+        duration = 9,
+        priority = 2,
+        ranks = {1822, 1823, 1824, 9904, 27003},
+        specs = {S.FERAL},
+        cooldownPriority = true,  -- Show energy prediction first, debuff shown when ability is ready
+    },
+    {
+        spellID = 27000,  -- Claw (basic cat form attack)
+        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 0,
+        priority = 3,
+        ranks = {1082, 3029, 5201, 9849, 9850, 27000},
+        specs = {S.FERAL},
+    },
+    {
         spellID = 1079,  -- Rip (maintain at 5 CP)
         tags = {C.DPS, C.ROTATIONAL, C.FINISHER, C.DEBUFF, C.PVE},
         cooldown = 0,
@@ -354,7 +372,7 @@ lib:RegisterSpells({
         talent = true,
         ranks = {33878, 33986, 33987},
         specs = {S.FERAL},
-        ignoreAura = true,  -- Debuff lasts 12s but you spam on 6s CD; cooldown display is more useful
+        cooldownPriority = true,  -- Debuff lasts 12s but you spam on 6s CD; cooldown display is more useful
     },
     {
         spellID = 33745,  -- Lacerate (stack and maintain)

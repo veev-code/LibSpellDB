@@ -1,17 +1,13 @@
----
-description: LibSpellDB addon context - Shared spell database library for WoW addons
-globs: **/*
-alwaysApply: false
----
-
 # LibSpellDB - Addon Context
 
 LibSpellDB is a shared spell database library for World of Warcraft addon developers (TBC Classic / Anniversary Edition). It provides a centralized, curated repository of spell data with extensive tagging for categorization, spec detection, rank handling, and proc tracking.
 
+**LibSpellDB is consumer-agnostic.** It must never reference, depend on, or assume VeevHUD (or any specific addon). It is a general-purpose library that any addon can use. All API design, data structures, and tag semantics should make sense independently of how any particular consumer uses them.
+
 ## File Structure
 
 ### Root
-- `LibSpellDB.toc` — TOC file (Interface 20505, v1.0.23, MIT license)
+- `LibSpellDB.toc` — TOC file, MIT license
 - `lib.xml` — Core library loader (load order)
 - `README.md` — Main documentation
 - `CHANGELOG.md` — Version history
@@ -64,10 +60,11 @@ if not lib then return end
     ranks = {100, 101, 102},            -- All rank spell IDs (low to high)
     specs = {S.ARMS, S.FURY},           -- Spec restrictions (nil = all specs)
     race = "Orc",                       -- Race restriction (racials only)
+    dispelType = "Magic",               -- Dispel type of the spell's buff ("Magic", "Curse", etc.)
 
     -- Aura targeting
     auraTarget = AT.SELF,               -- Where buff appears: "self", "ally", "pet", "none"
-    ignoreAura = true,                  -- Don't track this spell's buff/debuff
+    cooldownPriority = true,            -- Show cooldown/prediction first, then aura when ready
     -- consumesAllResource: REMOVED — use CONSUMES_ALL_RESOURCE tag instead
     targetLockoutDebuff = 6788,         -- Debuff that blocks re-casting (e.g. Weakened Soul)
 
@@ -108,6 +105,7 @@ if not lib then return end
 - `MAJOR` — Cooldown 60s+, save for key moments
 - `AOE` — AoE version of ability
 - `FINISHER` — Combo point / resource spenders
+- `CONSUMES_ALL_RESOURCE` — Drains ALL remaining resource, not just base cost (Execute)
 
 ### Exclusion Tags
 - `FILLER` — Mana-based spammables (excluded from HUD by default)
@@ -131,6 +129,13 @@ if not lib then return end
 
 ### Pet Tags
 `PET`, `PET_SUMMON`, `PET_CONTROL`, `PET_SUMMON_TEMP`
+
+### Totem Tags
+- `TOTEM` — Totem summon (tracks duration via SPELL_SUMMON)
+- `TOTEM_EARTH` — Earth totem (one active at a time)
+- `TOTEM_FIRE` — Fire totem (one active at a time)
+- `TOTEM_WATER` — Water totem (one active at a time)
+- `TOTEM_AIR` — Air totem (one active at a time)
 
 ### Stealth / Shapeshift Tags
 `STEALTH`, `STEALTH_BREAK`, `SHAPESHIFT`, `STANCE`
@@ -197,6 +202,7 @@ BALANCE, FERAL,                 -- Druid (RESTORATION shared)
 - `lib:GetAuraTarget(spellID)` — Returns "self", "ally", "pet", or "none"
 - `lib:IsSelfOnly(spellID)` — Returns true for "self" or "none"
 - `lib:IsRotational(spellID)` — Check ROTATIONAL tag
+- `lib:GetDispelType(spellID)` — Returns dispel type string for a spell's buff
 
 ### Triggered Aura Queries
 - `lib:GetAuraInfo(auraSpellID)` — Get `{sourceSpellID, tags, type, onTarget, duration}`
