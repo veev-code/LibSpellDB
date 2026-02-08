@@ -1,5 +1,14 @@
 # LibSpellDB Changelog
 
+## [1.0.26] - 2026-02-08
+
+### Added
+- **Druid: Claw** — All 6 ranks (1082, 3029, 5201, 9849, 9850, 27000) for Feral spec
+- **Druid: Rake** — All 5 ranks (1822, 1823, 1824, 9904, 27003) with `cooldownPriority` flag for Feral spec
+
+### Changed
+- **Renamed `ignoreAura` to `cooldownPriority`** across all data files (Druid, Warrior, Rogue) and documentation. The new name better reflects the behavior: cooldown/prediction display takes priority over aura tracking, rather than ignoring the aura entirely. Affected spells: Mortal Strike, Bloodthirst, Hemorrhage, Mangle (Bear), Rake.
+
 ## [1.0.25] - 2026-02-08
 
 ### Added
