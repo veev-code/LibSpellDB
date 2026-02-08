@@ -37,14 +37,18 @@ lib:RegisterSpells({
     -- Gnome - Escape Artist (breaks roots/snares)
     {
         spellID = 20589,
+        name = "Escape Artist",
+        description = "Escape the effects of any immobilization or movement speed reduction effect.",
         tags = {C.CC_BREAK, C.MOVEMENT},
-        cooldown = 60,
+        cooldown = 105,
         race = GNOME,
     },
 
     -- Undead - Will of the Forsaken (breaks fear/charm/sleep)
     {
         spellID = 7744,
+        name = "Will of the Forsaken",
+        description = "Provides immunity to Charm, Fear and Sleep while active. May also be used while already afflicted by Charm, Fear or Sleep. Lasts 5 sec.",
         tags = {C.CC_BREAK, C.CC_IMMUNITY},
         cooldown = 120,
         duration = 5,
@@ -54,6 +58,8 @@ lib:RegisterSpells({
     -- Dwarf - Stoneform (removes poison/disease/bleed + armor bonus)
     {
         spellID = 20594,
+        name = "Stoneform",
+        description = "While active, grants immunity to Bleed, Poison, and Disease effects. In addition, Armor increased by 10%. Lasts 8 sec.",
         tags = {C.CC_BREAK, C.DEFENSIVE, C.MINOR, C.DISPEL_POISON, C.DISPEL_DISEASE},
         cooldown = 180,
         duration = 8,
@@ -70,6 +76,8 @@ lib:RegisterSpells({
     -- Used by: Warriors, Hunters, Rogues
     {
         spellID = 20572,
+        name = "Blood Fury",
+        description = "Increases attack power by 6, but reduces healing effects on you by 50%. Lasts 15 sec.",
         tags = {C.DPS, C.MAJOR, C.HAS_BUFF},
         cooldown = 120,
         duration = 15,
@@ -81,6 +89,8 @@ lib:RegisterSpells({
     -- Used by: Shamans (Enhancement and Elemental benefit from both)
     {
         spellID = 33697,
+        name = "Blood Fury",
+        description = "Increases melee attack power by 6 and your damage and healing from spells and effects by up to 5, but reduces healing effects on you by 50%. Lasts 15 sec.",
         tags = {C.DPS, C.MAJOR, C.HAS_BUFF},
         cooldown = 120,
         duration = 15,
@@ -92,6 +102,8 @@ lib:RegisterSpells({
     -- Used by: Warlocks, Mages
     {
         spellID = 33702,
+        name = "Blood Fury",
+        description = "Increases your damage and healing from spells and effects by up to 5, but reduces healing effects on you by 50%. Lasts 15 sec.",
         tags = {C.DPS, C.MAJOR, C.HAS_BUFF},
         cooldown = 120,
         duration = 15,
@@ -102,6 +114,8 @@ lib:RegisterSpells({
     -- Troll - Berserking (attack/cast speed)
     {
         spellID = 26297,
+        name = "Berserking",
+        description = "Increases your attack speed by 10% to 30%. At full health the speed increase is 10% with a greater effect up to 30% if you are badly hurt when you activate Berserking. Lasts 10 sec.",
         tags = {C.DPS, C.MAJOR, C.HAS_BUFF},
         cooldown = 180,
         duration = 10,
@@ -118,6 +132,8 @@ lib:RegisterSpells({
     -- Tauren - War Stomp (AoE stun)
     {
         spellID = 20549,
+        name = "War Stomp",
+        description = "Stuns up to 5 enemies within 8 yds for 2 sec.",
         tags = {C.CC_HARD},
         cooldown = 120,
         duration = 2,
@@ -127,7 +143,9 @@ lib:RegisterSpells({
     -- Blood Elf - Arcane Torrent (AoE silence + resource restore)
     -- Different spellIDs per class, but all share same base functionality
     {
-        spellID = 28730,  -- Mage/Warlock/Priest version (restores mana)
+        spellID = 28730,  -- Mage/Warlock/Priest/Paladin version (restores mana)
+        name = "Arcane Torrent",
+        description = "Silence all enemies within 8 yards for 2 sec. In addition, you gain 10 Mana for each Mana Tap charge currently affecting you.",
         tags = {C.SILENCE, C.INTERRUPT, C.RESOURCE},
         cooldown = 120,
         duration = 2,
@@ -135,32 +153,31 @@ lib:RegisterSpells({
     },
     {
         spellID = 25046,  -- Rogue version (restores energy)
+        name = "Arcane Torrent",
+        description = "Silence all enemies within 8 yards for 2 sec. In addition, you gain 10 Energy for each Mana Tap charge currently affecting you.",
         tags = {C.SILENCE, C.INTERRUPT, C.RESOURCE},
         cooldown = 120,
         duration = 2,
         race = BLOODELF,
     },
     {
-        spellID = 28734,  -- Warrior version (restores rage... sort of)
-        tags = {C.SILENCE, C.INTERRUPT},
-        cooldown = 120,
-        duration = 2,
+        spellID = 28734,  -- Mana Tap (drains target mana, charges Arcane Torrent)
+        name = "Mana Tap",
+        description = "Reduces target's mana by 50 and charges you with Arcane energy for 10 min. This effect stacks up to 3 times.",
+        tags = {C.UTILITY, C.RESOURCE},
+        cooldown = 30,
+        duration = 600,
         race = BLOODELF,
     },
     {
         spellID = 28733,  -- Hunter version
+        name = "Arcane Torrent",
         tags = {C.SILENCE, C.INTERRUPT, C.RESOURCE},
         cooldown = 120,
         duration = 2,
         race = BLOODELF,
     },
-    {
-        spellID = 28732,  -- Paladin version (restores mana)
-        tags = {C.SILENCE, C.INTERRUPT, C.RESOURCE},
-        cooldown = 120,
-        duration = 2,
-        race = BLOODELF,
-    },
+    -- Paladin Arcane Torrent shares spellID 28730 (mana version) above
 })
 
 -------------------------------------------------------------------------------
@@ -171,6 +188,8 @@ lib:RegisterSpells({
     -- Draenei - Gift of the Naaru (HoT on self or ally)
     {
         spellID = 28880,
+        name = "Gift of the Naaru",
+        description = "Heals the target of 50 damage over 15 sec.",
         tags = {C.HEAL, C.HEAL_SINGLE, C.HOT, C.EXTERNAL_DEFENSIVE},
         cooldown = 180,
         duration = 15,
@@ -187,6 +206,8 @@ lib:RegisterSpells({
     -- Night Elf - Shadowmeld (stealth, combat drop)
     {
         spellID = 20580,
+        name = "Shadowmeld",
+        description = "Activate to slip into the shadows, reducing the chance for enemies to detect your presence. Lasts until cancelled or upon moving. Night Elf Rogues and Druids with Shadowmeld are more difficult to detect while stealthed or prowling.",
         tags = {C.UTILITY, C.STEALTH},
         cooldown = 10,
         race = NIGHTELF,
@@ -195,6 +216,8 @@ lib:RegisterSpells({
     -- Human - Perception (stealth detection)
     {
         spellID = 20600,
+        name = "Perception",
+        description = "Dramatically increases stealth detection for 20 sec.",
         tags = {C.UTILITY},
         cooldown = 180,
         duration = 20,
@@ -204,6 +227,8 @@ lib:RegisterSpells({
     -- Undead - Cannibalize (self heal out of combat)
     {
         spellID = 20577,
+        name = "Cannibalize",
+        description = "When activated, regenerates 7% of total health every 2 sec for 10 sec. Only works on Humanoid or Undead corpses within 5 yds. Any movement, action, or damage taken while Cannibalizing will cancel the effect.",
         tags = {C.UTILITY},
         cooldown = 120,
         duration = 10,
@@ -219,6 +244,8 @@ lib:RegisterSpells({
     -- PvP Trinket (TBC era)
     {
         spellID = 42292,
+        name = "PvP Trinket",
+        description = "Removes all movement impairing effects and all effects which cause loss of control of your character.",
         tags = {C.CC_BREAK},
         cooldown = 120,
     },
@@ -231,6 +258,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 23276,  -- Insignia of the Horde
+        name = "Immune Fear/Polymorph/Stun",
+        description = "Dispels all Fear, Polymorph and Stun effects.",
         tags = {C.CC_BREAK},
         cooldown = 300,
     },

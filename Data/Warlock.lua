@@ -19,6 +19,8 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 19244,  -- Spell Lock (Felhunter)
+        name = "Spell Lock",
+        description = "Silences the enemy for 3 sec. If used on a casting target, it will counter the enemy's spellcast, preventing any spell from that school of magic from being cast for 5 sec.",
         tags = {C.INTERRUPT, C.PET},
         cooldown = 24,
         duration = 6,
@@ -31,6 +33,8 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 5782,  -- Fear
+        name = "Fear",
+        description = "Strikes fear in the enemy, causing it to run in fear for up to 10 sec. Damage caused may interrupt the effect. Only 1 target can be feared at a time.",
         tags = {C.CC_HARD, C.FEAR},
         cooldown = 0,
         duration = 20,
@@ -39,6 +43,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 6789,  -- Death Coil
+        name = "Death Coil",
+        description = "Causes the enemy target to run in horror for 3 sec and causes 258 Shadow damage. The caster gains 100% of the damage caused in health.",
         tags = {C.CC_HARD, C.FEAR, C.HEAL_SINGLE, C.DPS, C.MINOR},
         cooldown = 120,
         duration = 3,
@@ -47,15 +53,19 @@ lib:RegisterSpells({
     },
     {
         spellID = 5484,  -- Howl of Terror
+        name = "Howl of Terror",
+        description = "Howl, causing 5 enemies within 10 yds to flee in terror for 6 sec. Damage caused may interrupt the effect.",
         tags = {C.CC_HARD, C.FEAR},
         cooldown = 40,
-        duration = 15,
+        duration = 8,
         talent = true,
         ranks = {5484, 17928},
         specs = {S.AFFLICTION},
     },
     {
         spellID = 6358,  -- Seduction (Succubus)
+        name = "Seduction",
+        description = "Seduces the target, preventing all actions for up to 15 sec. Any damage caused will remove the effect. Only works against Humanoids.",
         tags = {C.CC_HARD, C.DISORIENT, C.PET},
         cooldown = 0,
         duration = 15,
@@ -63,6 +73,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 710,  -- Banish
+        name = "Banish",
+        description = "Banishes the enemy target, preventing all action but making it invulnerable for up to 20 sec. Only one target can be banished at a time. Only works on Demons and Elementals.",
         tags = {C.CC_HARD, C.FILLER},  -- Spammable CC
         cooldown = 0,
         duration = 30,
@@ -71,6 +83,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 1098,  -- Enslave Demon
+        name = "Subjugate Demon",
+        description = "Subjugates the target demon, up to level 45, forcing it to do your bidding. While subjugated, the time between the demon's attacks is increased by 40% and its casting speed is slowed by 30%. Lasts up to 5 min. If you repeatedly subjugate the same demon, it will become more difficult to control with each attempt.",
         tags = {C.CC_HARD, C.FILLER},  -- Spammable CC
         cooldown = 0,
         duration = 300,
@@ -83,6 +97,8 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 18223,  -- Curse of Exhaustion
+        name = "Curse of Exhaustion",
+        description = "Reduces the target's movement speed by 30% for 12 sec. Only one Curse per Warlock can be active on any one target.",
         tags = {C.CC_SOFT, C.DEBUFF},
         cooldown = 0,
         duration = 12,
@@ -91,6 +107,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 1714,  -- Curse of Tongues
+        name = "Curse of Tongues",
+        description = "Forces the target to speak in Demonic, increasing the casting time of all spells by 50%. Only one Curse per Warlock can be active on any one target. Lasts 30 sec.",
         tags = {C.CC_SOFT, C.DEBUFF, C.SILENCE},
         cooldown = 0,
         duration = 30,
@@ -103,6 +121,8 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 6229,  -- Shadow Ward
+        name = "Shadow Ward",
+        description = "Absorbs 290 shadow damage. Lasts 30 sec.",
         tags = {C.DEFENSIVE, C.MINOR, C.HAS_BUFF},
         cooldown = 30,
         duration = 30,
@@ -112,6 +132,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 7812,  -- Sacrifice (Voidwalker)
+        name = "Sacrifice",
+        description = "Sacrifices the Voidwalker, giving its owner a shield that will absorb 319 damage for 30 sec. While the shield holds, spellcasting will not be interrupted by damage.",
         tags = {C.DEFENSIVE, C.MAJOR, C.PET, C.HAS_BUFF},
         cooldown = 0,
         duration = 30,
@@ -125,6 +147,8 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 18288,  -- Amplify Curse
+        name = "Amplify Curse",
+        description = "Increases the effect of your next Curse of Doom or Curse of Agony by 50%, or your next Curse of Exhaustion by an additional 20%. Lasts 30 sec.",
         tags = {C.DPS, C.MAJOR, C.HAS_BUFF},
         cooldown = 180,
         talent = true,
@@ -133,6 +157,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 17962,  -- Conflagrate (Destruction talent)
+        name = "Conflagrate",
+        description = "Ignites a target that is already afflicted by your Immolate, dealing 249 to 316 Fire damage and consuming the Immolate spell.",
         tags = {C.DPS, C.ROTATIONAL},
         cooldown = 10,
         talent = true,
@@ -140,6 +166,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 1122,  -- Inferno (Summon Infernal)
+        name = "Inferno",
+        description = "Summons a meteor from the Twisting Nether, causing 200 Fire damage and stunning all enemy targets in the area for 2 sec. An Infernal rises from the crater, under the command of the caster for 5 min. Once control is lost, the Infernal must be Subjugated to maintain control. Can only be used outdoors.",
         tags = {C.DPS, C.MAJOR, C.PET_SUMMON, C.PET_SUMMON_TEMP},
         cooldown = 3600,
         duration = 300,
@@ -147,12 +175,16 @@ lib:RegisterSpells({
     },
     {
         spellID = 18540,  -- Ritual of Doom (Summon Doomguard)
+        name = "Ritual of Doom",
+        description = "Begins a ritual that sacrifices a random participant to summon a doomguard. The doomguard must be immediately subjugated or it will attack the ritual participants. Requires the caster and 4 additional party members to complete the ritual. In order to participate, all players must right-click the portal and not move until the ritual is complete.",
         tags = {C.DPS, C.MAJOR, C.PET_SUMMON},
         cooldown = 3600,
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
         spellID = 17877,  -- Shadowburn (Destruction talent, execute phase)
+        name = "Shadowburn",
+        description = "Instantly blasts the target for 91 to 104 Shadow damage. If the target dies within 5 sec of Shadowburn, and yields experience or honor, the caster gains a Soul Shard.",
         tags = {C.DPS, C.ROTATIONAL, C.FINISHER},
         cooldown = 15,
         talent = true,
@@ -165,6 +197,8 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 19505,  -- Devour Magic (Felhunter)
+        name = "Devour Magic",
+        description = "Purges 1 harmful magic effect from a friend or 1 beneficial magic effect from an enemy. If an effect is devoured, the Felhunter will be healed for 258.",
         tags = {C.DISPEL_MAGIC, C.PET},
         cooldown = 8,
         ranks = {19505, 19731, 19734, 19736, 27276},
@@ -176,6 +210,8 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 603,  -- Curse of Doom (on long boss fights)
+        name = "Curse of Doom",
+        description = "Curses the target with impending doom, causing 3200 Shadow damage after 1 min. If the target dies from this damage, there is a chance that a Doomguard will be summoned. Cannot be cast on players.",
         tags = {C.DPS, C.MAINTENANCE, C.DEBUFF, C.PVE},
         cooldown = 60,
         duration = 60,
@@ -185,6 +221,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 980,  -- Curse of Agony (shorter fights)
+        name = "Curse of Agony",
+        description = "Curses the target with agony, causing 84 Shadow damage over 24 sec. This damage is dealt slowly at first, and builds up as the Curse reaches its full duration. Only one Curse per Warlock can be active on any one target.",
         tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE_PVP},
         cooldown = 0,
         duration = 24,
@@ -194,6 +232,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 30108,  -- Unstable Affliction (apply early)
+        name = "Unstable Affliction",
+        description = "Shadow energy slowly destroys the target, causing 660 damage over 18 sec. In addition, if the Unstable Affliction is dispelled it will cause 990 damage to the dispeller and silence them for 5 sec.",
         tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE},
         cooldown = 0,
         duration = 18,
@@ -204,6 +244,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 172,  -- Corruption (maintain)
+        name = "Corruption",
+        description = "Corrupts the target, causing 40 Shadow damage over 12 sec.",
         tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE_PVP},
         cooldown = 0,
         duration = 18,
@@ -213,6 +255,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 18265,  -- Siphon Life (maintain if talented)
+        name = "Siphon Life",
+        description = "Transfers 15 health from the target to the caster every 3 sec. Lasts 30 sec.",
         tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.HEAL_SINGLE, C.PVE},
         cooldown = 0,
         duration = 30,
@@ -227,6 +271,8 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 348,  -- Immolate (apply first for Conflag/Incinerate)
+        name = "Immolate",
+        description = "Burns the enemy for 11 Fire damage and then an additional 20 Fire damage over 15 sec.",
         tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE},
         cooldown = 0,
         duration = 15,
@@ -236,6 +282,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 29722,  -- Incinerate (main nuke with Immolate up)
+        name = "Incinerate",
+        description = "Deals 416 to 480 Fire damage to your target and an additional 103 to 120 Fire damage if the target is affected by an Immolate spell.",
         tags = {C.DPS, C.FILLER, C.PVE},
         cooldown = 0,
         priority = 2,
@@ -248,6 +296,8 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 686,  -- Shadow Bolt (main filler)
+        name = "Shadow Bolt",
+        description = "Sends a shadowy bolt at the enemy, causing 13 to 18 Shadow damage.",
         tags = {C.DPS, C.FILLER, C.PVE_PVP},
         cooldown = 0,
         priority = 5,
@@ -256,6 +306,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 5676,  -- Searing Pain (threat issues / low rank snipe)
+        name = "Searing Pain",
+        description = "Inflict searing pain on the enemy target, causing 38 to 47 Fire damage. Causes a high amount of threat.",
         tags = {C.DPS, C.FILLER, C.PVP},
         cooldown = 0,
         priority = 6,
@@ -264,6 +316,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 6353,  -- Soul Fire (opener/finisher - situational)
+        name = "Soul Fire",
+        description = "Burn the enemy's soul, causing 640 to 801 Fire damage.",
         tags = {C.DPS, C.MINOR, C.PVE},
         cooldown = 60,
         priority = 10,
@@ -272,6 +326,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 1120,  -- Drain Soul (execute phase / shard - situational)
+        name = "Drain Soul",
+        description = "Drains the soul of the target, causing 55 Shadow damage over 15 sec. If the target dies while being drained, and yields experience or honor, the caster gains a Soul Shard. Soul Shards are required for other spells.",
         tags = {C.DPS, C.MINOR, C.UTILITY, C.RESOURCE, C.PVE},
         cooldown = 0,
         duration = 15,
@@ -281,6 +337,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 689,  -- Drain Life (self-sustain - situational)
+        name = "Drain Life",
+        description = "Transfers 10 health every 1 sec from the target to the caster. Lasts 5 sec.",
         tags = {C.DPS, C.MINOR, C.HEAL_SINGLE, C.PVP},
         cooldown = 0,
         duration = 5,
@@ -290,6 +348,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 27243,  -- Seed of Corruption (AoE)
+        name = "Seed of Corruption",
+        description = "Imbeds a demon seed in the enemy target, causing 1044 Shadow damage over 18 sec. When the target takes 1044 total damage or dies, the seed will inflict 1110 to 1290 Shadow damage to all other enemies within 15 yards of the target. Only one Corruption spell per Warlock can be active on any one target.",
         tags = {C.DPS, C.AOE, C.DEBUFF, C.PVE},
         cooldown = 0,
         duration = 18,
@@ -298,6 +358,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 5740,  -- Rain of Fire (AoE)
+        name = "Rain of Fire",
+        description = "Calls down a fiery rain to burn enemies in the area of effect for (44 * 4) Fire damage over 8 sec.",
         tags = {C.DPS, C.AOE, C.PVE},
         cooldown = 0,
         duration = 8,
@@ -307,6 +369,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 1949,  -- Hellfire (AoE)
+        name = "Hellfire",
+        description = "Ignites the area surrounding the caster, causing 87 Fire damage to himself and 87 Fire damage to all nearby enemies every 1 sec. Lasts 15 sec.",
         tags = {C.DPS, C.AOE, C.PVE},
         cooldown = 0,
         duration = 15,
@@ -316,6 +380,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 5138,  -- Drain Mana (PvP utility)
+        name = "Drain Mana",
+        description = "Transfers 42 Mana every 1 sec from the target to the caster. Lasts 5 sec.",
         tags = {C.UTILITY, C.RESOURCE, C.PVP},
         cooldown = 0,
         duration = 5,
@@ -328,30 +394,40 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 688,  -- Summon Imp
+        name = "Summon Imp",
+        description = "Summons an Imp under the command of the Warlock.",
         tags = {C.PET_SUMMON, C.UTILITY},
         cooldown = 0,
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
         spellID = 697,  -- Summon Voidwalker
+        name = "Summon Voidwalker",
+        description = "Summons a Voidwalker under the command of the Warlock.",
         tags = {C.PET_SUMMON, C.UTILITY},
         cooldown = 0,
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
         spellID = 712,  -- Summon Succubus
+        name = "Summon Succubus",
+        description = "Summons a Succubus under the command of the Warlock.",
         tags = {C.PET_SUMMON, C.UTILITY},
         cooldown = 0,
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
         spellID = 691,  -- Summon Felhunter
+        name = "Summon Felhunter",
+        description = "Summons a Felhunter under the command of the Warlock.",
         tags = {C.PET_SUMMON, C.UTILITY},
         cooldown = 0,
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
         spellID = 18708,  -- Fel Domination
+        name = "Fel Domination",
+        description = "Your next Imp, Voidwalker, Succubus, Incubus, Felhunter or Felguard Summon spell has its casting time reduced by 5.5 sec and its Mana cost reduced by 50%.",
         tags = {C.PET_SUMMON, C.UTILITY},
         cooldown = 900,
         talent = true,
@@ -363,6 +439,8 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 20707,  -- Soulstone Resurrection
+        name = "Soulstone Resurrection",
+        description = "Stores the friendly target's soul. If the target dies while his soul is stored, he will be able to resurrect with 400 health and 700 mana.",
         tags = {C.RESURRECT, C.BATTLE_REZ, C.UTILITY},
         cooldown = 1800,
         ranks = {20707, 20762, 20763, 20764, 20765, 27238, 27239},
@@ -370,12 +448,16 @@ lib:RegisterSpells({
     },
     {
         spellID = 698,  -- Ritual of Summoning
+        name = "Ritual of Summoning",
+        description = "Begins a ritual that summons the targeted group member. Requires the caster and 2 additional party members to complete the ritual. In order to participate, all players must be out of combat and right-click the portal and not move until the ritual is complete.",
         tags = {C.UTILITY},
         cooldown = 0,
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
         spellID = 126,  -- Eye of Kilrogg
+        name = "Eye of Kilrogg",
+        description = "Summons an Eye of Kilrogg and binds your vision to it. The eye moves quickly but is very fragile.",
         tags = {C.UTILITY},
         cooldown = 0,
         duration = 45,
@@ -383,6 +465,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 5697,  -- Unending Breath
+        name = "Unending Breath",
+        description = "Allows the target to breathe underwater for 10 min.",
         tags = {C.UTILITY, C.BUFF, C.OUT_OF_COMBAT, C.LONG_BUFF, C.SITUATIONAL},
         cooldown = 0,
         duration = 600,
@@ -390,6 +474,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 132,  -- Detect Invisibility
+        name = "Detect Invisibility",
+        description = "Allows the friendly target to detect lesser invisibility for 10 min.",
         tags = {C.UTILITY, C.BUFF, C.OUT_OF_COMBAT, C.LONG_BUFF, C.SITUATIONAL},
         cooldown = 0,
         duration = 600,
@@ -397,6 +483,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 18094,  -- Nightfall (proc tracking)
+        name = "Nightfall",
+        description = "Gives your Corruption and Drain Life spells a 2% chance to cause you to enter a Shadow Trance state after damaging the opponent. The Shadow Trance state reduces the casting time of your next Shadow Bolt spell by 100%.",
         tags = {C.PROC, C.HAS_BUFF},
         talent = true,
         auraTarget = AT.SELF,
@@ -404,6 +492,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 702,  -- Curse of Weakness
+        name = "Curse of Weakness",
+        description = "Target's melee attack power is reduced by 21 for 2 min. Only one Curse per Warlock can be active on any one target.",
         tags = {C.DEBUFF, C.UTILITY},
         cooldown = 0,
         duration = 120,
@@ -412,6 +502,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 1490,  -- Curse of the Elements
+        name = "Curse of the Elements",
+        description = "Curses the target for 5 min, reducing Arcane, Fire, Frost, and Shadow resistances by 45 and increasing Arcane, Fire, Frost, and Shadow damage taken by 6%. Only one Curse per Warlock can be active on any one target.",
         tags = {C.DEBUFF, C.UTILITY, C.RAID_DEFENSIVE},
         cooldown = 0,
         duration = 300,
@@ -420,6 +512,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 17862,  -- Curse of Shadow
+        name = "Curse of Shadow",
+        description = "Curses the target for 5 min, reducing Shadow and Arcane resistances by 60 and increasing Shadow and Arcane damage taken by 8%. Only one Curse per Warlock can be active on any one target.",
         tags = {C.DEBUFF, C.UTILITY, C.RAID_DEFENSIVE},
         cooldown = 0,
         duration = 300,
@@ -428,6 +522,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 704,  -- Curse of Recklessness
+        name = "Curse of Recklessness",
+        description = "Curses the target with recklessness, increasing melee attack power by 20 but reducing armor by 140 for 2 min. Cursed enemies will not flee and will ignore Fear and Horror effects. Only one Curse per Warlock can be active on any one target.",
         tags = {C.DEBUFF, C.UTILITY, C.CC_BREAK},
         cooldown = 0,
         duration = 120,
@@ -440,6 +536,8 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 706,  -- Demon Armor
+        name = "Demon Armor",
+        description = "Protects the caster, increasing armor by 210, Shadow resistance by 3 and restores 7 health every 5 sec. Only one type of Armor spell can be active on the Warlock at any time. Lasts 30 min.",
         tags = {C.BUFF, C.DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
         duration = 1800,
@@ -450,6 +548,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 687,  -- Demon Skin
+        name = "Demon Skin",
+        description = "Protects the caster, increasing armor by 40 and restores 3 Health per 5 sec. for 30 min.",
         tags = {C.BUFF, C.DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
         duration = 1800,
@@ -460,6 +560,8 @@ lib:RegisterSpells({
     },
     {
         spellID = 28176,  -- Fel Armor (TBC+)
+        name = "Fel Armor",
+        description = "Surrounds the caster with fel energy, increasing the amount of health generated through spells and effects by 20% and increasing spell damage by up to 50. Only one type of Armor spell can be active on the Warlock at any time. Lasts 30 min.",
         tags = {C.BUFF, C.DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
         duration = 1800,
