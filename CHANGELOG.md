@@ -1,5 +1,22 @@
 # LibSpellDB Changelog
 
+## [1.0.32] - 2026-02-09
+
+### Added
+- **Priest racial abilities** — 8 race-restricted priest spells added with proper `race` fields:
+  - Night Elf: Starshards (Arcane DoT), Elune's Grace (avoidance buff)
+  - Human: Feedback (anti-magic shield)
+  - Draenei: Symbol of Hope (party mana regen)
+  - Undead/Blood Elf: Touch of Weakness (reactive damage buff)
+  - Troll: Hex of Weakness (healing reduction debuff), Shadowguard (shadow damage shield)
+  - Blood Elf: Consume Magic (self-dispel for mana)
+- **Multi-race `race` field support** — `IsSpellRelevantForSpec()` now accepts a table of race strings (e.g., `race = {"Dwarf", "Human"}`) in addition to a single string
+
+### Changed
+- **Priest: Chastise** — Correctly flagged as Dwarf/Draenei racial (was `talent = true`)
+- **Priest: Desperate Prayer** — Added `race = {Dwarf, Human}` restriction
+- **Priest: Devouring Plague** — Added `race = Undead` restriction
+
 ## [1.0.31] - 2026-02-09
 
 ### Changed

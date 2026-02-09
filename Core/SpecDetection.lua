@@ -284,10 +284,21 @@ function lib:IsSpellRelevantForSpec(spellID)
         return false
     end
     
-    -- Check race restriction first
+    -- Check race restriction first (race can be a string or table of strings)
     if spellData.race then
         local _, playerRace = UnitRace("player")
-        if playerRace ~= spellData.race then
+        if type(spellData.race) == "table" then
+            local raceMatch = false
+            for _, race in ipairs(spellData.race) do
+                if playerRace == race then
+                    raceMatch = true
+                    break
+                end
+            end
+            if not raceMatch then
+                return false  -- Wrong race
+            end
+        elseif playerRace ~= spellData.race then
             return false  -- Wrong race
         end
     end

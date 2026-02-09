@@ -13,19 +13,28 @@ local C = lib.Categories
 local S = lib.Specs
 local AT = lib.AuraTarget
 
+-- Race constants (must match UnitRace("player") return values)
+local HUMAN = "Human"
+local DWARF = "Dwarf"
+local NIGHTELF = "NightElf"
+local UNDEAD = "Scourge"  -- Internal name for Undead
+local TROLL = "Troll"
+local BLOODELF = "BloodElf"
+local DRAENEI = "Draenei"
+
 lib:RegisterSpells({
     -------------------------------------------------------------------------------
     -- Crowd Control - Soft CC
     -------------------------------------------------------------------------------
     {
-        spellID = 44046,  -- Chastise (Holy talent, Humanoids only)
+        spellID = 44046,  -- Chastise (Dwarf/Draenei racial, Humanoids only)
         name = "Chastise",
         description = "Chastise the target, causing 278 to 322 Holy damage and Immobilizing them for up to 2 sec. Only works against Humanoids. This spell causes very low threat.",
         tags = {C.CC_SOFT, C.ROOT},
         cooldown = 30,
         duration = 2,
-        talent = true,
         ranks = {44041, 44043, 44044, 44045, 44046},
+        race = {DWARF, DRAENEI},
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
 
@@ -135,13 +144,14 @@ lib:RegisterSpells({
         specs = {S.DISCIPLINE},
     },
     {
-        spellID = 13908,  -- Desperate Prayer (Dwarf/Human racial talent)
+        spellID = 13908,  -- Desperate Prayer (Dwarf/Human racial)
         name = "Desperate Prayer",
         description = "Instantly heals the caster for 148 to 185.",
         tags = {C.HEAL, C.MAJOR, C.HEAL_SINGLE},
         cooldown = 600,
         ranks = {13908, 19236, 19238, 19240, 19241, 19242, 19243, 25437},
         auraTarget = AT.SELF,  -- Self-heal only
+        race = {DWARF, HUMAN},
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
     {
@@ -409,6 +419,7 @@ lib:RegisterSpells({
         duration = 24,
         priority = 6,
         ranks = {2944, 19276, 19277, 19278, 19279, 19280, 25467},
+        race = UNDEAD,
         specs = {S.SHADOW},
     },
 
@@ -569,6 +580,116 @@ lib:RegisterSpells({
         dispelType = "Magic",
         ranks = {588, 602, 1006, 7128, 10951, 10952, 25431},
         auraTarget = AT.SELF,
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Priest Racial Abilities (race-restricted)
+    -- In TBC 2.3+, Fear Ward, Desperate Prayer, and Chastise became baseline.
+    -- The spells below remain locked to specific races.
+    -------------------------------------------------------------------------------
+
+    -- Night Elf: Starshards (level 10) - Instant Arcane DoT
+    {
+        spellID = 10797,  -- Starshards
+        name = "Starshards",
+        description = "Rains starshards down on the enemy target's head, causing 60 Arcane damage over 15 sec.",
+        tags = {C.DPS, C.MINOR, C.HAS_DOT},
+        cooldown = 30,
+        duration = 15,
+        ranks = {10797, 19296, 19299, 19302, 19303, 19304, 19305, 25446},
+        race = NIGHTELF,
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
+    },
+
+    -- Night Elf: Elune's Grace (level 20) - Avoidance buff
+    {
+        spellID = 2651,  -- Elune's Grace
+        name = "Elune's Grace",
+        description = "Reduces the chance you'll be hit by melee and ranged attacks by 20% for 15 sec.",
+        tags = {C.DEFENSIVE, C.PERSONAL_DEFENSIVE, C.MAJOR, C.HAS_BUFF},
+        cooldown = 180,
+        duration = 15,
+        auraTarget = AT.SELF,
+        race = NIGHTELF,
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
+    },
+
+    -- Human: Feedback (level 20) - Anti-magic mana burn shield
+    {
+        spellID = 13896,  -- Feedback
+        name = "Feedback",
+        description = "The priest becomes surrounded with anti-magic energy. Any successful spell cast against the priest will burn 18 of the attacker's Mana, causing 1 Shadow damage for each point of Mana burned. Lasts 15 sec.",
+        tags = {C.DEFENSIVE, C.MAJOR, C.HAS_BUFF},
+        cooldown = 180,
+        duration = 15,
+        ranks = {13896, 19271, 19273, 19274, 19275, 25441},
+        auraTarget = AT.SELF,
+        race = HUMAN,
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
+    },
+
+    -- Draenei: Symbol of Hope (level 10) - Party mana regeneration
+    {
+        spellID = 32548,  -- Symbol of Hope
+        name = "Symbol of Hope",
+        description = "Greatly increases the morale of party members, giving them 33 mana every 5 sec. Effect lasts 15 sec.",
+        tags = {C.RESOURCE, C.MAJOR},
+        cooldown = 300,
+        duration = 15,
+        race = DRAENEI,
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
+    },
+
+    -- Undead/Blood Elf: Touch of Weakness (level 10) - Reactive damage + debuff on attacker
+    {
+        spellID = 2652,  -- Touch of Weakness
+        name = "Touch of Weakness",
+        description = "The next melee attack against the caster will cause 8 Shadow damage and reduce the damage caused by the attacker by 2 for 2 min.",
+        tags = {C.DEFENSIVE, C.LONG_BUFF, C.HAS_BUFF},
+        cooldown = 0,
+        duration = 600,
+        ranks = {2652, 19261, 19262, 19264, 19265, 19266, 25461},
+        auraTarget = AT.SELF,
+        race = {UNDEAD, BLOODELF},
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
+    },
+
+    -- Troll: Hex of Weakness (level 10) - Damage + healing reduction debuff
+    {
+        spellID = 9035,  -- Hex of Weakness
+        name = "Hex of Weakness",
+        description = "Weakens the target enemy, reducing damage caused by 2 and reducing the effectiveness of any healing by 20%. Lasts 2 min.",
+        tags = {C.DEBUFF, C.UTILITY, C.FILLER},
+        cooldown = 0,
+        duration = 120,
+        ranks = {9035, 19281, 19282, 19283, 19284, 19285, 25470},
+        race = TROLL,
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
+    },
+
+    -- Troll: Shadowguard (level 20) - Shadow damage shield
+    {
+        spellID = 18137,  -- Shadowguard
+        name = "Shadowguard",
+        description = "The caster is surrounded by shadows. When a spell, melee or ranged attack hits the caster, the attacker will be struck for 20 Shadow damage. Attackers can only be damaged once every few seconds. This damage causes no threat. 3 charges. Lasts 10 min.",
+        tags = {C.DPS, C.LONG_BUFF, C.HAS_BUFF},
+        cooldown = 0,
+        duration = 600,
+        ranks = {18137, 19308, 19309, 19310, 19311, 19312, 25477},
+        auraTarget = AT.SELF,
+        race = TROLL,
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
+    },
+
+    -- Blood Elf: Consume Magic (level 20) - Self-dispel for mana
+    {
+        spellID = 32676,  -- Consume Magic
+        name = "Consume Magic",
+        description = "Dispels one beneficial Magic effect from the caster and gives them 120 to 154 mana. The dispelled effect must be a priest spell.",
+        tags = {C.RESOURCE, C.UTILITY, C.MINOR},
+        cooldown = 120,
+        race = BLOODELF,
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
 
