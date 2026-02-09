@@ -1,5 +1,16 @@
 # LibSpellDB Changelog
 
+## [1.0.30] - 2026-02-08
+
+### Added
+- **`CAT_FORM` and `BEAR_FORM` category tags** — New tags for classifying feral druid spells by required shapeshift form
+- **Druid form tagging** — 19 feral spells tagged with their required form:
+  - `CAT_FORM`: Mangle (Cat), Shred, Rake, Claw, Rip, Ferocious Bite, Pounce, Prowl, Dash
+  - `BEAR_FORM`: Mangle (Bear), Lacerate, Swipe, Maul, Demoralizing Roar, Feral Charge, Bash, Growl, Challenging Roar, Frenzied Regeneration
+
+### Changed
+- **TBC_Rotations.md** — Comprehensive rewrite sourced from Wowhead/Icy Veins TBC Classic guides. Corrected rotation priorities, added missing abilities, fixed TBC-era inaccuracies (e.g., Pyroblast not rotational, Fingers of Frost doesn't exist in TBC), added notes on key mechanics (powershifting, shot weaving, seal twisting)
+
 ## [1.0.29] - 2026-02-08
 
 ### Added

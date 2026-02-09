@@ -125,6 +125,8 @@ lib.Categories = {
     -- Shapeshift / Stance
     SHAPESHIFT          = "SHAPESHIFT",          -- Form changes
     STANCE              = "STANCE",              -- Stance changes
+    CAT_FORM            = "CAT_FORM",            -- Requires Cat Form (feral druid)
+    BEAR_FORM           = "BEAR_FORM",           -- Requires Bear Form (feral druid)
 
     -- Proc / Reactive
     PROC                = "PROC",                -- Proc-based abilities

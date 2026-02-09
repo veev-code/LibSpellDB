@@ -21,7 +21,7 @@ lib:RegisterSpells({
         spellID = 16979,  -- Feral Charge
         name = "Feral Charge",
         description = "Causes you to charge an enemy, immobilizing and interrupting any spell being cast for 4 sec.",
-        tags = {C.INTERRUPT, C.MOVEMENT_GAP_CLOSE, C.MOVEMENT},
+        tags = {C.INTERRUPT, C.MOVEMENT_GAP_CLOSE, C.MOVEMENT, C.BEAR_FORM},
         cooldown = 15,
         duration = 4,  -- Interrupt lockout / root duration
         talent = true,
@@ -39,7 +39,7 @@ lib:RegisterSpells({
         spellID = 5211,  -- Bash
         name = "Bash",
         description = "Stuns the target for 2 sec.",
-        tags = {C.CC_HARD},
+        tags = {C.CC_HARD, C.BEAR_FORM},
         cooldown = 60,
         duration = 4,
         ranks = {5211, 6798, 8983, 25515},
@@ -49,7 +49,7 @@ lib:RegisterSpells({
         spellID = 9005,  -- Pounce
         name = "Pounce",
         description = "Pounce, stunning the target for 3 sec and causing 270 damage over 18 sec. Must be prowling. Awards 1 combo point.",
-        tags = {C.CC_HARD},
+        tags = {C.CC_HARD, C.CAT_FORM},
         cooldown = 0,
         duration = 3,  -- Stun duration
         ranks = {9005, 9823, 9827, 27006},
@@ -103,7 +103,7 @@ lib:RegisterSpells({
         spellID = 22842,  -- Frenzied Regeneration
         name = "Frenzied Regeneration",
         description = "Converts up to 10 rage per second into health for 10 sec. Each point of rage is converted into 10 health.",
-        tags = {C.DEFENSIVE, C.MAJOR, C.HEAL_SINGLE, C.HAS_BUFF},
+        tags = {C.DEFENSIVE, C.MAJOR, C.HEAL_SINGLE, C.HAS_BUFF, C.BEAR_FORM},
         cooldown = 180,
         duration = 10,
         ranks = {22842, 22895, 22896, 26999},
@@ -177,7 +177,7 @@ lib:RegisterSpells({
         spellID = 1850,  -- Dash
         name = "Dash",
         description = "Increases movement speed by 50% for 15 sec. Does not break prowling.",
-        tags = {C.MOVEMENT, C.MOVEMENT_SPEED, C.HAS_BUFF},
+        tags = {C.MOVEMENT, C.MOVEMENT_SPEED, C.HAS_BUFF, C.CAT_FORM},
         cooldown = 300,
         duration = 15,
         ranks = {1850, 9821, 33357},
@@ -188,7 +188,7 @@ lib:RegisterSpells({
         spellID = 5215,  -- Prowl
         name = "Prowl",
         description = "Allows the Druid to prowl around, but reduces your movement speed by 40%. Lasts until cancelled.",
-        tags = {C.STEALTH},
+        tags = {C.STEALTH, C.CAT_FORM},
         cooldown = 10,
         ranks = {5215, 6783, 9913},
         specs = {S.FERAL},
@@ -258,7 +258,7 @@ lib:RegisterSpells({
         spellID = 5209,  -- Challenging Roar
         name = "Challenging Roar",
         description = "Forces all nearby enemies to focus attacks on you for 6 sec.",
-        tags = {C.TAUNT},
+        tags = {C.TAUNT, C.BEAR_FORM},
         cooldown = 600,
         duration = 6,
         specs = {S.FERAL},
@@ -267,7 +267,7 @@ lib:RegisterSpells({
         spellID = 6795,  -- Growl
         name = "Growl",
         description = "Taunts the target to attack you, but has no effect if the target is already attacking you.",
-        tags = {C.TAUNT},
+        tags = {C.TAUNT, C.BEAR_FORM},
         cooldown = 10,
         specs = {S.FERAL},
     },
@@ -370,7 +370,7 @@ lib:RegisterSpells({
         spellID = 33983,  -- Mangle (Cat) (apply debuff first)
         name = "Mangle (Cat)",
         description = "Mangle the target for 160% normal damage plus 264 and causes the target to take 30% additional damage from Shred and bleed effects for 12 sec. Awards 1 combo point.",
-        tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE_PVP, C.CAT_FORM},
         cooldown = 0,
         priority = 1,
         talent = true,
@@ -381,7 +381,7 @@ lib:RegisterSpells({
         spellID = 27002,  -- Shred (main CP builder from behind)
         name = "Shred",
         description = "Shred the target, causing 225% damage plus 405 to the target. Must be behind the target. Awards 1 combo point.",
-        tags = {C.DPS, C.ROTATIONAL, C.PVE},
+        tags = {C.DPS, C.ROTATIONAL, C.PVE, C.CAT_FORM},
         cooldown = 0,
         priority = 2,
         ranks = {5221, 6800, 8992, 9829, 9830, 27001, 27002, 27555},
@@ -391,7 +391,7 @@ lib:RegisterSpells({
         spellID = 27003,  -- Rake (applies DoT debuff)
         name = "Rake",
         description = "Rake the target for (Attack Power / 100 + 78) bleed damage and an additional (36 * 3 + Attack Power * 0.06) damage over 9 sec. Awards 1 combo point.",
-        tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE_PVP, C.CAT_FORM},
         cooldown = 0,
         duration = 9,
         priority = 2,
@@ -403,7 +403,7 @@ lib:RegisterSpells({
         spellID = 27000,  -- Claw (basic cat form attack)
         name = "Claw",
         description = "Claw the enemy, causing 190 additional damage. Awards 1 combo point.",
-        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP, C.CAT_FORM},
         cooldown = 0,
         priority = 3,
         ranks = {1082, 3029, 5201, 9849, 9850, 27000},
@@ -413,7 +413,7 @@ lib:RegisterSpells({
         spellID = 1079,  -- Rip (maintain at 5 CP)
         name = "Rip",
         description = "Finishing move that causes damage over time. Damage increases per combo point and by your attack power: 1 point : 42 damage over 12 sec. 2 points: 66 damage over 12 sec. 3 points: 90 damage over 12 sec. 4 points: 114 damage over 12 sec. 5 points: 138 damage over 12 sec.",
-        tags = {C.DPS, C.ROTATIONAL, C.FINISHER, C.DEBUFF, C.PVE},
+        tags = {C.DPS, C.ROTATIONAL, C.FINISHER, C.DEBUFF, C.PVE, C.CAT_FORM},
         cooldown = 0,
         duration = 12,
         priority = 3,
@@ -424,7 +424,7 @@ lib:RegisterSpells({
         spellID = 22568,  -- Ferocious Bite (dump excess CP/energy)
         name = "Ferocious Bite",
         description = "Finishing move that causes damage per combo point and converts each extra point of energy into 1 additional damage. Damage is increased by your attack power. 1 point : 50-66 damage 2 points: 86-102 damage 3 points: 122-138 damage 4 points: 158-174 damage 5 points: 194-210 damage",
-        tags = {C.DPS, C.ROTATIONAL, C.FINISHER, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.FINISHER, C.PVE_PVP, C.CAT_FORM},
         cooldown = 0,
         priority = 4,
         ranks = {22568, 22827, 22828, 22829, 31018, 24248},
@@ -438,7 +438,7 @@ lib:RegisterSpells({
         spellID = 33987,  -- Mangle (Bear) (highest threat on CD)
         name = "Mangle (Bear)",
         description = "Mangle the target for 115% normal damage plus 155 and causes the target to take 30% additional damage from Shred and bleed effects for 12 sec.",
-        tags = {C.TANK, C.ROTATIONAL, C.DEBUFF, C.PVE_PVP},
+        tags = {C.TANK, C.ROTATIONAL, C.DEBUFF, C.PVE_PVP, C.BEAR_FORM},
         cooldown = 6,
         priority = 1,
         talent = true,
@@ -450,7 +450,7 @@ lib:RegisterSpells({
         spellID = 33745,  -- Lacerate (stack and maintain)
         name = "Lacerate",
         description = "Lacerates the enemy target, dealing 31 bleed damage and making them bleed for 155 damage over 15 sec and causing a high amount of threat. Damage increased by attack power. This effect stacks up to 5 times on the same target.",
-        tags = {C.TANK, C.ROTATIONAL, C.DEBUFF, C.PVE},
+        tags = {C.TANK, C.ROTATIONAL, C.DEBUFF, C.PVE, C.BEAR_FORM},
         cooldown = 0,
         duration = 15,
         priority = 2,
@@ -460,7 +460,7 @@ lib:RegisterSpells({
         spellID = 779,  -- Swipe (AoE threat)
         name = "Swipe",
         description = "Swipe 3 nearby enemies, inflicting 10 damage. Damage increased by attack power.",
-        tags = {C.TANK, C.ROTATIONAL, C.AOE, C.PVE_PVP},
+        tags = {C.TANK, C.ROTATIONAL, C.AOE, C.PVE_PVP, C.BEAR_FORM},
         cooldown = 0,
         priority = 3,
         ranks = {779, 780, 769, 9754, 9908, 26997},
@@ -470,7 +470,7 @@ lib:RegisterSpells({
         spellID = 6807,  -- Maul (rage dump - situational)
         name = "Maul",
         description = "Increases the druid's next attack by 18 damage.",
-        tags = {C.TANK, C.ROTATIONAL, C.MINOR, C.PVE},
+        tags = {C.TANK, C.ROTATIONAL, C.MINOR, C.PVE, C.BEAR_FORM},
         cooldown = 0,
         priority = 10,
         ranks = {6807, 6808, 6809, 7092, 8972, 9745, 9880, 9881, 26996},
@@ -480,7 +480,7 @@ lib:RegisterSpells({
         spellID = 99,  -- Demoralizing Roar (maintain debuff)
         name = "Demoralizing Roar",
         description = "The druid roars, decreasing nearby enemies' melee attack power by 40. Lasts 30 sec.",
-        tags = {C.DEBUFF, C.UTILITY, C.PVE},
+        tags = {C.DEBUFF, C.UTILITY, C.PVE, C.BEAR_FORM},
         cooldown = 0,
         duration = 30,
         priority = 5,
