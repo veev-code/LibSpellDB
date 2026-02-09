@@ -397,7 +397,6 @@ lib:RegisterSpells({
         priority = 2,
         ranks = {1822, 1823, 1824, 9904, 27003},
         specs = {S.FERAL},
-        cooldownPriority = true,  -- Show energy prediction first, debuff shown when ability is ready
     },
     {
         spellID = 27000,  -- Claw (basic cat form attack)

@@ -1,5 +1,10 @@
 # LibSpellDB Changelog
 
+## [1.0.31] - 2026-02-09
+
+### Changed
+- **Druid: Rake** — Removed `cooldownPriority` flag so the DoT duration is displayed when active, letting players track when it needs refreshing. Previously the icon suppressed the aura display in favor of energy prediction.
+
 ## [1.0.30] - 2026-02-08
 
 ### Added
