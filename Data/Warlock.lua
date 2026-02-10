@@ -38,6 +38,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD, C.FEAR},
         cooldown = 0,
         duration = 20,
+        singleTarget = true,
         ranks = {5782, 6213, 6215, 27228},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
@@ -78,6 +79,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD, C.FILLER},  -- Spammable CC
         cooldown = 0,
         duration = 30,
+        singleTarget = true,
         ranks = {710, 18647},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
@@ -88,6 +90,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD, C.FILLER},  -- Spammable CC
         cooldown = 0,
         duration = 300,
+        singleTarget = true,
         ranks = {1098, 11725, 11726},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },

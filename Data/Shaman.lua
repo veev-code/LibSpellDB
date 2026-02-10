@@ -192,6 +192,7 @@ lib:RegisterSpells({
         tags = {C.HEAL, C.ROTATIONAL, C.HEAL_SINGLE, C.HAS_BUFF, C.LONG_BUFF, C.PVE},
         cooldown = 0,
         duration = 600,
+        singleTarget = true,
         dispelType = "Magic",
         priority = 1,
         talent = true,

@@ -37,6 +37,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD, C.DISORIENT, C.FILLER},  -- Spammable CC
         cooldown = 0,
         duration = 50,
+        singleTarget = true,
         ranks = {118, 12824, 12825, 12826, 28270, 28271, 28272},
         specs = {S.ARCANE, S.FIRE, S.FROST},
     },
@@ -346,6 +347,7 @@ lib:RegisterSpells({
         tags = {C.CC_SOFT, C.UTILITY},
         cooldown = 0,
         duration = 15,
+        singleTarget = true,
         talent = true,
         specs = {S.ARCANE},
     },

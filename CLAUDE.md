@@ -67,6 +67,7 @@ if not lib then return end
     cooldownPriority = true,            -- Show cooldown/prediction first, then aura when ready
     -- consumesAllResource: REMOVED — use CONSUMES_ALL_RESOURCE tag instead
     targetLockoutDebuff = 6788,         -- Debuff that blocks re-casting (e.g. Weakened Soul)
+    singleTarget = true,                -- Only one instance can be active at a time (Polymorph, Prayer of Mending)
     reactiveWindow = 20,                -- Duration (seconds) of usability window for REACTIVE spells
     reactiveWindowEvent = "PARTY_KILL", -- CLEU sub-event that triggers/refreshes the window
     clearsTotems = true,                -- When cast, destroys all active totems (Totemic Call)
@@ -205,6 +206,7 @@ BALANCE, FERAL,                 -- Druid (RESTORATION shared)
 - `lib:GetAuraTarget(spellID)` — Returns "self", "ally", "pet", or "none"
 - `lib:IsSelfOnly(spellID)` — Returns true for "self" or "none"
 - `lib:IsRotational(spellID)` — Check ROTATIONAL tag
+- `lib:IsSingleTarget(spellID)` — Check if only one instance can be active at a time
 - `lib:GetDispelType(spellID)` — Returns dispel type string for a spell's buff
 
 ### Triggered Aura Queries

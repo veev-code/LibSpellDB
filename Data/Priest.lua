@@ -58,6 +58,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD, C.FILLER},  -- Spammable CC, exclude from HUD
         cooldown = 0,
         duration = 60,
+        singleTarget = true,
         ranks = {605, 10911, 10912, 27620},
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
@@ -68,6 +69,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD, C.FILLER},  -- Spammable CC, exclude from HUD
         cooldown = 0,
         duration = 50,
+        singleTarget = true,
         ranks = {9484, 9485, 10955, 27655},
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
@@ -213,6 +215,7 @@ lib:RegisterSpells({
         tags = {C.HEAL, C.ROTATIONAL, C.HEAL_SINGLE, C.PVE_PVP},
         cooldown = 10,
         duration = 30,
+        singleTarget = true,
         priority = 1,
         auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.HOLY, S.DISCIPLINE},

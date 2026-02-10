@@ -1,5 +1,19 @@
 # LibSpellDB Changelog
 
+## [1.0.33] - 2026-02-09
+
+### Added
+- **`singleTarget` field** — New spell data field marking spells that can only be active on one target at a time (e.g., Polymorph: "Only one target can be polymorphed at a time", Prayer of Mending: "This spell can only be placed on one target at a time")
+- **`IsSingleTarget(spellID)` API** — Returns `true` if a spell has the `singleTarget` flag. Accepts spell ID or spell data table, consistent with `IsSelfOnly()` and `IsRotational()`
+- **12 spells tagged** with `singleTarget = true`:
+  - Mage: Polymorph, Slow
+  - Rogue: Sap
+  - Warlock: Fear, Banish, Enslave Demon
+  - Druid: Hibernate
+  - Priest: Mind Control, Shackle Undead, Prayer of Mending
+  - Paladin: Turn Undead
+  - Shaman: Earth Shield
+
 ## [1.0.32] - 2026-02-09
 
 ### Added

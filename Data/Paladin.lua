@@ -44,6 +44,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD, C.FEAR},
         cooldown = 30,
         duration = 20,
+        singleTarget = true,
         ranks = {2878, 5627, 10326},
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },

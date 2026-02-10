@@ -47,6 +47,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD, C.DISORIENT, C.FILLER},  -- Spammable (stealth-only)
         cooldown = 0,
         duration = 45,
+        singleTarget = true,
         ranks = {2070, 6770, 11297, 51724},
         specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
     },

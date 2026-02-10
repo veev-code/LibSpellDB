@@ -473,6 +473,29 @@ function lib:IsRotational(spellID)
 end
 
 --[[
+    Check if a spell can only be active on one target at a time
+
+    Covers spells with explicit single-target limitations (e.g. "Only one target can
+    be polymorphed at a time") and spells whose effect is implicitly exclusive to one
+    target (e.g. duration < cooldown).
+
+    @param spellID (number) - Spell ID (or spell data table)
+    @return (boolean) - true if only one instance can be active at a time
+]]
+function lib:IsSingleTarget(spellID)
+    local spellData
+    if type(spellID) == "table" then
+        spellData = spellID
+    else
+        spellData = self:GetSpellInfo(spellID)
+    end
+
+    if not spellData then return false end
+
+    return spellData.singleTarget == true
+end
+
+--[[
     Get all registered spells
 
     @return (table) - Dictionary of spellID -> spellData

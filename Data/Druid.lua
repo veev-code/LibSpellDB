@@ -82,6 +82,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD, C.FILLER},  -- Spammable CC
         cooldown = 0,
         duration = 40,
+        singleTarget = true,
         ranks = {2637, 18657, 18658},
         specs = {S.BALANCE, S.FERAL, S.RESTORATION},
     },
