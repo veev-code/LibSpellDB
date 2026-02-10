@@ -1,5 +1,12 @@
 # LibSpellDB Changelog
 
+## [1.0.34] - 2026-02-10
+
+### Added
+- **`appliesBuff` field** — New spell data field containing an array of buff spell IDs that a totem applies to nearby party members (ordered low to high by rank). Used for range detection — if the player lacks the buff, they've moved out of range. 12 Shaman totems annotated: Strength of Earth, Stoneskin, Grace of Air, Windfury, Tranquil Air, Wrath of Air, Frost Resistance, Flametongue, Totem of Wrath, Healing Stream, Mana Spring, Mana Tide
+- **Wrath of Air Totem** (spell 3738) — New TBC Air totem entry with `TOTEM_AIR` tag and `appliesBuff = {2895}`
+- **Mage: Scorch `triggersAuras`** — Improved Scorch talent now maps to its Fire Vulnerability debuff (spell 22959), enabling aura tracking on the target. Added `HAS_DEBUFF` tag.
+
 ## [1.0.33] - 2026-02-09
 
 ### Added

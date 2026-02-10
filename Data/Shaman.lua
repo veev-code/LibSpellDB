@@ -268,6 +268,7 @@ lib:RegisterSpells({
         duration = 12,
         priority = 7,
         talent = true,
+        appliesBuff = {16191},
         auraTarget = AT.NONE,  -- Totem placed at caster location
         specs = {S.RESTORATION},
     },
@@ -284,6 +285,7 @@ lib:RegisterSpells({
         duration = 120,
         priority = 1,
         talent = true,
+        appliesBuff = {30708},
         specs = {S.ELEMENTAL},
     },
 
@@ -400,6 +402,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 120,
         ranks = {8181, 10478, 10479, 25560},
+        appliesBuff = {8182, 10476, 10477, 25559},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
@@ -410,6 +413,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 120,
         ranks = {8227, 8249, 10526, 16387, 25557},
+        appliesBuff = {8230, 8250, 10521, 15036, 25554},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
 
@@ -424,6 +428,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 120,
         ranks = {8512, 10613, 10614, 25585, 25587},
+        appliesBuff = {8514, 10607, 10611, 25579, 25580},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
@@ -434,6 +439,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 120,
         ranks = {8835, 10627, 25359},
+        appliesBuff = {8836, 10626, 25360},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
@@ -452,6 +458,17 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.UTILITY, C.TOTEM, C.TOTEM_AIR},
         cooldown = 0,
         duration = 120,
+        appliesBuff = {25909},
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
+    },
+    {
+        spellID = 3738,  -- Wrath of Air Totem (TBC+)
+        name = "Wrath of Air Totem",
+        description = "Summons a Wrath of Air Totem with 5 health at the feet of the caster. The totem increases spell damage and healing of party members within 20 yards by 101. Lasts 2 min.",
+        tags = {C.BUFF, C.DPS, C.RAID_DEFENSIVE, C.TOTEM, C.TOTEM_AIR},
+        cooldown = 0,
+        duration = 120,
+        appliesBuff = {2895},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
 
@@ -466,6 +483,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 120,
         ranks = {5394, 6375, 6377, 10462, 10463, 25567},
+        appliesBuff = {5672, 6371, 6372, 10460, 10461, 25566},
         auraTarget = AT.NONE,  -- Totem placed at caster location
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
@@ -477,6 +495,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 120,
         ranks = {5675, 10495, 10496, 10497, 25569, 25570},
+        appliesBuff = {5677, 10491, 10493, 10494, 25569},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
 
@@ -501,6 +520,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 120,
         ranks = {8071, 8154, 8155, 10406, 10407, 10408, 25508, 25509},
+        appliesBuff = {8072, 8156, 8157, 10403, 10404, 10405, 25506, 25507},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
@@ -511,6 +531,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 120,
         ranks = {8075, 8160, 8161, 10442, 25361, 25528},
+        appliesBuff = {8076, 8162, 8163, 10441, 25362, 25527},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
 

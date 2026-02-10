@@ -71,6 +71,7 @@ if not lib then return end
     reactiveWindow = 20,                -- Duration (seconds) of usability window for REACTIVE spells
     reactiveWindowEvent = "PARTY_KILL", -- CLEU sub-event that triggers/refreshes the window
     clearsTotems = true,                -- When cast, destroys all active totems (Totemic Call)
+    appliesBuff = {8076, 8162},         -- Buff spell IDs applied to player/party (all ranks, low to high)
 
     -- Triggered auras (when aura ID differs from spell ID)
     triggersAuras = {

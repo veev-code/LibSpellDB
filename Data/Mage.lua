@@ -198,11 +198,15 @@ lib:RegisterSpells({
         spellID = 2948,  -- Scorch (maintain Improved Scorch debuff first)
         name = "Scorch",
         description = "Scorch the enemy for 56 to 69 Fire damage.",
-        tags = {C.DPS, C.MAINTENANCE, C.DEBUFF, C.PVE},
+        tags = {C.DPS, C.MAINTENANCE, C.DEBUFF, C.HAS_DEBUFF, C.PVE},
         cooldown = 0,
         priority = 1,
         ranks = {2948, 8444, 8445, 8446, 10205, 10206, 10207, 27073, 27074},
         specs = {S.FIRE},
+        -- Improved Scorch talent applies Fire Vulnerability debuff (stacks to 5, +3% fire dmg each)
+        triggersAuras = {
+            { spellID = 22959, tags = {C.DEBUFF, C.DPS}, type = "DEBUFF", onTarget = true, duration = 30 },
+        },
     },
     {
         spellID = 133,  -- Fireball (main nuke - filler, not tracked)
