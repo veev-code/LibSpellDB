@@ -1,5 +1,19 @@
 # LibSpellDB Changelog
 
+## [1.0.35] - 2026-02-10
+
+### Added
+- **Paladin: Missing seals** — Added 4 seals that were absent from the database:
+  - Seal of Wisdom (20166) — mana restore on melee, 4 ranks
+  - Seal of Light (20165) — heal on melee, 5 ranks
+  - Seal of Justice (20164) — stun on melee, 2 ranks
+  - Seal of Vengeance (31801) — stacking Holy DoT (Alliance)
+- **`buffGroup = "PALADIN_SEALS"`** — All 8 seals now tagged with a shared buff group for mutual exclusivity tracking
+
+### Changed
+- **Seal of Blood** — Broadened spec coverage from Retribution-only to Retribution + Protection (Prot Paladins use it for threat generation)
+- **All existing seals** — Added `auraTarget = AT.SELF` for consistent aura targeting metadata
+
 ## [1.0.34] - 2026-02-10
 
 ### Added

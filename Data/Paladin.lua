@@ -205,13 +205,14 @@ lib:RegisterSpells({
     {
         spellID = 31892,  -- Seal of Blood (maintain, Horde)
         name = "Seal of Blood",
-        description = "All melee attacks deal additional Holy damage equal to 35% of normal weapon damage, but the Paladin loses health equal to 10% of the total damage inflicted.Unleashing this Seal's energy will judge an enemy, instantly causing 295 to 325 Holy damage at the cost of health equal to 33% of the damage caused.",
+        description = "All melee attacks deal additional Holy damage equal to 35% of normal weapon damage, but the Paladin loses health equal to 10% of the total damage inflicted. Unleashing this Seal's energy will judge an enemy, instantly causing 295 to 325 Holy damage at the cost of health equal to 33% of the damage caused.",
         tags = {C.DPS, C.MAINTENANCE, C.BUFF, C.PVE},
         cooldown = 0,
         duration = 30,
         priority = 1,
         auraTarget = AT.SELF,
-        specs = {S.RETRIBUTION},
+        specs = {S.RETRIBUTION, S.PROTECTION},
+        buffGroup = "PALADIN_SEALS",
     },
     {
         spellID = 35395,  -- Crusader Strike (use on CD)
@@ -540,38 +541,91 @@ lib:RegisterSpells({
     },
 
     -------------------------------------------------------------------------------
-    -- Seals (for reference)
+    -- Seals (mutually exclusive — only one active at a time)
     -------------------------------------------------------------------------------
     {
         spellID = 21082,  -- Seal of the Crusader
         name = "Seal of the Crusader",
-        description = "Fills the Paladin with the spirit of a crusader for 30 sec, granting 41 melee attack power. The Paladin also attacks 40% faster, but deals less damage with each attack. Only one Seal can be active on the Paladin at any one time.Unleashing this Seal's energy will judge an enemy for 20 sec, increasing Holy damage taken by up to 23. Your melee strikes will refresh the spell's duration. Only one Judgement per Paladin can be active at any one time.",
+        description = "Fills the Paladin with the spirit of a crusader for 30 sec, granting 41 melee attack power. The Paladin also attacks 40% faster, but deals less damage with each attack. Only one Seal can be active on the Paladin at any one time. Unleashing this Seal's energy will judge an enemy for 20 sec, increasing Holy damage taken by up to 23.",
         tags = {C.BUFF, C.DPS, C.MAINTENANCE},
         cooldown = 0,
         duration = 30,
         ranks = {21082, 20162, 20305, 20306, 20307, 20308, 27158},
+        auraTarget = AT.SELF,
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        buffGroup = "PALADIN_SEALS",
     },
     {
         spellID = 20154,  -- Seal of Righteousness
         name = "Seal of Righteousness",
-        description = "Fills the Paladin with holy spirit for 30 sec, granting each melee attack an additional [1.2 * (216 * 1.2 * 1.03 * Mainhand weapon max base speed / 100) + 0.03 * (Mainhand weapon max damage + Mainhand weapon min damage) / 2 + 1] Holy damage. Only one Seal can be active on the Paladin at any one time.",
+        description = "Fills the Paladin with holy spirit for 30 sec, granting each melee attack additional Holy damage. Only one Seal can be active on the Paladin at any one time.",
         tags = {C.BUFF, C.DPS, C.MAINTENANCE},
         cooldown = 0,
         duration = 30,
         ranks = {20154, 20287, 20288, 20289, 20290, 20291, 20292, 20293, 27155},
+        auraTarget = AT.SELF,
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        buffGroup = "PALADIN_SEALS",
     },
     {
         spellID = 20375,  -- Seal of Command
         name = "Seal of Command",
-        description = "Gives the Paladin a chance to deal additional Holy damage equal to 70% of normal weapon damage. Only one Seal can be active on the Paladin at any one time. Lasts 30 sec.Unleashing this Seal's energy will judge an enemy, instantly causing 68 to 73 Holy damage, 137 to 146 if the target is stunned or incapacitated.",
+        description = "Gives the Paladin a chance to deal additional Holy damage equal to 70% of normal weapon damage. Only one Seal can be active on the Paladin at any one time. Lasts 30 sec. Unleashing this Seal's energy will judge an enemy, instantly causing Holy damage.",
         tags = {C.BUFF, C.DPS, C.MAINTENANCE},
         cooldown = 0,
         duration = 30,
         talent = true,
         ranks = {20375, 20915, 20918, 20919, 20920, 27170},
+        auraTarget = AT.SELF,
         specs = {S.RETRIBUTION},
+        buffGroup = "PALADIN_SEALS",
+    },
+    {
+        spellID = 20166,  -- Seal of Wisdom
+        name = "Seal of Wisdom",
+        description = "Fills the Paladin with divine wisdom for 30 sec, giving each melee attack a chance to restore the Paladin's mana. Only one Seal can be active on the Paladin at any one time. Unleashing this Seal's energy will judge an enemy, giving attacks made against the judged enemy a chance to restore the attacker's mana.",
+        tags = {C.BUFF, C.RESOURCE, C.MAINTENANCE},
+        cooldown = 0,
+        duration = 30,
+        ranks = {20166, 20356, 20357, 27166},
+        auraTarget = AT.SELF,
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        buffGroup = "PALADIN_SEALS",
+    },
+    {
+        spellID = 20165,  -- Seal of Light
+        name = "Seal of Light",
+        description = "Fills the Paladin with divine light for 30 sec, giving each melee attack a chance to heal the Paladin. Only one Seal can be active on the Paladin at any one time. Unleashing this Seal's energy will judge an enemy, giving melee attacks made against the judged enemy a chance to heal the attacker.",
+        tags = {C.BUFF, C.HEAL, C.MAINTENANCE},
+        cooldown = 0,
+        duration = 30,
+        ranks = {20165, 20347, 20348, 20349, 27160},
+        auraTarget = AT.SELF,
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        buffGroup = "PALADIN_SEALS",
+    },
+    {
+        spellID = 20164,  -- Seal of Justice
+        name = "Seal of Justice",
+        description = "Fills the Paladin with the spirit of justice for 30 sec, giving each melee attack a chance to stun the target for 2 sec. Unleashing this Seal's energy will judge an enemy for 20 sec, preventing them from fleeing.",
+        tags = {C.BUFF, C.CC_HARD, C.UTILITY},
+        cooldown = 0,
+        duration = 30,
+        ranks = {20164, 31895},
+        auraTarget = AT.SELF,
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        buffGroup = "PALADIN_SEALS",
+    },
+    {
+        spellID = 31801,  -- Seal of Vengeance (Alliance)
+        name = "Seal of Vengeance",
+        description = "Fills the Paladin with holy power, causing each melee attack to apply Holy Vengeance to the target, dealing 150 Holy damage over 15 sec. Can stack up to 5 times. Only one Seal can be active on the Paladin at any one time. Unleashing this Seal's energy will judge an enemy, dealing Holy damage per stack of Holy Vengeance.",
+        tags = {C.BUFF, C.DPS, C.MAINTENANCE},
+        cooldown = 0,
+        duration = 30,
+        auraTarget = AT.SELF,
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        buffGroup = "PALADIN_SEALS",
     },
 
     -------------------------------------------------------------------------------
