@@ -268,7 +268,6 @@ lib:RegisterSpells({
         duration = 12,
         priority = 7,
         talent = true,
-        appliesBuff = {16191},
         auraTarget = AT.NONE,  -- Totem placed at caster location
         specs = {S.RESTORATION},
     },
@@ -413,7 +412,6 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 120,
         ranks = {8227, 8249, 10526, 16387, 25557},
-        appliesBuff = {8230, 8250, 10521, 15036, 25554},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
 
@@ -428,7 +426,6 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 120,
         ranks = {8512, 10613, 10614, 25585, 25587},
-        appliesBuff = {8514, 10607, 10611, 25579, 25580},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
@@ -459,6 +456,17 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 120,
         appliesBuff = {25909},
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
+    },
+    {
+        spellID = 10595,  -- Nature Resistance Totem
+        name = "Nature Resistance Totem",
+        description = "Summons a Nature Resistance Totem with 5 health at the feet of the caster for 2 min. The totem increases party members' nature resistance by 30, if within 20 yards.",
+        tags = {C.BUFF, C.RAID_DEFENSIVE, C.TOTEM, C.TOTEM_AIR},
+        cooldown = 0,
+        duration = 120,
+        ranks = {10595, 10600, 10601, 25574},
+        appliesBuff = {10596, 10598, 10599, 25573},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
@@ -496,6 +504,18 @@ lib:RegisterSpells({
         duration = 120,
         ranks = {5675, 10495, 10496, 10497, 25569, 25570},
         appliesBuff = {5677, 10491, 10493, 10494, 25569},
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
+    },
+
+    {
+        spellID = 8184,  -- Fire Resistance Totem
+        name = "Fire Resistance Totem",
+        description = "Summons a Fire Resistance Totem with 5 health at the feet of the caster for 2 min. The totem increases party members' fire resistance by 30, if within 20 yards.",
+        tags = {C.BUFF, C.RAID_DEFENSIVE, C.TOTEM, C.TOTEM_WATER},
+        cooldown = 0,
+        duration = 120,
+        ranks = {8184, 10537, 10538, 25563},
+        appliesBuff = {8185, 10534, 10535, 25562},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
 

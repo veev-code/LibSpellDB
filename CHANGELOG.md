@@ -1,5 +1,16 @@
 # LibSpellDB Changelog
 
+## [1.0.38] - 2026-02-11
+
+### Added
+- **Shaman: Fire Resistance Totem** (8184) — Water element totem with 4 ranks and `appliesBuff` for range detection
+- **Shaman: Nature Resistance Totem** (10595) — Air element totem with 4 ranks and `appliesBuff` for range detection
+
+### Fixed
+- **Shaman: Mana Tide Totem** — Removed incorrect `appliesBuff` (totem pulses mana, does not apply a persistent `UnitBuff`)
+- **Shaman: Windfury Totem** — Removed incorrect `appliesBuff` (applies a weapon enchant via `GetWeaponEnchantInfo`, not a `UnitBuff`)
+- **Shaman: Flametongue Totem** — Removed incorrect `appliesBuff` (applies a weapon enchant, not a `UnitBuff`)
+
 ## [1.0.37] - 2026-02-11
 
 ### Changed
