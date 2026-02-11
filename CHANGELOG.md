@@ -1,5 +1,12 @@
 # LibSpellDB Changelog
 
+## [1.0.36] - 2026-02-10
+
+### Changed
+- **`IsRotational()` performance** — O(1) hash lookup via `spellIDToTags` index instead of O(n) tag array iteration and `GetSpellInfo()` lookup
+- **`GetAuraTarget()` performance** — O(1) hash lookup for healing/defensive tags instead of O(n) `ipairs` iteration over tag array
+- **`GetSortedSpells()` performance** — Pre-computes priority per spell before sorting, reducing comparator cost from O(n^2 * t) to O(n*t + n log n)
+
 ## [1.0.35] - 2026-02-10
 
 ### Added

@@ -412,11 +412,13 @@ function lib:GetAuraTarget(spellID)
         end
     end
     
-    -- Check tags - these indicate the spell can target other friendly players
-    if spellData.tags then
-        for _, tag in ipairs(spellData.tags) do
-            if tag == "HEAL_SINGLE" or tag == "HOT" or tag == "HAS_HOT" 
-               or tag == "HEAL_AOE" or tag == "EXTERNAL_DEFENSIVE" then
+    -- Check tags using hash index for O(1) lookup
+    local id = spellData.spellID
+    if id then
+        local tagSet = self.spellIDToTags[id]
+        if tagSet then
+            if tagSet["HEAL_SINGLE"] or tagSet["HOT"] or tagSet["HAS_HOT"]
+               or tagSet["HEAL_AOE"] or tagSet["EXTERNAL_DEFENSIVE"] then
                 return "ally"
             end
         end
@@ -454,22 +456,15 @@ end
 ]]
 function lib:IsRotational(spellID)
     -- Accept either spell ID or spell data table
-    local spellData
+    local id
     if type(spellID) == "table" then
-        spellData = spellID
+        id = spellID.spellID
     else
-        spellData = self:GetSpellInfo(spellID)
+        id = self.rankToCanonical[spellID] or spellID
     end
-    
-    if not spellData or not spellData.tags then return false end
-    
-    for _, tag in ipairs(spellData.tags) do
-        if tag == "ROTATIONAL" then
-            return true
-        end
-    end
-    
-    return false
+    if not id then return false end
+    local tags = self.spellIDToTags[id]
+    return tags and tags["ROTATIONAL"] or false
 end
 
 --[[
@@ -605,30 +600,25 @@ end
 ]]
 function lib:GetSortedSpells(spells, priorityFn)
     local sorted = {}
+    -- Pre-compute priority for each spell to avoid O(n^2) tag iteration in comparator
+    local priorityCache = {}
     for spellID, spellData in pairs(spells) do
         table.insert(sorted, spellData)
+        if priorityFn then
+            priorityCache[spellID] = priorityFn(spellData)
+        else
+            local maxPriority = 0
+            for tag in pairs(self.spellIDToTags[spellID] or {}) do
+                local tagPriority = self:GetCategoryPriority(tag)
+                if tagPriority > maxPriority then maxPriority = tagPriority end
+            end
+            priorityCache[spellID] = maxPriority
+        end
     end
 
-    if priorityFn then
-        table.sort(sorted, function(a, b)
-            return priorityFn(a) > priorityFn(b)
-        end)
-    else
-        -- Default: sort by highest priority tag
-        table.sort(sorted, function(a, b)
-            local aPriority = 0
-            local bPriority = 0
-            for tag in pairs(self.spellIDToTags[a.spellID] or {}) do
-                local tagPriority = self:GetCategoryPriority(tag)
-                if tagPriority > aPriority then aPriority = tagPriority end
-            end
-            for tag in pairs(self.spellIDToTags[b.spellID] or {}) do
-                local tagPriority = self:GetCategoryPriority(tag)
-                if tagPriority > bPriority then bPriority = tagPriority end
-            end
-            return aPriority > bPriority
-        end)
-    end
+    table.sort(sorted, function(a, b)
+        return (priorityCache[a.spellID] or 0) > (priorityCache[b.spellID] or 0)
+    end)
 
     return sorted
 end
