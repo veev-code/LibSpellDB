@@ -330,7 +330,7 @@ lib:RegisterSpells({
         spellID = 34120,  -- Steady Shot (main shot, weave with Auto)
         name = "Steady Shot",
         description = "A steady shot that causes base weapon damage plus (Ranged Attack Power * 0.2 + 150). Causes an additional 175 against Dazed targets.",
-        tags = {C.DPS, C.ROTATIONAL, C.PVE},
+        tags = {C.DPS, C.FILLER, C.PVE},
         cooldown = 0,
         priority = 4,
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},

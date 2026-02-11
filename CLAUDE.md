@@ -113,7 +113,7 @@ if not lib then return end
 - `CONSUMES_ALL_RESOURCE` — Drains ALL remaining resource, not just base cost (Execute)
 
 ### Exclusion Tags
-- `FILLER` — Mana-based spammables (excluded from HUD by default)
+- `FILLER` — Mana-based spammables with no cooldown (excluded from HUD by default)
 - `OUT_OF_COMBAT` — Only used out of combat
 - `LONG_BUFF` — 30+ min buffs cast out of combat
 
@@ -157,6 +157,15 @@ if not lib then return end
 
 ### Deprecated Tags (still functional)
 `CORE_ROTATION`, `SITUATIONAL`, `OFFENSIVE_CD`, `OFFENSIVE_CD_MINOR`, `HEALING_CD`, `HEALING_CD_MINOR`
+
+### Tagging Guidelines
+
+These rules ensure spells are categorized correctly for any consumer:
+
+- **FILLER vs ROTATIONAL** — `FILLER` is for mana-gated spammables with no cooldown (Flash Heal, Fireball, Binding Heal). Rage/energy-gated abilities without cooldowns are `ROTATIONAL`, not `FILLER` — their resource cost is meaningful and worth displaying.
+- **PERSONAL_DEFENSIVE vs HEAL** — Self-only emergency heals (Desperate Prayer) should use `PERSONAL_DEFENSIVE`, not `HEAL`. The `HEAL` role tag implies ally-targetable throughput. `HEAL_SINGLE`/`HEAL_AOE` subtypes can still be present as metadata.
+- **specs field** — Only include specs that realistically use the spell in their default role. DPS spells shouldn't list healer specs (and vice versa). Niche/cross-role spells can use `specs = {}` (empty = no spec by default, available for manual enable).
+- **talent field** — Only set `talent = true` for abilities learned via talent points. Baseline trainable abilities (even high-level ones like Shadowfiend at 66) should not have this flag.
 
 ## AuraTarget Constants (`lib.AuraTarget`)
 

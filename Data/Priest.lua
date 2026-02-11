@@ -149,7 +149,7 @@ lib:RegisterSpells({
         spellID = 13908,  -- Desperate Prayer (Dwarf/Human racial)
         name = "Desperate Prayer",
         description = "Instantly heals the caster for 148 to 185.",
-        tags = {C.HEAL, C.MAJOR, C.HEAL_SINGLE},
+        tags = {C.PERSONAL_DEFENSIVE, C.MAJOR, C.HEAL_SINGLE},
         cooldown = 600,
         ranks = {13908, 19236, 19238, 19240, 19241, 19242, 19243, 25437},
         auraTarget = AT.SELF,  -- Self-heal only
@@ -181,7 +181,7 @@ lib:RegisterSpells({
         duration = 0,  -- Next spell only
         talent = true,
         auraTarget = AT.SELF,
-        specs = {S.DISCIPLINE},
+        specs = {S.DISCIPLINE, S.HOLY},
     },
     {
         spellID = 10060,  -- Power Infusion
@@ -201,8 +201,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MAJOR, C.RESOURCE, C.PET_SUMMON, C.PET_SUMMON_TEMP, C.PVE},
         cooldown = 300,
         duration = 15,
-        talent = true,
-        specs = {S.SHADOW},
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
 
     -------------------------------------------------------------------------------
@@ -239,7 +238,7 @@ lib:RegisterSpells({
         spellID = 34861,  -- Circle of Healing (instant AoE heal)
         name = "Circle of Healing",
         description = "Heals friendly target and that target's party members within 15 yards of the target for 250 to 274.",
-        tags = {C.HEAL, C.AOE, C.HEAL_AOE, C.PVE},
+        tags = {C.HEAL, C.FILLER, C.HEAL_AOE, C.PVE},
         cooldown = 0,
         priority = 10,
         talent = true,
@@ -285,7 +284,7 @@ lib:RegisterSpells({
         spellID = 32546,  -- Binding Heal (heal self + target)
         name = "Binding Heal",
         description = "Heals a friendly target and the caster for 1053 to 1350. Low threat.",
-        tags = {C.HEAL, C.ROTATIONAL, C.HEAL_SINGLE, C.PVE_PVP},
+        tags = {C.HEAL, C.FILLER, C.HEAL_SINGLE, C.PVE_PVP},
         cooldown = 0,
         priority = 7,
         auraTarget = AT.ALLY,  -- Can target other players (heals both)
@@ -436,7 +435,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MINOR, C.PVE},  -- Not ROTATIONAL - no Smite DPS spec in TBC
         cooldown = 10,
         ranks = {14914, 15262, 15263, 15264, 15265, 15266, 15267, 15261, 25384},
-        specs = {S.DISCIPLINE, S.HOLY},  -- Exclude from Shadow
+        specs = {},  -- Niche for all specs in TBC; available for manual enable
     },
     {
         spellID = 585,  -- Smite (filler)

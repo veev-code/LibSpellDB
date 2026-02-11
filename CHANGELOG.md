@@ -1,5 +1,20 @@
 # LibSpellDB Changelog
 
+## [1.0.37] - 2026-02-11
+
+### Changed
+- **Priest: Binding Heal** — Retagged from `ROTATIONAL` to `FILLER` (no cooldown, mana-gated spammable)
+- **Priest: Circle of Healing** — Retagged from `AOE` to `FILLER` (no cooldown, mana-gated spammable)
+- **Priest: Desperate Prayer** — Retagged from `HEAL` to `PERSONAL_DEFENSIVE` (self-only emergency heal)
+- **Priest: Inner Focus** — Added Holy spec (was Discipline-only; common 14/47 builds take this talent)
+- **Priest: Shadowfiend** — Now available for all 3 specs, removed incorrect `talent = true` (trainable at level 66)
+- **Priest: Holy Fire** — Set `specs = {}` (niche for all specs in TBC; available for manual enable)
+- **Mage: Ice Block** — Removed duplicate entry that incorrectly made it available to all specs (Frost talent in TBC)
+- **Hunter: Steady Shot** — Retagged from `ROTATIONAL` to `FILLER` (no cooldown, mana-gated spammable)
+
+### Added
+- **Tagging Guidelines** in CLAUDE.md — Documented rules for FILLER vs ROTATIONAL, PERSONAL_DEFENSIVE vs HEAL, `specs` field, and `talent` field usage
+
 ## [1.0.36] - 2026-02-10
 
 ### Changed

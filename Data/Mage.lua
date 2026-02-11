@@ -56,7 +56,7 @@ lib:RegisterSpells({
     -- Personal Defensives / Immunities (Utility row)
     -------------------------------------------------------------------------------
     {
-        spellID = 45438,  -- Ice Block
+        spellID = 45438,  -- Ice Block (Frost talent: Ice Training)
         name = "Ice Block",
         description = "You become encased in a block of ice, protecting you from all physical attacks and spells for 10 sec, but during that time you cannot attack, move or cast spells. Also causes Hypothermia, preventing you from recasting Ice Block for 30 sec.",
         tags = {C.DEFENSIVE, C.MAJOR, C.IMMUNITY, C.HAS_BUFF},
@@ -65,16 +65,6 @@ lib:RegisterSpells({
         talent = true,
         auraTarget = AT.SELF,
         specs = {S.FROST},
-    },
-    {
-        spellID = 45438,  -- Ice Block (learned version in later expansions)
-        name = "Ice Block",
-        description = "You become encased in a block of ice, protecting you from all physical attacks and spells for 10 sec, but during that time you cannot attack, move or cast spells. Also causes Hypothermia, preventing you from recasting Ice Block for 30 sec.",
-        tags = {C.DEFENSIVE, C.MAJOR, C.IMMUNITY, C.HAS_BUFF},
-        cooldown = 300,
-        duration = 10,
-        auraTarget = AT.SELF,
-        specs = {S.ARCANE, S.FIRE, S.FROST},
     },
     {
         spellID = 11426,  -- Ice Barrier
