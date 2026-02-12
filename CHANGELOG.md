@@ -1,5 +1,13 @@
 # LibSpellDB Changelog
 
+## [1.0.40] - 2026-02-12
+
+### Added
+- **Priest: Inspiration** (15363) — Holy talent proc. Buff on heal target after critical heal. Ranks 1-3, `onAlly = true`.
+- **Shaman: Ancestral Fortitude** (16237) — Restoration talent proc (Ancestral Healing). Armor buff on heal target after critical heal. Ranks 1-3, `onAlly = true`.
+- **Shaman: Healing Way** (29203) — Restoration talent proc. Stacking buff (+6% Healing Wave effectiveness per stack, max 3) on Healing Wave target. `onAlly = true`.
+- **Hunter: Ferocious Inspiration** (34456) — Beast Mastery talent proc. Party damage buff (+3%) on pet critical hit.
+
 ## [1.0.39] - 2026-02-12
 
 ### Fixed

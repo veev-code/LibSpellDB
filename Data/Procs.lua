@@ -263,6 +263,21 @@ lib:RegisterSpells({
             stacks = 3,
         },
     },
+    -- Inspiration (Holy talent) - armor buff on heal target after crit heal
+    {
+        spellID = 15363,
+        name = "Inspiration",
+        ranks = {14892, 15362, 15363},
+        tags = {C.PROC, C.HEAL, C.MINOR},
+        cooldown = 0,
+        duration = 15,
+        talent = true,
+        procInfo = {
+            description = "Target's armor increased by 25% for 15 sec",
+            stacks = false,
+            onAlly = true,  -- Buff appears on heal target, not on player
+        },
+    },
     -- Clearcasting (Holy Concentration proc) - procs on critical heal
     {
         spellID = 34754,
@@ -339,6 +354,35 @@ lib:RegisterSpells({
             description = "30% attack speed increase",
             stacks = 3,
             consumedOnHit = true,
+        },
+    },
+    -- Ancestral Fortitude (Ancestral Healing proc, Restoration talent) - armor buff on crit heal target
+    {
+        spellID = 16237,  -- Ancestral Fortitude Rank 3 buff (25% armor)
+        name = "Ancestral Fortitude",
+        ranks = {16177, 16236, 16237},
+        tags = {C.PROC, C.HEAL, C.MINOR},
+        cooldown = 0,
+        duration = 15,
+        talent = true,
+        procInfo = {
+            description = "Target's armor increased by 25% for 15 sec",
+            stacks = false,
+            onAlly = true,  -- Buff appears on heal target, not on player
+        },
+    },
+    -- Healing Way (Restoration talent) - stacking buff on Healing Wave target
+    {
+        spellID = 29203,  -- Healing Way buff (all ranks apply same buff ID)
+        name = "Healing Way",
+        tags = {C.PROC, C.HEAL, C.MINOR},
+        cooldown = 0,
+        duration = 15,
+        talent = true,
+        procInfo = {
+            description = "Healing Wave effectiveness increased by 6% per stack",
+            stacks = 3,
+            onAlly = true,  -- Buff appears on heal target, not on player
         },
     },
 }, "SHAMAN")
@@ -427,6 +471,19 @@ lib:RegisterSpells({
         talent = true,
         procInfo = {
             description = "10% damage, immune to CC",
+            stacks = false,
+        },
+    },
+    -- Ferocious Inspiration (BM talent) - party damage buff on pet crit
+    {
+        spellID = 34456,  -- Ferocious Inspiration buff on party members
+        name = "Ferocious Inspiration",
+        tags = {C.PROC, C.DPS, C.MINOR},
+        cooldown = 0,
+        duration = 10,
+        talent = true,
+        procInfo = {
+            description = "All damage increased by 3%",
             stacks = false,
         },
     },
