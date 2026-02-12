@@ -59,7 +59,7 @@ lib:RegisterSpells({
         cooldown = 30,
         duration = 3,
         priority = 2,  -- Movement
-        ranks = {20252, 20616, 20617},
+        ranks = {20252, 20616, 20617, 25272, 25275},
         specs = {S.ARMS, S.FURY, S.PROTECTION},
         triggersAuras = {
             {

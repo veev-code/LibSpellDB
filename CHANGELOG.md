@@ -1,5 +1,10 @@
 # LibSpellDB Changelog
 
+## [1.0.39] - 2026-02-12
+
+### Fixed
+- **Warrior: Intercept missing ranks** — Added Rank 4 (25272) and Rank 5 (25275). Learning these ranks previously caused Intercept to disappear from addons that use LibSpellDB, because `rankToCanonical` couldn't map the unknown spell IDs back to the base entry.
+
 ## [1.0.38] - 2026-02-11
 
 ### Added
