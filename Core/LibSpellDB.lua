@@ -757,6 +757,34 @@ function lib:GetReactiveWindow(spellID)
 end
 
 -------------------------------------------------------------------------------
+-- Duration API
+-------------------------------------------------------------------------------
+
+--[[
+    Get the duration for a specific spell rank.
+
+    If the spell defines rankDurations (a map of spellID -> duration), returns the
+    rank-specific duration. Otherwise falls back to the base duration field.
+
+    @param spellID (number) - Spell ID (any rank)
+    @return (number or nil) - Duration in seconds, or nil if no duration
+]]
+function lib:GetSpellDuration(spellID)
+    local canonicalID = self.rankToCanonical[spellID] or spellID
+    local spellData = self.spells[canonicalID]
+    if not spellData then return nil end
+
+    -- Check for rank-specific duration (map: spellID -> duration)
+    if spellData.rankDurations then
+        local rankDuration = spellData.rankDurations[spellID]
+        if rankDuration then return rankDuration end
+    end
+
+    -- Fall back to base duration
+    return spellData.duration
+end
+
+-------------------------------------------------------------------------------
 -- Spell Rank Utilities
 -------------------------------------------------------------------------------
 

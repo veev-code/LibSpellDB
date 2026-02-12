@@ -381,6 +381,20 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 60,
         ranks = {3599, 6363, 6364, 6365, 10437, 10438, 25533},
+        rankDurations = {
+            [3599] = 30, [6363] = 35, [6364] = 40, [6365] = 45,
+            [10437] = 50, [10438] = 55, [25533] = 60,
+        },
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
+    },
+    {
+        spellID = 8190,  -- Magma Totem
+        name = "Magma Totem",
+        description = "Summons a Magma Totem with 5 health at the feet of the caster for 20 sec that causes 22 Fire damage to creatures within 8 yards every 2 seconds.",
+        tags = {C.DPS, C.AOE, C.TOTEM, C.TOTEM_FIRE},
+        cooldown = 0,
+        duration = 20,
+        ranks = {8190, 10585, 10586, 10587, 25552},
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {

@@ -1,5 +1,12 @@
 # LibSpellDB Changelog
 
+## [1.0.41] - 2026-02-12
+
+### Added
+- **New API: `GetSpellDuration(spellID)`** — Returns the duration for a specific spell rank. Supports a new `rankDurations` field (map of `spellID -> duration`) for spells where duration varies by rank. Falls back to the base `duration` field for spells without per-rank data.
+- **Shaman: Magma Totem** (8190) — Fire element totem, 5 ranks, 20s duration. Tags: `DPS`, `AOE`, `TOTEM`, `TOTEM_FIRE`.
+- **Shaman: Searing Totem per-rank durations** — Added `rankDurations` mapping: Rank 1 = 30s, Rank 2 = 35s, up to Rank 7 = 60s. Previously all ranks used 60s.
+
 ## [1.0.40] - 2026-02-12
 
 ### Added
