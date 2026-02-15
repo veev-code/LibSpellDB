@@ -416,7 +416,7 @@ lib:RegisterSpells({
         spellID = 2944,  -- Devouring Plague (Undead racial, extra DoT)
         name = "Devouring Plague",
         description = "Afflicts the target with a disease that causes 152 Shadow damage over 24 sec. Damage caused by the Devouring Plague heals the caster.",
-        tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.HEAL_SINGLE, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.HAS_DEBUFF, C.PVE_PVP},
         cooldown = 180,
         duration = 24,
         priority = 6,

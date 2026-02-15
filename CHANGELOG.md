@@ -1,5 +1,11 @@
 # LibSpellDB Changelog
 
+## [1.0.44] - 2026-02-15
+
+### Fixed
+- **Warlock: Siphon Life** — Replaced incorrect `DEBUFF` + `HEAL_SINGLE` tags with `HAS_DEBUFF`. The `HEAL_SINGLE` tag caused aura tracking consumers to misidentify this as an ally-targeted buff instead of an enemy-targeted debuff, breaking duration display.
+- **Priest: Devouring Plague** — Same fix. DoTs that heal the caster are enemy debuffs, not ally heals.
+
 ## [1.0.43] - 2026-02-15
 
 ### Changed

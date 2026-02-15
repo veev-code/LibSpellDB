@@ -260,7 +260,7 @@ lib:RegisterSpells({
         spellID = 18265,  -- Siphon Life (maintain if talented)
         name = "Siphon Life",
         description = "Transfers 15 health from the target to the caster every 3 sec. Lasts 30 sec.",
-        tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.HEAL_SINGLE, C.PVE},
+        tags = {C.DPS, C.ROTATIONAL, C.HAS_DEBUFF, C.PVE},
         cooldown = 0,
         duration = 30,
         priority = 4,
