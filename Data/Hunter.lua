@@ -224,7 +224,7 @@ lib:RegisterSpells({
         spellID = 2641,  -- Dismiss Pet
         name = "Dismiss Pet",
         description = "Dismiss your pet. Dismissing your pet will reduce its happiness by 50.",
-        tags = {C.PET_CONTROL, C.UTILITY},
+        tags = {C.PET_CONTROL, C.UTILITY, C.OUT_OF_COMBAT},
         cooldown = 0,
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
@@ -416,7 +416,7 @@ lib:RegisterSpells({
         spellID = 1462,  -- Beast Lore
         name = "Beast Lore",
         description = "Gather information about the target beast. The tooltip will display damage, health, armor, any special resistances, and diet. In addition, Beast Lore will reveal whether or not the creature is tameable and what abilities the tamed creature has.",
-        tags = {C.UTILITY},
+        tags = {C.UTILITY, C.OUT_OF_COMBAT},
         cooldown = 0,
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },

@@ -226,7 +226,7 @@ lib:RegisterSpells({
         spellID = 783,  -- Travel Form
         name = "Travel Form",
         description = "Shapeshift into travel form, increasing movement speed by 40%. Also protects the caster from Polymorph effects. Only useable outdoors.The act of shapeshifting frees the caster of Polymorph and Movement Impairing effects.",
-        tags = {C.SHAPESHIFT, C.MOVEMENT},
+        tags = {C.SHAPESHIFT, C.MOVEMENT, C.OUT_OF_COMBAT},
         cooldown = 0,
         specs = {S.BALANCE, S.FERAL, S.RESTORATION},
     },

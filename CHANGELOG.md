@@ -1,5 +1,17 @@
 # LibSpellDB Changelog
 
+## [1.0.43] - 2026-02-15
+
+### Changed
+- **Druid: Travel Form** — Tagged `OUT_OF_COMBAT` (outdoor-only movement form, not combat-relevant)
+- **Hunter: Dismiss Pet** — Tagged `OUT_OF_COMBAT`
+- **Hunter: Beast Lore** — Tagged `OUT_OF_COMBAT`
+- **Shaman: Ghost Wolf** — Tagged `OUT_OF_COMBAT` (outdoor-only movement form)
+- **Shaman: Astral Recall** — Tagged `OUT_OF_COMBAT`
+- **Warlock: Ritual of Doom** — Tagged `OUT_OF_COMBAT`
+- **Warlock: Ritual of Summoning** — Tagged `OUT_OF_COMBAT`
+- **Warlock: Eye of Kilrogg** — Tagged `OUT_OF_COMBAT`
+
 ## [1.0.42] - 2026-02-14
 
 ### Added

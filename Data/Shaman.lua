@@ -671,7 +671,7 @@ lib:RegisterSpells({
         spellID = 2645,  -- Ghost Wolf
         name = "Ghost Wolf",
         description = "Turns the Shaman into a Ghost Wolf, increasing speed by 40%. Only useable outdoors.",
-        tags = {C.MOVEMENT, C.MOVEMENT_SPEED, C.SHAPESHIFT},
+        tags = {C.MOVEMENT, C.MOVEMENT_SPEED, C.SHAPESHIFT, C.OUT_OF_COMBAT},
         cooldown = 0,
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
@@ -679,7 +679,7 @@ lib:RegisterSpells({
         spellID = 556,  -- Astral Recall
         name = "Astral Recall",
         description = "Yanks the caster through the twisting nether back to Hearthstone Location. Speak to an Innkeeper in a different place to change your home location.",
-        tags = {C.UTILITY},
+        tags = {C.UTILITY, C.OUT_OF_COMBAT},
         cooldown = 900,
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },

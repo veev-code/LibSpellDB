@@ -180,7 +180,7 @@ lib:RegisterSpells({
         spellID = 18540,  -- Ritual of Doom (Summon Doomguard)
         name = "Ritual of Doom",
         description = "Begins a ritual that sacrifices a random participant to summon a doomguard. The doomguard must be immediately subjugated or it will attack the ritual participants. Requires the caster and 4 additional party members to complete the ritual. In order to participate, all players must right-click the portal and not move until the ritual is complete.",
-        tags = {C.DPS, C.MAJOR, C.PET_SUMMON},
+        tags = {C.DPS, C.MAJOR, C.PET_SUMMON, C.OUT_OF_COMBAT},
         cooldown = 3600,
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
@@ -453,7 +453,7 @@ lib:RegisterSpells({
         spellID = 698,  -- Ritual of Summoning
         name = "Ritual of Summoning",
         description = "Begins a ritual that summons the targeted group member. Requires the caster and 2 additional party members to complete the ritual. In order to participate, all players must be out of combat and right-click the portal and not move until the ritual is complete.",
-        tags = {C.UTILITY},
+        tags = {C.UTILITY, C.OUT_OF_COMBAT},
         cooldown = 0,
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
@@ -461,7 +461,7 @@ lib:RegisterSpells({
         spellID = 126,  -- Eye of Kilrogg
         name = "Eye of Kilrogg",
         description = "Summons an Eye of Kilrogg and binds your vision to it. The eye moves quickly but is very fragile.",
-        tags = {C.UTILITY},
+        tags = {C.UTILITY, C.OUT_OF_COMBAT},
         cooldown = 0,
         duration = 45,
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
