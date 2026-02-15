@@ -574,4 +574,84 @@ lib:RegisterSpells({
         buffGroup = "WARLOCK_ARMOR",
     },
 
+    -------------------------------------------------------------------------------
+    -- Demonic Sacrifice (21-point Demonology talent)
+    -- Casting spell (18788) and its passive buff outcomes.
+    -- Buff IDs are not castable spells — detected via talentGate on the BuffGroup.
+    -- The casting spell uses triggersAuras so CooldownIcons can detect active buffs.
+    -------------------------------------------------------------------------------
+    {
+        spellID = 18788,  -- Demonic Sacrifice (casting spell)
+        name = "Demonic Sacrifice",
+        description = "When activated, sacrifices your summoned demon to grant you an effect that lasts 30 min. The effect is canceled if any Demon is summoned.",
+        tags = {C.BUFF, C.DPS, C.OUT_OF_COMBAT},
+        cooldown = 0,
+        duration = 1800,
+        talent = true,
+        auraTarget = AT.SELF,
+        specs = {S.DEMONOLOGY},
+        triggersAuras = {
+            { spellID = 18789, type = "BUFF", onTarget = false, duration = 1800 },  -- Burning Wish (Imp)
+            { spellID = 18790, type = "BUFF", onTarget = false, duration = 1800 },  -- Fel Stamina (Voidwalker)
+            { spellID = 18791, type = "BUFF", onTarget = false, duration = 1800 },  -- Touch of Shadow (Succubus)
+            { spellID = 18792, type = "BUFF", onTarget = false, duration = 1800 },  -- Fel Energy (Felhunter)
+            { spellID = 35701, type = "BUFF", onTarget = false, duration = 1800 },  -- Touch of Shadow (Felguard)
+        },
+    },
+    {
+        spellID = 18789,  -- Burning Wish (Imp sacrifice)
+        name = "Burning Wish",
+        description = "Increases your Fire damage by 15%. Obtained by sacrificing an Imp.",
+        tags = {C.BUFF, C.DPS, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 1800,
+        dispelType = nil,
+        specs = {S.DEMONOLOGY},
+        buffGroup = "WARLOCK_DEMONIC_SACRIFICE",
+    },
+    {
+        spellID = 18790,  -- Fel Stamina (Voidwalker sacrifice)
+        name = "Fel Stamina",
+        description = "Increases your Stamina by 15%. Obtained by sacrificing a Voidwalker.",
+        tags = {C.BUFF, C.DEFENSIVE, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 1800,
+        dispelType = nil,
+        specs = {S.DEMONOLOGY},
+        buffGroup = "WARLOCK_DEMONIC_SACRIFICE",
+    },
+    {
+        spellID = 18791,  -- Touch of Shadow (Succubus sacrifice)
+        name = "Touch of Shadow",
+        description = "Increases your Shadow damage by 15%. Obtained by sacrificing a Succubus.",
+        tags = {C.BUFF, C.DPS, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 1800,
+        dispelType = nil,
+        specs = {S.DEMONOLOGY},
+        buffGroup = "WARLOCK_DEMONIC_SACRIFICE",
+    },
+    {
+        spellID = 18792,  -- Fel Energy (Felhunter sacrifice)
+        name = "Fel Energy",
+        description = "Restores 2% of total Mana every 4 sec. Obtained by sacrificing a Felhunter.",
+        tags = {C.BUFF, C.RESOURCE, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 1800,
+        dispelType = nil,
+        specs = {S.DEMONOLOGY},
+        buffGroup = "WARLOCK_DEMONIC_SACRIFICE",
+    },
+    {
+        spellID = 35701,  -- Touch of Shadow (Felguard sacrifice, TBC)
+        name = "Touch of Shadow",
+        description = "Increases your damage done by 10%. Obtained by sacrificing a Felguard.",
+        tags = {C.BUFF, C.DPS, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 1800,
+        dispelType = nil,
+        specs = {S.DEMONOLOGY},
+        buffGroup = "WARLOCK_DEMONIC_SACRIFICE",
+    },
+
 }, "WARLOCK")

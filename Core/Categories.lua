@@ -415,6 +415,12 @@ lib.BuffGroups = {
         spells = {687, 706, 28176},
         relationship = "exclusive",
     },
+    WARLOCK_DEMONIC_SACRIFICE = {
+        description = "Demonic Sacrifice",
+        spells = {18789, 18790, 18791, 18792, 35701},
+        relationship = "exclusive",
+        talentGate = 18788,  -- Check this spell for IsSpellKnown instead of buff IDs
+    },
     MAGE_ARMOR = {
         description = "Mage armor",
         spells = {6117, 7302, 30482, 168},

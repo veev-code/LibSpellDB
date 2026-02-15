@@ -1,5 +1,12 @@
 # LibSpellDB Changelog
 
+## [1.0.42] - 2026-02-14
+
+### Added
+- **Warlock: Demonic Sacrifice** (18788) — Casting spell with `triggersAuras` mapping all 5 buff outcomes (Burning Wish, Fel Stamina, Touch of Shadow, Fel Energy, Felguard Touch of Shadow). Tags: `BUFF`, `DPS`, `OUT_OF_COMBAT`. Demonology spec.
+- **Warlock: Demonic Sacrifice buff entries** — 5 passive buff spells (18789, 18790, 18791, 18792, 35701) tagged `LONG_BUFF` with `buffGroup = "WARLOCK_DEMONIC_SACRIFICE"` for Buff Reminder support.
+- **New BuffGroup: `WARLOCK_DEMONIC_SACRIFICE`** — Exclusive group with `talentGate = 18788`. The `talentGate` field is a new BuffGroup property: when present, consumers should check `IsSpellKnown(talentGate)` instead of iterating group spell IDs (which are passive buff auras, not castable spells).
+
 ## [1.0.41] - 2026-02-12
 
 ### Added
