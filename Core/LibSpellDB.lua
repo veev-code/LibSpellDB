@@ -491,6 +491,55 @@ function lib:IsSingleTarget(spellID)
 end
 
 --[[
+    Get item IDs associated with a spell's cooldown.
+    For spells that create usable items (e.g., Soulstone), the cooldown
+    is tracked on the item rather than the spell itself.
+
+    @param spellID (number|table) - Spell ID or spell data table
+    @return (table or nil) - Array of item IDs, or nil if none
+]]
+function lib:GetCooldownItemIDs(spellID)
+    local spellData
+    if type(spellID) == "table" then
+        spellData = spellID
+    else
+        spellData = self:GetSpellInfo(spellID)
+    end
+
+    if not spellData then return nil end
+
+    return spellData.cooldownItemIDs
+end
+
+--[[
+    Get the active item cooldown for a spell that tracks cooldowns via items.
+    Iterates through the spell's cooldownItemIDs and returns the first active cooldown.
+
+    @param spellID (number|table) - Spell ID or spell data table
+    @return remaining (number or nil), duration (number), startTime (number)
+]]
+function lib:GetItemCooldown(spellID)
+    local itemIDs = self:GetCooldownItemIDs(spellID)
+    if not itemIDs then return nil end
+
+    local GetItemCooldown = _G.GetItemCooldown
+    if not GetItemCooldown then return nil end
+
+    local now = GetTime()
+    for _, itemID in ipairs(itemIDs) do
+        local start, dur, enable = GetItemCooldown(itemID)
+        if start and start > 0 and dur > 0 then
+            local remaining = (start + dur) - now
+            if remaining > 0 then
+                return remaining, dur, start
+            end
+        end
+    end
+
+    return nil
+end
+
+--[[
     Get all registered spells
 
     @return (table) - Dictionary of spellID -> spellData

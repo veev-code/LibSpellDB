@@ -1,5 +1,15 @@
 # LibSpellDB Changelog
 
+## [1.0.45] - 2026-02-15
+
+### Added
+- **New API: `GetCooldownItemIDs(spellID)`** — Returns the `cooldownItemIDs` array for spells that track cooldowns via created items (e.g., Soulstone), or nil.
+- **New API: `GetItemCooldown(spellID)`** — Queries `GetItemCooldown()` for each item in the spell's `cooldownItemIDs` array. Returns `remaining, duration, startTime` for the first active cooldown, or nil. Accepts spellID (number) or spellData (table).
+- **New spell data field: `cooldownItemIDs`** — Array of item IDs for spells where the cooldown lives on a created item rather than the spell itself.
+
+### Changed
+- **Warlock: Soulstone Resurrection** — Corrected `cooldown` from 1800 to 0 (creation spell has no cooldown; the item does). Added `duration = 1800`, `auraTarget = "ally"`, `singleTarget = true`, `HAS_BUFF` tag, and `cooldownItemIDs` for all 6 Soulstone item ranks (Minor through Master).
+
 ## [1.0.44] - 2026-02-15
 
 ### Fixed

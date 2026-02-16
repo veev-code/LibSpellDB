@@ -72,6 +72,7 @@ if not lib then return end
     reactiveWindowEvent = "PARTY_KILL", -- CLEU sub-event that triggers/refreshes the window
     clearsTotems = true,                -- When cast, destroys all active totems (Totemic Call)
     appliesBuff = {8076, 8162},         -- Buff spell IDs applied to player/party (all ranks, low to high)
+    cooldownItemIDs = {5232, 16892},    -- Item IDs whose cooldown to check (for spells that create usable items, e.g. Soulstone)
 
     -- Triggered auras (when aura ID differs from spell ID)
     triggersAuras = {
@@ -218,6 +219,10 @@ BALANCE, FERAL,                 -- Druid (RESTORATION shared)
 - `lib:IsRotational(spellID)` — Check ROTATIONAL tag
 - `lib:IsSingleTarget(spellID)` — Check if only one instance can be active at a time
 - `lib:GetDispelType(spellID)` — Returns dispel type string for a spell's buff
+
+### Item Cooldowns
+- `lib:GetCooldownItemIDs(spellID)` — Returns array of item IDs for spells with item-based cooldowns, or nil
+- `lib:GetItemCooldown(spellID)` — Queries `GetItemCooldown()` for each item; returns `remaining, duration, startTime` or nil
 
 ### Triggered Aura Queries
 - `lib:GetAuraInfo(auraSpellID)` — Get `{sourceSpellID, tags, type, onTarget, duration}`
