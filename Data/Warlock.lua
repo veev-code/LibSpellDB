@@ -441,16 +441,17 @@ lib:RegisterSpells({
     -- Utility
     -------------------------------------------------------------------------------
     {
-        spellID = 20707,  -- Soulstone Resurrection
-        name = "Soulstone Resurrection",
-        description = "Stores the friendly target's soul. If the target dies while his soul is stored, he will be able to resurrect with 400 health and 700 mana.",
+        spellID = 693,  -- Create Soulstone
+        name = "Create Soulstone",
+        description = "Creates a Soulstone. The Soulstone can be used to store the soul of a friendly target. If the target dies while his soul is stored, he will be able to resurrect.",
         tags = {C.RESURRECT, C.BATTLE_REZ, C.UTILITY, C.HAS_BUFF},
         cooldown = 0,
         duration = 1800,
         auraTarget = AT.ALLY,
         singleTarget = true,
         cooldownItemIDs = {5232, 16892, 16893, 16895, 16896, 22116},
-        ranks = {20707, 20762, 20763, 20764, 20765, 27238, 27239},
+        ranks = {693, 20752, 20755, 20756, 20757, 27238},
+        appliesBuff = {20707, 20762, 20763, 20764, 20765, 27239},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {

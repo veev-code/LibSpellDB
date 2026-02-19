@@ -1,5 +1,10 @@
 # LibSpellDB Changelog
 
+## [1.0.46] - 2026-02-19
+
+### Fixed
+- **Warlock: Soulstone spell ID mismatch** — The Soulstone entry used buff spell IDs (20707 "Soulstone Resurrection") as the canonical and rank IDs, but the player's spellbook contains "Create Soulstone" with entirely different IDs (693, 20752, etc.). This caused `IsSpellKnown()` to always fail, preventing the spell from appearing in any consumer addon. Fixed canonical to 693, ranks to the actual cast spell IDs, and added `appliesBuff` array with the buff spell IDs for aura tracking.
+
 ## [1.0.45] - 2026-02-15
 
 ### Added
