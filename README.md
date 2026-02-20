@@ -47,9 +47,12 @@ Describe how/when you use the ability:
 
 *   `INTERRUPT` — Spell interrupts
 *   `CC_HARD` — Stuns, incapacitates, polymorphs
-*   `CC_SOFT` — Slows, snares, roots
+*   `CC_SOFT` — Slows, snares
+*   `ROOT` — Root effects
 *   `SILENCE` — Silence effects
 *   `FEAR` — Fear effects
+*   `DISORIENT` — Disorient effects
+*   `KNOCKBACK` — Knockback effects
 *   `CC_BREAK` — Breaks CC (trinket, Berserker Rage)
 *   `CC_IMMUNITY` — Prevents CC application
 
@@ -67,12 +70,20 @@ Describe how/when you use the ability:
 *   `RESOURCE` — Resource generation/management
 *   `UTILITY` — General utility
 
+### Pet Tags
+
+*   `PET_SUMMON` — Summons a permanent pet
+*   `PET_SUMMON_TEMP` — Summons a temporary pet
+*   `PET_CONTROL` — Pet management (dismiss, passive, etc.)
+*   `REQUIRES_PET` — Spell requires an alive pet to function
+
 ### Mechanic Tags
 
 *   `REACTIVE` — Conditional abilities (Overpower, Execute, Revenge)
 *   `PROC` — Proc-based buffs to track
 *   `FINISHER` — Combo point/resource spenders
 *   `HAS_BUFF`, `HAS_DEBUFF`, `HAS_DOT`, `HAS_HOT` — Describes what the spell applies
+*   `RESURRECT`, `BATTLE_REZ` — Resurrection abilities
 
 ## Query Examples
 
@@ -89,7 +100,7 @@ local interrupts = LibSpellDB:GetSpellsByTag("INTERRUPT")
 local warriorInterrupts = LibSpellDB:GetSpellsByClassAndTag("WARRIOR", "INTERRUPT")
 
 -- Get spells matching ANY of these tags (union)
-local ccAbilities = LibSpellDB:GetSpellsByTags({"CC\_HARD", "CC\_SOFT", "INTERRUPT"})
+local ccAbilities = LibSpellDB:GetSpellsByTags({"CC_HARD", "CC_SOFT", "INTERRUPT"})
 
 -- Get spells matching ALL of these tags (intersection)
 local rotationalDps = LibSpellDB:GetSpellsByAllTags({"ROTATIONAL", "DPS"})
@@ -116,27 +127,46 @@ Each spell entry supports the following fields:
     ranks = {100, 101, 102},   -- Optional: All rank spell IDs (low to high)
     specs = {"ARMS", "FURY"},  -- Optional: Which specs use this (nil = all)
     race = "Orc",              -- Optional: Race restriction for racials
-    selfOnly = true,           -- Optional: Buff can ONLY target self (default: inferred from tags)
+    auraTarget = "self",       -- Optional: Where buff appears ("self", "ally", "pet", "none")
     cooldownPriority = true,   -- Optional: Show cooldown/prediction first, then aura when ready
+    singleTarget = true,       -- Optional: Only one instance can be active at a time
     triggersAuras = {...},     -- Optional: Auras this spell triggers (with different IDs)
+    appliesBuff = {8076, 8162},-- Optional: Buff spell IDs applied (when different from cast ID)
+    cooldownItemIDs = {5232},  -- Optional: Item IDs for item-based cooldowns (e.g., Soulstone)
+    itemCooldown = 120,        -- Optional: Duration when a created item is consumed
+    buffGroup = "WARRIOR_SHOUTS", -- Optional: BuffGroup this spell belongs to
     targetLockoutDebuff = 6788,-- Optional: Debuff that blocks re-casting (e.g., Weakened Soul)
     sharedCooldownGroup = "...",  -- Optional: Shared CD group name
 }
 ```
 
-### The `selfOnly` Field
+### The `auraTarget` Field
 
-The `selfOnly` field controls how buff tracking behaves when targeting friendly players:
+Controls where consumers should look for this spell's buff/debuff:
 
-*   `selfOnly = true` — Buff always displays your own status, regardless of target
-*   `selfOnly = false` — Buff checks the relevant friendly target (ally if targeting one)
-*   `selfOnly = nil` (default) — Inferred from tags:
-    *   Spells with `HEAL_SINGLE`, `HOT`, `HAS_HOT`, `HEAL_AOE`, or `EXTERNAL_DEFENSIVE` → can target others
-    *   All other buffs → self-only
+*   `"self"` — Buff appears on caster only (Barkskin, Evasion, Ice Block)
+*   `"ally"` — Can target other players (Renew, BoP, Power Word: Shield)
+*   `"pet"` — Targets pet (Mend Pet)
+*   `"none"` — No unit to track (AoE, totems, placed objects)
 
-**Examples:**
-*   Power Word: Shield, Renew, Blessing of Protection → can target others (check ally when targeting them)
-*   Recklessness, Shadowform, Stealth → self-only (always show your own buff)
+When `auraTarget` is nil, it's inferred from tags — spells with `HEAL_SINGLE`, `HOT`, `HAS_HOT`, `HEAL_AOE`, or `EXTERNAL_DEFENSIVE` default to `"ally"`; all others default to `"self"`.
+
+## BuffGroup System
+
+LibSpellDB groups related buff spells for features like buff reminders. Two relationship types:
+
+*   **Equivalent** — Different spells providing the same buff (Fortitude / Prayer of Fortitude). Any one satisfies the requirement.
+*   **Exclusive** — Only one from the group can be active at a time (Paladin Blessings, Mage Armors, Warrior Shouts).
+
+```lua
+-- Check if a spell belongs to a buff group
+if LibSpellDB:IsInBuffGroup(1243) then
+    local groupName, info = LibSpellDB:GetBuffGroup(1243)
+    -- groupName = "PRIEST_FORTITUDE"
+    -- info.relationship = "equivalent"
+    -- info.spells = {1243, 21562}
+end
+```
 
 ## Current Coverage
 

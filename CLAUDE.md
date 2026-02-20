@@ -49,11 +49,13 @@ if not lib then return end
 
     -- Optional (auto-resolved if nil)
     name = "Spell Name",                -- Override display name
+    description = "Spell description.", -- Full spell description text
     icon = 12345,                       -- Override icon ID
 
     -- Optional metadata
     cooldown = 10,                      -- Base cooldown in seconds
     duration = 5,                       -- Buff/effect duration in seconds
+    rankDurations = {[100]=5,[101]=8},  -- Per-rank durations when they differ (spellID -> seconds)
     charges = 2,                        -- Number of charges
     priority = 1,                       -- Sort priority within rows
     talent = true,                      -- Requires talent point
@@ -61,6 +63,7 @@ if not lib then return end
     specs = {S.ARMS, S.FURY},           -- Spec restrictions (nil = all specs)
     race = "Orc",                       -- Race restriction (racials only)
     dispelType = "Magic",               -- Dispel type of the spell's buff ("Magic", "Curse", etc.)
+    buffGroup = "WARRIOR_SHOUTS",       -- BuffGroup this spell belongs to (see BuffGroup System below)
 
     -- Aura targeting
     auraTarget = AT.SELF,               -- Where buff appears: "self", "ally", "pet", "none"
@@ -135,7 +138,7 @@ if not lib then return end
 `UTILITY`, `BUFF`, `DEBUFF`, `TAUNT`, `RESOURCE`, `RESURRECT`, `BATTLE_REZ`
 
 ### Pet Tags
-`PET`, `PET_SUMMON`, `PET_CONTROL`, `PET_SUMMON_TEMP`
+`PET`, `PET_SUMMON`, `PET_CONTROL`, `PET_SUMMON_TEMP`, `REQUIRES_PET`
 
 ### Totem Tags
 - `TOTEM` — Totem summon (tracks duration via SPELL_SUMMON)
@@ -145,7 +148,7 @@ if not lib then return end
 - `TOTEM_AIR` — Air totem (one active at a time)
 
 ### Stealth / Shapeshift Tags
-`STEALTH`, `STEALTH_BREAK`, `SHAPESHIFT`, `STANCE`
+`STEALTH`, `STEALTH_BREAK`, `SHAPESHIFT`, `STANCE`, `CAT_FORM`, `BEAR_FORM`
 
 ### Effect Tags
 - `PROC`, `REACTIVE` — Proc-based / conditional abilities (Execute, Overpower, Revenge)
@@ -242,8 +245,12 @@ BALANCE, FERAL,                 -- Druid (RESTORATION shared)
 - `lib:GetTalentPoints()` / `lib:GetTalentDistribution()` — Talent point info
 - `lib:DetectSpecBySignatureSpells(class)` — Fallback detection (deep talents)
 - `lib:IsSpellRelevantForSpec(spellID)` — Check spec + race restrictions
+- `lib:IsRaceRelevant(spellID)` — Check if spell matches player's race (ignores spec)
 - `lib:GetSpellsForCurrentSpec(class)` — Filtered spells for current spec
 - `lib:GetSpecDisplayName(specID)` — Display name for a spec
+
+### Duration
+- `lib:GetSpellDuration(spellID)` — Get duration for a specific rank (uses `rankDurations` if present, else `duration`)
 
 ### Procs
 - `lib:GetProcs(class)` — Array of proc spell data for class
@@ -253,6 +260,12 @@ BALANCE, FERAL,                 -- Druid (RESTORATION shared)
 ### Shared Cooldowns
 - `lib:GetSharedCooldownGroup(spellID)` — Group name + info
 - `lib:GetSharedCooldownSpells(spellID)` — All spells in same group
+
+### BuffGroups
+- `lib:GetBuffGroup(spellID)` — Returns group name and info table, or nil
+- `lib:GetBuffGroupSpells(spellID)` — Returns array of spell IDs in the same group
+- `lib:IsInBuffGroup(spellID)` — Boolean check if spell belongs to a BuffGroup
+- `lib:GetBuffGroupRelationship(spellID)` — Returns `"equivalent"` or `"exclusive"`
 
 ### Iteration
 - `lib:IterateSpells(filterFn)` — Iterator with filter function
@@ -271,6 +284,30 @@ BALANCE, FERAL,                 -- Druid (RESTORATION shared)
 - `lib:GetInvalidSpellCount()` / `lib:DumpInvalidSpells()` — Invalid spell tracking
 - `lib:SetDebugMode(enabled)` — Toggle debug warnings
 - `lib:DumpSpellsByClass(class)` / `lib:DumpSpellsByTag(tag)` — Print to chat
+
+## BuffGroup System (`lib.BuffGroups`)
+
+Defined in `Categories.lua`. Groups related buff spells for consumer features like buff reminders.
+
+### Relationship Types
+- **`equivalent`** — Different spells providing the same buff (e.g., Fortitude / Prayer of Fortitude). Any one satisfies the requirement.
+- **`exclusive`** — Only one spell from the group can be active at a time (e.g., Paladin Blessings, Mage Armors).
+
+### BuffGroup Definition Structure
+```lua
+lib.BuffGroups.GROUP_NAME = {
+    spells = {spellID1, spellID2},      -- Array of canonical spell IDs in this group
+    relationship = "equivalent",         -- or "exclusive"
+    -- Optional fields:
+    talentGate = 18788,                  -- Check IsSpellKnown() on this ID instead of buff IDs
+    excludeIfKnown = {19028, 30146},     -- If player knows any of these, default to disabled
+    weaponEnchant = true,                -- Tracked via GetWeaponEnchantInfo(), not UnitBuff()
+    itemBased = true,                    -- Applied via crafted items (e.g., poisons), not castable
+    minLevel = 20,                       -- Minimum level to learn this ability
+}
+```
+
+Spells reference their group via the `buffGroup` field in spell data.
 
 ## Internal Index Tables
 
