@@ -391,6 +391,15 @@ lib:RegisterSpells({
         ranks = {5138, 6226, 11703, 11704, 27221},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
+    {
+        spellID = 1454,  -- Life Tap (health → mana conversion)
+        name = "Life Tap",
+        description = "Converts 20 health into 20 mana.",
+        tags = {C.RESOURCE},
+        cooldown = 0,
+        ranks = {1454, 1455, 1456, 11687, 11688, 11689, 27222},
+        specs = {},  -- Available for manual enable; not shown by default (no cooldown to track)
+    },
 
     -------------------------------------------------------------------------------
     -- Pet Summons
@@ -426,6 +435,15 @@ lib:RegisterSpells({
         tags = {C.PET_SUMMON, C.UTILITY},
         cooldown = 0,
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+    },
+    {
+        spellID = 30146,  -- Summon Felguard (Demonology capstone)
+        name = "Summon Felguard",
+        description = "Summons a Felguard under the command of the Warlock.",
+        tags = {C.PET_SUMMON, C.UTILITY},
+        cooldown = 0,
+        talent = true,
+        specs = {S.DEMONOLOGY},
     },
     {
         spellID = 18708,  -- Fel Domination
@@ -490,14 +508,18 @@ lib:RegisterSpells({
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
-        spellID = 18094,  -- Nightfall (proc tracking)
-        name = "Nightfall",
-        description = "Gives your Corruption and Drain Life spells a 2% chance to cause you to enter a Shadow Trance state after damaging the opponent. The Shadow Trance state reduces the casting time of your next Shadow Bolt spell by 100%.",
-        tags = {C.PROC, C.HAS_BUFF},
+        spellID = 19028,  -- Soul Link (Demonology tier 6 talent)
+        name = "Soul Link",
+        description = "When active, 20% of all damage taken by the caster is taken by the demon instead. In addition, both the demon and master will inflict 5% more damage.",
+        tags = {C.BUFF, C.DEFENSIVE, C.LONG_BUFF, C.REQUIRES_PET},
+        cooldown = 0,
+        duration = 0,  -- Permanent while pet is alive
         talent = true,
         auraTarget = AT.SELF,
-        specs = {S.AFFLICTION},
+        specs = {S.AFFLICTION, S.DEMONOLOGY},
     },
+    -- Nightfall (18094) is a passive talent — the proc buff it triggers is
+    -- Shadow Trance (17941), registered in Procs.lua with procInfo metadata.
     {
         spellID = 702,  -- Curse of Weakness
         name = "Curse of Weakness",
@@ -611,7 +633,6 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 1800,
         dispelType = nil,
-        specs = {S.DEMONOLOGY},
         buffGroup = "WARLOCK_DEMONIC_SACRIFICE",
     },
     {
@@ -622,7 +643,6 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 1800,
         dispelType = nil,
-        specs = {S.DEMONOLOGY},
         buffGroup = "WARLOCK_DEMONIC_SACRIFICE",
     },
     {
@@ -633,7 +653,6 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 1800,
         dispelType = nil,
-        specs = {S.DEMONOLOGY},
         buffGroup = "WARLOCK_DEMONIC_SACRIFICE",
     },
     {
@@ -644,7 +663,6 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 1800,
         dispelType = nil,
-        specs = {S.DEMONOLOGY},
         buffGroup = "WARLOCK_DEMONIC_SACRIFICE",
     },
     {
@@ -655,7 +673,6 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 1800,
         dispelType = nil,
-        specs = {S.DEMONOLOGY},
         buffGroup = "WARLOCK_DEMONIC_SACRIFICE",
     },
 

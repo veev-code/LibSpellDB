@@ -112,6 +112,7 @@ lib.Categories = {
     PET_SUMMON          = "PET_SUMMON",          -- Pet summoning
     PET_CONTROL         = "PET_CONTROL",         -- Pet control abilities
     PET_SUMMON_TEMP     = "PET_SUMMON_TEMP",     -- Temporary pet/guardian summons
+    REQUIRES_PET        = "REQUIRES_PET",        -- Spell requires an alive pet (Soul Link)
     TOTEM               = "TOTEM",               -- Totem summon (tracks duration via SPELL_SUMMON)
     TOTEM_EARTH         = "TOTEM_EARTH",         -- Earth totem (only one Earth totem active at a time)
     TOTEM_FIRE          = "TOTEM_FIRE",          -- Fire totem (only one Fire totem active at a time)
@@ -420,6 +421,7 @@ lib.BuffGroups = {
         spells = {18789, 18790, 18791, 18792, 35701},
         relationship = "exclusive",
         talentGate = 18788,  -- Check this spell for IsSpellKnown instead of buff IDs
+        excludeIfKnown = {19028, 30146},  -- Soul Link, Summon Felguard: if known, player keeps pet alive
     },
     MAGE_ARMOR = {
         description = "Mage armor",

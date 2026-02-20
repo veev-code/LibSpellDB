@@ -274,6 +274,28 @@ function lib:GetSpecDisplayName(specID)
 end
 
 --[[
+    Check if a spell matches the current player's race
+    @param spellID number|table - Spell ID or spellData table
+    @return boolean - true if spell has no race restriction or matches player race
+]]
+function lib:IsRaceRelevant(spellID)
+    local spellData = type(spellID) == "table" and spellID or self:GetSpellInfo(spellID)
+    if not spellData or not spellData.race then
+        return true
+    end
+    local _, playerRace = UnitRace("player")
+    if type(spellData.race) == "table" then
+        for _, race in ipairs(spellData.race) do
+            if playerRace == race then
+                return true
+            end
+        end
+        return false
+    end
+    return playerRace == spellData.race
+end
+
+--[[
     Check if a spell is relevant for the current player (spec + race)
     @param spellID number - Spell ID to check
     @return boolean - true if spell is relevant for current player

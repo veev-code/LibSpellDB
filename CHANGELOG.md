@@ -1,5 +1,20 @@
 # LibSpellDB Changelog
 
+## [1.0.47] - 2026-02-19
+
+### Added
+- **New tag: `REQUIRES_PET`** — Marks spells that require an alive pet to function (e.g., Soul Link). Consumers can check this tag to suppress reminders when no pet is active.
+- **New API: `IsRaceRelevant(spellID)`** — Returns true if a spell has no race restriction or matches the current player's race. Accepts spellID (number) or spellData (table).
+- **New BuffGroup field: `excludeIfKnown`** — Array of spell IDs; if the player knows any of them, the buff group defaults to disabled. Used for Demonic Sacrifice (disabled when Soul Link or Summon Felguard is known).
+- **Warlock: Soul Link** — Added as `LONG_BUFF` with `REQUIRES_PET` tag for buff reminder support.
+- **Warlock: Summon Felguard** — Added as `PET_SUMMON` (Demonology capstone pet).
+- **Warlock: Life Tap** — Added as `RESOURCE` with `specs = {}` (available for manual enable).
+
+### Changed
+- **Warlock: Demonic Sacrifice buffs** — Removed `specs = {DEMONOLOGY}` restriction from all 5 DS buff spells. The `talentGate` + `excludeIfKnown` combination now handles filtering more precisely than spec detection.
+- **Warlock: Nightfall** — Removed from database. Nightfall (18094) is a passive talent; the proc buff it triggers (Shadow Trance, 17941) is the correct entry in Procs.lua.
+- **Paladin: Righteous Fury** — Removed `SITUATIONAL` tag. With spec-aware defaults, Protection gets it enabled by default while Holy/Ret get it disabled.
+
 ## [1.0.46] - 2026-02-19
 
 ### Fixed
