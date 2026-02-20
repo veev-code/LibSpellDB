@@ -99,6 +99,7 @@ if not lib then return end
         consumedOnCast = false,
         consumedOnHit = true,
         onTarget = false,
+        lowPriority = true,             -- Minor/passive proc, not worth actively tracking
     },
 }
 ```

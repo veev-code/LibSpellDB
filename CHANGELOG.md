@@ -1,5 +1,12 @@
 # LibSpellDB Changelog
 
+## [1.0.49] - 2026-02-20
+
+### Added
+- **New procInfo field: `lowPriority`** — Boolean flag indicating a minor/passive proc not worth actively tracking. Consumers can use this to default-disable low-value procs while still allowing users to opt in.
+- **Warrior: Deep Wounds** — Marked `lowPriority = true` (passive bleed debuff on target, no player decision)
+- **Warrior: Blood Craze** — Marked `lowPriority = true` (passive self-heal on being crit, no action needed)
+
 ## [1.0.48] - 2026-02-20
 
 ### Added

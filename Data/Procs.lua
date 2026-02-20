@@ -61,6 +61,7 @@ lib:RegisterSpells({
             description = "Bleed damage over 12 sec",
             stacks = false,
             onTarget = true,  -- This is a debuff on target, not a buff on player
+            lowPriority = true,
         },
     },
     -- Blood Craze (Fury talent) - procs after being the victim of a critical strike
@@ -75,6 +76,7 @@ lib:RegisterSpells({
         procInfo = {
             description = "Regenerates 3% of total health over 6 sec",
             stacks = false,
+            lowPriority = true,
         },
     },
 }, "WARRIOR")
