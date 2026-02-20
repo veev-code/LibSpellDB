@@ -1,5 +1,11 @@
 # LibSpellDB Changelog
 
+## [1.0.48] - 2026-02-20
+
+### Added
+- **Warlock: Create Healthstone** — New spell entry with all 18 Healthstone item IDs (6 standard, 6 improved rank 1, 6 improved rank 2). Tagged `PERSONAL_DEFENSIVE` + `UTILITY`. Includes `cooldownItemIDs` for item-based cooldown tracking.
+- **New spell data field: `itemCooldown`** — Duration in seconds of the cooldown when a created item is consumed. Used by consumers for consumption detection when the item leaves bags (e.g., Healthstone 120s, Soulstone 1800s). Added to both Create Healthstone and Create Soulstone entries.
+
 ## [1.0.47] - 2026-02-19
 
 ### Added

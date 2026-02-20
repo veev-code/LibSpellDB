@@ -73,6 +73,7 @@ if not lib then return end
     clearsTotems = true,                -- When cast, destroys all active totems (Totemic Call)
     appliesBuff = {8076, 8162},         -- Buff spell IDs applied to player/party (all ranks, low to high)
     cooldownItemIDs = {5232, 16892},    -- Item IDs whose cooldown to check (for spells that create usable items, e.g. Soulstone)
+    itemCooldown = 120,                 -- Duration (seconds) of cooldown when a created item is consumed (for consumption detection)
 
     -- Triggered auras (when aura ID differs from spell ID)
     triggersAuras = {

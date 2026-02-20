@@ -468,8 +468,28 @@ lib:RegisterSpells({
         auraTarget = AT.ALLY,
         singleTarget = true,
         cooldownItemIDs = {5232, 16892, 16893, 16895, 16896, 22116},
+        itemCooldown = 1800,
         ranks = {693, 20752, 20755, 20756, 20757, 27238},
         appliesBuff = {20707, 20762, 20763, 20764, 20765, 27239},
+        specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+    },
+    {
+        spellID = 6201,  -- Create Healthstone (Minor)
+        name = "Create Healthstone",
+        description = "Creates a Healthstone that can be used instantly to restore health.",
+        tags = {C.PERSONAL_DEFENSIVE, C.UTILITY},
+        cooldown = 0,
+        auraTarget = AT.NONE,
+        cooldownItemIDs = {
+            -- Standard Healthstones
+            5512, 5511, 5509, 5510, 9421, 22103,
+            -- Improved Healthstones (talent rank 1, +10%)
+            19004, 19006, 19008, 19010, 19012, 22104,
+            -- Improved Healthstones (talent rank 2, +20%)
+            19005, 19007, 19009, 19011, 19013, 22105,
+        },
+        itemCooldown = 120,
+        ranks = {6201, 6202, 5699, 11729, 11730, 27230},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
