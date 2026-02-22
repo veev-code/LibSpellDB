@@ -1,5 +1,23 @@
 # LibSpellDB Changelog
 
+## [1.0.50] - 2026-02-22
+
+### Added
+- **New API: `GetSpellIcon(spellIDOrData)`** — Returns the display icon for a spell, respecting the `icon` override field if set. Accepts spell ID (number) or spell data table.
+- **New API: `GetDodgeReactive(spellIDOrData)`** — Returns the dodge-reactive window duration for spells like Overpower that become usable when the target dodges. Used by consumers for stance-independent ready glow.
+- **New API: `GetRequiredItemIDs(spellIDOrData)`** — Returns the `requiredItemIDs` array for spells gated behind equipped items (e.g., weapon procs), or nil.
+- **New spell data field: `dodgeReactive`** — Duration (seconds) of the usability window after a target dodges. Added to Warrior's Overpower (5s).
+- **New spell data field: `requiredItemIDs`** — Array of item IDs; spell is only relevant when one of these items is equipped. Used for weapon proc spells.
+- **New spell data field: `icon`** — Override icon texture ID, returned by `GetSpellIcon()` instead of the auto-resolved spell icon.
+- **`GetProcs()` now includes SHARED procs** — Equipment procs registered under `class = "SHARED"` (e.g., weapon stun procs) are now returned alongside class-specific procs.
+- **Warrior: Overpower** — Added `dodgeReactive = 5` for stance-independent dodge-reactive glow.
+- **Warrior: Mace Stun Effect (5530)** — New proc entry for Mace Specialization talent stun (3s, on target). Custom icon (Mace Specialization talent texture).
+- **Warrior: Improved Hamstring (23694)** — New proc entry for Improved Hamstring talent root (5s, on target). Tagged `ROOT`.
+- **Shared: Deep Thunder / Stormherald Stun (34510)** — New proc entry for crafted mace weapon stun proc (4s, on target). Equipment-gated to item IDs 28441 (Deep Thunder) and 28442 (Stormherald).
+
+### Changed
+- **Warrior: Piercing Howl, Death Wish, Sweeping Strikes** — Expanded `specs` arrays to include `ARMS` alongside `FURY`, so these commonly-taken off-tree talents appear for Arms warriors via spec filtering.
+
 ## [1.0.49] - 2026-02-20
 
 ### Added

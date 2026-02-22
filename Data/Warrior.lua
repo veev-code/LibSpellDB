@@ -172,7 +172,7 @@ lib:RegisterSpells({
         duration = 6,
         priority = 5,  -- Soft CC
         talent = true,
-        specs = {S.FURY},
+        specs = {S.FURY, S.ARMS},  -- Fury tree talent, commonly taken by Arms for PvP utility
     },
 
     -------------------------------------------------------------------------------
@@ -255,7 +255,7 @@ lib:RegisterSpells({
         cooldown = 180,
         duration = 30,
         talent = true,
-        specs = {S.FURY},
+        specs = {S.FURY, S.ARMS},  -- Fury tree talent, commonly taken by Arms in PvP
     },
     {
         spellID = 12328,  -- Sweeping Strikes (Fury talent in TBC/Anniversary)
@@ -266,7 +266,7 @@ lib:RegisterSpells({
         duration = 10,
         talent = true,
         ranks = {12328, 12723, 26654},
-        specs = {S.FURY},  -- Fury tree talent in TBC
+        specs = {S.FURY, S.ARMS},  -- Fury tree talent, commonly taken by Arms for cleave
     },
     {
         spellID = 20230,  -- Retaliation
@@ -317,6 +317,7 @@ lib:RegisterSpells({
         priority = 3,
         ranks = {7384, 7887, 11584, 11585},
         specs = {S.ARMS},
+        dodgeReactive = 5,  -- Show dodge-reactive glow for 5s after target dodges (stance-independent)
     },
     {
         spellID = 1680,  -- Whirlwind (after MS, strong damage - used in both ST and AoE)

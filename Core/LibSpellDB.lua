@@ -225,6 +225,24 @@ function lib:GetSpellInfo(spellID)
 end
 
 --[[
+    Get the display icon for a spell.
+    Returns the icon override if set, or the auto-resolved icon from GetSpellInfo.
+
+    @param spellIDOrData (number|table) - Spell ID or spell data table
+    @return (number or nil) - Icon texture ID
+]]
+function lib:GetSpellIcon(spellIDOrData)
+    local spellData
+    if type(spellIDOrData) == "table" then
+        spellData = spellIDOrData
+    else
+        spellData = self:GetSpellInfo(spellIDOrData)
+    end
+    if not spellData then return nil end
+    return spellData.icon
+end
+
+--[[
     Get all spells for a class
 
     @param class (string) - Class token (e.g., "WARRIOR")
@@ -512,6 +530,26 @@ function lib:GetCooldownItemIDs(spellID)
 end
 
 --[[
+    Get required equipped item IDs for a spell.
+    Some spells (e.g., weapon procs) are only relevant when specific items are equipped.
+
+    @param spellIDOrData (number|table) - Spell ID or spell data table
+    @return (table or nil) - Array of item IDs, or nil if no requirement
+]]
+function lib:GetRequiredItemIDs(spellIDOrData)
+    local spellData
+    if type(spellIDOrData) == "table" then
+        spellData = spellIDOrData
+    else
+        spellData = self:GetSpellInfo(spellIDOrData)
+    end
+
+    if not spellData then return nil end
+
+    return spellData.requiredItemIDs
+end
+
+--[[
     Get the active item cooldown for a spell that tracks cooldowns via items.
     Iterates through the spell's cooldownItemIDs and returns the first active cooldown.
 
@@ -762,11 +800,19 @@ end
 function lib:GetProcs(class)
     local procs = {}
     local classSpells = self:GetSpellsByClassAndTag(class, "PROC")
-    
+
     for spellID, spellData in pairs(classSpells) do
         table.insert(procs, spellData)
     end
-    
+
+    -- Include shared/equipment procs (weapon procs like Deep Thunder / Stormherald)
+    local sharedSpells = self:GetSpellsByClassAndTag("SHARED", "PROC")
+    if sharedSpells then
+        for spellID, spellData in pairs(sharedSpells) do
+            table.insert(procs, spellData)
+        end
+    end
+
     return procs
 end
 
@@ -803,6 +849,27 @@ function lib:GetReactiveWindow(spellID)
     end
     if not spellData then return nil end
     return spellData.reactiveWindow
+end
+
+--[[
+    Get dodge-reactive window duration for a spell
+
+    For spells like Overpower that become usable when the target dodges,
+    this returns the duration (in seconds) of the dodge window.
+    Used by consumers to show ready-glow even when stance prevents IsUsableSpell.
+
+    @param spellIDOrData (number or table) - Spell ID or spell data table
+    @return (number or nil) - Dodge-reactive window duration in seconds, or nil
+]]
+function lib:GetDodgeReactive(spellIDOrData)
+    local spellData
+    if type(spellIDOrData) == "table" then
+        spellData = spellIDOrData
+    else
+        spellData = self:GetSpellInfo(spellIDOrData)
+    end
+    if not spellData then return nil end
+    return spellData.dodgeReactive
 end
 
 -------------------------------------------------------------------------------

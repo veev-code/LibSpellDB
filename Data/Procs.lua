@@ -79,7 +79,60 @@ lib:RegisterSpells({
             lowPriority = true,
         },
     },
+    -- Mace Stun Effect (Mace Specialization Arms talent) - stuns target on melee hit with maces
+    {
+        spellID = 5530,  -- Mace Stun Effect debuff on target
+        name = "Mace Stun Effect",
+        icon = 133476,  -- Mace Specialization talent icon
+        tags = {C.PROC, C.CC_HARD},
+        cooldown = 0,
+        duration = 3,
+        talent = true,
+        procInfo = {
+            description = "Stuns target for 3 sec on melee hit with maces",
+            stacks = false,
+            onTarget = true,
+        },
+    },
+
+    -- Improved Hamstring (Arms talent) - immobilizes target on Hamstring hit
+    {
+        spellID = 23694,
+        name = "Improved Hamstring",
+        tags = {C.PROC, C.ROOT},
+        cooldown = 0,
+        duration = 5,
+        talent = true,
+        procInfo = {
+            description = "Immobilizes target for 5 sec on Hamstring hit",
+            stacks = false,
+            onTarget = true,
+        },
+    },
 }, "WARRIOR")
+
+-------------------------------------------------------------------------------
+-- Shared / Equipment Procs (any class)
+-------------------------------------------------------------------------------
+
+lib:RegisterSpells({
+    -- Stun proc from Deep Thunder / Stormherald crafted maces (same spell for both weapons)
+    -- Chance on hit: Stuns target for 4 sec
+    {
+        spellID = 34510,  -- Stun debuff on target
+        name = "Stun",
+        description = "Stuns target for 4 sec (Deep Thunder / Stormherald proc)",
+        tags = {C.PROC, C.CC_HARD},
+        cooldown = 0,
+        duration = 4,
+        requiredItemIDs = {28441, 28442},  -- Deep Thunder (28441), Stormherald (28442)
+        procInfo = {
+            description = "Stuns target for 4 sec (Deep Thunder / Stormherald)",
+            stacks = false,
+            onTarget = true,
+        },
+    },
+}, "SHARED")
 
 -------------------------------------------------------------------------------
 -- Rogue Procs
