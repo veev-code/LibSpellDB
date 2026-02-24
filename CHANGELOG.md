@@ -1,5 +1,20 @@
 # LibSpellDB Changelog
 
+## [1.0.51] - 2026-02-24
+
+### Fixed
+- **Warlock: Missing TBC ranks** — 8 spells were missing their highest-level TBC rank, causing rank-to-base mapping failures when the player casts the max rank. Affected spells and added rank IDs:
+  - Siphon Life — Rank 6 (30911, level 70)
+  - Searing Pain — Rank 8 (30459, level 70)
+  - Soul Fire — Rank 4 (30545, level 70)
+  - Shadowburn — Rank 7 (27263, level 63)
+  - Drain Mana — Rank 6 (30908, level 70)
+  - Curse of Weakness — Rank 8 (30909, level 69)
+  - Devour Magic (Felhunter) — Rank 6 (27277, level 70)
+  - Curse of Shadow — Rank 3 (27229, level 67)
+- **Warlock: Curse of the Elements / Fear spell ID swap** — Curse of the Elements Rank 4 (27228) was incorrectly placed in Fear's ranks array, and Curse of Shadow Rank 3 (27229) was in Curse of the Elements' ranks. This caused Curse of the Elements to never match in aura tracking at max rank, and Fear to have a phantom fourth rank. All three spells corrected.
+- **Priest: Greater Heal missing rank** — Added Rank 7 (25213, level 68).
+
 ## [1.0.50] - 2026-02-22
 
 ### Added

@@ -265,7 +265,7 @@ lib:RegisterSpells({
         tags = {C.HEAL, C.FILLER, C.HEAL_SINGLE, C.PVE},
         cooldown = 0,
         priority = 5,
-        ranks = {2060, 10963, 10964, 10965, 25314, 25210},
+        ranks = {2060, 10963, 10964, 10965, 25314, 25210, 25213},
         auraTarget = AT.ALLY,  -- Can target other players
         specs = {S.DISCIPLINE, S.HOLY},
     },

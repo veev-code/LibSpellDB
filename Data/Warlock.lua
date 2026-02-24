@@ -39,7 +39,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 20,
         singleTarget = true,
-        ranks = {5782, 6213, 6215, 27228},
+        ranks = {5782, 6213, 6215},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
@@ -191,7 +191,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.ROTATIONAL, C.FINISHER},
         cooldown = 15,
         talent = true,
-        ranks = {17877, 18867, 18868, 18869, 18870, 18871, 30546},
+        ranks = {17877, 18867, 18868, 18869, 18870, 18871, 27263, 30546},
         specs = {S.DESTRUCTION},
     },
 
@@ -204,7 +204,7 @@ lib:RegisterSpells({
         description = "Purges 1 harmful magic effect from a friend or 1 beneficial magic effect from an enemy. If an effect is devoured, the Felhunter will be healed for 258.",
         tags = {C.DISPEL_MAGIC, C.PET},
         cooldown = 8,
-        ranks = {19505, 19731, 19734, 19736, 27276},
+        ranks = {19505, 19731, 19734, 19736, 27276, 27277},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
 
@@ -266,7 +266,7 @@ lib:RegisterSpells({
         priority = 4,
         talent = true,
         specs = {S.AFFLICTION},
-        ranks = {18265, 18879, 18880, 18881, 27264},
+        ranks = {18265, 18879, 18880, 18881, 27264, 30911},
     },
 
     -------------------------------------------------------------------------------
@@ -314,7 +314,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.FILLER, C.PVP},
         cooldown = 0,
         priority = 6,
-        ranks = {5676, 17919, 17920, 17921, 17922, 17923, 27210},
+        ranks = {5676, 17919, 17920, 17921, 17922, 17923, 27210, 30459},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
@@ -324,7 +324,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MINOR, C.PVE},
         cooldown = 60,
         priority = 10,
-        ranks = {6353, 17924, 27211},
+        ranks = {6353, 17924, 27211, 30545},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
@@ -388,7 +388,7 @@ lib:RegisterSpells({
         tags = {C.UTILITY, C.RESOURCE, C.PVP},
         cooldown = 0,
         duration = 5,
-        ranks = {5138, 6226, 11703, 11704, 27221},
+        ranks = {5138, 6226, 11703, 11704, 27221, 30908},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
@@ -547,7 +547,7 @@ lib:RegisterSpells({
         tags = {C.DEBUFF, C.UTILITY},
         cooldown = 0,
         duration = 120,
-        ranks = {702, 1108, 6205, 7646, 11707, 11708, 27224},
+        ranks = {702, 1108, 6205, 7646, 11707, 11708, 27224, 30909},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
@@ -557,7 +557,7 @@ lib:RegisterSpells({
         tags = {C.DEBUFF, C.UTILITY, C.RAID_DEFENSIVE},
         cooldown = 0,
         duration = 300,
-        ranks = {1490, 11721, 11722, 27229},
+        ranks = {1490, 11721, 11722, 27228},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
@@ -567,7 +567,7 @@ lib:RegisterSpells({
         tags = {C.DEBUFF, C.UTILITY, C.RAID_DEFENSIVE},
         cooldown = 0,
         duration = 300,
-        ranks = {17862, 17937},
+        ranks = {17862, 17937, 27229},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
