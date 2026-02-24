@@ -107,6 +107,7 @@ lib:RegisterSpells({
         duration = 12,
         talent = true,
         specs = {S.AFFLICTION},
+        buffGroup = "WARLOCK_CURSES",
     },
     {
         spellID = 1714,  -- Curse of Tongues
@@ -117,6 +118,7 @@ lib:RegisterSpells({
         duration = 30,
         ranks = {1714, 11719},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+        buffGroup = "WARLOCK_CURSES",
     },
 
     -------------------------------------------------------------------------------
@@ -221,6 +223,7 @@ lib:RegisterSpells({
         priority = 1,
         ranks = {603, 30910},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+        buffGroup = "WARLOCK_CURSES",
     },
     {
         spellID = 980,  -- Curse of Agony (shorter fights)
@@ -232,6 +235,7 @@ lib:RegisterSpells({
         priority = 1,
         ranks = {980, 1014, 6217, 11711, 11712, 11713, 27218},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+        buffGroup = "WARLOCK_CURSES",
     },
     {
         spellID = 30108,  -- Unstable Affliction (apply early)
@@ -549,6 +553,7 @@ lib:RegisterSpells({
         duration = 120,
         ranks = {702, 1108, 6205, 7646, 11707, 11708, 27224, 30909},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+        buffGroup = "WARLOCK_CURSES",
     },
     {
         spellID = 1490,  -- Curse of the Elements
@@ -559,6 +564,7 @@ lib:RegisterSpells({
         duration = 300,
         ranks = {1490, 11721, 11722, 27228},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+        buffGroup = "WARLOCK_CURSES",
     },
     {
         spellID = 17862,  -- Curse of Shadow
@@ -569,6 +575,7 @@ lib:RegisterSpells({
         duration = 300,
         ranks = {17862, 17937, 27229},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+        buffGroup = "WARLOCK_CURSES",
     },
     {
         spellID = 704,  -- Curse of Recklessness
@@ -579,6 +586,7 @@ lib:RegisterSpells({
         duration = 120,
         ranks = {704, 7658, 7659, 11717, 27226},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+        buffGroup = "WARLOCK_CURSES",
     },
 
     -------------------------------------------------------------------------------

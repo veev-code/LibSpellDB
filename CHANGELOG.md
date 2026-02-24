@@ -1,5 +1,15 @@
 # LibSpellDB Changelog
 
+## [1.0.52] - 2026-02-24
+
+### Added
+- **New BuffGroup: `WARLOCK_CURSES`** — All 8 warlock curses (Agony, Doom, Exhaustion, Tongues, Weakness, Elements, Shadow, Recklessness) grouped as exclusive. Only one curse can be active per target.
+- **New BuffGroup: `PALADIN_SEALS`** — All 8 paladin seals (Blood, Crusader, Righteousness, Command, Wisdom, Light, Justice, Vengeance) grouped as exclusive. Only one seal can be active at a time.
+- **Warlock curse spells** — Added `buffGroup = "WARLOCK_CURSES"` to all 8 curse spell definitions.
+
+### Fixed
+- **Missing `PALADIN_SEALS` group definition** — 8 paladin seal spells referenced `buffGroup = "PALADIN_SEALS"` but the group was never defined in Categories.lua.
+
 ## [1.0.51] - 2026-02-24
 
 ### Fixed

@@ -416,6 +416,11 @@ lib.BuffGroups = {
         spells = {687, 706, 28176},
         relationship = "exclusive",
     },
+    WARLOCK_CURSES = {
+        description = "Warlock curses",
+        spells = {980, 603, 18223, 1714, 702, 1490, 17862, 704},
+        relationship = "exclusive",
+    },
     WARLOCK_DEMONIC_SACRIFICE = {
         description = "Demonic Sacrifice",
         spells = {18789, 18790, 18791, 18792, 35701},
@@ -441,6 +446,11 @@ lib.BuffGroups = {
     PALADIN_AURAS = {
         description = "Paladin auras",
         spells = {465, 19746, 7294, 19891, 19888, 19876, 20218},
+        relationship = "exclusive",
+    },
+    PALADIN_SEALS = {
+        description = "Paladin seals",
+        spells = {31892, 21082, 20154, 20375, 20166, 20165, 20164, 31801},
         relationship = "exclusive",
     },
     HUNTER_ASPECTS = {
