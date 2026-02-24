@@ -146,6 +146,14 @@ lib:RegisterSpells({
         auraTarget = AT.SELF,
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
+    {
+        spellID = 29858,  -- Soulshatter
+        name = "Soulshatter",
+        description = "Reduces threat by 50% for all enemies within 50 yards.",
+        tags = {C.UTILITY},
+        cooldown = 180,
+        specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+    },
 
     -------------------------------------------------------------------------------
     -- Offensive Cooldowns (Secondary Row - throughput)

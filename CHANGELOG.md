@@ -1,5 +1,10 @@
 # LibSpellDB Changelog
 
+## [1.0.53] - 2026-02-24
+
+### Added
+- **Warlock: Soulshatter (29858)** — Threat reduction ability (50% threat drop, 3min CD). Tagged `UTILITY`, available for all warlock specs.
+
 ## [1.0.52] - 2026-02-24
 
 ### Added
