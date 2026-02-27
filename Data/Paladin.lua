@@ -86,7 +86,7 @@ lib:RegisterSpells({
         spellID = 1022,  -- Blessing of Protection
         name = "Blessing of Protection",
         description = "A targeted party member is protected from all physical attacks for 6 sec, but during that time they cannot attack or use physical abilities. Players may only have one Blessing on them per Paladin at any one time. Once protected, the target cannot be made invulnerable by Divine Shield, Divine Protection or Blessing of Protection again for 1 min.",
-        tags = {C.EXTERNAL_DEFENSIVE, C.MAJOR, C.IMMUNITY, C.HAS_BUFF},
+        tags = {C.EXTERNAL_DEFENSIVE, C.MAJOR, C.IMMUNITY, C.HAS_BUFF, C.IMPORTANT_EXTERNAL},
         cooldown = 300,
         duration = 10,
         ranks = {1022, 5599, 10278},
@@ -99,7 +99,7 @@ lib:RegisterSpells({
         spellID = 6940,  -- Blessing of Sacrifice
         name = "Blessing of Sacrifice",
         description = "Places a Blessing on the party member, transfering 45 damage taken per hit to the caster. Lasts 30 sec. Players may only have one Blessing on them per Paladin at any one time.",
-        tags = {C.EXTERNAL_DEFENSIVE, C.MINOR, C.HAS_BUFF},
+        tags = {C.EXTERNAL_DEFENSIVE, C.MINOR, C.HAS_BUFF, C.IMPORTANT_EXTERNAL},
         cooldown = 30,
         duration = 30,
         ranks = {6940, 20729},
@@ -110,7 +110,7 @@ lib:RegisterSpells({
         spellID = 1044,  -- Blessing of Freedom
         name = "Blessing of Freedom",
         description = "Places a Blessing on the friendly target, granting immunity to movement impairing effects for 10 sec. Players may only have one Blessing on them per Paladin at any one time.",
-        tags = {C.DEFENSIVE, C.MINOR, C.CC_BREAK, C.HAS_BUFF},
+        tags = {C.DEFENSIVE, C.MINOR, C.CC_BREAK, C.HAS_BUFF, C.IMPORTANT_EXTERNAL},
         cooldown = 25,
         duration = 10,
         auraTarget = AT.ALLY,  -- Can target other players

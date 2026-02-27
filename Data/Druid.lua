@@ -164,7 +164,7 @@ lib:RegisterSpells({
         spellID = 29166,  -- Innervate
         name = "Innervate",
         description = "Increases the target's Spirit based mana regeneration by 400% and allows full mana regeneration while casting. Lasts 20 sec.",
-        tags = {C.HEAL, C.MAJOR, C.RESOURCE, C.HAS_BUFF},
+        tags = {C.HEAL, C.MAJOR, C.RESOURCE, C.HAS_BUFF, C.IMPORTANT_EXTERNAL},
         cooldown = 360,
         duration = 20,
         auraTarget = AT.ALLY,  -- Can target other players

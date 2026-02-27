@@ -352,13 +352,17 @@ lib:RegisterSpells({
         spellID = 34428,  -- Victory Rush (TBC, usable after killing blow)
         name = "Victory Rush",
         description = "Instantly attack the target causing (Attack Power * 45 / 100) damage. Can only be used within 20 sec after you kill an enemy that yields experience or honor. Damage is based on your attack power.",
-        tags = {C.DPS, C.ROTATIONAL, C.REACTIVE, C.HEAL_SINGLE, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.REACTIVE, C.HEAL_SINGLE, C.PVE_PVP, C.PROC},
         cooldown = 0,
         priority = 7,
         auraTarget = AT.SELF,  -- Self-heal on kill
         specs = {S.ARMS, S.FURY},
         reactiveWindow = 20,  -- Usable for 20s after killing blow
         reactiveWindowEvent = "PARTY_KILL",  -- CLEU sub-event that triggers/refreshes the window
+        procInfo = {
+            description = "Usable for 20 sec after a killing blow",
+            stacks = false,
+        },
     },
 
     -------------------------------------------------------------------------------

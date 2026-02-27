@@ -285,7 +285,7 @@ lib:RegisterSpells({
         spellID = 34477,  -- Misdirection (use on pull)
         name = "Misdirection",
         description = "Threat caused by your next 3 attacks is redirected to the target raid member. Caster and target can only be affected by one Misdirection spell at a time. Effect lasts 30 sec.",
-        tags = {C.UTILITY, C.PVE},
+        tags = {C.UTILITY, C.PVE, C.IMPORTANT_EXTERNAL},
         cooldown = 120,
         duration = 30,
         priority = 1,

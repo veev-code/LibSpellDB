@@ -24,6 +24,7 @@ LibSpellDB is a shared spell database library for World of Warcraft addon develo
 - Per-class files: `Warrior.lua`, `Paladin.lua`, `Hunter.lua`, `Mage.lua`, `Priest.lua`, `Rogue.lua`, `Shaman.lua`, `Warlock.lua`, `Druid.lua`
 - `Racials.lua` — Racial abilities and PvP trinkets (`class = "SHARED"`)
 - `Procs.lua` — Proc buff definitions with `procInfo` metadata
+- `Externals.lua` — Cross-class external buffs: drums, item-based effects (`class = "SHARED"`)
 
 ### Other
 - `LibStub/LibStub.lua` — Embedded LibStub
@@ -154,6 +155,9 @@ if not lib then return end
 ### Effect Tags
 - `PROC`, `REACTIVE` — Proc-based / conditional abilities (Execute, Overpower, Revenge)
 - `HAS_BUFF`, `HAS_DEBUFF`, `HAS_HOT`, `HAS_DOT` — Spell applies an effect
+
+### External / Cross-Player Tags
+- `IMPORTANT_EXTERNAL` — High-impact buff from another player or shared source (Bloodlust, PI, Innervate, Drums)
 
 ### Healing Subtypes
 `HEAL_SINGLE`, `HEAL_AOE`, `HOT`

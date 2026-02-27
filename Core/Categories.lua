@@ -133,6 +133,10 @@ lib.Categories = {
     PROC                = "PROC",                -- Proc-based abilities
     REACTIVE            = "REACTIVE",            -- Reactive/conditional abilities - usability shown via overlay (Overpower, Revenge, Execute)
 
+    -- External / Cross-Player Effects
+    IMPORTANT_EXTERNAL  = "IMPORTANT_EXTERNAL",  -- High-impact buff from another player or shared source (Bloodlust, PI, Innervate)
+    MINOR_EXTERNAL      = "MINOR_EXTERNAL",      -- Lower-priority external buff (Drums) — available but not actively tracked by default
+
     -- Spell Effects (describes what the spell applies)
     HAS_BUFF            = "HAS_BUFF",            -- Applies a buff (same ID as spell unless appliesAura set)
     HAS_DEBUFF          = "HAS_DEBUFF",          -- Applies a debuff on target
@@ -325,6 +329,18 @@ lib.CategoryInfo = {
         description = "Threat and taunt abilities",
         color = {0.8, 0.4, 0.1},  -- Brown-orange
         priority = 82,
+    },
+    [lib.Categories.IMPORTANT_EXTERNAL] = {
+        name = "Important External",
+        description = "High-impact buff from another player or shared source",
+        color = {1.0, 0.84, 0.0},  -- Gold
+        priority = 92,
+    },
+    [lib.Categories.MINOR_EXTERNAL] = {
+        name = "Minor External",
+        description = "Lower-priority external buff, available but not tracked by default",
+        color = {0.8, 0.7, 0.3},  -- Dim gold
+        priority = 60,
     },
 }
 

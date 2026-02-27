@@ -124,7 +124,7 @@ lib:RegisterSpells({
         spellID = 6346,  -- Fear Ward (preventative buff, not reactive CD)
         name = "Fear Ward",
         description = "Wards the friendly target against Fear. The next Fear effect used against the target will fail, using up the ward. Lasts 3 min.",
-        tags = {C.CC_BREAK, C.CC_IMMUNITY, C.HAS_BUFF},
+        tags = {C.CC_BREAK, C.CC_IMMUNITY, C.HAS_BUFF, C.IMPORTANT_EXTERNAL},
         cooldown = 180,
         duration = 180,
         auraTarget = AT.ALLY,  -- Can target other players
@@ -138,7 +138,7 @@ lib:RegisterSpells({
         spellID = 33206,  -- Pain Suppression (Discipline talent)
         name = "Pain Suppression",
         description = "Instantly reduces a friendly target's threat by 5%, reduces all damage taken by 40% and increases resistance to Dispel mechanics by 65% for 8 sec.",
-        tags = {C.EXTERNAL_DEFENSIVE, C.MAJOR, C.HAS_BUFF, C.PVE_PVP},
+        tags = {C.EXTERNAL_DEFENSIVE, C.MAJOR, C.HAS_BUFF, C.PVE_PVP, C.IMPORTANT_EXTERNAL},
         cooldown = 120,
         duration = 8,
         talent = true,
@@ -187,7 +187,7 @@ lib:RegisterSpells({
         spellID = 10060,  -- Power Infusion
         name = "Power Infusion",
         description = "Infuses the target with power, increasing spell casting speed by 20% and reducing the mana cost of all spells by 20%. Lasts 15 sec.",
-        tags = {C.DPS, C.HEAL, C.MAJOR, C.HAS_BUFF},
+        tags = {C.DPS, C.HEAL, C.MAJOR, C.HAS_BUFF, C.IMPORTANT_EXTERNAL},
         cooldown = 180,
         duration = 15,
         talent = true,

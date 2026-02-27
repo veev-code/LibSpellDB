@@ -1,5 +1,26 @@
 # LibSpellDB Changelog
 
+## [1.0.54] - 2026-02-27
+
+### Added
+- **New tags: `IMPORTANT_EXTERNAL`, `MINOR_EXTERNAL`** — Two-tier classification for buffs received from other players or shared sources. `IMPORTANT_EXTERNAL` marks high-impact buffs (Bloodlust, Heroism, Power Infusion, Innervate, Pain Suppression, Blessing of Protection/Sacrifice/Freedom, Fear Ward, Earth Shield, Misdirection). `MINOR_EXTERNAL` marks lower-priority externals (Drums). Tags are mutually exclusive — a spell has one or the other, never both.
+- **New data file: `Data/Externals.lua`** — Leatherworking drums (6 variants: Drums of Battle/War/Speed + Greater versions) registered as `SHARED` class with `MINOR_EXTERNAL` tag.
+- **Expanded proc database** — 30+ new proc definitions across all classes:
+  - **Warrior**: Second Wind, Blood Frenzy, Victory Rush (now also tagged `PROC` with `procInfo`)
+  - **Rogue**: Remorseless, Mace Stun Effect, Find Weakness, Blade Twisting (Dazed)
+  - **Mage**: Ignite, Winter's Chill, Blazing Speed, Fire Vulnerability (Improved Scorch). Removed Arcane Power, Icy Veins, Presence of Mind (active abilities, not procs).
+  - **Warlock**: Shadow Vulnerability (ISB), Shadow Embrace, Nether Protection
+  - **Priest**: Blessed Recovery, Shadow Weaving, Focused Casting (Martyrdom), Blackout
+  - **Shaman**: Elemental Devastation, Focused Casting (Eye of the Storm). Fixed Unleashed Rage to use buff spell IDs with all 5 ranks.
+  - **Druid**: Natural Perfection, Starfire Stun (Celestial Focus)
+  - **Paladin**: Light's Grace, Redoubt, Reckoning
+  - **Hunter**: Expose Weakness, Master Tactician, Rapid Killing, Improved Wing Clip, Improved Concussive Shot
+- **Rogue procs reorganized** — Removed Blade Flurry and Adrenaline Rush from procs (they are active abilities, not procs). Added actual rogue proc talents.
+- **`IMPORTANT_EXTERNAL` tags on existing spells** — Bloodlust, Heroism, Power Infusion, Pain Suppression, Innervate, Blessing of Protection/Sacrifice/Freedom, Fear Ward, Earth Shield, Misdirection.
+
+### Changed
+- **Stormstrike**: Added `cooldownPriority = true` — consumers should show cooldown first, debuff uptime is secondary.
+
 ## [1.0.53] - 2026-02-24
 
 ### Added

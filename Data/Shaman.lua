@@ -102,6 +102,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE_PVP},
         cooldown = 10,  -- 10s with talents in TBC
         duration = 12,
+        cooldownPriority = true,  -- Show cooldown first; debuff uptime is less important than CD tracking
         priority = 1,
         talent = true,
         specs = {S.ENHANCEMENT},
@@ -147,7 +148,7 @@ lib:RegisterSpells({
         spellID = 2825,  -- Bloodlust (Horde)
         name = "Bloodlust",
         description = "Increases melee, ranged, and spell casting speed by 30% for all party members. Lasts 40 sec.",
-        tags = {C.DPS, C.MAJOR, C.RAID_DEFENSIVE, C.HAS_BUFF},
+        tags = {C.DPS, C.MAJOR, C.RAID_DEFENSIVE, C.HAS_BUFF, C.IMPORTANT_EXTERNAL},
         cooldown = 600,
         duration = 40,
         auraTarget = AT.SELF,  -- Buff appears on self, affects raid
@@ -157,7 +158,7 @@ lib:RegisterSpells({
         spellID = 32182,  -- Heroism (Alliance) - TBC+
         name = "Heroism",
         description = "Increases melee, ranged, and spell haste by 30% for all party and raid members. Lasts 40 sec.Allies receiving this effect will become Exhausted and be unable to benefit from Heroism again for 10 min.",
-        tags = {C.DPS, C.MAJOR, C.RAID_DEFENSIVE, C.HAS_BUFF},
+        tags = {C.DPS, C.MAJOR, C.RAID_DEFENSIVE, C.HAS_BUFF, C.IMPORTANT_EXTERNAL},
         cooldown = 600,
         duration = 40,
         auraTarget = AT.SELF,  -- Buff appears on self, affects raid
@@ -189,7 +190,7 @@ lib:RegisterSpells({
         spellID = 974,  -- Earth Shield (maintain on tank or self)
         name = "Earth Shield",
         description = "Protects the target with an earthen shield, giving a 30% chance of ignoring spell interruption when damaged and causing attacks to heal the shielded target for 150. This effect can only occur once every few seconds. 6 charges. Lasts 10 min. Earth Shield can only be placed on one target at a time and only one Elemental Shield can be active on a target at a time.",
-        tags = {C.HEAL, C.ROTATIONAL, C.HEAL_SINGLE, C.HAS_BUFF, C.LONG_BUFF, C.PVE},
+        tags = {C.HEAL, C.ROTATIONAL, C.HEAL_SINGLE, C.HAS_BUFF, C.LONG_BUFF, C.PVE, C.IMPORTANT_EXTERNAL},
         cooldown = 0,
         duration = 600,
         singleTarget = true,
