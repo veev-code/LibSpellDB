@@ -1,5 +1,10 @@
 # LibSpellDB Changelog
 
+## [1.0.55] - 2026-02-27
+
+### Added
+- **Aspect of the Wild** — Added all 3 ranks (20043, 20190, 27045) to Hunter spell data and `HUNTER_ASPECTS` BuffGroup. Fixes buff reminder false positives when using Aspect of the Wild.
+
 ## [1.0.54] - 2026-02-27
 
 ### Added

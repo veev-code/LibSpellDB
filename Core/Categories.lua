@@ -471,7 +471,7 @@ lib.BuffGroups = {
     },
     HUNTER_ASPECTS = {
         description = "Hunter aspects",
-        spells = {13165, 13163, 5118, 13159, 13161, 34074},
+        spells = {13165, 13163, 5118, 13159, 13161, 34074, 20043},
         relationship = "exclusive",
     },
 

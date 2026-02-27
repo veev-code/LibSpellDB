@@ -457,6 +457,16 @@ lib:RegisterSpells({
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
         buffGroup = "HUNTER_ASPECTS",
     },
+    {
+        spellID = 20043,  -- Aspect of the Wild
+        name = "Aspect of the Wild",
+        description = "The hunter and group members within 30 yards take on the aspect of the wild, increasing Nature resistance by 70. Only one Aspect can be active at a time.",
+        tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
+        cooldown = 0,
+        ranks = {20043, 20190, 27045},
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
+        buffGroup = "HUNTER_ASPECTS",
+    },
 
     -------------------------------------------------------------------------------
     -- Long-Duration Buffs (Buff Reminders)
