@@ -1,5 +1,10 @@
 # LibSpellDB Changelog
 
+## [1.0.56] - 2026-02-28
+
+### Fixed
+- **Mangle (Cat) and Mangle (Bear)** — Added missing `duration = 12` to both spells. The 12-second debuff duration was not declared in the spell data, causing consumers to fall back to estimated defaults.
+
 ## [1.0.55] - 2026-02-27
 
 ### Added
