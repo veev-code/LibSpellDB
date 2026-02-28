@@ -1,5 +1,10 @@
 # LibSpellDB Changelog
 
+## [1.0.57] - 2026-02-28
+
+### Added
+- **Mangle (Cat) and Mangle (Bear)** — Added `sharedAuraSpells` field linking both spells' rank IDs. Cat Mangle and Bear Mangle apply the same gameplay debuff (30% increased bleed damage) but have separate spell ID ranges. This field allows consumers to detect the debuff regardless of which form applied it.
+
 ## [1.0.56] - 2026-02-28
 
 ### Fixed

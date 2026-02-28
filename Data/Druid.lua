@@ -378,6 +378,7 @@ lib:RegisterSpells({
         talent = true,
         ranks = {33876, 33982, 33983},
         specs = {S.FERAL},
+        sharedAuraSpells = {33878, 33986, 33987},  -- Bear Mangle ranks apply same debuff
     },
     {
         spellID = 27002,  -- Shred (main CP builder from behind)
@@ -447,6 +448,7 @@ lib:RegisterSpells({
         ranks = {33878, 33986, 33987},
         specs = {S.FERAL},
         cooldownPriority = true,  -- Debuff lasts 12s but you spam on 6s CD; cooldown display is more useful
+        sharedAuraSpells = {33876, 33982, 33983},  -- Cat Mangle ranks apply same debuff
     },
     {
         spellID = 33745,  -- Lacerate (stack and maintain)
