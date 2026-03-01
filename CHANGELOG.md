@@ -1,5 +1,10 @@
 # LibSpellDB Changelog
 
+## [1.0.59] - 2026-03-01
+
+### Fixed
+- **Kick (Rogue)** — Added Anniversary Edition spell ID 38768 for Kick rank 5. The previous highest rank ID (27613) does not exist in the Anniversary Edition client, causing `IsSpellKnown()` to return false for all ranks and making Kick invisible to consumers.
+
 ## [1.0.58] - 2026-02-28
 
 ### Fixed

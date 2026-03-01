@@ -24,7 +24,7 @@ lib:RegisterSpells({
         tags = {C.INTERRUPT},
         cooldown = 10,
         duration = 5,  -- Lockout duration
-        ranks = {1766, 1767, 1768, 1769, 27613},
+        ranks = {1766, 1767, 1768, 1769, 27613, 38768},
         specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
     },
 

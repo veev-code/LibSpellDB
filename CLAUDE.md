@@ -51,7 +51,7 @@ if not lib then return end
     -- Optional (auto-resolved if nil)
     name = "Spell Name",                -- Override display name
     description = "Spell description.", -- Full spell description text
-    icon = 12345,                       -- Override icon ID
+    icon = 12345,                       -- Override icon texture ID (returned by GetSpellIcon instead of auto-resolved)
 
     -- Optional metadata
     cooldown = 10,                      -- Base cooldown in seconds
@@ -65,6 +65,7 @@ if not lib then return end
     race = "Orc",                       -- Race restriction (racials only)
     dispelType = "Magic",               -- Dispel type of the spell's buff ("Magic", "Curse", etc.)
     buffGroup = "WARRIOR_SHOUTS",       -- BuffGroup this spell belongs to (see BuffGroup System below)
+    requiredItemIDs = {28441, 28442},   -- Item IDs; spell only relevant when one is equipped (weapon procs)
 
     -- Aura targeting
     auraTarget = AT.SELF,               -- Where buff appears: "self", "ally", "pet", "none"
@@ -74,6 +75,7 @@ if not lib then return end
     singleTarget = true,                -- Only one instance can be active at a time (Polymorph, Prayer of Mending)
     reactiveWindow = 20,                -- Duration (seconds) of usability window for REACTIVE spells
     reactiveWindowEvent = "PARTY_KILL", -- CLEU sub-event that triggers/refreshes the window
+    dodgeReactive = 5,                  -- Duration (seconds) of usability window after target dodges (Overpower)
     clearsTotems = true,                -- When cast, destroys all active totems (Totemic Call)
     appliesBuff = {8076, 8162},         -- Buff spell IDs applied to player/party (all ranks, low to high)
     cooldownItemIDs = {5232, 16892},    -- Item IDs whose cooldown to check (for spells that create usable items, e.g. Soulstone)
@@ -157,7 +159,8 @@ if not lib then return end
 - `HAS_BUFF`, `HAS_DEBUFF`, `HAS_HOT`, `HAS_DOT` — Spell applies an effect
 
 ### External / Cross-Player Tags
-- `IMPORTANT_EXTERNAL` — High-impact buff from another player or shared source (Bloodlust, PI, Innervate, Drums)
+- `IMPORTANT_EXTERNAL` — High-impact buff from another player or shared source (Bloodlust, PI, Innervate)
+- `MINOR_EXTERNAL` — Lower-priority external buff (Drums) — available but not actively tracked by default
 
 ### Healing Subtypes
 `HEAL_SINGLE`, `HEAL_AOE`, `HOT`
@@ -223,15 +226,17 @@ BALANCE, FERAL,                 -- Druid (RESTORATION shared)
 - `lib:GetAllSpells()` — Get entire spell database
 
 ### Aura Targeting
-- `lib:GetAuraTarget(spellID)` — Returns "self", "ally", "pet", or "none"
+- `lib:GetAuraTarget(spellID)` — Returns "self", "ally", "pet", or "none" (also handles legacy `selfOnly` field conversion)
 - `lib:IsSelfOnly(spellID)` — Returns true for "self" or "none"
 - `lib:IsRotational(spellID)` — Check ROTATIONAL tag
 - `lib:IsSingleTarget(spellID)` — Check if only one instance can be active at a time
 - `lib:GetDispelType(spellID)` — Returns dispel type string for a spell's buff
+- `lib:GetSpellIcon(spellID)` — Returns override icon texture ID, or nil (falls back to auto-resolved)
 
-### Item Cooldowns
+### Item Cooldowns & Requirements
 - `lib:GetCooldownItemIDs(spellID)` — Returns array of item IDs for spells with item-based cooldowns, or nil
 - `lib:GetItemCooldown(spellID)` — Queries `GetItemCooldown()` for each item; returns `remaining, duration, startTime` or nil
+- `lib:GetRequiredItemIDs(spellID)` — Returns array of item IDs spell is gated behind (e.g., weapon procs), or nil
 
 ### Triggered Aura Queries
 - `lib:GetAuraInfo(auraSpellID)` — Get `{sourceSpellID, tags, type, onTarget, duration}`
@@ -261,6 +266,7 @@ BALANCE, FERAL,                 -- Druid (RESTORATION shared)
 - `lib:GetProcs(class)` — Array of proc spell data for class
 - `lib:GetProcInfo(spellID)` — Proc metadata for a spell
 - `lib:GetReactiveWindow(spellID)` — Duration of usability window for reactive spells, or nil
+- `lib:GetDodgeReactive(spellID)` — Duration of usability window after target dodges (e.g., Overpower), or nil
 
 ### Shared Cooldowns
 - `lib:GetSharedCooldownGroup(spellID)` — Group name + info
