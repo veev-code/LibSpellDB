@@ -1,5 +1,11 @@
 # LibSpellDB Changelog
 
+## [1.0.58] - 2026-02-28
+
+### Fixed
+- **Prayer of Mending** — Added `appliesBuff = {41635}`. The buff spell ID (41635) differs from the cast spell ID (33076), causing CLEU aura events to be unmapped by consumers. Removed `singleTarget` — PoM should follow target context rather than tracking globally, since it bounces to targets that may not benefit from the heal.
+- **Lightwell** — Added missing `C.HEAL` tag for correct role classification.
+
 ## [1.0.57] - 2026-02-28
 
 ### Added

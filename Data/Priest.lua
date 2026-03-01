@@ -160,7 +160,7 @@ lib:RegisterSpells({
         spellID = 724,  -- Lightwell
         name = "Lightwell",
         description = "Creates a Holy Lightwell. Members of your raid or party can click the Lightwell to restore 801 health over 6 sec. Any damage taken will cancel the effect. Lightwell lasts for 3 min or 5 charges.",
-        tags = {C.RAID_DEFENSIVE, C.HEAL_AOE},
+        tags = {C.HEAL, C.RAID_DEFENSIVE, C.HEAL_AOE},
         cooldown = 360,
         duration = 180,
         talent = true,
@@ -214,9 +214,9 @@ lib:RegisterSpells({
         tags = {C.HEAL, C.ROTATIONAL, C.HEAL_SINGLE, C.PVE_PVP},
         cooldown = 10,
         duration = 30,
-        singleTarget = true,
         priority = 1,
         auraTarget = AT.ALLY,  -- Can target other players
+        appliesBuff = {41635},  -- Buff spell ID differs from cast spell ID
         specs = {S.HOLY, S.DISCIPLINE},
     },
     {
