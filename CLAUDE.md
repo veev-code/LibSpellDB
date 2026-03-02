@@ -25,6 +25,7 @@ LibSpellDB is a shared spell database library for World of Warcraft addon develo
 - `Racials.lua` — Racial abilities and PvP trinkets (`class = "SHARED"`)
 - `Procs.lua` — Proc buff definitions with `procInfo` metadata
 - `Externals.lua` — Cross-class external buffs: drums, item-based effects (`class = "SHARED"`)
+- `Trinkets.lua` — Trinket proc buff metadata (passive proc trinkets only; on-use auto-detected by consumers)
 
 ### Other
 - `LibStub/LibStub.lua` — Embedded LibStub
@@ -162,6 +163,9 @@ if not lib then return end
 - `IMPORTANT_EXTERNAL` — High-impact buff from another player or shared source (Bloodlust, PI, Innervate)
 - `MINOR_EXTERNAL` — Lower-priority external buff (Drums) — available but not actively tracked by default
 
+### Equipment Tags
+- `TRINKET` — Trinket proc/on-use effect (used by TrinketTracker for row assignment)
+
 ### Healing Subtypes
 `HEAL_SINGLE`, `HEAL_AOE`, `HOT`
 
@@ -213,6 +217,11 @@ BALANCE, FERAL,                 -- Druid (RESTORATION shared)
 ### Spell Registration
 - `lib:RegisterSpell(spellData)` — Register a single spell; returns boolean
 - `lib:RegisterSpells(spellList, defaultClass)` — Register multiple; returns count
+
+### Trinket Registration & Queries
+- `lib:RegisterTrinket(trinketData)` — Register a single trinket; stored in `lib.trinkets[itemID]`
+- `lib:RegisterTrinkets(trinketList)` — Register multiple trinkets from an array
+- `lib:GetTrinketInfo(itemID)` — Get trinket data table or nil. Returns `{itemID, procBuffID, icd, onUseBuffID, onTarget}`
 
 ### Spell Queries
 - `lib:GetSpellInfo(spellID)` — Get spell data (handles rank lookup via `rankToCanonical`)

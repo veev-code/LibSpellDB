@@ -21,4 +21,7 @@
     <!-- External Buffs (Drums, etc.) -->
     <Script file="Externals.lua"/>
 
+    <!-- Trinket Proc Data -->
+    <Script file="Trinkets.lua"/>
+
 </Ui>

@@ -1,5 +1,12 @@
 # LibSpellDB Changelog
 
+## [1.0.60] - 2026-03-01
+
+### Added
+- **Trinket Database** — New `Trinkets.lua` with 35 TBC proc trinkets organized by raid tier. Includes proc buff IDs, internal cooldowns, on-use buff overrides, and target-applied flags.
+- **Trinket API** — `RegisterTrinket()`, `RegisterTrinkets()`, `GetTrinketInfo(itemID)` for querying trinket proc data by item ID.
+- **`TRINKET` category tag** — New equipment tag for trinket abilities.
+
 ## [1.0.59] - 2026-03-01
 
 ### Fixed

@@ -137,6 +137,9 @@ lib.Categories = {
     IMPORTANT_EXTERNAL  = "IMPORTANT_EXTERNAL",  -- High-impact buff from another player or shared source (Bloodlust, PI, Innervate)
     MINOR_EXTERNAL      = "MINOR_EXTERNAL",      -- Lower-priority external buff (Drums) — available but not actively tracked by default
 
+    -- Equipment
+    TRINKET             = "TRINKET",             -- Equipped trinket ability (on-use or proc effect)
+
     -- Spell Effects (describes what the spell applies)
     HAS_BUFF            = "HAS_BUFF",            -- Applies a buff (same ID as spell unless appliesAura set)
     HAS_DEBUFF          = "HAS_DEBUFF",          -- Applies a debuff on target
@@ -341,6 +344,12 @@ lib.CategoryInfo = {
         description = "Lower-priority external buff, available but not tracked by default",
         color = {0.8, 0.7, 0.3},  -- Dim gold
         priority = 60,
+    },
+    [lib.Categories.TRINKET] = {
+        name = "Trinket",
+        description = "Equipped trinket ability (on-use or proc effect)",
+        color = {0.8, 0.6, 1.0},  -- Light purple
+        priority = 75,
     },
 }
 

@@ -37,6 +37,9 @@ lib.rankToCanonical = lib.rankToCanonical or {}
 -- Aura mappings: auraSpellID -> {sourceSpellID, tags, type, onTarget, ...}
 lib.auraToSource = lib.auraToSource or {}
 
+-- Trinket database: itemID -> trinketData
+lib.trinkets = lib.trinkets or {}
+
 -- Game version detection
 lib.gameVersion = lib.gameVersion or "unknown"
 
@@ -964,4 +967,53 @@ function lib:GetHighestKnownRank(spellID)
     end
     
     return highestKnown or spellID
+end
+
+-------------------------------------------------------------------------------
+-- Trinket Database
+-- Separate from spells: trinkets are keyed by itemID, not spellID.
+-- Only proc trinkets need entries; on-use trinkets are auto-detected by consumers.
+--
+-- Schema:
+--   itemID       (number, required) - Item ID
+--   name         (string, optional) - Display name (auto-resolved via GetItemInfo if nil)
+--   procBuffID   (number, optional) - Buff spell ID applied by the proc
+--   icd          (number, optional) - Internal cooldown in seconds
+--   onUseBuffID  (number, optional) - Override: on-use buff ID if different from GetItemSpell name
+-------------------------------------------------------------------------------
+
+--- Register a single trinket.
+-- @param trinketData table with itemID (required) and optional proc/icd fields
+-- @return boolean success
+function lib:RegisterTrinket(trinketData)
+    if not trinketData or not trinketData.itemID then
+        if lib.debugMode then
+            print("|cffff6600LibSpellDB:|r RegisterTrinket: missing itemID")
+        end
+        return false
+    end
+    lib.trinkets[trinketData.itemID] = trinketData
+    return true
+end
+
+--- Register multiple trinkets.
+-- @param trinketList array of trinketData tables
+-- @return number count of successfully registered trinkets
+function lib:RegisterTrinkets(trinketList)
+    if not trinketList then return 0 end
+    local count = 0
+    for _, trinketData in ipairs(trinketList) do
+        if lib:RegisterTrinket(trinketData) then
+            count = count + 1
+        end
+    end
+    return count
+end
+
+--- Get trinket data by item ID.
+-- @param itemID number
+-- @return trinketData table or nil
+function lib:GetTrinketInfo(itemID)
+    if not itemID then return nil end
+    return lib.trinkets[itemID]
 end
