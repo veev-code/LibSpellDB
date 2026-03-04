@@ -1,5 +1,10 @@
 # LibSpellDB Changelog
 
+## [1.0.64] - 2026-03-04
+
+### Added
+- **Divine Intervention (Paladin)** — Tagged as `IMPORTANT_EXTERNAL` with `HAS_BUFF`, `duration = 180`, `appliesBuff = 19753`, and `auraTarget = ALLY`. Enables consumers to track this buff when cast on the player by another Paladin.
+
 ## [1.0.63] - 2026-03-04
 
 ### Changed

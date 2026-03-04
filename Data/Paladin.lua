@@ -120,8 +120,11 @@ lib:RegisterSpells({
         spellID = 19752,  -- Divine Intervention
         name = "Divine Intervention",
         description = "The paladin sacrifices himself to remove the targeted party member from harms way. Enemies will stop attacking the protected party member, who will be immune to all harmful attacks but cannot take any action for 3 min.",
-        tags = {C.DEFENSIVE, C.MAJOR, C.UTILITY},
+        tags = {C.DEFENSIVE, C.MAJOR, C.UTILITY, C.HAS_BUFF, C.IMPORTANT_EXTERNAL},
         cooldown = 3600,
+        duration = 180,
+        appliesBuff = 19753,
+        auraTarget = AT.ALLY,
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
