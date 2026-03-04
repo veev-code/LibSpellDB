@@ -123,7 +123,7 @@ lib:RegisterSpells({
         tags = {C.DEFENSIVE, C.MAJOR, C.UTILITY, C.HAS_BUFF, C.IMPORTANT_EXTERNAL},
         cooldown = 3600,
         duration = 180,
-        appliesBuff = 19753,
+        appliesBuff = {19753},
         auraTarget = AT.ALLY,
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },

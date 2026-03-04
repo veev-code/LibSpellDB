@@ -1,5 +1,10 @@
 # LibSpellDB Changelog
 
+## [1.0.66] - 2026-03-04
+
+### Fixed
+- **Divine Intervention `appliesBuff` format** — Changed `appliesBuff = 19753` (bare number) to `appliesBuff = {19753}` (table). The bare number caused `ipairs()` errors in consumers that iterate `appliesBuff` entries.
+
 ## [1.0.65] - 2026-03-04
 
 ### Added
