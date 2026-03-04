@@ -1,5 +1,11 @@
 # LibSpellDB Changelog
 
+## [1.0.62] - 2026-03-04
+
+### Fixed
+- **Trinket API `self` consistency** — `RegisterTrinket()`, `RegisterTrinkets()`, and `GetTrinketInfo()` now use `self` instead of the module-level `lib` variable, matching the convention used by all other API methods.
+- **Schema comment accuracy** — Trinket `name` field documentation no longer claims auto-resolution via `GetItemInfo`; consumers handle name resolution.
+
 ## [1.0.61] - 2026-03-04
 
 ### Fixed

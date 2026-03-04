@@ -976,7 +976,7 @@ end
 --
 -- Schema:
 --   itemID       (number, required) - Item ID
---   name         (string, optional) - Display name (auto-resolved via GetItemInfo if nil)
+--   name         (string, optional) - Display name (consumers resolve via GetItemInfo)
 --   procBuffID   (number, optional) - Buff spell ID applied by the proc
 --   icd          (number, optional) - Internal cooldown in seconds
 --   onUseBuffID  (number, optional) - Override: on-use buff ID if different from GetItemSpell name
@@ -987,12 +987,12 @@ end
 -- @return boolean success
 function lib:RegisterTrinket(trinketData)
     if not trinketData or not trinketData.itemID then
-        if lib.debugMode then
+        if self.debugMode then
             print("|cffff6600LibSpellDB:|r RegisterTrinket: missing itemID")
         end
         return false
     end
-    lib.trinkets[trinketData.itemID] = trinketData
+    self.trinkets[trinketData.itemID] = trinketData
     return true
 end
 
@@ -1003,7 +1003,7 @@ function lib:RegisterTrinkets(trinketList)
     if not trinketList then return 0 end
     local count = 0
     for _, trinketData in ipairs(trinketList) do
-        if lib:RegisterTrinket(trinketData) then
+        if self:RegisterTrinket(trinketData) then
             count = count + 1
         end
     end
@@ -1015,5 +1015,5 @@ end
 -- @return trinketData table or nil
 function lib:GetTrinketInfo(itemID)
     if not itemID then return nil end
-    return lib.trinkets[itemID]
+    return self.trinkets[itemID]
 end
