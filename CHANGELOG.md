@@ -1,5 +1,10 @@
 # LibSpellDB Changelog
 
+## [1.0.61] - 2026-03-04
+
+### Fixed
+- **Duplicate file load warning** — `Data\Data.xml` was listed in both `lib.xml` and the TOC file, causing a "Duplicate File Load Detected" LUA_WARNING when loaded as a standalone addon. The TOC now loads only `lib.xml`, which already includes the data files.
+
 ## [1.0.60] - 2026-03-01
 
 ### Added
