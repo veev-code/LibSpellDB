@@ -28,9 +28,16 @@ LibSpellDB is a shared spell database library for World of Warcraft addon develo
 - `Trinkets.lua` — Trinket proc buff metadata (passive proc trinkets only; on-use auto-detected by consumers)
 
 ### Other
-- `LibStub/LibStub.lua` — Embedded LibStub
-- `Tools/` — Python audit/parse scripts for spell data maintenance
+- `Libs/LibStub/LibStub.lua` — LibStub (fetched via `.pkgmeta` external, gitignored)
+- `Tools/fetch-libs.sh` — Fetches all library externals into `Libs/` for local development
+- `Tools/` — Also contains Python audit/parse scripts for spell data maintenance
 - `TBC_Procs.md`, `TBC_Rotations.md` — Reference documentation
+
+## Dependencies
+
+LibStub is fetched via `.pkgmeta` externals at release time (by `BigWigsMods/packager@v2`). It is NOT committed to git — `Libs/` is gitignored.
+
+**Local dev workflow:** Run `bash Tools/fetch-libs.sh` to populate `Libs/`, then test in-game.
 
 ## Library Registration
 

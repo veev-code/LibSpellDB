@@ -2,6 +2,9 @@ package-as: LibSpellDB
 
 enable-nolib-creation: no
 
+externals:
+  Libs/LibStub: https://repos.wowace.com/wow/libstub/trunk
+
 ignore:
   - README.md
   - .github

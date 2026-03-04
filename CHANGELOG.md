@@ -1,5 +1,10 @@
 # LibSpellDB Changelog
 
+## [1.0.63] - 2026-03-04
+
+### Changed
+- **LibStub externalized** — LibStub is no longer committed to the repository. It is now fetched via `.pkgmeta` externals at release time (from `repos.wowace.com`), matching the standard WoW library packaging convention. Added `Tools/fetch-libs.sh` for local development, `.gitignore` for `Libs/`, and updated `lib.xml` load path to `Libs\LibStub\LibStub.lua`.
+
 ## [1.0.62] - 2026-03-04
 
 ### Fixed

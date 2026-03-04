@@ -2,7 +2,7 @@
 ..\FrameXML\UI.xsd">
 
     <!-- LibStub -->
-    <Script file="LibStub\LibStub.lua"/>
+    <Script file="Libs\LibStub\LibStub.lua"/>
 
     <!-- Core Library -->
     <Script file="Core\LibSpellDB.lua"/>
