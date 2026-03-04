@@ -209,6 +209,7 @@ lib:RegisterSpells({
         tags = {C.HEAL, C.MAINTENANCE, C.BUFF, C.RESOURCE, C.HAS_BUFF, C.LONG_BUFF, C.PVE_PVP},
         cooldown = 0,
         duration = 600,
+        charges = 3,
         dispelType = nil,  -- Self-only shield, not purgeable
         priority = 2,
         ranks = {24398, 33736},
@@ -580,6 +581,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.BUFF, C.LONG_BUFF, C.HAS_BUFF},
         cooldown = 0,
         duration = 600,
+        charges = 3,
         dispelType = nil,  -- Self-only shield, not purgeable
         ranks = {324, 325, 905, 945, 8134, 10431, 10432, 25469, 25472},
         auraTarget = AT.SELF,

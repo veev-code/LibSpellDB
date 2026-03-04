@@ -579,6 +579,7 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.DEFENSIVE, C.LONG_BUFF},
         cooldown = 0,
         duration = 600,
+        charges = 20,
         dispelType = "Magic",
         ranks = {588, 602, 1006, 7128, 10951, 10952, 25431},
         auraTarget = AT.SELF,

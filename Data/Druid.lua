@@ -204,6 +204,7 @@ lib:RegisterSpells({
         description = "Shapeshift into cat form, increasing melee attack power by 40 plus Agility. Also protects the caster from Polymorph effects and allows the use of various cat abilities.The act of shapeshifting frees the caster of Polymorph and Movement Impairing effects.",
         tags = {C.SHAPESHIFT},
         cooldown = 0,
+        formType = "CAT",
         specs = {S.FERAL},
     },
     {
@@ -212,6 +213,7 @@ lib:RegisterSpells({
         description = "Shapeshift into bear form, increasing melee attack power by 120, armor contribution from items by 180%, and Stamina by 25%. Also protects the caster from Polymorph effects and allows the use of various bear abilities.The act of shapeshifting frees the caster of Polymorph and Movement Impairing effects.",
         tags = {C.SHAPESHIFT},
         cooldown = 0,
+        formType = "BEAR",
         specs = {S.FERAL},
     },
     {
@@ -220,7 +222,17 @@ lib:RegisterSpells({
         description = "Shapeshift into dire bear form, increasing melee attack power by 210, armor contribution from items by 400%, and Stamina by 25%. Also protects the caster from Polymorph effects and allows the use of various bear abilities.The act of shapeshifting frees the caster of Polymorph and Movement Impairing effects.",
         tags = {C.SHAPESHIFT},
         cooldown = 0,
+        formType = "BEAR",
         specs = {S.FERAL},
+    },
+    {
+        spellID = 1066,  -- Aquatic Form
+        name = "Aquatic Form",
+        description = "Shapeshift into aquatic form, increasing swim speed by 50% and allowing the druid to breathe underwater. Also protects the caster from Polymorph effects.The act of shapeshifting frees the caster of Polymorph and Movement Impairing effects.",
+        tags = {C.SHAPESHIFT, C.MOVEMENT, C.OUT_OF_COMBAT},
+        cooldown = 0,
+        formType = "AQUATIC",
+        specs = {S.BALANCE, S.FERAL, S.RESTORATION},
     },
     {
         spellID = 783,  -- Travel Form
@@ -228,6 +240,7 @@ lib:RegisterSpells({
         description = "Shapeshift into travel form, increasing movement speed by 40%. Also protects the caster from Polymorph effects. Only useable outdoors.The act of shapeshifting frees the caster of Polymorph and Movement Impairing effects.",
         tags = {C.SHAPESHIFT, C.MOVEMENT, C.OUT_OF_COMBAT},
         cooldown = 0,
+        formType = "TRAVEL",
         specs = {S.BALANCE, S.FERAL, S.RESTORATION},
     },
     {
@@ -236,6 +249,7 @@ lib:RegisterSpells({
         description = "Shapeshift into Moonkin Form. While in this form the armor contribution from items is increased by 400%, attack power is increased by 150% of your level and all party members within 30 yards have their spell critical chance increased by 5%. Melee attacks in this form have a chance on hit to regenerate mana based on attack power. The Moonkin can only cast Balance and Remove Curse spells while shapeshifted.The act of shapeshifting frees the caster of Polymorph and Movement Impairing effects.",
         tags = {C.SHAPESHIFT, C.DPS},
         cooldown = 0,
+        formType = "MOONKIN",
         talent = true,
         specs = {S.BALANCE},
         triggersAuras = {

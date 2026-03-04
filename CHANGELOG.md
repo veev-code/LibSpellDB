@@ -1,5 +1,14 @@
 # LibSpellDB Changelog
 
+## [1.0.67] - 2026-03-04
+
+### Added
+- **`formType` field for shapeshift spells** — New optional string field on SHAPESHIFT-tagged spells indicating form type (`"BEAR"`, `"CAT"`, `"AQUATIC"`, `"TRAVEL"`, `"MOONKIN"`). Consumers can query `GetSpellsByClassAndTag("DRUID", "SHAPESHIFT")` and read `data.formType` to build form-detection lookups without hardcoding spell IDs.
+- **Aquatic Form (1066)** — Added to Druid data with `SHAPESHIFT`, `MOVEMENT`, `OUT_OF_COMBAT` tags and `formType = "AQUATIC"`.
+- **`charges` field** — Populated on Inner Fire (20), Lightning Shield (3), Water Shield (3). The field existed in the schema but was not set on these spells.
+- **`GetFormType(spellID)`** — Returns the shapeshift form type string for a spell, or nil.
+- **`HasCharges(spellID)`** — Returns true if a spell has charges.
+
 ## [1.0.66] - 2026-03-04
 
 ### Fixed

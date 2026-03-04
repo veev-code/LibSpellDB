@@ -65,7 +65,8 @@ if not lib then return end
     cooldown = 10,                      -- Base cooldown in seconds
     duration = 5,                       -- Buff/effect duration in seconds
     rankDurations = {[100]=5,[101]=8},  -- Per-rank durations when they differ (spellID -> seconds)
-    charges = 2,                        -- Number of charges
+    charges = 2,                        -- Number of charges (Inner Fire, shields)
+    formType = "BEAR",                  -- Shapeshift form type (BEAR, CAT, AQUATIC, TRAVEL, MOONKIN)
     priority = 1,                       -- Sort priority within rows
     talent = true,                      -- Requires talent point
     ranks = {100, 101, 102},            -- All rank spell IDs (low to high)
@@ -249,6 +250,8 @@ BALANCE, FERAL,                 -- Druid (RESTORATION shared)
 - `lib:IsSelfOnly(spellID)` — Returns true for "self" or "none"
 - `lib:IsRotational(spellID)` — Check ROTATIONAL tag
 - `lib:IsSingleTarget(spellID)` — Check if only one instance can be active at a time
+- `lib:GetFormType(spellID)` — Returns shapeshift form type string ("BEAR", "CAT", etc.) or nil
+- `lib:HasCharges(spellID)` — Returns true if spell has charges (Inner Fire, shields)
 - `lib:GetDispelType(spellID)` — Returns dispel type string for a spell's buff
 - `lib:GetSpellIcon(spellID)` — Returns override icon texture ID, or nil (falls back to auto-resolved)
 

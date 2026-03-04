@@ -93,6 +93,7 @@ lib.gameVersion = DetectGameVersion()
             cooldown = 10,                      -- Optional: Base cooldown in seconds
             duration = 5,                       -- Optional: Buff/effect duration
             charges = 2,                        -- Optional: Number of charges
+            formType = "BEAR",                  -- Optional: Shapeshift form type (BEAR, CAT, AQUATIC, TRAVEL, MOONKIN)
             spec = {1, 2},                      -- Optional: Spec IDs that have this spell
             talent = true,                      -- Optional: Requires talent
             ranks = {100, 101, 102},            -- Optional: All rank spell IDs
@@ -509,6 +510,40 @@ function lib:IsSingleTarget(spellID)
     if not spellData then return false end
 
     return spellData.singleTarget == true
+end
+
+--[[
+    Get the shapeshift form type for a spell (e.g., "BEAR", "CAT", "MOONKIN").
+
+    @param spellID (number|table) - Spell ID or spell data table
+    @return (string or nil) - Form type string, or nil if not a shapeshift form
+]]
+function lib:GetFormType(spellID)
+    local spellData
+    if type(spellID) == "table" then
+        spellData = spellID
+    else
+        spellData = self:GetSpellInfo(spellID)
+    end
+
+    return spellData and spellData.formType or nil
+end
+
+--[[
+    Check if a spell has charges (e.g., Lightning Shield, Water Shield, Inner Fire).
+
+    @param spellID (number|table) - Spell ID or spell data table
+    @return (boolean) - true if the spell has charges
+]]
+function lib:HasCharges(spellID)
+    local spellData
+    if type(spellID) == "table" then
+        spellData = spellID
+    else
+        spellData = self:GetSpellInfo(spellID)
+    end
+
+    return spellData and spellData.charges and spellData.charges > 0 or false
 end
 
 --[[
