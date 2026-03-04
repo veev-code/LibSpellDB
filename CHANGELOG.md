@@ -1,5 +1,10 @@
 # LibSpellDB Changelog
 
+## [1.0.65] - 2026-03-04
+
+### Added
+- **`SWING_RESET` tag** — New melee mechanic tag for abilities that replace the next white hit with yellow damage, resetting the swing timer. Tagged: Heroic Strike, Cleave, Slam (Warrior), Raptor Strike (Hunter), Maul (Druid). Consumers can query `GetSpellsByTag("SWING_RESET")` + `GetAllRankIDs()` to build a complete rank-expanded lookup.
+
 ## [1.0.64] - 2026-03-04
 
 ### Added

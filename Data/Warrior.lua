@@ -332,7 +332,7 @@ lib:RegisterSpells({
         spellID = 1464,  -- Slam (filler between abilities)
         name = "Slam",
         description = "Slams the opponent, causing weapon damage plus 32.",
-        tags = {C.DPS, C.ROTATIONAL, C.PVE},
+        tags = {C.DPS, C.ROTATIONAL, C.PVE, C.SWING_RESET},
         cooldown = 0,
         priority = 5,
         ranks = {1464, 8820, 11604, 11605, 25241, 25242},
@@ -402,7 +402,7 @@ lib:RegisterSpells({
         spellID = 78,  -- Heroic Strike (rage dump, use when >50 rage)
         name = "Heroic Strike",
         description = "A strong attack that increases melee damage by 11 and causes a high amount of threat.",
-        tags = {C.DPS, C.MINOR, C.PVE},
+        tags = {C.DPS, C.MINOR, C.PVE, C.SWING_RESET},
         cooldown = 0,
         priority = 10,  -- Lower priority (situational)
         ranks = {78, 284, 285, 1608, 11564, 11565, 11566, 11567, 25286, 25712, 29707, 30324},
@@ -412,7 +412,7 @@ lib:RegisterSpells({
         spellID = 845,  -- Cleave (AoE rage dump)
         name = "Cleave",
         description = "A sweeping attack that does your weapon damage plus 5 to the target and his nearest ally.",
-        tags = {C.DPS, C.MINOR, C.AOE, C.PVE},
+        tags = {C.DPS, C.MINOR, C.AOE, C.PVE, C.SWING_RESET},
         cooldown = 0,
         priority = 11,  -- Lower priority (situational)
         ranks = {845, 7369, 11608, 11609, 20569, 25231},

@@ -133,6 +133,9 @@ lib.Categories = {
     PROC                = "PROC",                -- Proc-based abilities
     REACTIVE            = "REACTIVE",            -- Reactive/conditional abilities - usability shown via overlay (Overpower, Revenge, Execute)
 
+    -- Melee Mechanics
+    SWING_RESET         = "SWING_RESET",         -- Replaces next white hit with yellow damage, resetting the swing timer (Heroic Strike, Maul, Raptor Strike)
+
     -- External / Cross-Player Effects
     IMPORTANT_EXTERNAL  = "IMPORTANT_EXTERNAL",  -- High-impact buff from another player or shared source (Bloodlust, PI, Innervate)
     MINOR_EXTERNAL      = "MINOR_EXTERNAL",      -- Lower-priority external buff (Drums) — available but not actively tracked by default
@@ -350,6 +353,12 @@ lib.CategoryInfo = {
         description = "Equipped trinket ability (on-use or proc effect)",
         color = {0.8, 0.6, 1.0},  -- Light purple
         priority = 75,
+    },
+    [lib.Categories.SWING_RESET] = {
+        name = "Swing Reset",
+        description = "Replaces next white hit with yellow damage, resetting the swing timer",
+        color = {0.7, 0.5, 0.3},  -- Brown
+        priority = 80,
     },
 }
 

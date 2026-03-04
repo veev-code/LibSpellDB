@@ -385,7 +385,7 @@ lib:RegisterSpells({
         spellID = 2973,  -- Raptor Strike
         name = "Raptor Strike",
         description = "A strong attack that increases melee damage by 5.",
-        tags = {C.DPS, C.MINOR, C.PVE_PVP},
+        tags = {C.DPS, C.MINOR, C.PVE_PVP, C.SWING_RESET},
         cooldown = 6,
         ranks = {2973, 14260, 14261, 14262, 14263, 14264, 14265, 14266, 27014},
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},

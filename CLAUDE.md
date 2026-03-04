@@ -166,6 +166,9 @@ if not lib then return end
 - `PROC`, `REACTIVE` — Proc-based / conditional abilities (Execute, Overpower, Revenge)
 - `HAS_BUFF`, `HAS_DEBUFF`, `HAS_HOT`, `HAS_DOT` — Spell applies an effect
 
+### Melee Mechanic Tags
+- `SWING_RESET` — Replaces next white hit with yellow damage, resetting the swing timer (Heroic Strike, Cleave, Slam, Raptor Strike, Maul)
+
 ### External / Cross-Player Tags
 - `IMPORTANT_EXTERNAL` — High-impact buff from another player or shared source (Bloodlust, PI, Innervate)
 - `MINOR_EXTERNAL` — Lower-priority external buff (Drums) — available but not actively tracked by default
