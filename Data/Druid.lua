@@ -365,6 +365,7 @@ lib:RegisterSpells({
         priority = 6,
         ranks = {770, 778, 9749, 9907, 26993},
         specs = {S.BALANCE, S.RESTORATION},
+        sharedAura = true,
     },
     {
         spellID = 27011,  -- Faerie Fire (Feral) - usable in cat/bear form
@@ -376,6 +377,7 @@ lib:RegisterSpells({
         priority = 5,
         ranks = {16857, 17390, 17391, 17392, 27011},
         specs = {S.FERAL},
+        sharedAura = true,
     },
 
     -------------------------------------------------------------------------------
@@ -393,6 +395,7 @@ lib:RegisterSpells({
         ranks = {33876, 33982, 33983},
         specs = {S.FERAL},
         sharedAuraSpells = {33878, 33986, 33987},  -- Bear Mangle ranks apply same debuff
+        sharedAura = true,
     },
     {
         spellID = 27002,  -- Shred (main CP builder from behind)
@@ -463,6 +466,7 @@ lib:RegisterSpells({
         specs = {S.FERAL},
         cooldownPriority = true,  -- Debuff lasts 12s but you spam on 6s CD; cooldown display is more useful
         sharedAuraSpells = {33876, 33982, 33983},  -- Cat Mangle ranks apply same debuff
+        sharedAura = true,
     },
     {
         spellID = 33745,  -- Lacerate (stack and maintain)
@@ -504,6 +508,7 @@ lib:RegisterSpells({
         priority = 5,
         ranks = {99, 1735, 9490, 9747, 9898, 26998},
         specs = {S.FERAL},
+        sharedAura = true,
     },
 
     -------------------------------------------------------------------------------

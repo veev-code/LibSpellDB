@@ -478,6 +478,7 @@ lib:RegisterSpells({
         priority = 5,
         ranks = {6343, 8198, 8204, 8205, 11580, 11581, 13532, 25264},
         specs = {S.PROTECTION},
+        sharedAura = true,
     },
     {
         spellID = 1160,  -- Demoralizing Shout (maintain AP reduction debuff)
@@ -489,6 +490,7 @@ lib:RegisterSpells({
         priority = 6,
         ranks = {1160, 6190, 11554, 11555, 11556, 25202, 25203, 27579},
         specs = {S.PROTECTION},
+        sharedAura = true,
     },
 
     -------------------------------------------------------------------------------
@@ -534,6 +536,7 @@ lib:RegisterSpells({
         duration = 30,
         ranks = {7386, 7405, 8380, 11596, 11597, 25225},
         specs = {S.PROTECTION},
+        sharedAura = true,
     },
 
     -------------------------------------------------------------------------------

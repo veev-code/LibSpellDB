@@ -513,6 +513,26 @@ function lib:IsSingleTarget(spellID)
 end
 
 --[[
+    Check if a spell's aura is shared across all players (only one instance per target,
+    any player can apply/refresh it). Examples: Thunder Clap, Sunder Armor, Faerie Fire.
+
+    @param spellID (number|table) - Spell ID or spell data table
+    @return (boolean) - true if the aura is shared regardless of source
+]]
+function lib:IsSharedAura(spellID)
+    local spellData
+    if type(spellID) == "table" then
+        spellData = spellID
+    else
+        spellData = self:GetSpellInfo(spellID)
+    end
+
+    if not spellData then return false end
+
+    return spellData.sharedAura == true
+end
+
+--[[
     Get the shapeshift form type for a spell (e.g., "BEAR", "CAT", "MOONKIN").
 
     @param spellID (number|table) - Spell ID or spell data table

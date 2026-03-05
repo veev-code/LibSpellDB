@@ -1,5 +1,18 @@
 # LibSpellDB Changelog
 
+## [1.0.69] - 2026-03-04
+
+### Added
+- **`sharedAura` field** — New boolean field marking debuffs that are shared across all players (only one instance per target, any player can apply/refresh). Examples: Thunder Clap, Sunder Armor, Faerie Fire. Consumers can query `IsSharedAura(spellID)` to determine if a debuff should be shown regardless of source.
+- **`IsSharedAura(spellID)`** — New API method. Returns `true` if the spell's aura is shared across all players. Accepts spell ID (number) or spell data table.
+- **17 spells tagged `sharedAura = true`:**
+  - Warrior: Thunder Clap, Demoralizing Shout, Sunder Armor
+  - Druid: Faerie Fire, Faerie Fire (Feral), Demoralizing Roar, Mangle (Cat), Mangle (Bear)
+  - Warlock: Curse of Elements, Curse of Shadow, Curse of Weakness, Curse of Recklessness, Curse of Tongues, Curse of Exhaustion (utility curses only — Curse of Agony and Curse of Doom are per-warlock damage and NOT shared)
+  - Hunter: Hunter's Mark
+  - Rogue: Expose Armor
+  - Shaman: Stormstrike
+
 ## [1.0.68] - 2026-03-04
 
 ### Added

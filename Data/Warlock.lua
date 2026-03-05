@@ -108,6 +108,7 @@ lib:RegisterSpells({
         talent = true,
         specs = {S.AFFLICTION},
         buffGroup = "WARLOCK_CURSES",
+        sharedAura = true,
     },
     {
         spellID = 1714,  -- Curse of Tongues
@@ -119,6 +120,7 @@ lib:RegisterSpells({
         ranks = {1714, 11719},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
         buffGroup = "WARLOCK_CURSES",
+        sharedAura = true,
     },
 
     -------------------------------------------------------------------------------
@@ -562,6 +564,7 @@ lib:RegisterSpells({
         ranks = {702, 1108, 6205, 7646, 11707, 11708, 27224, 30909},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
         buffGroup = "WARLOCK_CURSES",
+        sharedAura = true,
     },
     {
         spellID = 1490,  -- Curse of the Elements
@@ -573,6 +576,7 @@ lib:RegisterSpells({
         ranks = {1490, 11721, 11722, 27228},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
         buffGroup = "WARLOCK_CURSES",
+        sharedAura = true,
     },
     {
         spellID = 17862,  -- Curse of Shadow
@@ -584,6 +588,7 @@ lib:RegisterSpells({
         ranks = {17862, 17937, 27229},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
         buffGroup = "WARLOCK_CURSES",
+        sharedAura = true,
     },
     {
         spellID = 704,  -- Curse of Recklessness
@@ -595,6 +600,7 @@ lib:RegisterSpells({
         ranks = {704, 7658, 7659, 11717, 27226},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
         buffGroup = "WARLOCK_CURSES",
+        sharedAura = true,
     },
 
     -------------------------------------------------------------------------------

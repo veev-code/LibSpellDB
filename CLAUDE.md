@@ -82,6 +82,7 @@ if not lib then return end
     -- consumesAllResource: REMOVED — use CONSUMES_ALL_RESOURCE tag instead
     targetLockoutDebuff = 6788,         -- Debuff that blocks re-casting (e.g. Weakened Soul)
     singleTarget = true,                -- Only one instance can be active at a time (Polymorph, Prayer of Mending)
+    sharedAura = true,                  -- Aura shared across all players; any player can apply/refresh (Thunder Clap, Sunder, Faerie Fire)
     reactiveWindow = 20,                -- Duration (seconds) of usability window for REACTIVE spells
     reactiveWindowEvent = "PARTY_KILL", -- CLEU sub-event that triggers/refreshes the window
     dodgeReactive = 5,                  -- Duration (seconds) of usability window after target dodges (Overpower)
@@ -250,6 +251,7 @@ BALANCE, FERAL,                 -- Druid (RESTORATION shared)
 - `lib:IsSelfOnly(spellID)` — Returns true for "self" or "none"
 - `lib:IsRotational(spellID)` — Check ROTATIONAL tag
 - `lib:IsSingleTarget(spellID)` — Check if only one instance can be active at a time
+- `lib:IsSharedAura(spellID)` — Check if aura is shared across all players (any source can apply/refresh)
 - `lib:GetFormType(spellID)` — Returns shapeshift form type string ("BEAR", "CAT", etc.) or nil
 - `lib:HasCharges(spellID)` — Returns true if spell has charges (Inner Fire, shields)
 - `lib:GetDispelType(spellID)` — Returns dispel type string for a spell's buff

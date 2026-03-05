@@ -106,6 +106,7 @@ lib:RegisterSpells({
         priority = 1,
         talent = true,
         specs = {S.ENHANCEMENT},
+        sharedAura = true,
         triggersAuras = {
             {
                 spellID = 17364,  -- Stormstrike debuff (same ID in TBC)

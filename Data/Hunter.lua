@@ -305,6 +305,7 @@ lib:RegisterSpells({
         priority = 2,
         ranks = {1130, 14323, 14324, 14325},
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
+        sharedAura = true,
     },
     {
         spellID = 1978,  -- Serpent Sting (maintain DoT)

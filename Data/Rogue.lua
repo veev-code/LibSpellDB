@@ -245,6 +245,7 @@ lib:RegisterSpells({
         priority = 10,
         ranks = {8647, 8649, 8650, 11197, 11198, 26866},
         specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
+        sharedAura = true,
     },
     {
         spellID = 1943,  -- Rupture (maintain DoT)
