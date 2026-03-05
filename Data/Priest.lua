@@ -679,6 +679,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.LONG_BUFF, C.HAS_BUFF},
         cooldown = 0,
         duration = 600,
+        charges = 3,
         ranks = {18137, 19308, 19309, 19310, 19311, 19312, 25477},
         auraTarget = AT.SELF,
         race = TROLL,

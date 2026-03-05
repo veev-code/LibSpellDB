@@ -1,5 +1,10 @@
 # LibSpellDB Changelog
 
+## [1.0.68] - 2026-03-04
+
+### Added
+- **`charges` field** — Added to Earth Shield (6) and Shadowguard (3). Completes charge data for all charge-based LONG_BUFF spells.
+
 ## [1.0.67] - 2026-03-04
 
 ### Added
