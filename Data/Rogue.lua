@@ -327,10 +327,11 @@ lib:RegisterSpells({
         spellID = 1725,  -- Distract
         name = "Distract",
         description = "Throws a distraction, attracting the attention of all nearby monsters for 10 seconds. Does not break stealth.",
-        tags = {C.UTILITY},
+        tags = {C.UTILITY, C.TIMED_EFFECT},
         cooldown = 30,
         duration = 10,
         specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
+        auraTarget = AT.NONE,
     },
     {
         spellID = 1966,  -- Feint

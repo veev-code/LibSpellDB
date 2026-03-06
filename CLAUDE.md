@@ -164,6 +164,9 @@ if not lib then return end
 ### Stealth / Shapeshift Tags
 `STEALTH`, `STEALTH_BREAK`, `SHAPESHIFT`, `STANCE`, `CAT_FORM`, `BEAR_FORM`
 
+### Timed Effect Tags
+- `TIMED_EFFECT` — Cast-and-forget spell with a fixed-duration effect but no trackable buff/debuff (Flamestrike ground fire, Distract, Consecration). Consumers start a countdown timer on SPELL_CAST_SUCCEEDED using the spell's `duration` field.
+
 ### Effect Tags
 - `PROC`, `REACTIVE` — Proc-based / conditional abilities (Execute, Overpower, Revenge)
 - `HAS_BUFF`, `HAS_DEBUFF`, `HAS_HOT`, `HAS_DOT` — Spell applies an effect
@@ -250,6 +253,7 @@ BALANCE, FERAL,                 -- Druid (RESTORATION shared)
 - `lib:GetAuraTarget(spellID)` — Returns "self", "ally", "pet", or "none" (also handles legacy `selfOnly` field conversion)
 - `lib:IsSelfOnly(spellID)` — Returns true for "self" or "none"
 - `lib:IsRotational(spellID)` — Check ROTATIONAL tag
+- `lib:IsTimedEffect(spellID)` — Check TIMED_EFFECT tag (cast-and-forget with duration but no trackable buff)
 - `lib:IsSingleTarget(spellID)` — Check if only one instance can be active at a time
 - `lib:IsSharedAura(spellID)` — Check if aura is shared across all players (any source can apply/refresh)
 - `lib:GetFormType(spellID)` — Returns shapeshift form type string ("BEAR", "CAT", etc.) or nil

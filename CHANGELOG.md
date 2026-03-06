@@ -1,5 +1,17 @@
 # LibSpellDB Changelog
 
+## [1.0.70] - 2026-03-06
+
+### Added
+- **`TIMED_EFFECT` tag** — New tag for cast-and-forget spells with a fixed-duration effect but no trackable buff/debuff (ground effects, placed effects). Consumers can start a countdown timer on `SPELL_CAST_SUCCEEDED` using the spell's `duration` field.
+- **`IsTimedEffect(spellID)`** — New API method. Returns `true` if the spell has the `TIMED_EFFECT` tag. Accepts spell ID (number) or spell data table.
+- **4 spells tagged `TIMED_EFFECT`:**
+  - Mage: Flamestrike (8s ground fire)
+  - Rogue: Distract (10s distraction)
+  - Paladin: Consecration (8s ground AoE)
+  - Hunter: Flare (20s stealth reveal)
+- Set `auraTarget = AT.NONE` on all 4 spells (no unit to track for UnitBuff/UnitDebuff).
+
 ## [1.0.69] - 2026-03-04
 
 ### Added

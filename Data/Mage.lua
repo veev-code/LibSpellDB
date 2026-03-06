@@ -305,11 +305,12 @@ lib:RegisterSpells({
         spellID = 2120,  -- Flamestrike
         name = "Flamestrike",
         description = "Calls down a pillar of fire, burning all enemies within the area for 55 to 71 Fire damage and an additional 48 Fire damage over 8 sec.",
-        tags = {C.DPS, C.AOE, C.PVE},
+        tags = {C.DPS, C.AOE, C.TIMED_EFFECT, C.PVE},
         cooldown = 0,
         duration = 8,
         ranks = {2120, 2121, 8422, 8423, 10215, 10216, 27086},
         specs = {S.FIRE},
+        auraTarget = AT.NONE,
     },
     {
         spellID = 10,  -- Blizzard

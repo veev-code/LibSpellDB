@@ -240,13 +240,14 @@ lib:RegisterSpells({
         spellID = 26573,  -- Consecration (use on CD - both ST and AoE)
         name = "Consecration",
         description = "Consecrates the land beneath the Paladin, doing 64 Holy damage over 8 sec to enemies who enter the area.",
-        tags = {C.DPS, C.ROTATIONAL, C.AOE, C.PVE_PVP},
+        tags = {C.DPS, C.ROTATIONAL, C.AOE, C.TIMED_EFFECT, C.PVE_PVP},
         cooldown = 8,
         duration = 8,
         priority = 4,
         talent = true,
         ranks = {20116, 20922, 20923, 20924, 26573, 27173},
         specs = {S.RETRIBUTION, S.PROTECTION},
+        auraTarget = AT.NONE,
     },
     {
         spellID = 24275,  -- Hammer of Wrath (sub-20% execute)

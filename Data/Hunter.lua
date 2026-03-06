@@ -408,10 +408,11 @@ lib:RegisterSpells({
         spellID = 1543,  -- Flare
         name = "Flare",
         description = "Exposes all hidden and invisible enemies within 10 yards of the targeted area for 20 sec.",
-        tags = {C.UTILITY, C.STEALTH_BREAK},
+        tags = {C.UTILITY, C.STEALTH_BREAK, C.TIMED_EFFECT},
         cooldown = 20,
         duration = 20,
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
+        auraTarget = AT.NONE,
     },
     {
         spellID = 1462,  -- Beast Lore

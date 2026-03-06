@@ -143,6 +143,9 @@ lib.Categories = {
     -- Equipment
     TRINKET             = "TRINKET",             -- Equipped trinket ability (on-use or proc effect)
 
+    -- Timed Effects
+    TIMED_EFFECT        = "TIMED_EFFECT",        -- Timed effect with no trackable buff (Flamestrike ground fire, Distract, Consecration)
+
     -- Spell Effects (describes what the spell applies)
     HAS_BUFF            = "HAS_BUFF",            -- Applies a buff (same ID as spell unless appliesAura set)
     HAS_DEBUFF          = "HAS_DEBUFF",          -- Applies a debuff on target

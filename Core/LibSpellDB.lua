@@ -490,6 +490,28 @@ function lib:IsRotational(spellID)
 end
 
 --[[
+    Check if a spell is a timed effect (cast-and-forget with a fixed duration but no trackable buff).
+
+    Timed effect spells (Flamestrike ground fire, Distract, Consecration) create an effect
+    for a fixed duration that cannot be tracked via UnitBuff/UnitDebuff. Consumers use this
+    to start a cast-triggered countdown timer using the spell's duration field.
+
+    @param spellID (number|table) - Spell ID or spell data table
+    @return (boolean) - true if the spell is a timed effect
+]]
+function lib:IsTimedEffect(spellID)
+    local id
+    if type(spellID) == "table" then
+        id = spellID.spellID
+    else
+        id = self.rankToCanonical[spellID] or spellID
+    end
+    if not id then return false end
+    local tags = self.spellIDToTags[id]
+    return tags and tags["TIMED_EFFECT"] or false
+end
+
+--[[
     Check if a spell can only be active on one target at a time
 
     Covers spells with explicit single-target limitations (e.g. "Only one target can
