@@ -439,6 +439,19 @@ lib:RegisterSpells({
             lowPriority = true,  -- PvP-oriented
         },
     },
+    -- Spirit of Redemption (Holy talent) - angel form on death, free healing for 15 sec
+    {
+        spellID = 27827,
+        name = "Spirit of Redemption",
+        tags = {C.PROC, C.HEAL},
+        cooldown = 0,
+        duration = 15,
+        talent = true,
+        procInfo = {
+            description = "Angel form on death, free healing for 15 sec",
+            stacks = false,
+        },
+    },
     -- Blackout (Shadow talent) - stun on target from Shadow damage
     {
         spellID = 15269,  -- Blackout stun debuff on target

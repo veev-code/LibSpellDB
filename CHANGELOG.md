@@ -1,5 +1,10 @@
 # LibSpellDB Changelog
 
+## [1.0.71] - 2026-03-06
+
+### Added
+- **Priest: Spirit of Redemption** — Added proc entry for angel form on death (27827), 15s duration.
+
 ## [1.0.70] - 2026-03-06
 
 ### Added
