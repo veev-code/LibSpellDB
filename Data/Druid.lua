@@ -247,7 +247,7 @@ lib:RegisterSpells({
         spellID = 24858,  -- Moonkin Form
         name = "Moonkin Form",
         description = "Shapeshift into Moonkin Form. While in this form the armor contribution from items is increased by 400%, attack power is increased by 150% of your level and all party members within 30 yards have their spell critical chance increased by 5%. Melee attacks in this form have a chance on hit to regenerate mana based on attack power. The Moonkin can only cast Balance and Remove Curse spells while shapeshifted.The act of shapeshifting frees the caster of Polymorph and Movement Impairing effects.",
-        tags = {C.SHAPESHIFT, C.DPS},
+        tags = {C.SHAPESHIFT},
         cooldown = 0,
         formType = "MOONKIN",
         talent = true,

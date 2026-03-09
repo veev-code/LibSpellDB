@@ -569,4 +569,32 @@ lib:RegisterSpells({
         buffGroup = "WARRIOR_SHOUTS",
     },
 
+    -------------------------------------------------------------------------------
+    -- Stances
+    -------------------------------------------------------------------------------
+    {
+        spellID = 2457,  -- Battle Stance
+        name = "Battle Stance",
+        description = "A basic combat stance. Generates rage from normal melee attacks.",
+        tags = {C.STANCE},
+        cooldown = 0,
+        specs = {S.ARMS, S.FURY, S.PROTECTION},
+    },
+    {
+        spellID = 71,  -- Defensive Stance
+        name = "Defensive Stance",
+        description = "A defensive combat stance. Reduces damage taken by 10% and damage caused by 10%. Increases threat generated.",
+        tags = {C.STANCE},
+        cooldown = 0,
+        specs = {S.ARMS, S.FURY, S.PROTECTION},
+    },
+    {
+        spellID = 2458,  -- Berserker Stance
+        name = "Berserker Stance",
+        description = "An aggressive stance. Critical hit chance is increased by 3%, but all damage taken is increased by 10%.",
+        tags = {C.STANCE},
+        cooldown = 0,
+        specs = {S.ARMS, S.FURY, S.PROTECTION},
+    },
+
 }, "WARRIOR")

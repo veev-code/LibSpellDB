@@ -1,5 +1,13 @@
 # LibSpellDB Changelog
 
+## [1.0.72] - 2026-03-09
+
+### Added
+- **Warrior: Stances** — Added Battle Stance (2457), Defensive Stance (71), and Berserker Stance (2458) with `STANCE` tag. All three available to all warrior specs.
+
+### Fixed
+- **Druid: Moonkin Form** — Removed incorrect `DPS` tag. Moonkin Form is a shapeshift, not a DPS cooldown. Retains `SHAPESHIFT` tag.
+
 ## [1.0.71] - 2026-03-06
 
 ### Added
