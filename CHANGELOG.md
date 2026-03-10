@@ -1,5 +1,10 @@
 # LibSpellDB Changelog
 
+## [1.0.74] - 2026-03-09
+
+### Added
+- **Mage: Arcane Blast self-debuff tracking** — Added `triggersAuras` mapping for Arcane Blast (30451) to its self-debuff (36032, `type = "DEBUFF"`, `onTarget = false`, 8s duration). Consumers can now track the caster's stacking debuff (up to 3 stacks) instead of looking for a debuff on the target.
+
 ## [1.0.73] - 2026-03-09
 
 ### Fixed

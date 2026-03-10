@@ -230,6 +230,10 @@ lib:RegisterSpells({
         cooldown = 0,
         priority = 1,
         specs = {S.ARCANE},
+        -- Self-debuff that stacks up to 3, increasing damage and mana cost
+        triggersAuras = {
+            { spellID = 36032, type = "DEBUFF", onTarget = false, duration = 8 },
+        },
     },
     {
         spellID = 116,  -- Frostbolt (filler/mana conservation - main for Frost)
