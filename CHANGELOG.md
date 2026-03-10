@@ -1,5 +1,15 @@
 # LibSpellDB Changelog
 
+## [1.0.73] - 2026-03-09
+
+### Fixed
+- **Missing `auraTarget` on ally-targetable buff spells** — 18 LONG_BUFF spells across 5 classes were missing their `auraTarget` field, causing them to incorrectly resolve as `"self"`. This prevented consumers (e.g., Buff Reminders) from offering party/raid tracking for these buffs.
+  - **Priest** (4): Power Word: Fortitude → `AT.ALLY`, Prayer of Fortitude → `AT.NONE`, Divine Spirit → `AT.ALLY`, Shadow Protection → `AT.ALLY`
+  - **Paladin** (8): Blessing of Might/Kings/Wisdom/Salvation → `AT.ALLY`, Greater Blessing of Might/Wisdom/Kings/Salvation → `AT.NONE`
+  - **Hunter** (2): Aspect of the Pack → `AT.NONE`, Aspect of the Wild → `AT.NONE`
+  - **Shaman** (2): Water Walking → `AT.ALLY`, Water Breathing → `AT.ALLY`
+  - **Warlock** (2): Unending Breath → `AT.ALLY`, Detect Invisibility → `AT.ALLY`
+
 ## [1.0.72] - 2026-03-09
 
 ### Added

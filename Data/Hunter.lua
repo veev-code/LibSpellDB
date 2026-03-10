@@ -201,6 +201,7 @@ lib:RegisterSpells({
         description = "The hunter and group members within 30 yards take on the aspects of a pack of cheetahs, increasing movement speed by 30%. If a pack member is struck, they will be dazed for 4 sec. Only one Aspect can be active at a time.",
         tags = {C.MOVEMENT, C.MOVEMENT_SPEED, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
+        auraTarget = AT.NONE,  -- Party-wide
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
         buffGroup = "HUNTER_ASPECTS",
     },
@@ -466,6 +467,7 @@ lib:RegisterSpells({
         tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
         cooldown = 0,
         ranks = {20043, 20190, 27045},
+        auraTarget = AT.NONE,  -- Party-wide
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
         buffGroup = "HUNTER_ASPECTS",
     },

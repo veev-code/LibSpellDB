@@ -395,6 +395,7 @@ lib:RegisterSpells({
         duration = 600,
         dispelType = "Magic",
         ranks = {19740, 19834, 19835, 19836, 19837, 19838, 25291, 27140},
+        auraTarget = AT.ALLY,
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
         buffGroup = "PALADIN_BLESSINGS",
     },
@@ -407,6 +408,7 @@ lib:RegisterSpells({
         duration = 600,
         dispelType = "Magic",
         talent = true,
+        auraTarget = AT.ALLY,
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
         buffGroup = "PALADIN_BLESSINGS",
     },
@@ -419,6 +421,7 @@ lib:RegisterSpells({
         duration = 600,
         dispelType = "Magic",
         ranks = {19742, 19850, 19852, 19853, 19854, 25290, 27142},
+        auraTarget = AT.ALLY,
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
         buffGroup = "PALADIN_BLESSINGS",
     },
@@ -444,6 +447,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 600,
         dispelType = "Magic",
+        auraTarget = AT.ALLY,
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
         buffGroup = "PALADIN_BLESSINGS",
     },
@@ -456,6 +460,7 @@ lib:RegisterSpells({
         duration = 1800,
         dispelType = "Magic",
         ranks = {25782, 25916, 27141},
+        auraTarget = AT.NONE,  -- Raid-wide
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
         buffGroup = "PALADIN_BLESSINGS",
     },
@@ -468,6 +473,7 @@ lib:RegisterSpells({
         duration = 1800,
         dispelType = "Magic",
         ranks = {25894, 25918, 27143},
+        auraTarget = AT.NONE,  -- Raid-wide
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
         buffGroup = "PALADIN_BLESSINGS",
     },
@@ -480,6 +486,7 @@ lib:RegisterSpells({
         duration = 1800,
         dispelType = "Magic",
         talent = true,
+        auraTarget = AT.NONE,  -- Raid-wide
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
         buffGroup = "PALADIN_BLESSINGS",
     },
@@ -505,6 +512,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 1800,
         dispelType = "Magic",
+        auraTarget = AT.NONE,  -- Raid-wide
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
         buffGroup = "PALADIN_BLESSINGS",
     },

@@ -661,6 +661,7 @@ lib:RegisterSpells({
         tags = {C.UTILITY, C.MOVEMENT, C.OUT_OF_COMBAT, C.LONG_BUFF, C.SITUATIONAL},
         cooldown = 0,
         duration = 600,
+        auraTarget = AT.ALLY,
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
@@ -670,6 +671,7 @@ lib:RegisterSpells({
         tags = {C.UTILITY, C.OUT_OF_COMBAT, C.LONG_BUFF, C.SITUATIONAL},
         cooldown = 0,
         duration = 600,
+        auraTarget = AT.ALLY,
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
