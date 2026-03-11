@@ -382,29 +382,31 @@ end
 ]]
 function lib:IsSelfOnly(spellID)
     local auraTarget = self:GetAuraTarget(spellID)
-    -- "self" and "none" are both considered "self-only" for backwards compatibility
-    -- "ally" and "pet" can target others
+    -- "self" and "none" are self-only (buff on caster, or no unit to track)
+    -- "ally", "enemy", and "pet" all target other units
     return auraTarget == "self" or auraTarget == "none"
 end
 
 --[[
     Get the aura target type for a spell
-    
+
     Returns where the buff/effect appears for tracking purposes:
     - "self": Buff appears on caster only (Barkskin, Evasion, Ice Block)
     - "ally": Can target other friendly players (Renew, BoP, PWS)
+    - "enemy": Debuff applied to enemy target (Corruption, Curse of Agony, Sunder Armor)
     - "pet": Targets pet (Mend Pet)
     - "none": No unit to track - AoE around caster, totems, placed objects
-    
+
     Priority:
     1. Explicit auraTarget field
     2. Legacy selfOnly field (converted to "self"/"ally")
     3. triggersAuras onTarget = false -> "self"
     4. Tags indicating spell can target others -> "ally"
-    5. Default: "self"
-    
+    5. Tags indicating spell applies enemy debuff -> "enemy"
+    6. Default: "self"
+
     @param spellID (number) - Spell ID (or spell data table)
-    @return (string) - "self", "ally", "pet", or "none"
+    @return (string) - "self", "ally", "enemy", "pet", or "none"
 ]]
 function lib:GetAuraTarget(spellID)
     -- Accept either spell ID or spell data table
@@ -414,26 +416,26 @@ function lib:GetAuraTarget(spellID)
     else
         spellData = self:GetSpellInfo(spellID)
     end
-    
+
     if not spellData then return "self" end  -- Default to self if no data
-    
+
     -- Explicit auraTarget field takes precedence
     if spellData.auraTarget then
         return spellData.auraTarget
     end
-    
+
     -- Legacy selfOnly field support (convert to auraTarget values)
     if spellData.selfOnly ~= nil then
         return spellData.selfOnly and "self" or "ally"
     end
-    
+
     -- Check triggersAuras for explicit onTarget = false
     if spellData.triggersAuras and spellData.triggersAuras[1] then
         if spellData.triggersAuras[1].onTarget == false then
             return "self"
         end
     end
-    
+
     -- Check tags using hash index for O(1) lookup
     local id = spellData.spellID
     if id then
@@ -443,9 +445,13 @@ function lib:GetAuraTarget(spellID)
                or tagSet["HEAL_AOE"] or tagSet["EXTERNAL_DEFENSIVE"] then
                 return "ally"
             end
+            if tagSet["DEBUFF"] or tagSet["HAS_DEBUFF"] or tagSet["DOT"]
+               or tagSet["HAS_DOT"] then
+                return "enemy"
+            end
         end
     end
-    
+
     -- Default: self
     return "self"
 end

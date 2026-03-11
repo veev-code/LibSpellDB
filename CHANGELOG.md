@@ -1,5 +1,15 @@
 # LibSpellDB Changelog
 
+## [1.0.75] - 2026-03-11
+
+### Added
+- **New AuraTarget: `"enemy"`** — `GetAuraTarget()` now returns `"enemy"` for spells tagged with `DEBUFF`, `HAS_DEBUFF`, `DOT`, or `HAS_DOT`. Previously these spells defaulted to `"self"`, making `IsSelfOnly()` incorrectly return `true` for enemy debuffs. This caused consumers that trust `IsSelfOnly()` for target resolution to check the player instead of the enemy target.
+- **`AuraTarget.ENEMY`** constant added to `lib.AuraTarget` table.
+
+### Changed
+- **`GetAuraTarget()` priority** — Added step 5: debuff/DOT tags → `"enemy"`, before the `"self"` default. Explicit `auraTarget` fields, `selfOnly`, `triggersAuras`, and ally/heal tags still take precedence.
+- **`IsSelfOnly()` semantics** — Now correctly returns `false` for enemy debuff spells. Only `"self"` and `"none"` are considered self-only; `"enemy"`, `"ally"`, and `"pet"` all return `false`.
+
 ## [1.0.74] - 2026-03-09
 
 ### Added

@@ -163,10 +163,11 @@ lib.Categories = {
 -------------------------------------------------------------------------------
 
 lib.AuraTarget = {
-    SELF = "self",   -- Buff appears on caster only (Barkskin, Evasion, Ice Block)
-    ALLY = "ally",   -- Can target other friendly players (Renew, BoP, PWS)
-    PET  = "pet",    -- Targets pet (Mend Pet)
-    NONE = "none",   -- No unit to track - AoE around caster, totems, placed objects
+    SELF  = "self",   -- Buff appears on caster only (Barkskin, Evasion, Ice Block)
+    ALLY  = "ally",   -- Can target other friendly players (Renew, BoP, PWS)
+    ENEMY = "enemy",  -- Debuff applied to enemy target (Corruption, Curse of Agony, Sunder Armor)
+    PET   = "pet",    -- Targets pet (Mend Pet)
+    NONE  = "none",   -- No unit to track - AoE around caster, totems, placed objects
 }
 
 -------------------------------------------------------------------------------
