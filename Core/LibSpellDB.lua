@@ -129,6 +129,15 @@ function lib:RegisterSpell(spellData)
         return false
     end
 
+    -- Validate auraTarget is present when duration > 0
+    -- Always warn (not debug-only) so developers notice during testing
+    if spellData.duration and spellData.duration > 0 and not spellData.auraTarget then
+        -- selfOnly is a legacy field that GetAuraTarget can resolve, so allow it
+        if spellData.selfOnly == nil then
+            print("|cffff6600LibSpellDB WARNING:|r Spell " .. spellID .. " (" .. (spellData.name or spellData.class or "unknown") .. ") has duration but no auraTarget field")
+        end
+    end
+
     -- Auto-resolve name if not provided
     if not spellData.name then
         spellData.name = spellName

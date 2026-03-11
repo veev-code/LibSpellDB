@@ -76,8 +76,8 @@ if not lib then return end
     buffGroup = "WARRIOR_SHOUTS",       -- BuffGroup this spell belongs to (see BuffGroup System below)
     requiredItemIDs = {28441, 28442},   -- Item IDs; spell only relevant when one is equipped (weapon procs)
 
-    -- Aura targeting
-    auraTarget = AT.SELF,               -- Where buff appears: "self", "ally", "pet", "none"
+    -- Aura targeting (REQUIRED when duration > 0)
+    auraTarget = AT.SELF,               -- Where aura appears: "self", "ally", "enemy", "pet", "none"
     cooldownPriority = true,            -- Show cooldown/prediction first, then aura when ready
     -- consumesAllResource: REMOVED — use CONSUMES_ALL_RESOURCE tag instead
     targetLockoutDebuff = 6788,         -- Debuff that blocks re-casting (e.g. Weakened Soul)
@@ -204,12 +204,17 @@ These rules ensure spells are categorized correctly for any consumer:
 Defined in `Categories.lua`:
 ```lua
 lib.AuraTarget = {
-    SELF = "self",   -- Buff appears on caster only (Barkskin, Evasion)
-    ALLY = "ally",   -- Can target other players (Renew, BoP, PWS)
-    PET  = "pet",    -- Targets pet (Mend Pet)
-    NONE = "none",   -- No unit to track (AoE, totems, placed objects)
+    SELF  = "self",   -- Buff appears on caster only (Barkskin, Evasion)
+    ALLY  = "ally",   -- Can target other players (Renew, BoP, PWS)
+    ENEMY = "enemy",  -- Debuff applied to enemy target (Corruption, Sunder Armor)
+    PET   = "pet",    -- Targets pet (Mend Pet)
+    NONE  = "none",   -- No unit to track (AoE, totems, placed objects)
 }
 ```
+
+**Required field**: Every spell with `duration > 0` MUST have an explicit `auraTarget` field. This is validated at registration time (`RegisterSpell` warns in debug mode if missing). The field tells consumers which unit to check for the aura — without it, aura tracking silently breaks for debuffs and ally-targeted buffs.
+
+Tag-based inference in `GetAuraTarget()` exists as a legacy fallback but should NOT be relied upon for new spells. Always set `auraTarget` explicitly.
 
 ## Spec Constants (`lib.Specs`)
 

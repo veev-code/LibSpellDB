@@ -14,6 +14,7 @@ local lib = LibStub and LibStub:GetLibrary(MAJOR, true)
 if not lib then return end
 
 local C = lib.Categories
+local AT = lib.AuraTarget
 
 -------------------------------------------------------------------------------
 -- Leatherworking Drums
@@ -28,6 +29,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.HAS_BUFF, C.MINOR_EXTERNAL},
         cooldown = 120,
         duration = 30,
+        auraTarget = AT.SELF,
     },
     -- Drums of War — Increases attack power by 60 and spell power by 30 for all party members. Lasts 30 sec.
     {
@@ -37,6 +39,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.HAS_BUFF, C.MINOR_EXTERNAL},
         cooldown = 120,
         duration = 30,
+        auraTarget = AT.SELF,
     },
     -- Drums of Speed — Increases movement speed by 15% for all party members. Lasts 30 sec.
     {
@@ -46,6 +49,7 @@ lib:RegisterSpells({
         tags = {C.MOVEMENT_SPEED, C.HAS_BUFF, C.MINOR_EXTERNAL},
         cooldown = 120,
         duration = 30,
+        auraTarget = AT.SELF,
     },
     -- Greater Drums of Battle
     {
@@ -55,6 +59,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.HAS_BUFF, C.MINOR_EXTERNAL},
         cooldown = 120,
         duration = 30,
+        auraTarget = AT.SELF,
     },
     -- Greater Drums of War
     {
@@ -64,6 +69,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.HAS_BUFF, C.MINOR_EXTERNAL},
         cooldown = 120,
         duration = 30,
+        auraTarget = AT.SELF,
     },
     -- Greater Drums of Speed
     {
@@ -73,5 +79,6 @@ lib:RegisterSpells({
         tags = {C.MOVEMENT_SPEED, C.HAS_BUFF, C.MINOR_EXTERNAL},
         cooldown = 120,
         duration = 30,
+        auraTarget = AT.SELF,
     },
 }, "SHARED")

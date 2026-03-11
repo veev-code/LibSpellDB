@@ -1,9 +1,9 @@
 --[[
     LibSpellDB - Proc Buff Data
-    
+
     Defines important proc buffs for each class.
     These are passive buffs that proc from talents/abilities and are worth tracking.
-    
+
     Note: The spellID here is the BUFF ID (what appears in UnitBuff), not the ability ID.
     This may differ from the triggering ability's spell ID.
 ]]
@@ -13,6 +13,7 @@ local lib = LibStub and LibStub:GetLibrary(MAJOR, true)
 if not lib then return end
 
 local C = lib.Categories
+local AT = lib.AuraTarget
 
 -------------------------------------------------------------------------------
 -- Warrior Procs
@@ -27,6 +28,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.DPS, C.MINOR},
         cooldown = 0,
         duration = 12,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "25% damage increase when enraged",
@@ -41,6 +43,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.DPS, C.MINOR},
         cooldown = 0,
         duration = 15,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "25% attack speed increase",
@@ -56,6 +59,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.DEBUFF},
         cooldown = 0,
         duration = 12,
+        auraTarget = AT.ENEMY,
         talent = true,
         procInfo = {
             description = "Bleed damage over 12 sec",
@@ -72,6 +76,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.PERSONAL_DEFENSIVE, C.MINOR},
         cooldown = 0,
         duration = 6,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "Regenerates 3% of total health over 6 sec",
@@ -87,6 +92,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.CC_HARD},
         cooldown = 0,
         duration = 3,
+        auraTarget = AT.ENEMY,
         talent = true,
         procInfo = {
             description = "Stuns target for 3 sec on melee hit with maces",
@@ -102,6 +108,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.ROOT},
         cooldown = 0,
         duration = 5,
+        auraTarget = AT.ENEMY,
         talent = true,
         procInfo = {
             description = "Immobilizes target for 5 sec on Hamstring hit",
@@ -117,6 +124,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.PERSONAL_DEFENSIVE, C.MINOR},
         cooldown = 0,
         duration = 10,
+        auraTarget = AT.SELF,
         ranks = {29841, 29842},
         talent = true,
         procInfo = {
@@ -157,6 +165,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.CC_HARD},
         cooldown = 0,
         duration = 4,
+        auraTarget = AT.ENEMY,
         requiredItemIDs = {28441, 28442},  -- Deep Thunder (28441), Stormherald (28442)
         procInfo = {
             description = "Stuns target for 4 sec (Deep Thunder / Stormherald)",
@@ -178,6 +187,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.RESOURCE},
         cooldown = 0,
         duration = 15,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "Next spell costs no mana",
@@ -192,6 +202,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.DEBUFF, C.DPS},
         cooldown = 0,
         duration = 4,
+        auraTarget = AT.ENEMY,
         talent = true,
         procInfo = {
             description = "Target burns for 40% of Fire crit damage over 4 sec",
@@ -206,6 +217,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.DEBUFF, C.DPS},
         cooldown = 0,
         duration = 15,
+        auraTarget = AT.ENEMY,
         talent = true,
         procInfo = {
             description = "Target's chance to be crit by Frost spells increased by 2% per stack",
@@ -220,6 +232,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.MOVEMENT_SPEED},
         cooldown = 0,
         duration = 8,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "50% movement speed, removes movement impairing effects",
@@ -234,6 +247,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.DEBUFF, C.DPS},
         cooldown = 0,
         duration = 30,
+        auraTarget = AT.ENEMY,
         talent = true,
         procInfo = {
             description = "Target takes 3% increased Fire damage per stack",
@@ -255,6 +269,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.DPS, C.MINOR},
         cooldown = 0,
         duration = 10,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "Next Shadow Bolt is instant",
@@ -270,6 +285,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.DPS, C.MINOR},
         cooldown = 0,
         duration = 8,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "Next Shadow Bolt or Incinerate is instant",
@@ -284,6 +300,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.DEBUFF, C.DPS},
         cooldown = 0,
         duration = 12,
+        auraTarget = AT.ENEMY,
         talent = true,
         procInfo = {
             description = "Target takes 20% increased Shadow damage, 4 charges",
@@ -298,6 +315,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.DEBUFF, C.DPS},
         cooldown = 0,
         duration = 12,
+        auraTarget = AT.ENEMY,
         talent = true,
         procInfo = {
             description = "Target's physical damage dealt reduced by 5%",
@@ -313,6 +331,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.PERSONAL_DEFENSIVE},
         cooldown = 0,
         duration = 4,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "Immune to Shadow and Fire spells for 4 sec",
@@ -334,6 +353,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.RESOURCE},
         cooldown = 0,
         duration = 15,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "100% spirit, 50% mana regen while casting",
@@ -348,6 +368,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.HEAL, C.MINOR},
         cooldown = 0,
         duration = 10,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "Next Flash Heal or Smite is instant and costs no mana",
@@ -362,6 +383,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.PERSONAL_DEFENSIVE},
         cooldown = 0,
         duration = 8,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "4% damage reduction, 10% healing increase per stack",
@@ -376,6 +398,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.HEAL, C.MINOR},
         cooldown = 0,
         duration = 15,
+        auraTarget = AT.ALLY,
         talent = true,
         procInfo = {
             description = "Target's armor increased by 25% for 15 sec",
@@ -390,6 +413,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.RESOURCE},
         cooldown = 0,
         duration = 15,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "Next Flash Heal, Binding Heal, or Greater Heal costs no mana",
@@ -404,6 +428,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.PERSONAL_DEFENSIVE, C.MINOR},
         cooldown = 0,
         duration = 6,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "Heals for 25% of crit damage taken over 6 sec",
@@ -418,6 +443,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.DEBUFF, C.DPS},
         cooldown = 0,
         duration = 15,
+        auraTarget = AT.ENEMY,
         talent = true,
         procInfo = {
             description = "Increases shadow damage taken by 2% per stack",
@@ -432,6 +458,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.MINOR},
         cooldown = 0,
         duration = 6,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "Immune to spell pushback, +10% interrupt resist for 6 sec",
@@ -446,6 +473,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.HEAL},
         cooldown = 0,
         duration = 15,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "Angel form on death, free healing for 15 sec",
@@ -459,6 +487,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.CC_HARD},
         cooldown = 0,
         duration = 3,
+        auraTarget = AT.ENEMY,
         talent = true,
         procInfo = {
             description = "Stuns target for 3 sec from Shadow damage",
@@ -481,6 +510,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.RESOURCE},
         cooldown = 0,
         duration = 15,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "Next 2 damage spells cost 40% less mana",
@@ -497,6 +527,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.DPS, C.MINOR},
         cooldown = 0,
         duration = 10,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "Party melee AP increased by 10%",
@@ -510,6 +541,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.RESOURCE},
         cooldown = 0,
         duration = 15,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "Next Shock spell costs 60% less mana",
@@ -525,6 +557,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.DPS, C.MINOR},
         cooldown = 0,
         duration = 15,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "30% attack speed increase",
@@ -540,6 +573,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.HEAL, C.MINOR},
         cooldown = 0,
         duration = 15,
+        auraTarget = AT.ALLY,
         talent = true,
         procInfo = {
             description = "Target's armor increased by 25% for 15 sec",
@@ -554,6 +588,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.HEAL, C.MINOR},
         cooldown = 0,
         duration = 15,
+        auraTarget = AT.ALLY,
         talent = true,
         procInfo = {
             description = "Healing Wave effectiveness increased by 6% per stack",
@@ -565,10 +600,11 @@ lib:RegisterSpells({
     {
         spellID = 29178,  -- Elemental Devastation buff on player (Rank 3)
         name = "Elemental Devastation",
-        ranks = {30165, 29177, 29178},
+        ranks = {29177, 29178, 30165},
         tags = {C.PROC, C.DPS, C.MINOR},
         cooldown = 0,
         duration = 10,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "Melee crit chance increased by 9% for 10 sec",
@@ -582,6 +618,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.MINOR},
         cooldown = 0,
         duration = 6,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "Immune to spell pushback for 6 sec after being critted",
@@ -603,6 +640,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.RESOURCE},
         cooldown = 0,
         duration = 15,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "Next ability costs no mana/energy/rage",
@@ -617,6 +655,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.DPS, C.MINOR},
         cooldown = 0,
         duration = 15,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "Next spell cast time reduced by 0.5s",
@@ -632,6 +671,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.PERSONAL_DEFENSIVE, C.MINOR},
         cooldown = 0,
         duration = 8,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "Spell crit chance against you reduced by 4% per stack",
@@ -646,6 +686,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.CC_HARD},
         cooldown = 0,
         duration = 3,
+        auraTarget = AT.ENEMY,
         talent = true,
         procInfo = {
             description = "Stuns target for 3 sec from Starfire",
@@ -669,6 +710,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.DPS, C.MINOR},
         cooldown = 0,
         duration = 20,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "Next Sinister Strike, Backstab, or Ambush has 40% increased crit chance",
@@ -678,12 +720,13 @@ lib:RegisterSpells({
     },
     -- Mace Stun Effect (Mace Specialization Combat talent) - stuns target on melee hit with maces
     {
-        spellID = 5530,  -- Mace Stun Effect debuff on target (same spell as Warrior)
+        spellID = 5530,  -- Mace Stun Effect debuff on target
         name = "Mace Stun Effect",
         icon = 133476,  -- Mace Specialization talent icon
         tags = {C.PROC, C.CC_HARD},
         cooldown = 0,
         duration = 3,
+        auraTarget = AT.ENEMY,
         talent = true,
         procInfo = {
             description = "Stuns target for 3 sec on melee hit with maces",
@@ -699,6 +742,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.DPS},
         cooldown = 0,
         duration = 10,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "Offensive ability damage increased by 10% for 10 sec",
@@ -712,6 +756,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.CC_SOFT},
         cooldown = 0,
         duration = 8,
+        auraTarget = AT.ENEMY,
         talent = true,
         procInfo = {
             description = "Target movement speed reduced by 50% for 8 sec",
@@ -734,6 +779,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.DPS, C.MINOR},
         cooldown = 0,
         duration = 30,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "Physical and Holy damage increased",
@@ -747,6 +793,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.HEAL, C.MINOR},
         cooldown = 0,
         duration = 15,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "Next Holy Light cast time reduced by 0.5 sec",
@@ -758,10 +805,11 @@ lib:RegisterSpells({
     {
         spellID = 20128,  -- Redoubt buff on player (name fallback recommended)
         name = "Redoubt",
-        ranks = {20127, 20130, 20128},
+        ranks = {20127, 20128, 20130},
         tags = {C.PROC, C.TANK, C.MINOR},
         cooldown = 0,
         duration = 10,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "Block chance increased by 30% for 10 sec or 5 blocks",
@@ -775,6 +823,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.DPS, C.MINOR},
         cooldown = 0,
         duration = 8,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "Next 4 weapon swings generate an extra attack",
@@ -796,6 +845,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.DPS, C.MINOR},
         cooldown = 0,
         duration = 12,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "30% ranged attack speed",
@@ -810,6 +860,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.DPS, C.MAJOR, C.CC_IMMUNITY},
         cooldown = 120,
         duration = 18,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "10% damage, immune to CC",
@@ -823,6 +874,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.DPS, C.MINOR},
         cooldown = 0,
         duration = 10,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "All damage increased by 3%",
@@ -837,6 +889,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.DPS, C.DEBUFF},
         cooldown = 0,
         duration = 7,
+        auraTarget = AT.ENEMY,
         talent = true,
         procInfo = {
             description = "Target takes additional damage equal to 25% of your Agility",
@@ -851,6 +904,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.DPS, C.MINOR},
         cooldown = 0,
         duration = 8,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "Ranged crit chance increased by 6%",
@@ -865,6 +919,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.DPS},
         cooldown = 0,
         duration = 20,
+        auraTarget = AT.SELF,
         talent = true,
         procInfo = {
             description = "Next Aimed Shot or Multi-Shot deals additional damage",
@@ -879,6 +934,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.ROOT},
         cooldown = 0,
         duration = 5,
+        auraTarget = AT.ENEMY,
         talent = true,
         procInfo = {
             description = "Immobilizes target for 5 sec on Wing Clip hit",
@@ -894,6 +950,7 @@ lib:RegisterSpells({
         tags = {C.PROC, C.CC_HARD},
         cooldown = 0,
         duration = 3,
+        auraTarget = AT.ENEMY,
         talent = true,
         procInfo = {
             description = "Stuns target for 3 sec on Concussive Shot hit",

@@ -39,6 +39,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD, C.MOVEMENT_GAP_CLOSE, C.MOVEMENT},
         cooldown = 15,
         duration = 1,
+        auraTarget = AT.ENEMY,
         priority = 2,  -- Movement
         ranks = {100, 6178, 11578},
         specs = {S.ARMS, S.FURY, S.PROTECTION},
@@ -58,6 +59,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD, C.MOVEMENT_GAP_CLOSE, C.MOVEMENT},
         cooldown = 30,
         duration = 3,
+        auraTarget = AT.ENEMY,
         priority = 2,  -- Movement
         ranks = {20252, 20616, 20617, 25272, 25275},
         specs = {S.ARMS, S.FURY, S.PROTECTION},
@@ -90,6 +92,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD, C.FEAR},
         cooldown = 180,
         duration = 8,
+        auraTarget = AT.ENEMY,
         priority = 3,  -- Hard CC
         specs = {S.ARMS, S.FURY, S.PROTECTION},
         triggersAuras = {
@@ -108,6 +111,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD},
         cooldown = 45,
         duration = 5,
+        auraTarget = AT.ENEMY,
         priority = 3,  -- Hard CC
         talent = true,
         specs = {S.PROTECTION},
@@ -119,6 +123,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD},
         cooldown = 60,
         duration = 10,
+        auraTarget = AT.ENEMY,
         priority = 3,  -- Hard CC
         specs = {S.ARMS, S.FURY, S.PROTECTION},
     },
@@ -133,6 +138,7 @@ lib:RegisterSpells({
         tags = {C.INTERRUPT},
         cooldown = 10,
         duration = 4,
+        auraTarget = AT.ENEMY,
         priority = 4,  -- Interrupt
         ranks = {6552, 6554, 13491},
         specs = {S.ARMS, S.FURY},
@@ -144,6 +150,7 @@ lib:RegisterSpells({
         tags = {C.INTERRUPT},
         cooldown = 12,
         duration = 6,
+        auraTarget = AT.ENEMY,
         priority = 4,  -- Interrupt
         ranks = {72, 1671, 1672, 29704},
         specs = {S.PROTECTION},
@@ -159,6 +166,7 @@ lib:RegisterSpells({
         tags = {C.CC_SOFT},
         cooldown = 0,
         duration = 15,
+        auraTarget = AT.ENEMY,
         priority = 5,  -- Soft CC
         ranks = {1715, 7372, 7373, 25212, 27584},
         specs = {S.ARMS, S.FURY, S.PROTECTION},
@@ -170,6 +178,7 @@ lib:RegisterSpells({
         tags = {C.CC_SOFT},
         cooldown = 0,
         duration = 6,
+        auraTarget = AT.ENEMY,
         priority = 5,  -- Soft CC
         talent = true,
         specs = {S.FURY, S.ARMS},  -- Fury tree talent, commonly taken by Arms for PvP utility
@@ -185,6 +194,7 @@ lib:RegisterSpells({
         tags = {C.DEFENSIVE, C.MAJOR, C.DAMAGE_REDUCTION, C.HAS_BUFF},
         cooldown = 1800,
         duration = 10,
+        auraTarget = AT.SELF,
         priority = 6,  -- Personal defensive
         specs = {S.PROTECTION},
         sharedCooldownGroup = "WARRIOR_30MIN_CD",
@@ -196,6 +206,7 @@ lib:RegisterSpells({
         tags = {C.DEFENSIVE, C.MAJOR, C.HAS_BUFF},
         cooldown = 480,
         duration = 20,
+        auraTarget = AT.SELF,
         priority = 6,  -- Personal defensive
         talent = true,
         ranks = {12975, 12976},
@@ -208,6 +219,7 @@ lib:RegisterSpells({
         tags = {C.DEFENSIVE, C.MINOR, C.IMMUNITY, C.HAS_BUFF},
         cooldown = 10,
         duration = 5,
+        auraTarget = AT.SELF,
         priority = 6,  -- Personal defensive
         specs = {S.ARMS, S.FURY, S.PROTECTION},
     },
@@ -244,6 +256,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MAJOR, C.HAS_BUFF},
         cooldown = 1800,
         duration = 15,
+        auraTarget = AT.SELF,
         specs = {S.FURY},
         sharedCooldownGroup = "WARRIOR_30MIN_CD",
     },
@@ -254,6 +267,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MAJOR, C.HAS_BUFF},
         cooldown = 180,
         duration = 30,
+        auraTarget = AT.SELF,
         talent = true,
         specs = {S.FURY, S.ARMS},  -- Fury tree talent, commonly taken by Arms in PvP
     },
@@ -264,6 +278,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MINOR, C.HAS_BUFF},
         cooldown = 30,
         duration = 10,
+        auraTarget = AT.SELF,
         talent = true,
         ranks = {12328, 12723, 26654},
         specs = {S.FURY, S.ARMS},  -- Fury tree talent, commonly taken by Arms for cleave
@@ -275,6 +290,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MAJOR, C.DEFENSIVE, C.HAS_BUFF},
         cooldown = 1800,
         duration = 15,
+        auraTarget = AT.SELF,
         ranks = {20230, 20240},
         specs = {S.ARMS},
         sharedCooldownGroup = "WARRIOR_30MIN_CD",
@@ -291,6 +307,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE},
         cooldown = 0,
         duration = 15,
+        auraTarget = AT.ENEMY,
         priority = 1,
         ranks = {772, 6546, 6547, 6548, 11572, 11573, 11574, 25208},
         specs = {S.ARMS},
@@ -302,6 +319,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE_PVP},
         cooldown = 6,
         duration = 10,
+        auraTarget = AT.ENEMY,
         priority = 2,
         talent = true,
         ranks = {12294, 21551, 21552, 21553, 25248, 27580, 30330},
@@ -429,6 +447,7 @@ lib:RegisterSpells({
         tags = {C.TANK, C.ROTATIONAL, C.DEFENSIVE, C.HAS_BUFF, C.PVE},
         cooldown = 5,
         duration = 5,
+        auraTarget = AT.SELF,
         priority = 1,
         specs = {S.PROTECTION},
     },
@@ -439,7 +458,7 @@ lib:RegisterSpells({
         tags = {C.TANK, C.ROTATIONAL, C.REACTIVE, C.PVE},
         cooldown = 5,
         priority = 2,
-        ranks = {6572, 6574, 7379, 11600, 11601, 25288, 25269, 30357},
+        ranks = {6572, 6574, 7379, 11600, 11601, 25269, 25288, 30357},
         specs = {S.PROTECTION},
     },
     {
@@ -475,6 +494,7 @@ lib:RegisterSpells({
         tags = {C.TANK, C.MAINTENANCE, C.DEBUFF, C.CC_SOFT, C.PVE},
         cooldown = 4,
         duration = 30,
+        auraTarget = AT.ENEMY,
         priority = 5,
         ranks = {6343, 8198, 8204, 8205, 11580, 11581, 13532, 25264},
         specs = {S.PROTECTION},
@@ -487,6 +507,7 @@ lib:RegisterSpells({
         tags = {C.TANK, C.MAINTENANCE, C.DEBUFF, C.PVE},
         cooldown = 0,
         duration = 30,
+        auraTarget = AT.ENEMY,
         priority = 6,
         ranks = {1160, 6190, 11554, 11555, 11556, 25202, 25203, 27579},
         specs = {S.PROTECTION},
@@ -511,6 +532,7 @@ lib:RegisterSpells({
         tags = {C.TAUNT},
         cooldown = 600,
         duration = 6,
+        auraTarget = AT.ENEMY,
         specs = {S.PROTECTION},
     },
     {
@@ -520,6 +542,7 @@ lib:RegisterSpells({
         tags = {C.TAUNT},
         cooldown = 120,
         duration = 6,
+        auraTarget = AT.ENEMY,
         ranks = {694, 7400, 7402, 7814, 7815, 7816, 20559, 20560, 25266},
         specs = {S.PROTECTION},
     },
@@ -534,6 +557,7 @@ lib:RegisterSpells({
         tags = {C.DEBUFF, C.UTILITY},
         cooldown = 0,
         duration = 30,
+        auraTarget = AT.ENEMY,
         ranks = {7386, 7405, 8380, 11596, 11597, 25225},
         specs = {S.PROTECTION},
         sharedAura = true,
@@ -550,7 +574,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 120,
         dispelType = nil,  -- Physical buff, cannot be purged
-        ranks = {6673, 5242, 6192, 11549, 11550, 11551, 25289, 2048},
+        ranks = {2048, 5242, 6192, 6673, 11549, 11550, 11551, 25289},
         auraTarget = AT.NONE,  -- Affects party, no single target
         specs = {S.ARMS, S.FURY, S.PROTECTION},
         buffGroup = "WARRIOR_SHOUTS",

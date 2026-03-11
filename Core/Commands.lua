@@ -28,6 +28,7 @@ SlashCmdList["LIBSPELLDB"] = function(msg)
         print("  /spelldb tag <TAG> - List spells with a tag (e.g., INTERRUPT)")
         print("  /spelldb spell <ID> - Show info for a spell ID")
         print("  /spelldb categories - List all categories")
+        print("  /spelldb validate - Validate all spell data for missing fields")
         print("  /spelldb invalid - Show invalid spell IDs that were skipped")
         print("  /spelldb debug - Toggle debug mode (shows warnings on load)")
         print("  /spelldb version - Show library version")
@@ -102,6 +103,25 @@ SlashCmdList["LIBSPELLDB"] = function(msg)
             else
                 print(("  %s"):format(cat))
             end
+        end
+
+    elseif cmd == "validate" then
+        local errors = 0
+        local checked = 0
+        for spellID, spellData in pairs(lib:GetAllSpells()) do
+            if spellData.duration and spellData.duration > 0 then
+                checked = checked + 1
+                if not spellData.auraTarget and spellData.selfOnly == nil then
+                    errors = errors + 1
+                    print(("  |cffff6600MISSING auraTarget:|r [%d] %s (%s) duration=%d"):format(
+                        spellID, spellData.name or "?", spellData.class or "?", spellData.duration))
+                end
+            end
+        end
+        if errors == 0 then
+            print(("|cff00ff00LibSpellDB:|r All %d spells with duration have auraTarget. Validation passed."):format(checked))
+        else
+            print(("|cffff6600LibSpellDB:|r %d of %d spells with duration are MISSING auraTarget."):format(errors, checked))
         end
 
     elseif cmd == "invalid" then

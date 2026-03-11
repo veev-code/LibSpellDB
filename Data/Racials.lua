@@ -52,6 +52,7 @@ lib:RegisterSpells({
         tags = {C.CC_BREAK, C.CC_IMMUNITY},
         cooldown = 120,
         duration = 5,
+        auraTarget = AT.SELF,
         race = UNDEAD,
     },
 
@@ -63,6 +64,7 @@ lib:RegisterSpells({
         tags = {C.CC_BREAK, C.DEFENSIVE, C.MINOR, C.DISPEL_POISON, C.DISPEL_DISEASE},
         cooldown = 180,
         duration = 8,
+        auraTarget = AT.SELF,
         race = DWARF,
     },
 })
@@ -137,6 +139,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD},
         cooldown = 120,
         duration = 2,
+        auraTarget = AT.ENEMY,
         race = TAUREN,
     },
 
@@ -149,6 +152,7 @@ lib:RegisterSpells({
         tags = {C.SILENCE, C.INTERRUPT, C.RESOURCE},
         cooldown = 120,
         duration = 2,
+        auraTarget = AT.ENEMY,
         race = BLOODELF,
     },
     {
@@ -158,6 +162,7 @@ lib:RegisterSpells({
         tags = {C.SILENCE, C.INTERRUPT, C.RESOURCE},
         cooldown = 120,
         duration = 2,
+        auraTarget = AT.ENEMY,
         race = BLOODELF,
     },
     {
@@ -167,6 +172,7 @@ lib:RegisterSpells({
         tags = {C.UTILITY, C.RESOURCE},
         cooldown = 30,
         duration = 600,
+        auraTarget = AT.SELF,
         race = BLOODELF,
     },
     {
@@ -175,6 +181,7 @@ lib:RegisterSpells({
         tags = {C.SILENCE, C.INTERRUPT, C.RESOURCE},
         cooldown = 120,
         duration = 2,
+        auraTarget = AT.ENEMY,
         race = BLOODELF,
     },
     -- Paladin Arcane Torrent shares spellID 28730 (mana version) above
@@ -221,6 +228,7 @@ lib:RegisterSpells({
         tags = {C.UTILITY},
         cooldown = 180,
         duration = 20,
+        auraTarget = AT.SELF,
         race = HUMAN,
     },
 
@@ -232,6 +240,7 @@ lib:RegisterSpells({
         tags = {C.UTILITY},
         cooldown = 120,
         duration = 10,
+        auraTarget = AT.SELF,
         race = UNDEAD,
     },
 })
