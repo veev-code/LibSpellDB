@@ -1,5 +1,23 @@
 # LibSpellDB Changelog
 
+## [1.0.76] - 2026-03-11
+
+### Changed
+- **`GetAuraTarget()` is now explicit-only** — No longer infers aura target from tags, `selfOnly`, or `triggersAuras`. Returns the explicit `auraTarget` field or nil. All spells with `duration > 0` now have an explicit `auraTarget` field.
+- **`class` is now required** — `RegisterSpell` asserts if `class` is missing. Previously defaulted silently to `"SHARED"`.
+- **Racials use explicit `"SHARED"` class** — All `RegisterSpells` calls in `Racials.lua` now pass `"SHARED"` as the default class.
+
+### Added
+- **`GetAuraType(spellID)`** — Returns `"BUFF"` (self/ally/pet), `"DEBUFF"` (enemy), or nil (none/unknown). Derived from `auraTarget`.
+- **`IsHelpfulSpell(spellID)`** — Returns `true` for self/ally/pet/none targets, `false` for enemy. Derived from `auraTarget`.
+- **32-rule CI validation** — `Tools/validate_spells.py` now enforces 32 data integrity rules across all spell files, including auraTarget consistency, tag validity, rank/appliesBuff length matching, duplicate detection, and class resolution.
+- **CI pipeline on every push** — Lua syntax checking (`luac5.1 -p`) and spell data validation run on every push to main, not just on tags.
+
+### Fixed
+- **5 spells missing `auraTarget`** — Pounce (Druid), Misdirection (Hunter), Stormstrike (Shaman), Bloodrage and Rampage (Warrior) had `duration > 0` but no `auraTarget`. Previously bypassed validation due to a `triggersAuras` exemption bug.
+- **Mana Spring Totem ranks** — Removed buff ID 25569 from `ranks` array (was mixed in with summon spell IDs), fixing ranks/appliesBuff length mismatch.
+- **Validator Rule 1 `triggersAuras` exemption** — Removed incorrect exemption that let spells with `triggersAuras` bypass the `auraTarget` requirement. The source spell still needs its own `auraTarget`.
+
 ## [1.0.75] - 2026-03-11
 
 ### Added

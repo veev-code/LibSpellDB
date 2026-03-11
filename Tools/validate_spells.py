@@ -52,6 +52,9 @@ Checks:
    27. sharedAura requires auraTarget ENEMY
    28. class must be a valid WoW class token or "SHARED"
    29. class field in RegisterSpells default must match filename
+   30. (reserved)
+   31. Every spell must resolve to a class (per-spell or RegisterSpells default)
+   32. auraTarget consistency with tags (ENEMY↔BUFF/HAS_BUFF, SELF/ALLY/PET↔DEBUFF/HAS_DEBUFF/HAS_DOT)
 
 Usage:
     python validate_spells.py           # from Tools/ directory
@@ -406,7 +409,7 @@ def get_default_class_for_line(register_blocks, line_num):
     return result
 
 
-def validate_spell(spell, line_num, filepath, valid_tags, buff_groups, shared_cd_groups):
+def validate_spell(spell, line_num, filepath, valid_tags, buff_groups, shared_cd_groups, resolved_class=None):
     """Validate a single spell. Returns list of error strings."""
     errors = []
     spell_id = spell.get("spellID", "???")
@@ -419,11 +422,9 @@ def validate_spell(spell, line_num, filepath, valid_tags, buff_groups, shared_cd
 
     # === Aura targeting rules ===
 
-    # Rule 1: duration > 0 requires auraTarget (or legacy selfOnly)
-    if duration > 0:
-        if not aura_target and not self_only:
-            if spell.get("triggersAuras.onTarget") is None:
-                errors.append(f"MISSING auraTarget: {label} has duration={duration} but no auraTarget field")
+    # Rule 1: duration > 0 requires auraTarget
+    if duration > 0 and not aura_target:
+        errors.append(f"MISSING auraTarget: {label} has duration={duration} but no auraTarget field")
 
     # Rule 2: auraTarget value must be valid
     if aura_target and aura_target not in VALID_AURA_TARGETS:
@@ -580,6 +581,23 @@ def validate_spell(spell, line_num, filepath, valid_tags, buff_groups, shared_cd
     if spell_class and spell_class not in VALID_CLASSES:
         errors.append(f"INVALID CLASS: {label} has class='{spell_class}' (not a valid class token)")
 
+    # Rule 31: Every spell must resolve to a class (per-spell or RegisterSpells default)
+    if resolved_class is None:
+        errors.append(f"MISSING CLASS: {label} has no class (set per-spell or use RegisterSpells with defaultClass)")
+
+    # Rule 32: auraTarget consistency with tags
+    # ENEMY auraTarget should not have BUFF/HAS_BUFF tags (it's a debuff, not a buff)
+    # SELF/ALLY/PET auraTarget should not have DEBUFF/HAS_DEBUFF/HAS_DOT tags
+    # Exception: spells with triggersAuras can have mixed buff/debuff via triggered auras
+    if aura_target and not spell.get("has_triggersAuras"):
+        tag_set = set(tags)
+        if aura_target == "AT.ENEMY" and (tag_set & {"BUFF", "HAS_BUFF"}):
+            bad_tags = ", ".join(sorted(tag_set & {"BUFF", "HAS_BUFF"}))
+            errors.append(f"AURA_TAG_MISMATCH: {label} has auraTarget={aura_target} but also has buff tag(s): {bad_tags} (enemy auras are debuffs)")
+        if aura_target in ("AT.SELF", "AT.ALLY", "AT.PET") and (tag_set & {"DEBUFF", "HAS_DEBUFF", "HAS_DOT"}):
+            bad_tags = ", ".join(sorted(tag_set & {"DEBUFF", "HAS_DEBUFF", "HAS_DOT"}))
+            errors.append(f"AURA_TAG_MISMATCH: {label} has auraTarget={aura_target} but also has debuff tag(s): {bad_tags} (self/ally auras are buffs)")
+
     return errors
 
 
@@ -611,11 +629,12 @@ def validate_file(filepath, valid_tags, buff_groups, shared_cd_groups):
                 errors.append(f"CLASS MISMATCH: {filepath.name} RegisterSpells default class is '{actual_class}' but expected '{expected_class}'")
 
     for spell, line_num in parse_spell_blocks(content, filepath):
-        # Resolve class: per-spell override > default from enclosing RegisterSpells > "SHARED"
+        # Resolve class: per-spell override > default from enclosing RegisterSpells
+        # Note: resolved_class may be None if neither is set (Rule 31 will catch this)
         default_class = get_default_class_for_line(register_blocks, line_num)
-        resolved_class = spell.get("class") or default_class or "SHARED"
-        spell_ids.append((spell.get("spellID"), spell.get("name", "unknown"), resolved_class, filepath.name, line_num))
-        errors.extend(validate_spell(spell, line_num, filepath, valid_tags, buff_groups, shared_cd_groups))
+        resolved_class = spell.get("class") or default_class
+        spell_ids.append((spell.get("spellID"), spell.get("name", "unknown"), resolved_class or "SHARED", filepath.name, line_num))
+        errors.extend(validate_spell(spell, line_num, filepath, valid_tags, buff_groups, shared_cd_groups, resolved_class=resolved_class))
 
     return errors, spell_ids
 

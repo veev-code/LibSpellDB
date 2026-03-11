@@ -106,10 +106,7 @@ function lib:RegisterSpell(spellData)
     assert(spellData.spellID, "LibSpellDB: spellID is required")
     assert(spellData.tags and #spellData.tags > 0, "LibSpellDB: tags array is required")
     
-    -- Default to "SHARED" if no class specified (racials, trinkets, etc.)
-    if not spellData.class then
-        spellData.class = "SHARED"
-    end
+    assert(spellData.class, "LibSpellDB: class is required for spell " .. spellData.spellID .. " (set per-spell or use RegisterSpells with defaultClass)")
 
     local spellID = spellData.spellID
 
@@ -132,10 +129,7 @@ function lib:RegisterSpell(spellData)
     -- Validate auraTarget is present when duration > 0
     -- Always warn (not debug-only) so developers notice during testing
     if spellData.duration and spellData.duration > 0 and not spellData.auraTarget then
-        -- selfOnly is a legacy field that GetAuraTarget can resolve, so allow it
-        if spellData.selfOnly == nil then
-            print("|cffff6600LibSpellDB WARNING:|r Spell " .. spellID .. " (" .. (spellData.name or spellData.class or "unknown") .. ") has duration but no auraTarget field")
-        end
+        print("|cffff6600LibSpellDB WARNING:|r Spell " .. spellID .. " (" .. (spellData.name or spellData.class or "unknown") .. ") has duration but no auraTarget field")
     end
 
     -- Auto-resolve name if not provided
@@ -377,27 +371,24 @@ end
 
 --[[
     Determine if a spell can only target self (vs. targeting other friendly players)
-    
+
     Used for buff tracking to determine whether to check self or the current friendly target.
-    
-    Priority:
-    1. Explicit selfOnly field in spell data (highest priority)
-    2. triggersAuras[1].onTarget == false (explicit self-only aura)
-    3. Tags indicating spell can target others: HEAL_SINGLE, HOT, HAS_HOT, HEAL_AOE, EXTERNAL_DEFENSIVE
-    4. Default: self-only (for buffs like Recklessness, Shadowform, Stealth)
-    
+    Returns true if auraTarget is "self", "none", or nil (no aura to track).
+
     @param spellID (number) - Spell ID (or spell data table)
     @return (boolean) - true if spell can ONLY target self, false if it can target others
 ]]
 function lib:IsSelfOnly(spellID)
     local auraTarget = self:GetAuraTarget(spellID)
+    -- nil means no data (treat as self-only: no aura to track on other units)
     -- "self" and "none" are self-only (buff on caster, or no unit to track)
     -- "ally", "enemy", and "pet" all target other units
+    if auraTarget == nil then return true end
     return auraTarget == "self" or auraTarget == "none"
 end
 
 --[[
-    Get the aura target type for a spell
+    Get the aura target type for a spell.
 
     Returns where the buff/effect appears for tracking purposes:
     - "self": Buff appears on caster only (Barkskin, Evasion, Ice Block)
@@ -406,16 +397,11 @@ end
     - "pet": Targets pet (Mend Pet)
     - "none": No unit to track - AoE around caster, totems, placed objects
 
-    Priority:
-    1. Explicit auraTarget field
-    2. Legacy selfOnly field (converted to "self"/"ally")
-    3. triggersAuras onTarget = false -> "self"
-    4. Tags indicating spell can target others -> "ally"
-    5. Tags indicating spell applies enemy debuff -> "enemy"
-    6. Default: "self"
+    Returns nil if the spell has no data in the database (unknown spell ID).
+    All registered spells with duration > 0 are required to have an explicit auraTarget field.
 
     @param spellID (number) - Spell ID (or spell data table)
-    @return (string) - "self", "ally", "enemy", "pet", or "none"
+    @return (string or nil) - "self", "ally", "enemy", "pet", "none", or nil if no data
 ]]
 function lib:GetAuraTarget(spellID)
     -- Accept either spell ID or spell data table
@@ -426,43 +412,37 @@ function lib:GetAuraTarget(spellID)
         spellData = self:GetSpellInfo(spellID)
     end
 
-    if not spellData then return "self" end  -- Default to self if no data
+    if not spellData then return nil end  -- No data: return nil, callers handle this
 
-    -- Explicit auraTarget field takes precedence
-    if spellData.auraTarget then
-        return spellData.auraTarget
-    end
+    return spellData.auraTarget
+end
 
-    -- Legacy selfOnly field support (convert to auraTarget values)
-    if spellData.selfOnly ~= nil then
-        return spellData.selfOnly and "self" or "ally"
-    end
+--[[
+    Get the aura type (BUFF or DEBUFF) for a spell.
+    Derived from auraTarget: SELF/ALLY/PET → "BUFF", ENEMY → "DEBUFF", NONE/nil → nil.
 
-    -- Check triggersAuras for explicit onTarget = false
-    if spellData.triggersAuras and spellData.triggersAuras[1] then
-        if spellData.triggersAuras[1].onTarget == false then
-            return "self"
-        end
-    end
+    @param spellID (number or table) - Spell ID or spell data table
+    @return (string or nil) - "BUFF", "DEBUFF", or nil
+]]
+function lib:GetAuraType(spellID)
+    local auraTarget = self:GetAuraTarget(spellID)
+    if not auraTarget then return nil end
+    if auraTarget == "enemy" then return "DEBUFF" end
+    if auraTarget == "none" then return nil end
+    return "BUFF"  -- self, ally, pet
+end
 
-    -- Check tags using hash index for O(1) lookup
-    local id = spellData.spellID
-    if id then
-        local tagSet = self.spellIDToTags[id]
-        if tagSet then
-            if tagSet["HEAL_SINGLE"] or tagSet["HOT"] or tagSet["HAS_HOT"]
-               or tagSet["HEAL_AOE"] or tagSet["EXTERNAL_DEFENSIVE"] then
-                return "ally"
-            end
-            if tagSet["DEBUFF"] or tagSet["HAS_DEBUFF"] or tagSet["DOT"]
-               or tagSet["HAS_DOT"] then
-                return "enemy"
-            end
-        end
-    end
+--[[
+    Check if a spell is helpful (targets self or allies, not enemies).
+    Derived from auraTarget: SELF/ALLY/PET/NONE → true, ENEMY → false.
 
-    -- Default: self
-    return "self"
+    @param spellID (number or table) - Spell ID or spell data table
+    @return (boolean) - true if helpful, false if harmful
+]]
+function lib:IsHelpfulSpell(spellID)
+    local auraTarget = self:GetAuraTarget(spellID)
+    if not auraTarget then return true end  -- No aura target = assume helpful (buffs/self)
+    return auraTarget ~= "enemy"
 end
 
 --[[

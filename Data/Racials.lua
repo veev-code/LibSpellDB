@@ -67,7 +67,7 @@ lib:RegisterSpells({
         auraTarget = AT.SELF,
         race = DWARF,
     },
-})
+}, "SHARED")
 
 -------------------------------------------------------------------------------
 -- Offensive Cooldowns (Secondary Row - throughput)
@@ -124,7 +124,7 @@ lib:RegisterSpells({
         auraTarget = AT.SELF,
         race = TROLL,
     },
-})
+}, "SHARED")
 
 -------------------------------------------------------------------------------
 -- CC Abilities / Interrupts (will appear in Utility row)
@@ -185,7 +185,7 @@ lib:RegisterSpells({
         race = BLOODELF,
     },
     -- Paladin Arcane Torrent shares spellID 28730 (mana version) above
-})
+}, "SHARED")
 
 -------------------------------------------------------------------------------
 -- Healing Abilities
@@ -203,7 +203,7 @@ lib:RegisterSpells({
         auraTarget = AT.ALLY,  -- Can target other players
         race = DRAENEI,
     },
-})
+}, "SHARED")
 
 -------------------------------------------------------------------------------
 -- Utility / Situational (not tracked by default)
@@ -243,7 +243,7 @@ lib:RegisterSpells({
         auraTarget = AT.SELF,
         race = UNDEAD,
     },
-})
+}, "SHARED")
 
 -------------------------------------------------------------------------------
 -- PvP Trinkets (no race restriction)
@@ -272,4 +272,4 @@ lib:RegisterSpells({
         tags = {C.CC_BREAK},
         cooldown = 300,
     },
-})
+}, "SHARED")

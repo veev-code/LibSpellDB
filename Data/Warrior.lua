@@ -234,6 +234,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MINOR, C.RESOURCE, C.HAS_BUFF},
         cooldown = 60,
         duration = 10,
+        auraTarget = AT.SELF,
         priority = 7,  -- Resource
         specs = {S.ARMS, S.FURY, S.PROTECTION},
         triggersAuras = {
@@ -405,6 +406,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.ROTATIONAL, C.BUFF, C.HAS_BUFF, C.REACTIVE, C.PVE},
         cooldown = 0,
         duration = 30,
+        auraTarget = AT.SELF,
         priority = 2,
         talent = true,
         ranks = {29801, 30030, 30033},  -- Rank 1, 2, 3

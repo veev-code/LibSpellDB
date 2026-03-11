@@ -54,6 +54,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD, C.CAT_FORM},
         cooldown = 0,
         duration = 3,  -- Stun duration
+        auraTarget = AT.ENEMY,
         ranks = {9005, 9823, 9827, 27006},
         specs = {S.FERAL},
         triggersAuras = {

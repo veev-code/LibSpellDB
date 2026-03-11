@@ -214,7 +214,7 @@ lib.AuraTarget = {
 
 **Required field**: Every spell with `duration > 0` MUST have an explicit `auraTarget` field. This is validated at registration time (`RegisterSpell` warns in debug mode if missing). The field tells consumers which unit to check for the aura — without it, aura tracking silently breaks for debuffs and ally-targeted buffs.
 
-Tag-based inference in `GetAuraTarget()` exists as a legacy fallback but should NOT be relied upon for new spells. Always set `auraTarget` explicitly.
+`GetAuraTarget()` returns the explicit `auraTarget` field directly — no fallback or inference. Returns nil for unknown spells. `class` is also required (asserts on registration).
 
 ## Spec Constants (`lib.Specs`)
 
@@ -255,7 +255,9 @@ BALANCE, FERAL,                 -- Druid (RESTORATION shared)
 - `lib:GetAllSpells()` — Get entire spell database
 
 ### Aura Targeting
-- `lib:GetAuraTarget(spellID)` — Returns "self", "ally", "pet", or "none" (also handles legacy `selfOnly` field conversion)
+- `lib:GetAuraTarget(spellID)` — Returns "self", "ally", "enemy", "pet", "none", or nil (explicit field only, no inference)
+- `lib:GetAuraType(spellID)` — Returns "BUFF", "DEBUFF", or nil (derived from auraTarget)
+- `lib:IsHelpfulSpell(spellID)` — Returns true for self/ally/pet/none, false for enemy
 - `lib:IsSelfOnly(spellID)` — Returns true for "self" or "none"
 - `lib:IsRotational(spellID)` — Check ROTATIONAL tag
 - `lib:IsTimedEffect(spellID)` — Check TIMED_EFFECT tag (cast-and-forget with duration but no trackable buff)

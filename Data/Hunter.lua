@@ -296,6 +296,7 @@ lib:RegisterSpells({
         tags = {C.UTILITY, C.PVE, C.IMPORTANT_EXTERNAL},
         cooldown = 120,
         duration = 30,
+        auraTarget = AT.ALLY,
         priority = 1,
         ranks = {34477, 35079},
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},

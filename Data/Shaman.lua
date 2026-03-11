@@ -107,6 +107,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE_PVP},
         cooldown = 10,  -- 10s with talents in TBC
         duration = 12,
+        auraTarget = AT.ENEMY,
         cooldownPriority = true,  -- Show cooldown first; debuff uptime is less important than CD tracking
         priority = 1,
         talent = true,
