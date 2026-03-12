@@ -1,5 +1,18 @@
 # LibSpellDB Changelog
 
+## [1.0.77] - 2026-03-12
+
+### Added
+- **`reagentItemID` field** — New optional spell data field indicating the item consumed when casting (e.g., Soul Shard 6265, Infernal Stone 5565). Enables consumers to display reagent counts on spell icons.
+- **`GetReagentItemID(spellID)`** — New API function returning the reagent item ID for a spell, or nil.
+
+### Changed
+- **Warlock: Soul Fire** — Now Destruction-only (`specs = {S.DESTRUCTION}`). Long cast time and soul shard cost make it impractical outside Destruction's Ruin talent scaling.
+- **Warlock: Drain Soul, Drain Life, Drain Mana, Rain of Fire, Hellfire** — Tagged as `FILLER`. These are spammable channels/AoE with no cooldown, not worth tracking by default.
+- **Warlock: Inferno** — Changed to `specs = {}` (manual enable only). 1-hour cooldown with Infernal Stone reagent; extremely niche.
+- **Warlock: Pet Summons** (Imp, Voidwalker, Succubus, Felhunter, Felguard) — Tagged `OUT_OF_COMBAT`. 10-second cast time makes these pre-fight preparation. Fel Domination remains visible for Demonology as the in-combat emergency summon.
+- **Warlock: Reagent data** — Added `reagentItemID` to 13 warlock spells: Soul Shard (Soul Fire, Shadowburn, Soulshatter, Enslave Demon, Create Soulstone, Create Healthstone, Ritual of Summoning, Summon Voidwalker/Succubus/Felhunter/Felguard), Infernal Stone (Inferno), Demonic Figurine (Ritual of Doom).
+
 ## [1.0.76] - 2026-03-11
 
 ### Changed

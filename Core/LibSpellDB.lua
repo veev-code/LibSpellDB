@@ -625,6 +625,25 @@ function lib:GetRequiredItemIDs(spellIDOrData)
 end
 
 --[[
+    Get the reagent item ID required to cast a spell (e.g., Soul Shard for warlock spells).
+
+    @param spellID (number|table) - Spell ID or spell data table
+    @return itemID (number or nil) - The required reagent item ID
+]]
+function lib:GetReagentItemID(spellIDOrData)
+    local spellData
+    if type(spellIDOrData) == "table" then
+        spellData = spellIDOrData
+    else
+        spellData = self:GetSpellInfo(spellIDOrData)
+    end
+
+    if not spellData then return nil end
+
+    return spellData.reagentItemID
+end
+
+--[[
     Get the active item cooldown for a spell that tracks cooldowns via items.
     Iterates through the spell's cooldownItemIDs and returns the first active cooldown.
 

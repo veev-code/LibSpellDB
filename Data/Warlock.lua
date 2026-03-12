@@ -100,6 +100,7 @@ lib:RegisterSpells({
         singleTarget = true,
         ranks = {1098, 11725, 11726},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+        reagentItemID = 6265,  -- Soul Shard
     },
 
     -------------------------------------------------------------------------------
@@ -164,6 +165,7 @@ lib:RegisterSpells({
         tags = {C.UTILITY},
         cooldown = 180,
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+        reagentItemID = 6265,  -- Soul Shard
     },
 
     -------------------------------------------------------------------------------
@@ -196,7 +198,8 @@ lib:RegisterSpells({
         cooldown = 3600,
         duration = 300,
         auraTarget = AT.NONE,
-        specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+        specs = {},  -- 1hr CD, requires Infernal Stone reagent; available for manual enable
+        reagentItemID = 5565,  -- Infernal Stone
     },
     {
         spellID = 18540,  -- Ritual of Doom (Summon Doomguard)
@@ -205,6 +208,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MAJOR, C.PET_SUMMON, C.OUT_OF_COMBAT},
         cooldown = 3600,
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+        reagentItemID = 16583,  -- Demonic Figurine
     },
     {
         spellID = 17877,  -- Shadowburn (Destruction talent, execute phase)
@@ -215,6 +219,7 @@ lib:RegisterSpells({
         talent = true,
         ranks = {17877, 18867, 18868, 18869, 18870, 18871, 27263, 30546},
         specs = {S.DESTRUCTION},
+        reagentItemID = 6265,  -- Soul Shard
     },
 
     -------------------------------------------------------------------------------
@@ -355,13 +360,14 @@ lib:RegisterSpells({
         cooldown = 60,
         priority = 10,
         ranks = {6353, 17924, 27211, 30545},
-        specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+        specs = {S.DESTRUCTION},  -- Long cast + shard cost; only Destro uses for Ruin scaling
+        reagentItemID = 6265,  -- Soul Shard
     },
     {
-        spellID = 1120,  -- Drain Soul (execute phase / shard - situational)
+        spellID = 1120,  -- Drain Soul (execute phase / shard generation)
         name = "Drain Soul",
         description = "Drains the soul of the target, causing 55 Shadow damage over 15 sec. If the target dies while being drained, and yields experience or honor, the caster gains a Soul Shard. Soul Shards are required for other spells.",
-        tags = {C.DPS, C.MINOR, C.UTILITY, C.RESOURCE, C.PVE},
+        tags = {C.DPS, C.FILLER, C.RESOURCE, C.PVE},
         cooldown = 0,
         duration = 15,
         auraTarget = AT.ENEMY,
@@ -373,7 +379,7 @@ lib:RegisterSpells({
         spellID = 689,  -- Drain Life (self-sustain - situational)
         name = "Drain Life",
         description = "Transfers 10 health every 1 sec from the target to the caster. Lasts 5 sec.",
-        tags = {C.DPS, C.MINOR, C.HEAL_SINGLE, C.PVP},
+        tags = {C.DPS, C.FILLER, C.HEAL_SINGLE, C.PVP},
         cooldown = 0,
         duration = 5,
         auraTarget = AT.ENEMY,
@@ -396,7 +402,7 @@ lib:RegisterSpells({
         spellID = 5740,  -- Rain of Fire (AoE)
         name = "Rain of Fire",
         description = "Calls down a fiery rain to burn enemies in the area of effect for (44 * 4) Fire damage over 8 sec.",
-        tags = {C.DPS, C.AOE, C.PVE},
+        tags = {C.DPS, C.AOE, C.FILLER, C.PVE},
         cooldown = 0,
         duration = 8,
         auraTarget = AT.NONE,
@@ -408,7 +414,7 @@ lib:RegisterSpells({
         spellID = 1949,  -- Hellfire (AoE)
         name = "Hellfire",
         description = "Ignites the area surrounding the caster, causing 87 Fire damage to himself and 87 Fire damage to all nearby enemies every 1 sec. Lasts 15 sec.",
-        tags = {C.DPS, C.AOE, C.PVE},
+        tags = {C.DPS, C.AOE, C.FILLER, C.PVE},
         cooldown = 0,
         duration = 15,
         auraTarget = AT.NONE,
@@ -420,7 +426,7 @@ lib:RegisterSpells({
         spellID = 5138,  -- Drain Mana (PvP utility)
         name = "Drain Mana",
         description = "Transfers 42 Mana every 1 sec from the target to the caster. Lasts 5 sec.",
-        tags = {C.UTILITY, C.RESOURCE, C.PVP},
+        tags = {C.UTILITY, C.FILLER, C.RESOURCE, C.PVP},
         cooldown = 0,
         duration = 5,
         auraTarget = AT.ENEMY,
@@ -444,7 +450,7 @@ lib:RegisterSpells({
         spellID = 688,  -- Summon Imp
         name = "Summon Imp",
         description = "Summons an Imp under the command of the Warlock.",
-        tags = {C.PET_SUMMON, C.UTILITY},
+        tags = {C.PET_SUMMON, C.UTILITY, C.OUT_OF_COMBAT},
         cooldown = 0,
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
@@ -452,34 +458,38 @@ lib:RegisterSpells({
         spellID = 697,  -- Summon Voidwalker
         name = "Summon Voidwalker",
         description = "Summons a Voidwalker under the command of the Warlock.",
-        tags = {C.PET_SUMMON, C.UTILITY},
+        tags = {C.PET_SUMMON, C.UTILITY, C.OUT_OF_COMBAT},
         cooldown = 0,
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+        reagentItemID = 6265,  -- Soul Shard
     },
     {
         spellID = 712,  -- Summon Succubus
         name = "Summon Succubus",
         description = "Summons a Succubus under the command of the Warlock.",
-        tags = {C.PET_SUMMON, C.UTILITY},
+        tags = {C.PET_SUMMON, C.UTILITY, C.OUT_OF_COMBAT},
         cooldown = 0,
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+        reagentItemID = 6265,  -- Soul Shard
     },
     {
         spellID = 691,  -- Summon Felhunter
         name = "Summon Felhunter",
         description = "Summons a Felhunter under the command of the Warlock.",
-        tags = {C.PET_SUMMON, C.UTILITY},
+        tags = {C.PET_SUMMON, C.UTILITY, C.OUT_OF_COMBAT},
         cooldown = 0,
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+        reagentItemID = 6265,  -- Soul Shard
     },
     {
         spellID = 30146,  -- Summon Felguard (Demonology capstone)
         name = "Summon Felguard",
         description = "Summons a Felguard under the command of the Warlock.",
-        tags = {C.PET_SUMMON, C.UTILITY},
+        tags = {C.PET_SUMMON, C.UTILITY, C.OUT_OF_COMBAT},
         cooldown = 0,
         talent = true,
         specs = {S.DEMONOLOGY},
+        reagentItemID = 6265,  -- Soul Shard
     },
     {
         spellID = 18708,  -- Fel Domination
@@ -508,6 +518,7 @@ lib:RegisterSpells({
         ranks = {693, 20752, 20755, 20756, 20757, 27238},
         appliesBuff = {20707, 20762, 20763, 20764, 20765, 27239},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+        reagentItemID = 6265,  -- Soul Shard
     },
     {
         spellID = 6201,  -- Create Healthstone (Minor)
@@ -527,6 +538,7 @@ lib:RegisterSpells({
         itemCooldown = 120,
         ranks = {5699, 6201, 6202, 11729, 11730, 27230},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+        reagentItemID = 6265,  -- Soul Shard
     },
     {
         spellID = 698,  -- Ritual of Summoning
@@ -535,6 +547,7 @@ lib:RegisterSpells({
         tags = {C.UTILITY, C.OUT_OF_COMBAT},
         cooldown = 0,
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+        reagentItemID = 6265,  -- Soul Shard
     },
     {
         spellID = 126,  -- Eye of Kilrogg
