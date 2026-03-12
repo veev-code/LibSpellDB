@@ -1,5 +1,21 @@
 # LibSpellDB Changelog
 
+## [1.0.78] - 2026-03-12
+
+### Added
+- **`rankReagents` field** — New optional spell data field for spells where different ranks require different reagents (e.g., Rebirth seeds, Gift of the Wild herbs, Prayer of Fortitude candles). Maps rank spell IDs to their reagent item IDs.
+- **`GetAllReagentItemIDs(spellID)`** — New API function returning a deduplicated array of all reagent item IDs across all ranks of a spell, or nil. For single-reagent spells, returns `{itemID}`. For per-rank spells, collects all unique reagent IDs from `rankReagents`.
+
+### Changed
+- **`GetReagentItemID(spellID)`** — Now also checks `rankReagents` when given a specific rank spell ID. Falls back to `reagentItemID` for single-reagent spells.
+- **Comprehensive reagent data** — Added reagent requirements to 15 spells across 6 classes:
+  - **Druid**: Rebirth (`rankReagents` — Maple/Stranglethorn/Ashwood/Ironwood/Hornbeam Seeds), Gift of the Wild (`rankReagents` — Wild Berries, Wild Quillvine)
+  - **Mage**: Slow Fall (Light Feather), Arcane Brilliance (Arcane Powder)
+  - **Priest**: Levitate (Light Feather), Prayer of Fortitude (`rankReagents` — Holy/Sacred Candle), Prayer of Shadow Protection (Sacred Candle), Prayer of Spirit (Sacred Candle)
+  - **Paladin**: Divine Intervention (Symbol of Divinity), Greater Blessings ×6 (Symbol of Kings)
+  - **Rogue**: Blind (Blinding Powder), Vanish (Flash Powder)
+  - **Shaman**: Reincarnation (Ankh), Water Walking (Fish Oil), Water Breathing (Shiny Fish Scales)
+
 ## [1.0.77] - 2026-03-12
 
 ### Added

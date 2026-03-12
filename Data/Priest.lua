@@ -470,6 +470,7 @@ lib:RegisterSpells({
         tags = {C.UTILITY, C.MOVEMENT, C.OUT_OF_COMBAT},
         cooldown = 0,
         duration = 120,
+        reagentItemID = 17056,  -- Light Feather
         auraTarget = AT.ALLY,
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
@@ -497,6 +498,7 @@ lib:RegisterSpells({
         dispelType = "Magic",
         talent = true,
         ranks = {27681, 32999},
+        reagentItemID = 17029,  -- Sacred Candle
         auraTarget = AT.NONE,  -- Raid-wide
         specs = {S.DISCIPLINE},
         buffGroup = "PRIEST_SPIRIT",
@@ -510,6 +512,11 @@ lib:RegisterSpells({
         duration = 3600,
         dispelType = "Magic",
         ranks = {21562, 21564, 25392},
+        rankReagents = {
+            [21562] = 17028,  -- R1: Holy Candle
+            [21564] = 17029,  -- R2: Sacred Candle
+            [25392] = 17029,  -- R3: Sacred Candle
+        },
         auraTarget = AT.NONE,  -- Raid-wide
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
         buffGroup = "PRIEST_FORTITUDE",
@@ -549,6 +556,7 @@ lib:RegisterSpells({
         duration = 1200,
         dispelType = "Magic",
         ranks = {27683, 39374},
+        reagentItemID = 17029,  -- Sacred Candle
         auraTarget = AT.NONE,  -- Raid-wide
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
         buffGroup = "PRIEST_SHADOW_PROT",

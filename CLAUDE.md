@@ -88,6 +88,8 @@ if not lib then return end
     dodgeReactive = 5,                  -- Duration (seconds) of usability window after target dodges (Overpower)
     clearsTotems = true,                -- When cast, destroys all active totems (Totemic Call)
     appliesBuff = {8076, 8162},         -- Buff spell IDs applied to player/party (all ranks, low to high)
+    reagentItemID = 6265,               -- Required reagent item ID (same for all ranks; e.g., Soul Shard)
+    rankReagents = {[20484]=17034},     -- Per-rank reagent item IDs when they differ (e.g., Rebirth seeds)
     cooldownItemIDs = {5232, 16892},    -- Item IDs whose cooldown to check (for spells that create usable items, e.g. Soulstone)
     itemCooldown = 120,                 -- Duration (seconds) of cooldown when a created item is consumed (for consumption detection)
 
@@ -272,6 +274,8 @@ BALANCE, FERAL,                 -- Druid (RESTORATION shared)
 - `lib:GetCooldownItemIDs(spellID)` — Returns array of item IDs for spells with item-based cooldowns, or nil
 - `lib:GetItemCooldown(spellID)` — Queries `GetItemCooldown()` for each item; returns `remaining, duration, startTime` or nil
 - `lib:GetRequiredItemIDs(spellID)` — Returns array of item IDs spell is gated behind (e.g., weapon procs), or nil
+- `lib:GetReagentItemID(spellID)` — Returns reagent item ID for a spell (or specific rank via `rankReagents`), or nil
+- `lib:GetAllReagentItemIDs(spellID)` — Returns deduplicated array of all reagent item IDs across all ranks, or nil
 
 ### Triggered Aura Queries
 - `lib:GetAuraInfo(auraSpellID)` — Get `{sourceSpellID, tags, type, onTarget, duration}`

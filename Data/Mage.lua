@@ -345,6 +345,7 @@ lib:RegisterSpells({
         tags = {C.UTILITY, C.MOVEMENT, C.OUT_OF_COMBAT},
         cooldown = 0,
         duration = 30,
+        reagentItemID = 17056,  -- Light Feather
         auraTarget = AT.ALLY,
         specs = {S.ARCANE, S.FIRE, S.FROST},
     },
@@ -396,6 +397,7 @@ lib:RegisterSpells({
         duration = 3600,
         dispelType = "Magic",
         ranks = {23028, 27127},
+        reagentItemID = 17020,  -- Arcane Powder
         auraTarget = AT.NONE,  -- Raid-wide, no single target
         specs = {S.ARCANE, S.FIRE, S.FROST},
         buffGroup = "MAGE_INTELLECT",

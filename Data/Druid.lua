@@ -272,6 +272,14 @@ lib:RegisterSpells({
         tags = {C.BATTLE_REZ, C.RESURRECT, C.UTILITY},
         cooldown = 1200,
         ranks = {20484, 20739, 20742, 20747, 20748, 26994},
+        rankReagents = {
+            [20484] = 17034,  -- R1: Maple Seed
+            [20739] = 17035,  -- R2: Stranglethorn Seed
+            [20742] = 17036,  -- R3: Ashwood Seed
+            [20747] = 17037,  -- R4: Ironwood Seed
+            [20748] = 17038,  -- R5: Hornbeam Seed
+            [26994] = 17038,  -- R6: Hornbeam Seed
+        },
         specs = {S.BALANCE, S.FERAL, S.RESTORATION},
     },
     {
@@ -626,6 +634,11 @@ lib:RegisterSpells({
         duration = 3600,
         dispelType = "Magic",
         ranks = {21849, 21850, 26991},
+        rankReagents = {
+            [21849] = 17021,  -- R1: Wild Berries
+            [21850] = 17026,  -- R2: Wild Quillvine
+            [26991] = 17026,  -- R3: Wild Quillvine
+        },
         auraTarget = AT.NONE,  -- Raid-wide, no single target
         specs = {S.BALANCE, S.FERAL, S.RESTORATION},
         buffGroup = "DRUID_MOTW",

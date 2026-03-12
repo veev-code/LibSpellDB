@@ -39,6 +39,7 @@ lib:RegisterSpells({
         tags = {C.CC_HARD, C.DISORIENT},
         cooldown = 180,
         duration = 10,
+        reagentItemID = 5530,  -- Blinding Powder
         auraTarget = AT.ENEMY,
         specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
     },
@@ -108,6 +109,7 @@ lib:RegisterSpells({
         tags = {C.DEFENSIVE, C.MAJOR, C.MOVEMENT_ESCAPE, C.STEALTH},
         cooldown = 300,
         ranks = {1856, 1857, 26889},
+        reagentItemID = 5140,  -- Flash Powder
         specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
     },
     {

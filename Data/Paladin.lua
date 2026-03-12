@@ -127,6 +127,7 @@ lib:RegisterSpells({
         cooldown = 3600,
         duration = 180,
         appliesBuff = {19753},
+        reagentItemID = 17033,  -- Symbol of Divinity
         auraTarget = AT.ALLY,
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
@@ -463,6 +464,7 @@ lib:RegisterSpells({
         duration = 1800,
         dispelType = "Magic",
         ranks = {25782, 25916, 27141},
+        reagentItemID = 21177,  -- Symbol of Kings
         auraTarget = AT.NONE,  -- Raid-wide
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
         buffGroup = "PALADIN_BLESSINGS",
@@ -476,6 +478,7 @@ lib:RegisterSpells({
         duration = 1800,
         dispelType = "Magic",
         ranks = {25894, 25918, 27143},
+        reagentItemID = 21177,  -- Symbol of Kings
         auraTarget = AT.NONE,  -- Raid-wide
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
         buffGroup = "PALADIN_BLESSINGS",
@@ -489,6 +492,7 @@ lib:RegisterSpells({
         duration = 1800,
         dispelType = "Magic",
         talent = true,
+        reagentItemID = 21177,  -- Symbol of Kings
         auraTarget = AT.NONE,  -- Raid-wide
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
         buffGroup = "PALADIN_BLESSINGS",
@@ -503,6 +507,7 @@ lib:RegisterSpells({
         dispelType = "Magic",
         talent = true,
         ranks = {25899, 27169},
+        reagentItemID = 21177,  -- Symbol of Kings
         auraTarget = AT.ALLY,
         specs = {S.PROTECTION},
         buffGroup = "PALADIN_BLESSINGS",
@@ -515,6 +520,7 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 1800,
         dispelType = "Magic",
+        reagentItemID = 21177,  -- Symbol of Kings
         auraTarget = AT.NONE,  -- Raid-wide
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
         buffGroup = "PALADIN_BLESSINGS",
@@ -541,6 +547,7 @@ lib:RegisterSpells({
         duration = 1800,
         dispelType = "Magic",
         ranks = {25890, 27145},
+        reagentItemID = 21177,  -- Symbol of Kings
         auraTarget = AT.ALLY,
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
         buffGroup = "PALADIN_BLESSINGS",

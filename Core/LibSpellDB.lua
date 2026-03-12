@@ -640,7 +640,58 @@ function lib:GetReagentItemID(spellIDOrData)
 
     if not spellData then return nil end
 
-    return spellData.reagentItemID
+    -- Single reagent (same for all ranks)
+    if spellData.reagentItemID then
+        return spellData.reagentItemID
+    end
+
+    -- Per-rank reagent: check if the queried ID is a specific rank
+    if spellData.rankReagents and type(spellIDOrData) == "number" then
+        return spellData.rankReagents[spellIDOrData]
+    end
+
+    return nil
+end
+
+--[[
+    Get all unique reagent item IDs for a spell across all of its ranks.
+    Returns a deduplicated array, or nil if no reagents.
+
+    For single-reagent spells (reagentItemID), returns {itemID}.
+    For per-rank spells (rankReagents), returns all unique item IDs.
+
+    @param spellIDOrData (number|table) - Spell ID or spell data table
+    @return itemIDs (table or nil) - Array of unique reagent item IDs
+]]
+function lib:GetAllReagentItemIDs(spellIDOrData)
+    local spellData
+    if type(spellIDOrData) == "table" then
+        spellData = spellIDOrData
+    else
+        spellData = self:GetSpellInfo(spellIDOrData)
+    end
+
+    if not spellData then return nil end
+
+    -- Single reagent (same for all ranks)
+    if spellData.reagentItemID then
+        return {spellData.reagentItemID}
+    end
+
+    -- Per-rank reagents: collect unique item IDs
+    if spellData.rankReagents then
+        local seen = {}
+        local result = {}
+        for _, itemID in pairs(spellData.rankReagents) do
+            if not seen[itemID] then
+                seen[itemID] = true
+                result[#result + 1] = itemID
+            end
+        end
+        if #result > 0 then return result end
+    end
+
+    return nil
 end
 
 --[[

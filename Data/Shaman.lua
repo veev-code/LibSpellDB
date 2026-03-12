@@ -685,6 +685,7 @@ lib:RegisterSpells({
         description = "Allows you to resurrect yourself upon death with 20% health and mana.",
         tags = {C.RESURRECT, C.UTILITY},
         cooldown = 3600,
+        reagentItemID = 17030,  -- Ankh
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
@@ -694,6 +695,7 @@ lib:RegisterSpells({
         tags = {C.UTILITY, C.MOVEMENT, C.OUT_OF_COMBAT, C.LONG_BUFF, C.SITUATIONAL},
         cooldown = 0,
         duration = 600,
+        reagentItemID = 17058,  -- Fish Oil
         auraTarget = AT.ALLY,
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
@@ -704,6 +706,7 @@ lib:RegisterSpells({
         tags = {C.UTILITY, C.OUT_OF_COMBAT, C.LONG_BUFF, C.SITUATIONAL},
         cooldown = 0,
         duration = 600,
+        reagentItemID = 17057,  -- Shiny Fish Scales
         auraTarget = AT.ALLY,
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
