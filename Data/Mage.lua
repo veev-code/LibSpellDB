@@ -90,7 +90,7 @@ lib:RegisterSpells({
         duration = 30,
         ranks = {543, 8457, 8458, 10223, 10225, 27128},
         auraTarget = AT.SELF,
-        specs = {S.ARCANE, S.FIRE, S.FROST},
+        specs = {},
     },
     {
         spellID = 6143,  -- Frost Ward
@@ -101,7 +101,7 @@ lib:RegisterSpells({
         duration = 30,
         ranks = {6143, 8461, 8462, 10177, 28609, 32796},
         auraTarget = AT.SELF,
-        specs = {S.ARCANE, S.FIRE, S.FROST},
+        specs = {},
     },
     {
         spellID = 1463,  -- Mana Shield
@@ -112,7 +112,7 @@ lib:RegisterSpells({
         duration = 60,
         ranks = {1463, 8494, 8495, 10191, 10192, 10193, 27131},
         auraTarget = AT.SELF,
-        specs = {S.ARCANE, S.FIRE, S.FROST},
+        specs = {},
     },
 
     -------------------------------------------------------------------------------

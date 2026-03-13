@@ -1,5 +1,16 @@
 # LibSpellDB Changelog
 
+## [1.0.79] - 2026-03-12
+
+### Changed
+- **Default visibility reduction across 6 classes** — Situational and niche spells are now hidden by default (`specs = {}`) to reduce icon clutter out of the box. All remain available for manual enable via consumer config.
+  - **Druid**: Claw (tagged FILLER, removed ROTATIONAL), Entangling Roots (tagged FILLER)
+  - **Hunter**: Raptor Strike, Mongoose Bite, Scare Beast, Disengage, Flare, Immolation Trap, Explosive Trap (hidden by default); Wing Clip (tagged FILLER)
+  - **Mage**: Fire Ward, Frost Ward, Mana Shield (hidden by default)
+  - **Paladin**: Exorcism, Holy Wrath, Turn Undead, Divine Intervention (hidden by default)
+  - **Rogue**: Distract, Feint, Crippling Poison (hidden by default); Shiv (tagged FILLER)
+  - **Warrior**: Challenging Shout (Protection-only); Heroic Strike, Cleave, Hamstring, Piercing Howl (tagged FILLER)
+
 ## [1.0.78] - 2026-03-12
 
 ### Added

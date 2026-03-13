@@ -293,7 +293,7 @@ lib:RegisterSpells({
         spellID = 5938,  -- Shiv (apply poisons / utility - situational)
         name = "Shiv",
         description = "Performs an instant off-hand weapon attack that automatically applies the poison from your off-hand weapon to the target. Slower weapons require more Energy. Awards 1 combo point.",
-        tags = {C.DPS, C.MINOR, C.UTILITY, C.PVE_PVP},
+        tags = {C.DPS, C.MINOR, C.UTILITY, C.PVE_PVP, C.FILLER},
         cooldown = 0,
         priority = 11,
         specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
@@ -341,7 +341,7 @@ lib:RegisterSpells({
         tags = {C.UTILITY, C.TIMED_EFFECT},
         cooldown = 30,
         duration = 10,
-        specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
+        specs = {},
         auraTarget = AT.NONE,
     },
     {
@@ -351,7 +351,7 @@ lib:RegisterSpells({
         tags = {C.UTILITY},
         cooldown = 10,
         ranks = {1966, 6768, 8637, 11303, 25302, 27448},
-        specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
+        specs = {},
     },
 
     -------------------------------------------------------------------------------
@@ -364,7 +364,7 @@ lib:RegisterSpells({
         duration = 12,
         auraTarget = AT.ENEMY,
         ranks = {3409, 11201},
-        specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
+        specs = {},
     },
 
     -------------------------------------------------------------------------------

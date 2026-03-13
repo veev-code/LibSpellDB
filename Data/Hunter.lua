@@ -87,7 +87,7 @@ lib:RegisterSpells({
         duration = 20,
         auraTarget = AT.ENEMY,
         ranks = {1513, 14326, 14327},
-        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
+        specs = {},
     },
     {
         spellID = 1499,  -- Freezing Trap (the trap itself)
@@ -116,7 +116,7 @@ lib:RegisterSpells({
         spellID = 2974,  -- Wing Clip
         name = "Wing Clip",
         description = "Inflicts 5 damage and reduces the enemy target's movement speed by 50% for 10 sec.",
-        tags = {C.CC_SOFT},
+        tags = {C.CC_SOFT, C.FILLER},
         cooldown = 0,
         duration = 10,
         auraTarget = AT.ENEMY,
@@ -191,7 +191,7 @@ lib:RegisterSpells({
         tags = {C.UTILITY},
         cooldown = 5,
         ranks = {781, 14272, 14273, 27015},
-        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
+        specs = {},
     },
     {
         spellID = 5118,  -- Aspect of the Cheetah
@@ -266,7 +266,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MINOR, C.DEBUFF},
         cooldown = 30,
         ranks = {13795, 14302, 14303, 14304, 14305, 27023},
-        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
+        specs = {},
     },
     {
         spellID = 13813,  -- Explosive Trap
@@ -275,7 +275,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MINOR, C.AOE},
         cooldown = 30,
         ranks = {13813, 14316, 14317, 27025},
-        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
+        specs = {},
     },
     {
         spellID = 13809,  -- Frost Trap
@@ -401,7 +401,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MINOR, C.PVE_PVP, C.SWING_RESET},
         cooldown = 6,
         ranks = {2973, 14260, 14261, 14262, 14263, 14264, 14265, 14266, 27014},
-        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
+        specs = {},
     },
     {
         spellID = 1495,  -- Mongoose Bite
@@ -410,7 +410,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.MINOR, C.REACTIVE, C.PVE_PVP},
         cooldown = 5,
         ranks = {1495, 14269, 14270, 14271, 36916},
-        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
+        specs = {},
     },
 
     -------------------------------------------------------------------------------
@@ -423,7 +423,7 @@ lib:RegisterSpells({
         tags = {C.UTILITY, C.STEALTH_BREAK, C.TIMED_EFFECT},
         cooldown = 20,
         duration = 20,
-        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
+        specs = {},
         auraTarget = AT.NONE,
     },
     {

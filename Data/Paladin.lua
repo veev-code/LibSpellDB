@@ -49,7 +49,7 @@ lib:RegisterSpells({
         auraTarget = AT.ENEMY,
         singleTarget = true,
         ranks = {2878, 5627, 10326},
-        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        specs = {},
     },
 
     -------------------------------------------------------------------------------
@@ -129,7 +129,7 @@ lib:RegisterSpells({
         appliesBuff = {19753},
         reagentItemID = 17033,  -- Symbol of Divinity
         auraTarget = AT.ALLY,
-        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        specs = {},
     },
     {
         spellID = 20216,  -- Divine Favor (throughput CD for healing)
@@ -271,7 +271,7 @@ lib:RegisterSpells({
         cooldown = 15,
         priority = 10,
         ranks = {879, 5614, 5615, 10312, 10313, 10314, 27138, 33632},
-        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        specs = {},
     },
 
     -------------------------------------------------------------------------------
@@ -661,7 +661,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.AOE},
         cooldown = 60,
         ranks = {2812, 10318, 27139},
-        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+        specs = {},
     },
 
     -------------------------------------------------------------------------------

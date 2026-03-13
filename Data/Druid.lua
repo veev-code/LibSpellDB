@@ -72,7 +72,7 @@ lib:RegisterSpells({
         spellID = 339,  -- Entangling Roots
         name = "Entangling Roots",
         description = "Roots the target in place and causes 20 Nature damage over 12 sec. Damage caused may interrupt the effect. Only useable outdoors.",
-        tags = {C.ROOT, C.CC_SOFT},
+        tags = {C.ROOT, C.CC_SOFT, C.FILLER},
         cooldown = 0,
         duration = 27,
         auraTarget = AT.ENEMY,
@@ -444,7 +444,7 @@ lib:RegisterSpells({
         spellID = 27000,  -- Claw (basic cat form attack)
         name = "Claw",
         description = "Claw the enemy, causing 190 additional damage. Awards 1 combo point.",
-        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP, C.CAT_FORM},
+        tags = {C.DPS, C.PVE_PVP, C.CAT_FORM, C.FILLER},
         cooldown = 0,
         priority = 3,
         ranks = {1082, 3029, 5201, 9849, 9850, 27000},
