@@ -765,6 +765,20 @@ lib:RegisterSpells({
             lowPriority = true,  -- PvP-oriented
         },
     },
+    -- Cheating Death (Cheat Death Subtlety talent) - 90% DR proc when near death
+    {
+        spellID = 45182,  -- Cheating Death buff on player
+        name = "Cheating Death",
+        tags = {C.PROC, C.DEFENSIVE, C.DAMAGE_REDUCTION},
+        cooldown = 0,
+        duration = 3,
+        auraTarget = AT.SELF,
+        talent = true,
+        procInfo = {
+            description = "All damage taken reduced by 90% for 3 sec",
+            stacks = false,
+        },
+    },
 }, "ROGUE")
 
 -------------------------------------------------------------------------------
