@@ -1,5 +1,10 @@
 # LibSpellDB Changelog
 
+## [1.0.80] - 2026-03-13
+
+### Added
+- **Cheating Death proc** — Added Subtlety Rogue's Cheating Death buff (45182) to proc tracking. 90% damage reduction for 3 sec when Cheat Death talent triggers.
+
 ## [1.0.79] - 2026-03-12
 
 ### Changed
