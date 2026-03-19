@@ -278,7 +278,7 @@ lib:RegisterSpells({
             [20742] = 17036,  -- R3: Ashwood Seed
             [20747] = 17037,  -- R4: Ironwood Seed
             [20748] = 17038,  -- R5: Hornbeam Seed
-            [26994] = 17038,  -- R6: Hornbeam Seed
+            [26994] = 22147,  -- R6: Flintweed Seed
         },
         specs = {S.BALANCE, S.FERAL, S.RESTORATION},
     },
@@ -636,8 +636,8 @@ lib:RegisterSpells({
         ranks = {21849, 21850, 26991},
         rankReagents = {
             [21849] = 17021,  -- R1: Wild Berries
-            [21850] = 17026,  -- R2: Wild Quillvine
-            [26991] = 17026,  -- R3: Wild Quillvine
+            [21850] = 17026,  -- R2: Wild Thornroot
+            [26991] = 22148,  -- R3: Wild Quillvine
         },
         auraTarget = AT.NONE,  -- Raid-wide, no single target
         specs = {S.BALANCE, S.FERAL, S.RESTORATION},

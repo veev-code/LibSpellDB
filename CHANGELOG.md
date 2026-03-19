@@ -1,5 +1,11 @@
 # LibSpellDB Changelog
 
+## [1.0.83] - 2026-03-18
+
+### Fixed
+- **Rebirth Rank 6 reagent** — Fixed incorrect reagent item ID for Rebirth Rank 6 (spell 26994). Was mapped to Hornbeam Seed (R5's reagent) instead of Flintweed Seed (22147).
+- **Gift of the Wild Rank 3 reagent** — Fixed incorrect reagent item ID for Gift of the Wild Rank 3 (spell 26991). Was mapped to Wild Thornroot (R2's reagent, 17026) instead of Wild Quillvine (22148).
+
 ## [1.0.82] - 2026-03-18
 
 ### Added
