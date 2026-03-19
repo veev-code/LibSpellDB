@@ -1,5 +1,10 @@
 # LibSpellDB Changelog
 
+## [1.0.81] - 2026-03-18
+
+### Added
+- **Shadowstep** — Added Subtlety Rogue's Shadowstep (36554) with gap-close tags, 30s cooldown, and `appliesBuff` mapping to the 20% damage buff (36563).
+
 ## [1.0.80] - 2026-03-13
 
 ### Added

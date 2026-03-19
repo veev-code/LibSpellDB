@@ -205,6 +205,18 @@ lib:RegisterSpells({
     -- Movement
     -------------------------------------------------------------------------------
     {
+        spellID = 36554,  -- Shadowstep
+        name = "Shadowstep",
+        description = "Attempts to step through the shadows and reappear behind your enemy target. The damage of your next ability is increased by 20% and the threat caused is reduced by 50%. Lasts 10 sec.",
+        tags = {C.MOVEMENT, C.MOVEMENT_GAP_CLOSE, C.DPS, C.MINOR, C.HAS_BUFF},
+        cooldown = 30,
+        duration = 10,
+        auraTarget = AT.SELF,
+        appliesBuff = {36563},  -- Shadowstep damage buff (+20% damage, 10 sec)
+        talent = true,
+        specs = {S.SUBTLETY},
+    },
+    {
         spellID = 2983,  -- Sprint
         name = "Sprint",
         description = "Increases the rogue's movement speed by 50% for 15 sec. Does not break stealth.",
