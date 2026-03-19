@@ -100,6 +100,21 @@ lib:RegisterSpells({
     },
 
     -------------------------------------------------------------------------------
+    -- Interrupts
+    -------------------------------------------------------------------------------
+    {
+        spellID = 34490,  -- Silencing Shot
+        name = "Silencing Shot",
+        description = "A shot that deals 50% weapon damage and Silences the target for 3 sec.",
+        tags = {C.INTERRUPT, C.DPS, C.MINOR},
+        cooldown = 20,
+        duration = 3,
+        auraTarget = AT.ENEMY,
+        talent = true,
+        specs = {S.MARKSMANSHIP},
+    },
+
+    -------------------------------------------------------------------------------
     -- Soft CC / Slows
     -------------------------------------------------------------------------------
     {
@@ -411,6 +426,18 @@ lib:RegisterSpells({
         cooldown = 5,
         ranks = {1495, 14269, 14270, 14271, 36916},
         specs = {},
+    },
+    {
+        spellID = 19306,  -- Counterattack
+        name = "Counterattack",
+        description = "A strike that becomes active after parrying an opponent's attack. This attack deals 40 damage and immobilizes the target for 5 sec. Counterattack cannot be blocked, dodged, or parried.",
+        tags = {C.DPS, C.MINOR, C.REACTIVE, C.CC_SOFT, C.ROOT},
+        cooldown = 5,
+        duration = 5,
+        auraTarget = AT.ENEMY,
+        talent = true,
+        ranks = {19306, 20909, 20910, 27067},
+        specs = {S.SURVIVAL},
     },
 
     -------------------------------------------------------------------------------

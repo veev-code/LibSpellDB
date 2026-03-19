@@ -1,5 +1,13 @@
 # LibSpellDB Changelog
 
+## [1.0.82] - 2026-03-18
+
+### Added
+- **Silencing Shot** — Added Marksmanship Hunter's Silencing Shot (34490). Interrupt talent, 20s cooldown, 3s silence debuff.
+- **Counterattack** — Added Survival Hunter's Counterattack (19306). Reactive parry talent, 5s cooldown, 5s root debuff. 4 ranks.
+- **Shadowfury** — Added Destruction Warlock's Shadowfury (30283). AoE stun talent, 20s cooldown, 2s stun. 3 ranks.
+- **Dark Pact** — Added Affliction Warlock's Dark Pact (18220). Pet mana drain talent, no cooldown. 4 ranks.
+
 ## [1.0.81] - 2026-03-18
 
 ### Added

@@ -211,6 +211,18 @@ lib:RegisterSpells({
         reagentItemID = 16583,  -- Demonic Figurine
     },
     {
+        spellID = 30283,  -- Shadowfury (Destruction capstone)
+        name = "Shadowfury",
+        description = "Shadowfury is unleashed, causing 612 to 728 Shadow damage and stunning all enemies within 8 yds for 2 sec.",
+        tags = {C.CC_HARD, C.AOE, C.DPS, C.MINOR},
+        cooldown = 20,
+        duration = 2,
+        auraTarget = AT.ENEMY,
+        talent = true,
+        ranks = {30283, 30413, 30414},
+        specs = {S.DESTRUCTION},
+    },
+    {
         spellID = 17877,  -- Shadowburn (Destruction talent, execute phase)
         name = "Shadowburn",
         description = "Instantly blasts the target for 91 to 104 Shadow damage. If the target dies within 5 sec of Shadowburn, and yields experience or honor, the caster gains a Soul Shard.",
@@ -441,6 +453,16 @@ lib:RegisterSpells({
         cooldown = 0,
         ranks = {1454, 1455, 1456, 11687, 11688, 11689, 27222},
         specs = {},  -- Available for manual enable; not shown by default (no cooldown to track)
+    },
+    {
+        spellID = 18220,  -- Dark Pact (Affliction talent)
+        name = "Dark Pact",
+        description = "Drains 305 of your pet's Mana, returning 100% to you.",
+        tags = {C.RESOURCE},
+        cooldown = 0,
+        talent = true,
+        ranks = {18220, 18937, 18938, 27265},
+        specs = {},  -- Available for manual enable; no cooldown to track
     },
 
     -------------------------------------------------------------------------------
