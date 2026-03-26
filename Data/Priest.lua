@@ -131,7 +131,7 @@ lib:RegisterSpells({
         spellID = 6346,  -- Fear Ward (preventative buff, not reactive CD)
         name = "Fear Ward",
         description = "Wards the friendly target against Fear. The next Fear effect used against the target will fail, using up the ward. Lasts 3 min.",
-        tags = {C.CC_BREAK, C.CC_IMMUNITY, C.HAS_BUFF, C.IMPORTANT_EXTERNAL},
+        tags = {C.CC_BREAK, C.CC_IMMUNITY, C.HAS_BUFF, C.IMPORTANT_EXTERNAL, C.LONG_BUFF},
         cooldown = 180,
         duration = 180,
         auraTarget = AT.ALLY,  -- Can target other players

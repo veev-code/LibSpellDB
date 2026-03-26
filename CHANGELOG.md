@@ -1,5 +1,10 @@
 # LibSpellDB Changelog
 
+## [1.0.84] - 2026-03-26
+
+### Changed
+- **Fear Ward** — Added `LONG_BUFF` tag. Fear Ward has a 3-minute duration matching its 3-minute cooldown, making it appropriate for buff reminder tracking rather than cooldown icon display.
+
 ## [1.0.83] - 2026-03-18
 
 ### Fixed
