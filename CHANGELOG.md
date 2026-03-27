@@ -1,5 +1,12 @@
 # LibSpellDB Changelog
 
+## [1.0.85] - 2026-03-27
+
+### Added
+- **PvP Powerup buffs** — Added 4 battleground/arena pickup buffs: Berserking (24378), Restoration (24379), Speed (23978), Shadow Sight (34709). Tagged `MINOR_EXTERNAL` + `PVP_POWERUP`.
+- **`DRUMS` tag** — New category tag for leatherworking drum buffs. Applied to all 6 existing drum entries.
+- **`PVP_POWERUP` tag** — New category tag for battleground/arena pickup buffs.
+
 ## [1.0.84] - 2026-03-26
 
 ### Changed

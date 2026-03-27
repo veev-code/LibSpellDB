@@ -178,7 +178,9 @@ if not lib then return end
 
 ### External / Cross-Player Tags
 - `IMPORTANT_EXTERNAL` — High-impact buff from another player or shared source (Bloodlust, PI, Innervate)
-- `MINOR_EXTERNAL` — Lower-priority external buff (Drums) — available but not actively tracked by default
+- `MINOR_EXTERNAL` — Lower-priority external buff — available but not actively tracked by default
+- `DRUMS` — Leatherworking drum buffs (party/raid)
+- `PVP_POWERUP` — Battleground/arena pickup buffs (Berserking, Speed, Restoration, Shadow Sight)
 
 ### Equipment Tags
 - `TRINKET` — Trinket proc/on-use effect (used by TrinketTracker for row assignment)

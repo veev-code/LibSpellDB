@@ -138,7 +138,9 @@ lib.Categories = {
 
     -- External / Cross-Player Effects
     IMPORTANT_EXTERNAL  = "IMPORTANT_EXTERNAL",  -- High-impact buff from another player or shared source (Bloodlust, PI, Innervate)
-    MINOR_EXTERNAL      = "MINOR_EXTERNAL",      -- Lower-priority external buff (Drums) — available but not actively tracked by default
+    MINOR_EXTERNAL      = "MINOR_EXTERNAL",      -- Lower-priority external buff — available but not actively tracked by default
+    DRUMS               = "DRUMS",               -- Leatherworking drum buffs (party/raid)
+    PVP_POWERUP         = "PVP_POWERUP",         -- Battleground/arena pickup buffs (Berserking, Speed, etc.)
 
     -- Equipment
     TRINKET             = "TRINKET",             -- Equipped trinket ability (on-use or proc effect)
@@ -351,6 +353,18 @@ lib.CategoryInfo = {
         description = "Lower-priority external buff, available but not tracked by default",
         color = {0.8, 0.7, 0.3},  -- Dim gold
         priority = 60,
+    },
+    [lib.Categories.DRUMS] = {
+        name = "Drums",
+        description = "Leatherworking drum buffs for party or raid",
+        color = {0.8, 0.7, 0.3},  -- Dim gold
+        priority = 59,
+    },
+    [lib.Categories.PVP_POWERUP] = {
+        name = "PvP Powerup",
+        description = "Battleground or arena pickup buff",
+        color = {0.9, 0.3, 0.3},  -- Red
+        priority = 58,
     },
     [lib.Categories.TRINKET] = {
         name = "Trinket",
