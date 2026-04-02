@@ -367,6 +367,8 @@ lib:RegisterSpells({
         description = "A wave of flame radiates outward from the caster, damaging all enemies caught within the blast for 160 to 192 Fire damage, and Dazing them for 6 sec.",
         tags = {C.DPS, C.AOE, C.CC_SOFT, C.KNOCKBACK},
         cooldown = 30,
+        duration = 6,
+        auraTarget = AT.ENEMY,
         talent = true,
         ranks = {11113, 13018, 13019, 13020, 13021, 27133, 33933},
         specs = {S.FIRE},

@@ -296,6 +296,8 @@ lib:RegisterSpells({
         description = "Hurls a holy shield at the enemy, dealing 270 to 330 Holy damage, Dazing them and then jumping to additional nearby enemies. Affects 3 total targets. Lasts 6 sec.",
         tags = {C.TANK, C.ROTATIONAL, C.CC_SOFT, C.PVE},
         cooldown = 30,
+        duration = 6,
+        auraTarget = AT.ENEMY,
         priority = 2,
         talent = true,
         specs = {S.PROTECTION},
@@ -673,6 +675,8 @@ lib:RegisterSpells({
         description = "Come to the defense of a friendly target, commanding up to 3 enemies attacking the target to attack the Paladin instead.",
         tags = {C.TAUNT},
         cooldown = 15,
+        duration = 3,
+        auraTarget = AT.ENEMY,
         specs = {S.PROTECTION},
     },
 

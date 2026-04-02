@@ -525,6 +525,8 @@ lib:RegisterSpells({
         description = "Taunts the target to attack you, but has no effect if the target is already attacking you.",
         tags = {C.TAUNT},
         cooldown = 10,
+        duration = 3,
+        auraTarget = AT.ENEMY,
         specs = {S.PROTECTION},
     },
     {

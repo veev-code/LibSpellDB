@@ -1,5 +1,17 @@
 # LibSpellDB Changelog
 
+## [1.0.87] - 2026-04-01
+
+### Fixed
+- **Taunt (355)** — Added missing `duration = 3` and `auraTarget = AT.ENEMY`. Taunt applies a 3s forced-attack debuff but had no aura data, so consumers couldn't track it.
+- **Growl (6795)** — Same fix as Taunt: added `duration = 3, auraTarget = AT.ENEMY`.
+- **Righteous Defense (31789)** — Same fix as Taunt: added `duration = 3, auraTarget = AT.ENEMY`.
+- **Aimed Shot (19434)** — Added missing `duration = 10, auraTarget = AT.ENEMY` for the 50% healing reduction debuff.
+- **Blast Wave (11113)** — Added missing `duration = 6, auraTarget = AT.ENEMY` for the daze debuff.
+- **Avenger's Shield (31935)** — Added missing `duration = 6, auraTarget = AT.ENEMY` for the daze debuff.
+- **Riposte (14251)** — Added missing `duration = 6, auraTarget = AT.ENEMY` for the disarm debuff.
+- **Ghostly Strike (14278)** — Fixed `auraTarget` from `AT.ENEMY` to `AT.SELF`. The 15% dodge buff applies to the caster, not the target.
+
 ## [1.0.86] - 2026-04-01
 
 ### Changed

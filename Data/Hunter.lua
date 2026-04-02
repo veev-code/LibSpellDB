@@ -400,6 +400,8 @@ lib:RegisterSpells({
         description = "An aimed shot that increases ranged damage by 70 and reduces healing done to that target by 50%. Lasts 10 sec.",
         tags = {C.DPS, C.ROTATIONAL, C.PVE},
         cooldown = 6,
+        duration = 10,
+        auraTarget = AT.ENEMY,
         priority = 8,
         talent = true,
         ranks = {19434, 20900, 20901, 20902, 20903, 20904, 27065, 27632},
