@@ -1,5 +1,12 @@
 # LibSpellDB Changelog
 
+## [1.0.86] - 2026-04-01
+
+### Changed
+- **Warrior Rend** — Removed from Arms spec defaults. Still available for manual enable.
+- **Warrior Slam** — Removed from Arms spec defaults. Still available for manual enable.
+- **Shared cooldown group descriptions** — Shortened to concise labels.
+
 ## [1.0.85] - 2026-03-27
 
 ### Added

@@ -302,7 +302,7 @@ lib:RegisterSpells({
     -- Core Rotation - Arms (Priority: Rend → MS → Overpower → WW → Slam → Execute)
     -------------------------------------------------------------------------------
     {
-        spellID = 772,  -- Rend (apply first for Deep Wounds/Trauma)
+        spellID = 772,  -- Rend
         name = "Rend",
         description = "Wounds the target causing them to bleed for 15 damage plus an additional [0.00743 * 3 * ((Mainhand weapon max base damage + Mainhand weapon min base damage) / 2 + Attack Power / 14 * Mainhand weapon max base speed)] (based on weapon damage) over 9 sec.",
         tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE},
@@ -311,7 +311,7 @@ lib:RegisterSpells({
         auraTarget = AT.ENEMY,
         priority = 1,
         ranks = {772, 6546, 6547, 6548, 11572, 11573, 11574, 25208},
-        specs = {S.ARMS},
+        specs = {},  -- Available but not default for any spec
     },
     {
         spellID = 12294,  -- Mortal Strike (highest damage, use on CD)
@@ -348,14 +348,14 @@ lib:RegisterSpells({
         specs = {S.FURY, S.ARMS},
     },
     {
-        spellID = 1464,  -- Slam (filler between abilities)
+        spellID = 1464,  -- Slam
         name = "Slam",
         description = "Slams the opponent, causing weapon damage plus 32.",
         tags = {C.DPS, C.ROTATIONAL, C.PVE, C.SWING_RESET},
         cooldown = 0,
         priority = 5,
         ranks = {1464, 8820, 11604, 11605, 25241, 25242},
-        specs = {S.ARMS},
+        specs = {},  -- Available but not default for any spec
     },
     {
         spellID = 5308,  -- Execute (sub-20% finisher)

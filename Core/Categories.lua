@@ -389,7 +389,7 @@ lib.CategoryInfo = {
 
 lib.SharedCooldownGroups = {
     WARRIOR_30MIN_CD = {
-        description = "Recklessness, Retaliation, Shield Wall share a 30-minute cooldown",
+        description = "Warrior 30-min cooldowns",
         spells = {1719, 20230, 871},  -- Recklessness, Retaliation, Shield Wall
     },
 }
