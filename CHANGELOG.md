@@ -1,5 +1,10 @@
 # LibSpellDB Changelog
 
+## [1.0.88] - 2026-04-02
+
+### Changed
+- **Aimed Shot (19434)** — Added `cooldownPriority = true`. The 10s healing debuff outlasts the 6s cooldown, so consumers should prioritize cooldown display over debuff tracking (same pattern as Mortal Strike).
+
 ## [1.0.87] - 2026-04-01
 
 ### Fixed

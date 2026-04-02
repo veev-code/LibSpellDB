@@ -402,6 +402,7 @@ lib:RegisterSpells({
         cooldown = 6,
         duration = 10,
         auraTarget = AT.ENEMY,
+        cooldownPriority = true,
         priority = 8,
         talent = true,
         ranks = {19434, 20900, 20901, 20902, 20903, 20904, 27065, 27632},
