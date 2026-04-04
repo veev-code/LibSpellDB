@@ -40,6 +40,12 @@ lib.auraToSource = lib.auraToSource or {}
 -- Trinket database: itemID -> trinketData
 lib.trinkets = lib.trinkets or {}
 
+-- Potion database: itemID -> potionData
+lib.potions = lib.potions or {}
+
+-- Consumable database: itemID -> consumableData (non-potion combat consumables)
+lib.consumables = lib.consumables or {}
+
 -- Game version detection
 lib.gameVersion = lib.gameVersion or "unknown"
 
@@ -1158,4 +1164,96 @@ end
 function lib:GetTrinketInfo(itemID)
     if not itemID then return nil end
     return self.trinkets[itemID]
+end
+
+-------------------------------------------------------------------------------
+-- Potion API
+-------------------------------------------------------------------------------
+
+--- Register a single potion.
+-- @param potionData table with itemID (required) and optional buffSpellID
+-- @return boolean success
+function lib:RegisterPotion(potionData)
+    if not potionData or not potionData.itemID then
+        if self.debugMode then
+            print("|cffff6600LibSpellDB:|r RegisterPotion: missing itemID")
+        end
+        return false
+    end
+    self.potions[potionData.itemID] = potionData
+    return true
+end
+
+--- Register multiple potions.
+-- @param potionList array of potionData tables
+-- @return number count of successfully registered potions
+function lib:RegisterPotions(potionList)
+    if not potionList then return 0 end
+    local count = 0
+    for _, potionData in ipairs(potionList) do
+        if self:RegisterPotion(potionData) then
+            count = count + 1
+        end
+    end
+    return count
+end
+
+--- Get potion data by item ID.
+-- @param itemID number
+-- @return potionData table or nil
+function lib:GetPotionInfo(itemID)
+    if not itemID then return nil end
+    return self.potions[itemID]
+end
+
+--- Get all registered potions.
+-- @return table itemID -> potionData
+function lib:GetAllPotions()
+    return self.potions
+end
+
+-------------------------------------------------------------------------------
+-- Consumable API (non-potion combat consumables: runes, sappers, etc.)
+-------------------------------------------------------------------------------
+
+--- Register a single consumable.
+-- @param consumableData table with itemID (required) and optional buffSpellID
+-- @return boolean success
+function lib:RegisterConsumable(consumableData)
+    if not consumableData or not consumableData.itemID then
+        if self.debugMode then
+            print("|cffff6600LibSpellDB:|r RegisterConsumable: missing itemID")
+        end
+        return false
+    end
+    self.consumables[consumableData.itemID] = consumableData
+    return true
+end
+
+--- Register multiple consumables.
+-- @param consumableList array of consumableData tables
+-- @return number count of successfully registered consumables
+function lib:RegisterConsumables(consumableList)
+    if not consumableList then return 0 end
+    local count = 0
+    for _, data in ipairs(consumableList) do
+        if self:RegisterConsumable(data) then
+            count = count + 1
+        end
+    end
+    return count
+end
+
+--- Get consumable data by item ID.
+-- @param itemID number
+-- @return consumableData table or nil
+function lib:GetConsumableInfo(itemID)
+    if not itemID then return nil end
+    return self.consumables[itemID]
+end
+
+--- Get all registered consumables.
+-- @return table itemID -> consumableData
+function lib:GetAllConsumables()
+    return self.consumables
 end

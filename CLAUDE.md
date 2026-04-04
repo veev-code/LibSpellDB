@@ -26,6 +26,8 @@ LibSpellDB is a shared spell database library for World of Warcraft addon develo
 - `Procs.lua` — Proc buff definitions with `procInfo` metadata
 - `Externals.lua` — Cross-class external buffs: drums, item-based effects (`class = "SHARED"`)
 - `Trinkets.lua` — Trinket proc buff metadata (passive proc trinkets only; on-use auto-detected by consumers)
+- `Potions.lua` — Combat potion metadata (itemID, optional buffSpellID for duration tracking)
+- `Consumables.lua` — Non-potion combat consumable metadata (runes, sappers, Zanza buffs, etc.)
 
 ### Other
 - `Libs/LibStub/LibStub.lua` — LibStub (fetched via `.pkgmeta` external, gitignored)
@@ -246,6 +248,18 @@ BALANCE, FERAL,                 -- Druid (RESTORATION shared)
 - `lib:RegisterTrinket(trinketData)` — Register a single trinket; stored in `lib.trinkets[itemID]`
 - `lib:RegisterTrinkets(trinketList)` — Register multiple trinkets from an array
 - `lib:GetTrinketInfo(itemID)` — Get trinket data table or nil. Returns `{itemID, procBuffID, icd, onUseBuffID, onTarget}`
+
+### Potion Registration & Queries
+- `lib:RegisterPotion(potionData)` — Register a single potion; stored in `lib.potions[itemID]`
+- `lib:RegisterPotions(potionList)` — Register multiple potions from an array
+- `lib:GetPotionInfo(itemID)` — Get potion data table or nil. Returns `{itemID, buffSpellID}`
+- `lib:GetAllPotions()` — Get all registered potions. Returns `lib.potions` (itemID -> potionData)
+
+### Consumable Registration & Queries (non-potion combat consumables)
+- `lib:RegisterConsumable(consumableData)` — Register a single consumable; stored in `lib.consumables[itemID]`
+- `lib:RegisterConsumables(consumableList)` — Register multiple consumables from an array
+- `lib:GetConsumableInfo(itemID)` — Get consumable data table or nil. Returns `{itemID, buffSpellID}`
+- `lib:GetAllConsumables()` — Get all registered consumables. Returns `lib.consumables` (itemID -> consumableData)
 
 ### Spell Queries
 - `lib:GetSpellInfo(spellID)` — Get spell data (handles rank lookup via `rankToCanonical`)

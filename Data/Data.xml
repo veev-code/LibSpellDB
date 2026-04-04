@@ -24,4 +24,10 @@
     <!-- Trinket Proc Data -->
     <Script file="Trinkets.lua"/>
 
+    <!-- Potion Data -->
+    <Script file="Potions.lua"/>
+
+    <!-- Non-Potion Consumable Data -->
+    <Script file="Consumables.lua"/>
+
 </Ui>

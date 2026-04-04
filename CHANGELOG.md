@@ -1,5 +1,14 @@
 # LibSpellDB Changelog
 
+## [1.0.89] - 2026-04-03
+
+### Added
+- **Potion API** — New `RegisterPotion`, `RegisterPotions`, `GetPotionInfo`, `GetAllPotions` for combat potion metadata. Stored in `lib.potions[itemID]`. Schema: `{itemID, buffSpellID?}`.
+- **Consumable API** — New `RegisterConsumable`, `RegisterConsumables`, `GetConsumableInfo`, `GetAllConsumables` for non-potion combat consumables (runes, engineering, etc.). Stored in `lib.consumables[itemID]`. Same schema as potions.
+- **`Data/Potions.lua`** — 30 combat potions: healing, mana, rejuvenation, offensive (Destruction, Haste, Insane Strength, Heroic, Mighty Rage), defensive (FAP, Living Action, LIP, Stoneshield, Ironshield, Flask of Petrification, Purification), and all Greater/Major protection potions.
+- **`Data/Consumables.lua`** — 8 non-potion combat consumables: Dark Rune, Demonic Rune, Thistle Tea, Whipper Root Tuber, Night Dragon's Breath, Goblin Sapper Charge, Dense Dynamite, Juju Flurry.
+- **`GetSpecIcon(class, spec)`** — Returns the talent tree tab icon for any spec via `GetTalentTabInfo`. Used by consumers for spec-labeled UI elements.
+
 ## [1.0.88] - 2026-04-02
 
 ### Changed

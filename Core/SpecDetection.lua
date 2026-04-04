@@ -145,6 +145,28 @@ function lib:GetTalentDistribution()
     return points
 end
 
+-------------------------------------------------------------------------------
+-- Spec Icons (from talent tree tabs)
+-------------------------------------------------------------------------------
+
+--- Get the talent tree icon for a spec.
+-- Uses GetTalentTabInfo to retrieve the canonical talent tree icon.
+-- @param class string Class token (e.g., "WARRIOR")
+-- @param spec string Spec token (e.g., "ARMS")
+-- @return number|nil Icon texture ID
+function lib:GetSpecIcon(class, spec)
+    local classSpecs = self.CLASS_SPECS[class]
+    if not classSpecs then return nil end
+    for tabIndex, specName in ipairs(classSpecs) do
+        if specName == spec then
+            -- GetTalentTabInfo returns: id, name, description, iconTexture, ...
+            local _, _, _, iconTexture = GetTalentTabInfo(tabIndex)
+            return iconTexture
+        end
+    end
+    return nil
+end
+
 -- Signature spells that indicate a specific spec (deep talents/trained abilities)
 lib.SIGNATURE_SPELLS = {
     WARRIOR = {
