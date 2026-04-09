@@ -1,5 +1,10 @@
 # LibSpellDB Changelog
 
+## [1.0.91] - 2026-04-09
+
+### Added
+- **Mage: Ice Block lockout** — Added `targetLockoutDebuff = 41425` (Hypothermia) to Ice Block. Consumers can now show the 30s Hypothermia cooldown as the limiting factor when it outlasts Ice Block's own cooldown.
+
 ## [1.0.90] - 2026-04-09
 
 ### Added

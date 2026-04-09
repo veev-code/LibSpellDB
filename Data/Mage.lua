@@ -68,6 +68,8 @@ lib:RegisterSpells({
         talent = true,
         auraTarget = AT.SELF,
         specs = {S.FROST},
+        -- Hypothermia debuff prevents recasting for 30 sec
+        targetLockoutDebuff = 41425,
     },
     {
         spellID = 11426,  -- Ice Barrier
