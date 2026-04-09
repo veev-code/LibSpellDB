@@ -546,7 +546,7 @@ lib:RegisterSpells({
         spellID = 6201,  -- Create Healthstone (Minor)
         name = "Create Healthstone",
         description = "Creates a Healthstone that can be used instantly to restore health.",
-        tags = {C.PERSONAL_DEFENSIVE, C.UTILITY},
+        tags = {C.PERSONAL_DEFENSIVE, C.UTILITY, C.CREATES_CONSUMABLE},
         cooldown = 0,
         auraTarget = AT.NONE,
         cooldownItemIDs = {

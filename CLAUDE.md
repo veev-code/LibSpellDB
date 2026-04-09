@@ -171,6 +171,9 @@ if not lib then return end
 ### Timed Effect Tags
 - `TIMED_EFFECT` — Cast-and-forget spell with a fixed-duration effect but no trackable buff/debuff (Flamestrike ground fire, Distract, Consecration). Consumers start a countdown timer on SPELL_CAST_SUCCEEDED using the spell's `duration` field.
 
+### Created Consumable Tags
+- `CREATES_CONSUMABLE` — Spell crafts a usable item the player should restock when missing (Conjure Mana Gem ranks, Create Healthstone). Pair with `cooldownItemIDs` listing the items the spell can create. Consumers query `GetCreatedItemCount(spellID)` to detect empty stock and produce restock reminders. Reagent gating (e.g., Soul Shard for Healthstone) is handled naturally by `IsUsableSpell` on the consumer side.
+
 ### Effect Tags
 - `PROC`, `REACTIVE` — Proc-based / conditional abilities (Execute, Overpower, Revenge)
 - `HAS_BUFF`, `HAS_DEBUFF`, `HAS_HOT`, `HAS_DOT` — Spell applies an effect
@@ -289,6 +292,7 @@ BALANCE, FERAL,                 -- Druid (RESTORATION shared)
 ### Item Cooldowns & Requirements
 - `lib:GetCooldownItemIDs(spellID)` — Returns array of item IDs for spells with item-based cooldowns, or nil
 - `lib:GetItemCooldown(spellID)` — Queries `GetItemCooldown()` for each item; returns `remaining, duration, startTime` or nil
+- `lib:GetCreatedItemCount(spellID)` — For `CREATES_CONSUMABLE` spells, sums `GetItemCount()` across all `cooldownItemIDs`. Returns total bag count, or nil if the spell has no created items.
 - `lib:GetRequiredItemIDs(spellID)` — Returns array of item IDs spell is gated behind (e.g., weapon procs), or nil
 - `lib:GetReagentItemID(spellID)` — Returns reagent item ID for a spell (or specific rank via `rankReagents`), or nil
 - `lib:GetAllReagentItemIDs(spellID)` — Returns deduplicated array of all reagent item IDs across all ranks, or nil

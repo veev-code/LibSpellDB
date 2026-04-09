@@ -148,6 +148,9 @@ lib.Categories = {
     -- Timed Effects
     TIMED_EFFECT        = "TIMED_EFFECT",        -- Timed effect with no trackable buff (Flamestrike ground fire, Distract, Consecration)
 
+    -- Created Consumables
+    CREATES_CONSUMABLE  = "CREATES_CONSUMABLE",  -- Spell creates a usable item player should restock when missing (Conjure Mana Gem, Create Healthstone). Pair with cooldownItemIDs.
+
     -- Spell Effects (describes what the spell applies)
     HAS_BUFF            = "HAS_BUFF",            -- Applies a buff (same ID as spell unless appliesAura set)
     HAS_DEBUFF          = "HAS_DEBUFF",          -- Applies a debuff on target

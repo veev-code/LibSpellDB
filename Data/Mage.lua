@@ -483,4 +483,61 @@ lib:RegisterSpells({
         buffGroup = "MAGE_MAGIC_MODIFIER",
     },
 
+    -------------------------------------------------------------------------------
+    -- Conjured Mana Gems
+    -- Each rank is a separate entry: in TBC mages can carry one of every rank
+    -- simultaneously (all share a 2-min cooldown), so each gem produces its own
+    -- restock reminder when missing from bags.
+    -------------------------------------------------------------------------------
+    {
+        spellID = 759,  -- Conjure Mana Agate
+        name = "Conjure Mana Agate",
+        description = "Conjures a Mana Agate which can be used to instantly restore mana.",
+        tags = {C.UTILITY, C.OUT_OF_COMBAT, C.CREATES_CONSUMABLE},
+        cooldown = 0,
+        cooldownItemIDs = {5514},  -- Mana Agate
+        requiredLevel = 28,
+        specs = {S.ARCANE, S.FIRE, S.FROST},
+    },
+    {
+        spellID = 3552,  -- Conjure Mana Jade
+        name = "Conjure Mana Jade",
+        description = "Conjures a Mana Jade which can be used to instantly restore mana.",
+        tags = {C.UTILITY, C.OUT_OF_COMBAT, C.CREATES_CONSUMABLE},
+        cooldown = 0,
+        cooldownItemIDs = {5513},  -- Mana Jade
+        requiredLevel = 38,
+        specs = {S.ARCANE, S.FIRE, S.FROST},
+    },
+    {
+        spellID = 10053,  -- Conjure Mana Citrine
+        name = "Conjure Mana Citrine",
+        description = "Conjures a Mana Citrine which can be used to instantly restore mana.",
+        tags = {C.UTILITY, C.OUT_OF_COMBAT, C.CREATES_CONSUMABLE},
+        cooldown = 0,
+        cooldownItemIDs = {8007},  -- Mana Citrine
+        requiredLevel = 48,
+        specs = {S.ARCANE, S.FIRE, S.FROST},
+    },
+    {
+        spellID = 10054,  -- Conjure Mana Ruby
+        name = "Conjure Mana Ruby",
+        description = "Conjures a Mana Ruby which can be used to instantly restore mana.",
+        tags = {C.UTILITY, C.OUT_OF_COMBAT, C.CREATES_CONSUMABLE},
+        cooldown = 0,
+        cooldownItemIDs = {8008},  -- Mana Ruby
+        requiredLevel = 58,
+        specs = {S.ARCANE, S.FIRE, S.FROST},
+    },
+    {
+        spellID = 27101,  -- Conjure Mana Emerald (TBC)
+        name = "Conjure Mana Emerald",
+        description = "Conjures a Mana Emerald which can be used to instantly restore mana. Has 3 charges.",
+        tags = {C.UTILITY, C.OUT_OF_COMBAT, C.CREATES_CONSUMABLE},
+        cooldown = 0,
+        cooldownItemIDs = {22044},  -- Mana Emerald
+        requiredLevel = 68,
+        specs = {S.ARCANE, S.FIRE, S.FROST},
+    },
+
 }, "MAGE")

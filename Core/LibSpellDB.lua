@@ -611,6 +611,29 @@ function lib:GetCooldownItemIDs(spellID)
 end
 
 --[[
+    Sum the player's bag count of all items created by a CREATES_CONSUMABLE spell.
+    For Conjure Mana Ruby this returns the number of Mana Rubies in bags; for
+    Create Healthstone it returns the total Healthstone count across all ranks.
+
+    @param spellID (number|table) - Spell ID or spell data table
+    @return count (number or nil) - Total bag count, or nil if spell has no created items
+]]
+function lib:GetCreatedItemCount(spellID)
+    local itemIDs = self:GetCooldownItemIDs(spellID)
+    if not itemIDs then return nil end
+
+    local GetItemCount = _G.GetItemCount
+    if not GetItemCount then return nil end
+
+    local total = 0
+    for _, itemID in ipairs(itemIDs) do
+        total = total + (GetItemCount(itemID) or 0)
+        if total > 0 then return total end
+    end
+    return total
+end
+
+--[[
     Get required equipped item IDs for a spell.
     Some spells (e.g., weapon procs) are only relevant when specific items are equipped.
 

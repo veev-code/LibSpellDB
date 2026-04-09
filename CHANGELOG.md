@@ -1,5 +1,15 @@
 # LibSpellDB Changelog
 
+## [1.0.90] - 2026-04-09
+
+### Added
+- **`CREATES_CONSUMABLE` tag** — Marks spells that craft a usable item the player should restock when missing (Conjure Mana Gem, Create Healthstone). Pair with `cooldownItemIDs` so consumers know which items to scan.
+- **`GetCreatedItemCount(spellID)`** — Sums the player's bag count across all `cooldownItemIDs` for a `CREATES_CONSUMABLE` spell. Used by reminder consumers to detect when stock is empty.
+- **Conjure Mana Gem (Mage)** — All five TBC ranks added as separate entries (Agate 759, Jade 3552, Citrine 10053, Ruby 10054, Emerald 27101), each tagged `CREATES_CONSUMABLE` with its own gem item ID. In TBC mages can carry one of every rank simultaneously, so each is its own restock entry.
+
+### Changed
+- **Create Healthstone (6201)** — Now tagged `CREATES_CONSUMABLE`. Consumers can produce a restock reminder when no Healthstone is in bags; reagent (Soul Shard) gating is handled naturally by `IsUsableSpell`.
+
 ## [1.0.89] - 2026-04-03
 
 ### Added
