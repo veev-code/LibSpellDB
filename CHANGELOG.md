@@ -1,5 +1,12 @@
 # LibSpellDB Changelog
 
+## [1.0.92] - 2026-04-09
+
+### Added
+- **`cooldownResetBy` field** — New optional spell data field indicating a spell that can reset this spell's cooldown (e.g., Cold Snap for Ice Block). Consumers use this to determine when a lockout debuff is the real bottleneck for availability.
+- **`GetCooldownResetBy(spellID)`** — Returns the reset spell ID for a given spell, or nil.
+- **Mage: Ice Block `cooldownResetBy`** — Ice Block now declares `cooldownResetBy = 11958` (Cold Snap), enabling consumers to show the Hypothermia lockout as the limiting factor when Cold Snap could reset Ice Block's cooldown.
+
 ## [1.0.91] - 2026-04-09
 
 ### Added

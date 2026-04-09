@@ -70,6 +70,7 @@ lib:RegisterSpells({
         specs = {S.FROST},
         -- Hypothermia debuff prevents recasting for 30 sec
         targetLockoutDebuff = 41425,
+        cooldownResetBy = 11958,  -- Cold Snap resets Frost spell cooldowns
     },
     {
         spellID = 11426,  -- Ice Barrier

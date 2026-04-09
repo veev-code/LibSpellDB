@@ -83,6 +83,7 @@ if not lib then return end
     cooldownPriority = true,            -- Show cooldown/prediction first, then aura when ready
     -- consumesAllResource: REMOVED — use CONSUMES_ALL_RESOURCE tag instead
     targetLockoutDebuff = 6788,         -- Debuff that blocks re-casting (e.g. Weakened Soul)
+    cooldownResetBy = 11958,            -- Spell that can reset this spell's CD (e.g. Cold Snap for Ice Block)
     singleTarget = true,                -- Only one instance can be active at a time (Polymorph, Prayer of Mending)
     sharedAura = true,                  -- Aura shared across all players; any player can apply/refresh (Thunder Clap, Sunder, Faerie Fire)
     reactiveWindow = 20,                -- Duration (seconds) of usability window for REACTIVE spells
@@ -326,6 +327,7 @@ BALANCE, FERAL,                 -- Druid (RESTORATION shared)
 - `lib:GetProcInfo(spellID)` — Proc metadata for a spell
 - `lib:GetReactiveWindow(spellID)` — Duration of usability window for reactive spells, or nil
 - `lib:GetDodgeReactive(spellID)` — Duration of usability window after target dodges (e.g., Overpower), or nil
+- `lib:GetCooldownResetBy(spellID)` — Spell ID that can reset this spell's cooldown (e.g., Cold Snap for Ice Block), or nil
 
 ### Shared Cooldowns
 - `lib:GetSharedCooldownGroup(spellID)` — Group name + info

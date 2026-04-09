@@ -556,6 +556,32 @@ function lib:IsSharedAura(spellID)
 end
 
 --[[
+    Get the spell ID that can reset this spell's cooldown.
+
+    Used for lockout display logic: when a spell has both a targetLockoutDebuff and
+    a cooldownResetBy spell, the lockout should display when the debuff duration exceeds
+    the effective time-to-availability (min of own CD, reset spell's CD).
+
+    Example: Ice Block (cooldownResetBy = Cold Snap). Hypothermia lockout should display
+    when its remaining duration exceeds Cold Snap's remaining cooldown.
+
+    @param spellID (number|table) - Spell ID or spell data table
+    @return (number or nil) - Spell ID of the reset spell, or nil
+]]
+function lib:GetCooldownResetBy(spellID)
+    local spellData
+    if type(spellID) == "table" then
+        spellData = spellID
+    else
+        spellData = self:GetSpellInfo(spellID)
+    end
+
+    if not spellData then return nil end
+
+    return spellData.cooldownResetBy
+end
+
+--[[
     Get the shapeshift form type for a spell (e.g., "BEAR", "CAT", "MOONKIN").
 
     @param spellID (number|table) - Spell ID or spell data table
