@@ -1134,35 +1134,39 @@ end
     @param spellID (number) - Base spell ID or any rank ID
     @return (number) - Spell ID of highest known rank, or input ID if none found
 ]]
+-- IsSpellKnown can return false for talent-learned spells in Anniversary Edition;
+-- IsPlayerSpell is a reliable fallback.
+function lib:PlayerKnowsSpell(spellID)
+    return (IsSpellKnown and IsSpellKnown(spellID)) or (IsPlayerSpell and IsPlayerSpell(spellID)) or false
+end
+
 function lib:GetHighestKnownRank(spellID)
     local canonicalID = self.rankToCanonical[spellID] or spellID
     local spellData = self.spells[canonicalID]
-    
+
     if not spellData or not spellData.ranks then
-        -- No rank data, check if the spell is known
-        if IsSpellKnown and IsSpellKnown(canonicalID) then
+        if self:PlayerKnowsSpell(canonicalID) then
             return canonicalID
         end
         return spellID
     end
-    
+
     -- Check ranks from highest to lowest (ranks array is ordered low to high)
     local highestKnown = nil
     for i = #spellData.ranks, 1, -1 do
         local rankID = spellData.ranks[i]
-        if IsSpellKnown and IsSpellKnown(rankID) then
+        if self:PlayerKnowsSpell(rankID) then
             highestKnown = rankID
             break
         end
     end
-    
-    -- If no ranks known, check if base spell is known
+
     if not highestKnown then
-        if IsSpellKnown and IsSpellKnown(canonicalID) then
+        if self:PlayerKnowsSpell(canonicalID) then
             highestKnown = canonicalID
         end
     end
-    
+
     return highestKnown or spellID
 end
 

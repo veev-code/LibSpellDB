@@ -483,7 +483,7 @@ lib:RegisterSpells({
         duration = 1800,
         dispelType = "Magic",
         talent = true,
-        ranks = {14752, 14818, 14819, 27841},
+        ranks = {14752, 14818, 14819, 25312, 27841},
         auraTarget = AT.ALLY,
         specs = {S.DISCIPLINE},
         buffGroup = "PRIEST_SPIRIT",
@@ -497,7 +497,7 @@ lib:RegisterSpells({
         duration = 3600,
         dispelType = "Magic",
         talent = true,
-        ranks = {27681, 32999},
+        ranks = {27681},
         reagentItemID = 17029,  -- Sacred Candle
         auraTarget = AT.NONE,  -- Raid-wide
         specs = {S.DISCIPLINE},

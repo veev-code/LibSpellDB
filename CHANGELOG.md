@@ -1,5 +1,14 @@
 # LibSpellDB Changelog
 
+## [1.0.93] - 2026-04-27
+
+### Added
+- **`PlayerKnowsSpell(spellID)`** — New API that checks both `IsSpellKnown` and `IsPlayerSpell`. Works around an Anniversary Edition quirk where `IsSpellKnown` returns false for talent-learned spells. `GetHighestKnownRank` now uses this internally for reliable rank detection.
+
+### Fixed
+- **Priest: Divine Spirit missing Rank 5** — Added spell ID 25312 (Rank 5) to the ranks array. Without it, `GetHighestKnownRank` could not find the player's known rank, causing dependent features (e.g., buff reminders) to silently fail.
+- **Priest: Prayer of Spirit bogus rank** — Removed incorrect spell ID 32999 from Prayer of Spirit's ranks. This ID belongs to a different spell and caused false positives in `IsSpellKnown` checks, leading the equivalent group logic to select Prayer of Spirit over Divine Spirit, then failing the usability check when reagents were missing.
+
 ## [1.0.92] - 2026-04-09
 
 ### Added
