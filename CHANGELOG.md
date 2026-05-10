@@ -1,5 +1,11 @@
 # LibSpellDB Changelog
 
+## [1.0.94] - 2026-05-09
+
+### Added
+- **`defaultTrackTarget` field** — New optional spell data field (string: `"raid"`, `"party"`, or `"player"`) that lets a spell declare its preferred buff-reminder tracking scope. Useful for ally-only buffs where player-self tracking is meaningless — e.g., Soulstone, where the buff can only land on one raid member at a time.
+- **Warlock: Create Soulstone (693)** — Now tagged `LONG_BUFF` and declares `defaultTrackTarget = "raid"`. Consumers can drive buff-reminder UI from this without requiring per-spell hardcoding.
+
 ## [1.0.93] - 2026-04-27
 
 ### Added

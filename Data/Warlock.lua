@@ -530,7 +530,7 @@ lib:RegisterSpells({
         spellID = 693,  -- Create Soulstone
         name = "Create Soulstone",
         description = "Creates a Soulstone. The Soulstone can be used to store the soul of a friendly target. If the target dies while his soul is stored, he will be able to resurrect.",
-        tags = {C.RESURRECT, C.BATTLE_REZ, C.UTILITY, C.HAS_BUFF},
+        tags = {C.RESURRECT, C.BATTLE_REZ, C.UTILITY, C.HAS_BUFF, C.LONG_BUFF},
         cooldown = 0,
         duration = 1800,
         auraTarget = AT.ALLY,
@@ -541,6 +541,7 @@ lib:RegisterSpells({
         appliesBuff = {20707, 20762, 20763, 20764, 20765, 27239},
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
         reagentItemID = 6265,  -- Soul Shard
+        defaultTrackTarget = "raid",  -- singleTarget ally buff: raid-wide tracking is the only meaningful default
     },
     {
         spellID = 6201,  -- Create Healthstone (Minor)
