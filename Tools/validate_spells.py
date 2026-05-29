@@ -219,8 +219,31 @@ def parse_spell_blocks(lua_content, filepath):
             brace_depth = 0
 
 
+def strip_version_overrides(block_text):
+    """Remove a versionOverrides = {...} table (balanced braces) before field extraction, so
+    its per-version delta values (spellID/ranks/name/...) aren't mis-parsed as the spell's
+    primary fields. The validator checks the default-version data; per-version overrides are
+    validated at runtime in-game (RegisterSpell + the /vh invalid name-mismatch audit)."""
+    idx = block_text.find("versionOverrides")
+    if idx == -1:
+        return block_text
+    brace_start = block_text.find("{", idx)
+    if brace_start == -1:
+        return block_text
+    depth = 0
+    for i in range(brace_start, len(block_text)):
+        if block_text[i] == "{":
+            depth += 1
+        elif block_text[i] == "}":
+            depth -= 1
+            if depth == 0:
+                return block_text[:idx] + block_text[i + 1:]
+    return block_text
+
+
 def parse_spell_fields(block_text):
     """Parse key-value pairs from a spell definition block."""
+    block_text = strip_version_overrides(block_text)
     fields = {}
 
     # spellID

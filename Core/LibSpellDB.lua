@@ -55,26 +55,48 @@ lib.debugMode = false
 -- Track invalid spells to avoid repeat warnings
 lib.invalidSpellsLogged = lib.invalidSpellsLogged or {}
 
+-- Track reused-ID name mismatches (data name vs client name) for cross-version auditing
+lib.nameMismatches = lib.nameMismatches or {}
+
 -------------------------------------------------------------------------------
 -- Version Detection
 -------------------------------------------------------------------------------
 
 local function DetectGameVersion()
-    local _, _, _, tocVersion = GetBuildInfo()
+    -- Prefer WOW_PROJECT_ID (the ecosystem-standard flavor signal). Comparing a
+    -- numeric project ID against an undefined constant is safe (yields false), so
+    -- the newer constants don't need nil guards.
+    local projectID = WOW_PROJECT_ID
+    if projectID then
+        if projectID == WOW_PROJECT_MAINLINE then
+            return "retail"
+        elseif projectID == WOW_PROJECT_CLASSIC then
+            return "vanilla"  -- Classic Era (also any progression realm still in its vanilla phase)
+        elseif projectID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+            return "tbc"
+        elseif projectID == WOW_PROJECT_WRATH_CLASSIC then
+            return "wrath"
+        elseif projectID == WOW_PROJECT_CATACLYSM_CLASSIC then
+            return "cata"
+        elseif projectID == WOW_PROJECT_MISTS_CLASSIC then
+            return "mists"
+        end
+    end
 
+    -- Fallback for any client predating WOW_PROJECT_ID: interface-number ranges.
+    local _, _, _, tocVersion = GetBuildInfo()
     if tocVersion >= 110000 then
         return "retail"
+    elseif tocVersion >= 50000 and tocVersion < 60000 then
+        return "mists"
     elseif tocVersion >= 40000 and tocVersion < 50000 then
         return "cata"
     elseif tocVersion >= 30000 and tocVersion < 40000 then
         return "wrath"
     elseif tocVersion >= 20000 and tocVersion < 30000 then
         return "tbc"
-    elseif tocVersion >= 11500 and tocVersion < 20000 then
-        -- Anniversary Edition uses 115xx interface numbers
-        return "anniversary"
-    elseif tocVersion >= 11400 and tocVersion < 11500 then
-        return "vanilla"
+    elseif tocVersion >= 11300 and tocVersion < 20000 then
+        return "vanilla"  -- Classic Era (1.13 / 1.14 / 1.15)
     else
         return "unknown"
     end
@@ -114,22 +136,63 @@ function lib:RegisterSpell(spellData)
     
     assert(spellData.class, "LibSpellDB: class is required for spell " .. spellData.spellID .. " (set per-spell or use RegisterSpells with defaultClass)")
 
+    -- Per-version overrides: some spell IDs were reused for *different* spells between
+    -- vanilla and TBC (e.g. 11958 = Ice Block on Classic Era but Cold Snap on TBC). A spell
+    -- may override any of its fields per game version (spellID, ranks, cooldownResetBy, ...),
+    -- or opt out of a version entirely with `false`.
+    if spellData.versionOverrides then
+        local ov = spellData.versionOverrides[self.gameVersion]
+        if ov == false then
+            return false
+        elseif type(ov) == "table" then
+            for k, v in pairs(ov) do
+                spellData[k] = v
+            end
+        end
+    end
+
     local spellID = spellData.spellID
 
-    -- Validate spell exists in game
-    local spellName = C_Spell and C_Spell.GetSpellName and C_Spell.GetSpellName(spellID)
-        or GetSpellInfo and GetSpellInfo(spellID)
+    -- Validate the spell exists in the running client.
+    local spellName = (C_Spell and C_Spell.GetSpellName and C_Spell.GetSpellName(spellID))
+        or (GetSpellInfo and GetSpellInfo(spellID))
+    local resolveID = spellID
+
+    -- If the primary ID is absent but a listed rank exists (e.g. a spell keyed to a TBC
+    -- rank while running on Classic Era), register via the lowest valid rank. The primary
+    -- ID stays the canonical key, so consumer config and cross-rank lookups are unchanged
+    -- on clients where it IS valid.
+    if not spellName and spellData.ranks then
+        for _, rankID in ipairs(spellData.ranks) do
+            local rankName = (C_Spell and C_Spell.GetSpellName and C_Spell.GetSpellName(rankID))
+                or (GetSpellInfo and GetSpellInfo(rankID))
+            if rankName then
+                spellName = rankName
+                resolveID = rankID
+                break
+            end
+        end
+    end
 
     if not spellName then
-        -- Spell doesn't exist in this game version, log warning and skip
+        -- Doesn't exist in this client (and no valid rank); log and skip.
         if not self.invalidSpellsLogged[spellID] then
-            self.invalidSpellsLogged[spellID] = true
-            -- Only print in debug mode or first load
+            self.invalidSpellsLogged[spellID] = (spellData.name or "?") .. " (" .. (spellData.class or "?") .. ")"
             if self.debugMode then
                 print("|cffff9900LibSpellDB:|r Invalid spell ID " .. spellID .. " (" .. (spellData.class or "unknown") .. ") - does not exist in this game version")
             end
         end
         return false
+    end
+
+    -- Reused-ID guard: if the data names a spell but the client's actual name for this ID is
+    -- wholly different (no shared substring), the ID likely maps to a *different* spell on this
+    -- version (e.g. 11958 = Ice Block on Era / Cold Snap on TBC). Record for auditing.
+    if spellData.name and spellName then
+        local a, b = spellData.name:lower(), spellName:lower()
+        if not a:find(b, 1, true) and not b:find(a, 1, true) then
+            self.nameMismatches[spellID] = spellData.name .. " (data) != " .. spellName .. " (client) [" .. (spellData.class or "?") .. "]"
+        end
     end
 
     -- Validate auraTarget is present when duration > 0
@@ -146,9 +209,9 @@ function lib:RegisterSpell(spellData)
     -- Auto-resolve icon if not provided
     if not spellData.icon then
         if C_Spell and C_Spell.GetSpellTexture then
-            spellData.icon = select(2, C_Spell.GetSpellTexture(spellID)) or C_Spell.GetSpellTexture(spellID)
+            spellData.icon = select(2, C_Spell.GetSpellTexture(resolveID)) or C_Spell.GetSpellTexture(resolveID)
         elseif GetSpellInfo then
-            spellData.icon = select(3, GetSpellInfo(spellID))
+            spellData.icon = select(3, GetSpellInfo(resolveID))
         end
     end
 
@@ -974,6 +1037,19 @@ function lib:GetInvalidSpellCount()
     return count
 end
 
+-- Returns the map of spells skipped because their primary spellID does not exist
+-- in the running client (spellID -> "Name (CLASS)" label).
+function lib:GetInvalidSpells()
+    return self.invalidSpellsLogged
+end
+
+-- Returns the map of reused-ID name mismatches (spellID -> "data != client" label) detected
+-- at registration: the spell registered, but the client's name for that ID differs wholly from
+-- the data's — a sign the ID maps to a different spell on this version.
+function lib:GetNameMismatches()
+    return self.nameMismatches
+end
+
 function lib:DumpInvalidSpells()
     local count = self:GetInvalidSpellCount()
     if count == 0 then
@@ -982,8 +1058,8 @@ function lib:DumpInvalidSpells()
     end
 
     print("|cffff9900LibSpellDB:|r " .. count .. " invalid spell IDs detected:")
-    for spellID in pairs(self.invalidSpellsLogged) do
-        print(("  [%d]"):format(spellID))
+    for spellID, label in pairs(self.invalidSpellsLogged) do
+        print(("  [%d] %s"):format(spellID, type(label) == "string" and label or ""))
     end
 end
 

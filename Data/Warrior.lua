@@ -262,7 +262,8 @@ lib:RegisterSpells({
         sharedCooldownGroup = "WARRIOR_30MIN_CD",
     },
     {
-        spellID = 12292,  -- Death Wish
+        spellID = 12292,  -- Death Wish (TBC); Era reuses 12292 for Sweeping Strikes
+        versionOverrides = { vanilla = { spellID = 12328 } },  -- Era Death Wish = 12328
         name = "Death Wish",
         description = "When activated, increases your physical damage by 20% and makes you immune to Fear effects, but increases all damage taken by 5%. Lasts 30 sec.",
         tags = {C.DPS, C.MAJOR, C.HAS_BUFF},
@@ -273,7 +274,8 @@ lib:RegisterSpells({
         specs = {S.FURY, S.ARMS},  -- Fury tree talent, commonly taken by Arms in PvP
     },
     {
-        spellID = 12328,  -- Sweeping Strikes (Fury talent in TBC/Anniversary)
+        spellID = 12328,  -- Sweeping Strikes (TBC Fury talent); Era reuses 12328 for Death Wish
+        versionOverrides = { vanilla = { spellID = 12292, ranks = {12292} } },  -- Era Sweeping Strikes = 12292 (single-rank Arms talent)
         name = "Sweeping Strikes",
         description = "Your next 10 melee attacks strike an additional nearby opponent.",
         tags = {C.DPS, C.MINOR, C.HAS_BUFF},

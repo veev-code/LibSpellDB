@@ -593,8 +593,7 @@ lib:RegisterSpells({
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
-        spellID = 132,  -- Detect Invisibility
-        name = "Detect Invisibility",
+        spellID = 132,  -- Detect Invisibility (Era client: "Detect Lesser Invisibility"); name auto-resolves per version
         description = "Allows the friendly target to detect lesser invisibility for 10 min.",
         tags = {C.UTILITY, C.BUFF, C.OUT_OF_COMBAT, C.LONG_BUFF, C.SITUATIONAL},
         cooldown = 0,

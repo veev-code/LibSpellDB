@@ -1,6 +1,6 @@
 # LibSpellDB - Addon Context
 
-LibSpellDB is a shared spell database library for World of Warcraft addon developers (TBC Classic / Anniversary Edition). It provides a centralized, curated repository of spell data with extensive tagging for categorization, spec detection, rank handling, and proc tracking.
+LibSpellDB is a shared spell database library for World of Warcraft addon developers (Classic Era and TBC / Anniversary Edition). It provides a centralized, curated repository of spell data with extensive tagging for categorization, spec detection, rank handling, and proc tracking.
 
 **LibSpellDB is consumer-agnostic.** It must never reference, depend on, or assume VeevHUD (or any specific addon). It is a general-purpose library that any addon can use. All API design, data structures, and tag semantics should make sense independently of how any particular consumer uses them.
 
@@ -351,9 +351,9 @@ BALANCE, FERAL,                 -- Druid (RESTORATION shared)
 - `lib:GetAllCategories()` — All category constants
 
 ### Utility / Debug
-- `lib:GetGameVersion()` — "tbc", "anniversary", "wrath", "cata", "retail", "vanilla", "unknown"
+- `lib:GetGameVersion()` — "vanilla" (Classic Era), "tbc", "wrath", "cata", "mists", "retail", "unknown" (WOW_PROJECT_ID-based, interface-range fallback)
 - `lib:GetSpellCount()` / `lib:GetClassSpellCount(class)` — Counts
-- `lib:GetInvalidSpellCount()` / `lib:DumpInvalidSpells()` — Invalid spell tracking
+- `lib:GetInvalidSpellCount()` / `lib:GetInvalidSpells()` / `lib:DumpInvalidSpells()` — Invalid spell tracking (IDs pruned because they don't exist in the running client; `GetInvalidSpells` returns the spellID→"Name (CLASS)" map)
 - `lib:SetDebugMode(enabled)` — Toggle debug warnings
 - `lib:DumpSpellsByClass(class)` / `lib:DumpSpellsByTag(tag)` — Print to chat
 
@@ -414,3 +414,14 @@ Spells reference their group via the `buffGroup` field in spell data.
 - Tags are uppercase snake_case strings
 - Spec detection uses `GetTalentInfo()` iteration, falls back to signature spell detection
 - Permissive when spec unknown (shows all class spells)
+
+## Multi-Version Support (Classic Era + TBC)
+
+LibSpellDB ships for **both** Classic Era (interface 115xx, `WOW_PROJECT_CLASSIC`) and TBC/Anniversary (20xxx, `WOW_PROJECT_BURNING_CRUSADE_CLASSIC`) from one codebase — a single comma-separated `## Interface:` line, no per-version files or branches (Bartender4 pattern). CI omits `-g`; the BigWigs packager reads both interface numbers from the TOC and tags both game versions.
+
+- **Self-pruning:** `RegisterSpell` validates each spell via `C_Spell.GetSpellName`/`GetSpellInfo` and silently skips IDs the running client lacks. TBC-only spells/ranks and Blood Elf/Draenei racials therefore vanish automatically on Classic Era — no manual filtering.
+- **`GetGameVersion()`** uses `WOW_PROJECT_ID` (interface-range fallback): "vanilla" for Classic Era, "tbc" for TBC. "anniversary" is NOT a version — it's a season of the Classic-Era client, irrelevant to which spells exist.
+- **Cross-version IDs.** Two mechanisms:
+  - *Rank fallback* (automatic): if a spell's primary `spellID` is absent but a listed `ranks` entry exists, it registers via the lowest valid rank (spells keyed to a TBC rank still work on Classic Era; canonical unchanged). Safe **only** for true ranks — rank IDs are never reused for other spells.
+  - *`versionOverrides = { vanilla = {...} }`* (explicit): for spells whose ID — or other fields — **differ or are reused** across versions. Per game version, give a table of field overrides (`spellID`, `ranks`, `cooldownResetBy`, …) merged onto the spell, or `false` to exclude the spell entirely on that version. **Required** when an ID is reused for a *different* spell. Real cases: `11958` = Ice Block (Era) / Cold Snap (TBC); `12472` = Cold Snap (Era) / Icy Veins (TBC); Warrior `12292`↔`12328` (Death Wish / Sweeping Strikes swap). NEVER put a reused ID in `ranks` — it corrupts the version where the ID means a different spell; use `versionOverrides` (which can replace `ranks` per version too).
+  - *Audit:* on an Era client, `/vh invalid` (VeevHUD → `VeevHUDLog`) dumps both client-pruned spells **and** reused-ID name mismatches (`GetNameMismatches()`: data name vs client name). The mismatch list catches silent wrong-spell registrations that pruning can't.

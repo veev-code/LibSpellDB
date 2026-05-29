@@ -436,10 +436,11 @@ lib:RegisterSpells({
             lowPriority = true,  -- PvP-oriented
         },
     },
-    -- Shadow Weaving (Shadow talent) - stacking shadow damage debuff on target
+    -- Shadow Vulnerability - target debuff applied by the Priest Shadow Weaving talent.
+    -- In-game name is "Shadow Vulnerability" on both TBC and Era (the talent is "Shadow Weaving").
     {
-        spellID = 15258,  -- Shadow Weaving debuff on target (name fallback recommended)
-        name = "Shadow Weaving",
+        spellID = 15258,  -- name fallback recommended
+        name = "Shadow Vulnerability",
         tags = {C.PROC, C.DEBUFF, C.DPS},
         cooldown = 0,
         duration = 15,

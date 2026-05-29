@@ -1,5 +1,22 @@
 # LibSpellDB Changelog
 
+## [1.0.95] - 2026-05-29
+
+### Added
+- **Classic Era support** — The library now targets both Classic Era (1.15) and TBC from a single codebase. The TOC declares both interface versions; spells that don't exist on the running client are pruned automatically at registration.
+- **`versionOverrides` field** — Per-game-version field overrides on a spell (`{ vanilla = { spellID = ..., ranks = {...}, name = ..., cooldownResetBy = ... } }`), or `false` to exclude the spell entirely on a version. Required for spell IDs that were reused for *different* spells across versions — e.g. `11958` is Ice Block on Classic Era but Cold Snap on TBC, and `12472` is Cold Snap on Era but Icy Veins on TBC.
+- **Rank fallback in `RegisterSpell`** — When a spell's primary `spellID` is absent on the running client but a listed `ranks` entry exists, the spell registers via its lowest valid rank (canonical ID unchanged). Spells keyed to a TBC max-rank now resolve correctly on Classic Era.
+- **`GetInvalidSpells()`** — Returns the map of spells pruned because their ID doesn't exist on the running client (`spellID -> "Name (CLASS)"`).
+- **`GetNameMismatches()`** — Returns reused-ID name mismatches detected at registration (the spell registered, but the client's name for that ID differs wholly from the data's), surfacing silent wrong-spell registrations that pruning alone can't catch.
+
+### Changed
+- **`GetGameVersion()` detection** — Now uses `WOW_PROJECT_ID` (with an interface-number fallback) and returns `"vanilla"` for Classic Era. **Breaking:** the `"anniversary"` return value is removed — Anniversary realms run the Classic-Era or TBC client, so they report `"vanilla"`/`"tbc"` like any other realm of that client.
+
+### Fixed
+- **Feral druid abilities and Ice Block dropped on Classic Era** — Shred, Claw, Rake, Faerie Fire (Feral), and Ice Block were keyed to TBC-specific primary spell IDs and silently vanished on Classic Era. Now resolved via rank fallback / `versionOverrides`.
+- **Warrior Death Wish / Sweeping Strikes** — These two spell IDs (`12292`/`12328`) are swapped between Classic Era and TBC; corrected per version so each tracks the right ability.
+- **Shadow Weaving proc** — Renamed to **Shadow Vulnerability** to match the in-game spell name (`15258`) on both versions, fixing name-based proc matching.
+
 ## [1.0.94] - 2026-05-09
 
 ### Added

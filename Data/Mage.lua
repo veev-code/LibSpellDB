@@ -68,6 +68,7 @@ lib:RegisterSpells({
         talent = true,
         auraTarget = AT.SELF,
         specs = {S.FROST},
+        versionOverrides = { vanilla = { spellID = 11958, cooldownResetBy = 12472 } },  -- Era: Ice Block = 11958 (Cold Snap on TBC), Cold Snap = 12472
         -- Hypothermia debuff prevents recasting for 30 sec
         targetLockoutDebuff = 41425,
         cooldownResetBy = 11958,  -- Cold Snap resets Frost spell cooldowns
@@ -153,7 +154,8 @@ lib:RegisterSpells({
         specs = {S.FIRE},
     },
     {
-        spellID = 12472,  -- Icy Veins (TBC)
+        spellID = 12472,  -- Icy Veins (TBC only; 12472 = Cold Snap on Classic Era, so must not register there)
+        versionOverrides = { vanilla = false },  -- exclude on Classic Era (Icy Veins is TBC+; 12472 = Cold Snap there)
         name = "Icy Veins",
         description = "Hastens your spellcasting, increasing spell casting speed by 20% and gives you 100% chance to avoid interruption caused by damage while casting. Lasts 20 sec.",
         tags = {C.DPS, C.MAJOR, C.HAS_BUFF, C.PVE},
@@ -165,6 +167,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 11958,  -- Cold Snap (resets CDs - utility, not pure throughput)
+        versionOverrides = { vanilla = { spellID = 12472 } },  -- TBC Cold Snap = 11958; Era reuses 12472 (Icy Veins on TBC)
         name = "Cold Snap",
         description = "When activated, this spell finishes the cooldown on all Frost spells you recently cast.",
         tags = {C.DPS, C.MAJOR, C.UTILITY, C.PVE_PVP},

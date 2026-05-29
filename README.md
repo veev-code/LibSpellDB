@@ -170,7 +170,7 @@ end
 
 ## Current Coverage
 
-LibSpellDB currently includes comprehensive spell data for all TBC Classic classes. Each class includes rotational abilities, cooldowns, utility, CC, defensives, and more — all properly tagged for flexible querying.
+LibSpellDB includes comprehensive spell data for all classes across **Classic Era and TBC** (Anniversary). Each class includes rotational abilities, cooldowns, utility, CC, defensives, and more — all properly tagged for flexible querying. The same dataset serves both versions: spells that don't exist in the running client are skipped automatically (see below).
 
 ## For Addon Developers
 
