@@ -6,7 +6,7 @@
 ]]
 
 local MAJOR = "LibSpellDB-1.0"
-local lib = LibStub and LibStub:GetLibrary(MAJOR, true)
+local lib = LIBSPELLDB_REGISTRATION  -- set by Core/LibSpellDB.lua only when this copy won LibStub version selection
 if not lib then return end
 
 local C = lib.Categories
@@ -40,7 +40,8 @@ lib:RegisterSpells({
         duration = 50,
         auraTarget = AT.ENEMY,
         singleTarget = true,
-        ranks = {118, 12824, 12825, 12826, 28270, 28271, 28272},
+        ranks = {118, 12824, 12825, 12826},
+        variants = {28270, 28271, 28272},  -- Pig/Turtle variants: cast detection only, never "highest rank"
         specs = {S.ARCANE, S.FIRE, S.FROST},
     },
     {

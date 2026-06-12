@@ -6,7 +6,7 @@
 ]]
 
 local MAJOR = "LibSpellDB-1.0"
-local lib = LibStub and LibStub:GetLibrary(MAJOR, true)
+local lib = LIBSPELLDB_REGISTRATION  -- set by Core/LibSpellDB.lua only when this copy won LibStub version selection
 if not lib then return end
 
 local C = lib.Categories
@@ -313,7 +313,6 @@ lib:RegisterSpells({
         duration = 30,
         auraTarget = AT.ALLY,
         priority = 1,
-        ranks = {34477, 35079},
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
         triggersAuras = {
             { spellID = 35079, tags = {C.BUFF}, type = "BUFF", onTarget = true },  -- Misdirection on target
@@ -398,7 +397,7 @@ lib:RegisterSpells({
         spellID = 19434,  -- Aimed Shot (when procs / opener)
         name = "Aimed Shot",
         description = "An aimed shot that increases ranged damage by 70 and reduces healing done to that target by 50%. Lasts 10 sec.",
-        tags = {C.DPS, C.ROTATIONAL, C.PVE},
+        tags = {C.DPS, C.ROTATIONAL, C.PVE, C.RANGED_RESET},
         cooldown = 6,
         duration = 10,
         auraTarget = AT.ENEMY,

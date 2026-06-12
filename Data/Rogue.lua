@@ -6,7 +6,7 @@
 ]]
 
 local MAJOR = "LibSpellDB-1.0"
-local lib = LibStub and LibStub:GetLibrary(MAJOR, true)
+local lib = LIBSPELLDB_REGISTRATION  -- set by Core/LibSpellDB.lua only when this copy won LibStub version selection
 if not lib then return end
 
 local C = lib.Categories
@@ -52,7 +52,7 @@ lib:RegisterSpells({
         duration = 45,
         auraTarget = AT.ENEMY,
         singleTarget = true,
-        ranks = {2070, 6770, 11297, 51724},
+        ranks = {2070, 6770, 11297},
         specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
     },
     {

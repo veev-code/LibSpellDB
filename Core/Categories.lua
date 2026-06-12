@@ -4,7 +4,7 @@
 ]]
 
 local MAJOR, MINOR = "LibSpellDB-1.0", 1
-local lib = LibStub and LibStub:GetLibrary(MAJOR, true)
+local lib = LIBSPELLDB_REGISTRATION  -- set by Core/LibSpellDB.lua only when this copy won LibStub version selection
 if not lib then return end
 
 -------------------------------------------------------------------------------
@@ -23,10 +23,10 @@ lib.Categories = {
     -------------------------------------------------------------------------------
     -- Usage Pattern Tags (how/when you use the ability)
     -------------------------------------------------------------------------------
-    ROTATIONAL          = "ROTATIONAL",          -- Core rotation, used on cooldown (Primary Row)
-    MAINTENANCE         = "MAINTENANCE",         -- Buff/debuff to keep up (Secondary Row)
-    MINOR               = "MINOR",               -- Cooldown <60s, tactical usage (Secondary Row)
-    MAJOR               = "MAJOR",               -- Cooldown 60s+, save for key moments (Secondary Row)
+    ROTATIONAL          = "ROTATIONAL",          -- Core rotation, used on cooldown
+    MAINTENANCE         = "MAINTENANCE",         -- Buff/debuff to keep up
+    MINOR               = "MINOR",               -- Cooldown <60s, tactical usage
+    MAJOR               = "MAJOR",               -- Cooldown 60s+, save for key moments
     AOE                 = "AOE",                 -- AoE version of ability
 
     -------------------------------------------------------------------------------
@@ -135,6 +135,7 @@ lib.Categories = {
 
     -- Melee Mechanics
     SWING_RESET         = "SWING_RESET",         -- Replaces next white hit with yellow damage, resetting the swing timer (Heroic Strike, Maul, Raptor Strike)
+    RANGED_RESET        = "RANGED_RESET",        -- Cast-time shot that resets the ranged auto-shot timer (Aimed Shot)
 
     -- External / Cross-Player Effects
     IMPORTANT_EXTERNAL  = "IMPORTANT_EXTERNAL",  -- High-impact buff from another player or shared source (Bloodlust, PI, Innervate)
@@ -378,6 +379,12 @@ lib.CategoryInfo = {
     [lib.Categories.SWING_RESET] = {
         name = "Swing Reset",
         description = "Replaces next white hit with yellow damage, resetting the swing timer",
+        color = {0.7, 0.5, 0.3},  -- Brown
+        priority = 80,
+    },
+    [lib.Categories.RANGED_RESET] = {
+        name = "Ranged Reset",
+        description = "Cast-time shot that resets the ranged auto-shot timer",
         color = {0.7, 0.5, 0.3},  -- Brown
         priority = 80,
     },

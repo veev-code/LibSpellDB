@@ -1,5 +1,29 @@
 # LibSpellDB Changelog
 
+## [1.0.96] - 2026-06-11
+
+Full library audit release.
+
+### Fixed
+- **LibStub version selection now actually works** — the MINOR constant had been pinned at 1 since the first release, so whichever copy loaded first won permanently; a stale embedded copy could shadow a newer standalone install (and vice versa), with the loser's data files silently re-registering over the winner's. MINOR is now bumped every release, all secondary files (Categories, SpecDetection, Commands, Data) execute only for the copy that won registration (`LIBSPELLDB_REGISTRATION` hand-off), and upgrading over an older in-place copy wipes all data/indexes before re-registering.
+- **`GetItemCooldown()` returned nil on modern Classic clients** — it read the removed `_G.GetItemCooldown` global; now falls back to `C_Container.GetItemCooldown`. Soulstone/Healthstone item-cooldown queries work again. `GetCreatedItemCount` gained the same future-proofing for `GetItemCount`.
+- **`GetCreatedItemCount()`** now returns the documented total across all created-item ranks instead of the first non-zero count.
+- **Spec detection fallback** — the `GetTalentTabInfo` path read `pointsSpent` from the legacy 3-return signature and could never work on modern clients; both signatures are now handled.
+- **Re-registration index hygiene** — registering an already-registered spell ID now cleans the previous entry's tag/rank/aura index entries instead of leaving stale `spellsByTag`/`auraToSource` ghosts. Cross-class duplicate entries (Mace Stun) keep both classes pointing at one live data table.
+- **Rank data corrections** — removed WotLK-only rank IDs from Commanding Shout (47439/47440) and Sap (51724); removed Misdirection's triggered-buff ID (35079) from its ranks; Polymorph's Pig/Turtle variants no longer win `GetHighestKnownRank` over the top Sheep rank (moved to the new `variants` field).
+
+### Added
+- **`variants` spell field** — same-spell flavor variants (Polymorph: Pig/Turtle) map to the canonical ID for cast/rank resolution without being treated as ranks.
+- **`RANGED_RESET` tag** — cast-time shots that reset the ranged auto-shot timer (Aimed Shot).
+- **`GetSpellData(spellID)`** — alias for `GetSpellInfo`; prefer it in new code to avoid confusion with the WoW global of the same name (which returns a tuple, not a table).
+- **spellData-table support** — `HasTag`, `GetTagsForSpell`, `GetSpellDuration`, `GetAllRankIDs`, and `GetHighestKnownRank` now accept a spellData table like the rest of the API (previously they silently failed on table input).
+- **Rank reused-ID auditing** — rank IDs that exist on the running client but resolve to a wholly different spell name are now recorded in the `GetNameMismatches()` audit, same as primary IDs.
+- `/spelldb version` reports the real library version (was hardcoded "1.0").
+
+### Documentation
+- Query APIs that return live internal tables (`GetAllSpells`, `GetSpellsByClass`, `GetSpellsByTag`, ...) or allocate a fresh table per call (`GetSpellsByTags`, `GetProcs`, ...) are now documented as such.
+- CLAUDE.md documents the MINOR-bump release requirement and the secondary-file registration gating.
+
 ## [1.0.95] - 2026-05-29
 
 ### Added

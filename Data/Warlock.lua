@@ -6,7 +6,7 @@
 ]]
 
 local MAJOR = "LibSpellDB-1.0"
-local lib = LibStub and LibStub:GetLibrary(MAJOR, true)
+local lib = LIBSPELLDB_REGISTRATION  -- set by Core/LibSpellDB.lua only when this copy won LibStub version selection
 if not lib then return end
 
 local C = lib.Categories
@@ -714,7 +714,7 @@ lib:RegisterSpells({
     -- Demonic Sacrifice (21-point Demonology talent)
     -- Casting spell (18788) and its passive buff outcomes.
     -- Buff IDs are not castable spells — detected via talentGate on the BuffGroup.
-    -- The casting spell uses triggersAuras so CooldownIcons can detect active buffs.
+    -- The casting spell uses triggersAuras so consumers can detect active buffs.
     -------------------------------------------------------------------------------
     {
         spellID = 18788,  -- Demonic Sacrifice (casting spell)

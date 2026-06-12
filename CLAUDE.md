@@ -43,11 +43,21 @@ LibStub is fetched via `.pkgmeta` externals at release time (by `BigWigsMods/pac
 
 ## Library Registration
 
-Registered as `"LibSpellDB-1.0"` via LibStub. All core and data files access the library with:
+Registered as `"LibSpellDB-1.0"` via LibStub. **MINOR must be bumped on every
+release** (`Core/LibSpellDB.lua` top) — LibStub can only prefer the newer copy
+when standalone + embedded installs coexist if the number actually increases.
+The release process must include this bump.
+
+`Core/LibSpellDB.lua` sets the global `LIBSPELLDB_REGISTRATION` to the lib when
+THIS copy wins LibStub version selection (nil when it loses). All secondary
+files (Core/Categories.lua, Core/SpecDetection.lua, Core/Commands.lua, Data/*)
+gate on it so a losing copy's data files never re-register over the winner:
 ```lua
-local lib = LibStub and LibStub:GetLibrary("LibSpellDB-1.0", true)
+local lib = LIBSPELLDB_REGISTRATION  -- set by Core/LibSpellDB.lua only when this copy won LibStub version selection
 if not lib then return end
 ```
+When a newer copy upgrades over an older in-place one, the core wipes all data
+and index tables before its data files re-register (no stale entries).
 
 ## Spell Data Structure
 
@@ -72,6 +82,7 @@ if not lib then return end
     priority = 1,                       -- Sort priority within rows
     talent = true,                      -- Requires talent point
     ranks = {100, 101, 102},            -- All rank spell IDs (low to high)
+    variants = {28270, 28271, 28272},   -- Same-spell flavor variants (Polymorph Pig/Turtle): mapped for cast/rank resolution but excluded from GetHighestKnownRank
     specs = {S.ARMS, S.FURY},           -- Spec restrictions (nil = all specs)
     race = "Orc",                       -- Race restriction (racials only)
     dispelType = "Magic",               -- Dispel type of the spell's buff ("Magic", "Curse", etc.)
@@ -181,6 +192,7 @@ if not lib then return end
 
 ### Melee Mechanic Tags
 - `SWING_RESET` — Replaces next white hit with yellow damage, resetting the swing timer (Heroic Strike, Cleave, Slam, Raptor Strike, Maul)
+- `RANGED_RESET` — Cast-time shot that resets the ranged auto-shot timer (Aimed Shot)
 
 ### External / Cross-Player Tags
 - `IMPORTANT_EXTERNAL` — High-impact buff from another player or shared source (Bloodlust, PI, Innervate)
@@ -267,6 +279,7 @@ BALANCE, FERAL,                 -- Druid (RESTORATION shared)
 
 ### Spell Queries
 - `lib:GetSpellInfo(spellID)` — Get spell data (handles rank lookup via `rankToCanonical`)
+- `lib:GetSpellData(spellID)` — Alias for GetSpellInfo; prefer it in new code (avoids confusion with the WoW global of the same name, which returns a tuple)
 - `lib:GetSpellsByClass(class)` — All spells for a class
 - `lib:GetSpellsByTag(tag)` — All spells with a tag
 - `lib:GetSpellsByTags(tags)` — Spells matching ANY tag (union)

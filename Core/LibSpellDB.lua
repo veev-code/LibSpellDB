@@ -15,8 +15,17 @@
         if LibSpellDB:HasTag(6552, "INTERRUPT") then ... end
 ]]
 
-local MAJOR, MINOR = "LibSpellDB-1.0", 1
-local lib, _ = LibStub:NewLibrary(MAJOR, MINOR)
+-- MINOR must increase on every release, or LibStub cannot prefer the newer
+-- copy when both a standalone install and an embedded copy are present.
+local MAJOR, MINOR = "LibSpellDB-1.0", 96
+local lib, oldMinor = LibStub:NewLibrary(MAJOR, MINOR)
+
+-- Hand-off marker for this distribution's secondary files (Core/Categories.lua,
+-- Core/SpecDetection.lua, Core/Commands.lua, Data/*). They execute only when
+-- THIS copy won LibStub version selection — otherwise an older copy's data
+-- files would re-register over the winner's. The global is intentional.
+LIBSPELLDB_REGISTRATION = lib
+
 if not lib then return end
 
 -------------------------------------------------------------------------------
@@ -57,6 +66,23 @@ lib.invalidSpellsLogged = lib.invalidSpellsLogged or {}
 
 -- Track reused-ID name mismatches (data name vs client name) for cross-version auditing
 lib.nameMismatches = lib.nameMismatches or {}
+
+-- Upgrading over an older in-place copy: wipe all data and indexes so this
+-- version's data files re-register cleanly (entries removed between versions
+-- would otherwise linger in the indexes).
+if oldMinor then
+    wipe(lib.spells)
+    wipe(lib.spellsByClass)
+    wipe(lib.spellsByTag)
+    wipe(lib.spellIDToTags)
+    wipe(lib.rankToCanonical)
+    wipe(lib.auraToSource)
+    wipe(lib.trinkets)
+    wipe(lib.potions)
+    wipe(lib.consumables)
+    wipe(lib.invalidSpellsLogged)
+    wipe(lib.nameMismatches)
+end
 
 -------------------------------------------------------------------------------
 -- Version Detection
@@ -131,6 +157,7 @@ lib.gameVersion = DetectGameVersion()
         }
 ]]
 function lib:RegisterSpell(spellData)
+    assert(type(spellData) == "table", "LibSpellDB: RegisterSpell requires a spellData table")
     assert(spellData.spellID, "LibSpellDB: spellID is required")
     assert(spellData.tags and #spellData.tags > 0, "LibSpellDB: tags array is required")
     
@@ -195,6 +222,22 @@ function lib:RegisterSpell(spellData)
         end
     end
 
+    -- Same reused-ID guard for rank IDs: a rank that exists in this client but
+    -- resolves to a wholly different name maps to a different spell here.
+    -- (Ranks that don't exist are expected — cross-version pruning handles them.)
+    if spellData.ranks and spellName then
+        for _, rankID in ipairs(spellData.ranks) do
+            local rankName = (C_Spell and C_Spell.GetSpellName and C_Spell.GetSpellName(rankID))
+                or (GetSpellInfo and GetSpellInfo(rankID))
+            if rankName then
+                local a, b = rankName:lower(), spellName:lower()
+                if not a:find(b, 1, true) and not b:find(a, 1, true) then
+                    self.nameMismatches[rankID] = spellName .. " rank (data) != " .. rankName .. " (client) [" .. (spellData.class or "?") .. "]"
+                end
+            end
+        end
+    end
+
     -- Validate auraTarget is present when duration > 0
     -- Always warn (not debug-only) so developers notice during testing
     if spellData.duration and spellData.duration > 0 and not spellData.auraTarget then
@@ -212,6 +255,49 @@ function lib:RegisterSpell(spellData)
             spellData.icon = select(2, C_Spell.GetSpellTexture(resolveID)) or C_Spell.GetSpellTexture(resolveID)
         elseif GetSpellInfo then
             spellData.icon = select(3, GetSpellInfo(resolveID))
+        end
+    end
+
+    -- Re-registration: clean up the previous registration's index entries so
+    -- stale tags/ranks/auras don't linger. Cross-class duplicate entries (e.g.
+    -- Mace Stun registered for both WARRIOR and ROGUE) are a sanctioned
+    -- pattern: the previous class's index entry is re-pointed at the new data
+    -- table so both classes keep the spell, referencing one live table.
+    local previous = self.spells[spellID]
+    if previous and previous ~= spellData then
+        local prevClass = previous.class
+        if prevClass and prevClass ~= spellData.class and self.spellsByClass[prevClass] then
+            self.spellsByClass[prevClass][spellID] = spellData
+        end
+        local prevTags = self.spellIDToTags[spellID]
+        if prevTags then
+            for tag in pairs(prevTags) do
+                if self.spellsByTag[tag] then
+                    self.spellsByTag[tag][spellID] = nil
+                end
+            end
+        end
+        if previous.ranks then
+            for _, rankID in ipairs(previous.ranks) do
+                if self.rankToCanonical[rankID] == spellID then
+                    self.rankToCanonical[rankID] = nil
+                end
+            end
+        end
+        if previous.variants then
+            for _, variantID in ipairs(previous.variants) do
+                if self.rankToCanonical[variantID] == spellID then
+                    self.rankToCanonical[variantID] = nil
+                end
+            end
+        end
+        if previous.triggersAuras then
+            for _, auraInfo in ipairs(previous.triggersAuras) do
+                local entry = auraInfo.spellID and self.auraToSource[auraInfo.spellID]
+                if entry and entry.sourceSpellID == spellID then
+                    self.auraToSource[auraInfo.spellID] = nil
+                end
+            end
         end
     end
 
@@ -238,6 +324,15 @@ function lib:RegisterSpell(spellData)
         end
     end
     self.rankToCanonical[spellID] = spellID
+
+    -- Variant spell IDs (same spell, different flavor — e.g. Polymorph: Pig).
+    -- Mapped for cast/rank resolution like ranks, but kept OUT of `ranks` so
+    -- they never win GetHighestKnownRank over the true top rank.
+    if spellData.variants then
+        for _, variantID in ipairs(spellData.variants) do
+            self.rankToCanonical[variantID] = spellID
+        end
+    end
 
     -- Handle triggered auras - build reverse index
     if spellData.triggersAuras then
@@ -301,6 +396,14 @@ function lib:GetSpellInfo(spellID)
 end
 
 --[[
+    Alias for GetSpellInfo. Prefer this name in new code — it avoids confusion
+    with the WoW global GetSpellInfo, which returns a tuple rather than a table.
+]]
+function lib:GetSpellData(spellID)
+    return self:GetSpellInfo(spellID)
+end
+
+--[[
     Get the display icon for a spell.
     Returns the icon override if set, or the auto-resolved icon from GetSpellInfo.
 
@@ -323,6 +426,7 @@ end
 
     @param class (string) - Class token (e.g., "WARRIOR")
     @return (table) - Dictionary of spellID -> spellData
+    @note Returns an internal index table — treat as read-only; copy before modifying.
 ]]
 function lib:GetSpellsByClass(class)
     return self.spellsByClass[class] or {}
@@ -333,6 +437,7 @@ end
 
     @param tag (string) - Category tag (e.g., "INTERRUPT")
     @return (table) - Dictionary of spellID -> spellData
+    @note Returns an internal index table — treat as read-only; copy before modifying.
 ]]
 function lib:GetSpellsByTag(tag)
     return self.spellsByTag[tag] or {}
@@ -343,6 +448,7 @@ end
 
     @param tags (table) - Array of tags
     @return (table) - Dictionary of spellID -> spellData
+    @note Allocates a new table per call — cache the result rather than calling per-frame.
 ]]
 function lib:GetSpellsByTags(tags)
     local result = {}
@@ -362,6 +468,7 @@ end
 
     @param tags (table) - Array of tags
     @return (table) - Dictionary of spellID -> spellData
+    @note Allocates a new table per call — cache the result rather than calling per-frame.
 ]]
 function lib:GetSpellsByAllTags(tags)
     if #tags == 0 then return {} end
@@ -399,6 +506,7 @@ end
     @param class (string) - Class token
     @param tag (string) - Category tag
     @return (table) - Dictionary of spellID -> spellData
+    @note Allocates a new table per call — cache the result rather than calling per-frame.
 ]]
 function lib:GetSpellsByClassAndTag(class, tag)
     local result = {}
@@ -422,6 +530,7 @@ end
     @return (boolean)
 ]]
 function lib:HasTag(spellID, tag)
+    if type(spellID) == "table" then spellID = spellID.spellID end
     local canonicalID = self.rankToCanonical[spellID] or spellID
     local tags = self.spellIDToTags[canonicalID]
     return tags and tags[tag] or false
@@ -433,7 +542,9 @@ end
     @param spellID (number) - Spell ID
     @return (table) - Dictionary of tag -> true
 ]]
+-- Note: returns an internal table on hit — treat as read-only.
 function lib:GetTagsForSpell(spellID)
+    if type(spellID) == "table" then spellID = spellID.spellID end
     local canonicalID = self.rankToCanonical[spellID] or spellID
     return self.spellIDToTags[canonicalID] or {}
 end
@@ -532,8 +643,8 @@ end
 
 --[[
     Check if a spell is rotational (core rotation, used frequently)
-    
-    Used by VeevHUD to determine buff tracking behavior:
+
+    Used by consumers to determine buff tracking behavior:
     - ROTATIONAL spells follow target context (check ally if targeting ally)
     - Non-ROTATIONAL spells always track the buff regardless of current target
     
@@ -711,13 +822,12 @@ function lib:GetCreatedItemCount(spellID)
     local itemIDs = self:GetCooldownItemIDs(spellID)
     if not itemIDs then return nil end
 
-    local GetItemCount = _G.GetItemCount
+    local GetItemCount = _G.GetItemCount or (C_Item and C_Item.GetItemCount)
     if not GetItemCount then return nil end
 
     local total = 0
     for _, itemID in ipairs(itemIDs) do
         total = total + (GetItemCount(itemID) or 0)
-        if total > 0 then return total end
     end
     return total
 end
@@ -823,7 +933,9 @@ function lib:GetItemCooldown(spellID)
     local itemIDs = self:GetCooldownItemIDs(spellID)
     if not itemIDs then return nil end
 
-    local GetItemCooldown = _G.GetItemCooldown
+    -- The bare global was removed with the C_Container migration on modern
+    -- Classic clients; fall back to C_Container.GetItemCooldown.
+    local GetItemCooldown = _G.GetItemCooldown or (C_Container and C_Container.GetItemCooldown)
     if not GetItemCooldown then return nil end
 
     local now = GetTime()
@@ -844,6 +956,7 @@ end
     Get all registered spells
 
     @return (table) - Dictionary of spellID -> spellData
+    @note Returns the live internal database — treat as read-only; copy before modifying.
 ]]
 function lib:GetAllSpells()
     return self.spells
@@ -892,6 +1005,7 @@ end
     
     @param auraSpellID (number) - The aura/buff/debuff spell ID
     @return (table) - Array of tags, or empty table if not found
+    @note Returns an internal table on hit — treat as read-only.
 ]]
 function lib:GetAuraTags(auraSpellID)
     local auraInfo = self.auraToSource[auraSpellID]
@@ -1072,6 +1186,7 @@ end
 
     @param class (string) - Class token (e.g., "WARRIOR")
     @return (table) - Array of proc spell data
+    @note Allocates a new array per call — cache the result rather than calling per-frame.
 ]]
 function lib:GetProcs(class)
     local procs = {}
@@ -1162,6 +1277,7 @@ end
     @return (number or nil) - Duration in seconds, or nil if no duration
 ]]
 function lib:GetSpellDuration(spellID)
+    if type(spellID) == "table" then spellID = spellID.spellID end
     local canonicalID = self.rankToCanonical[spellID] or spellID
     local spellData = self.spells[canonicalID]
     if not spellData then return nil end
@@ -1187,6 +1303,7 @@ end
     @return (table) - Set of spell IDs (keys are IDs, values are true)
 ]]
 function lib:GetAllRankIDs(spellID)
+    if type(spellID) == "table" then spellID = spellID.spellID end
     local canonicalID = self.rankToCanonical[spellID] or spellID
     local spellData = self.spells[canonicalID]
     
@@ -1217,6 +1334,7 @@ function lib:PlayerKnowsSpell(spellID)
 end
 
 function lib:GetHighestKnownRank(spellID)
+    if type(spellID) == "table" then spellID = spellID.spellID end
     local canonicalID = self.rankToCanonical[spellID] or spellID
     local spellData = self.spells[canonicalID]
 
@@ -1336,7 +1454,7 @@ function lib:GetPotionInfo(itemID)
 end
 
 --- Get all registered potions.
--- @return table itemID -> potionData
+-- @return table itemID -> potionData (internal table — treat as read-only)
 function lib:GetAllPotions()
     return self.potions
 end
@@ -1382,7 +1500,7 @@ function lib:GetConsumableInfo(itemID)
 end
 
 --- Get all registered consumables.
--- @return table itemID -> consumableData
+-- @return table itemID -> consumableData (internal table — treat as read-only)
 function lib:GetAllConsumables()
     return self.consumables
 end

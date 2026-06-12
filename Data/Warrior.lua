@@ -6,7 +6,7 @@
 ]]
 
 local MAJOR = "LibSpellDB-1.0"
-local lib = LibStub and LibStub:GetLibrary(MAJOR, true)
+local lib = LIBSPELLDB_REGISTRATION  -- set by Core/LibSpellDB.lua only when this copy won LibStub version selection
 if not lib then return end
 
 local C = lib.Categories
@@ -593,7 +593,6 @@ lib:RegisterSpells({
         cooldown = 0,
         duration = 120,
         dispelType = nil,  -- Physical buff, cannot be purged
-        ranks = {469, 47439, 47440},
         auraTarget = AT.NONE,  -- Affects party, no single target
         specs = {S.ARMS, S.FURY, S.PROTECTION},
         buffGroup = "WARRIOR_SHOUTS",

@@ -3,7 +3,7 @@
 ]]
 
 local MAJOR = "LibSpellDB-1.0"
-local lib = LibStub and LibStub:GetLibrary(MAJOR, true)
+local lib = LIBSPELLDB_REGISTRATION  -- set by Core/LibSpellDB.lua only when this copy won LibStub version selection
 if not lib then return end
 
 -------------------------------------------------------------------------------
@@ -111,7 +111,7 @@ SlashCmdList["LIBSPELLDB"] = function(msg)
         for spellID, spellData in pairs(lib:GetAllSpells()) do
             if spellData.duration and spellData.duration > 0 then
                 checked = checked + 1
-                if not spellData.auraTarget and spellData.selfOnly == nil then
+                if not spellData.auraTarget then
                     errors = errors + 1
                     print(("  |cffff6600MISSING auraTarget:|r [%d] %s (%s) duration=%d"):format(
                         spellID, spellData.name or "?", spellData.class or "?", spellData.duration))
@@ -131,7 +131,8 @@ SlashCmdList["LIBSPELLDB"] = function(msg)
         lib:SetDebugMode(not lib.debugMode)
 
     elseif cmd == "version" then
-        print("|cff00ff00LibSpellDB|r Version: 1.0")
+        local _, minor = LibStub:GetLibrary(MAJOR, true)
+        print(("|cff00ff00LibSpellDB|r Version: %s (r%s)"):format(MAJOR, tostring(minor)))
         print(("  Game Version: %s"):format(lib:GetGameVersion()))
 
     else

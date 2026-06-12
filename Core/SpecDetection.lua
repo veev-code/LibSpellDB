@@ -5,7 +5,7 @@
 ]]
 
 local MAJOR = "LibSpellDB-1.0"
-local lib = LibStub and LibStub:GetLibrary(MAJOR, true)
+local lib = LIBSPELLDB_REGISTRATION  -- set by Core/LibSpellDB.lua only when this copy won LibStub version selection
 if not lib then return end
 
 -------------------------------------------------------------------------------
@@ -129,13 +129,17 @@ function lib:GetTalentDistribution()
         end
     end
     
-    -- Method 2: Fallback to GetTalentTabInfo if above didn't work
+    -- Method 2: Fallback to GetTalentTabInfo if above didn't work.
+    -- The signature differs by client: classic-era returns
+    -- (name, texture, pointsSpent, ...) while modern Classic clients return
+    -- (id, name, description, iconTexture, pointsSpent, ...). Handle both.
     if points[1] == 0 and points[2] == 0 and points[3] == 0 then
         if GetTalentTabInfo then
             for tab = 1, 3 do
-                local name, iconTexture, pointsSpent = GetTalentTabInfo(tab)
-                if pointsSpent ~= nil then
-                    points[tab] = tonumber(pointsSpent) or 0
+                local r1, r2, r3, r4, r5 = GetTalentTabInfo(tab)
+                local pointsSpent = (type(r3) == "number" and r3) or (type(r5) == "number" and r5)
+                if pointsSpent then
+                    points[tab] = pointsSpent
                 end
             end
         end
