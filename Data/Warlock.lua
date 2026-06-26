@@ -701,6 +701,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 28176,  -- Fel Armor (TBC+)
+        versionOverrides = { vanilla = false },  -- TBC/Wrath ability; on Era/SoD it is the skill-book version
         name = "Fel Armor",
         description = "Surrounds the caster with fel energy, increasing the amount of health generated through spells and effects by 20% and increasing spell damage by up to 50. Only one type of Armor spell can be active on the Warlock at any time. Lasts 30 min.",
         tags = {C.BUFF, C.DEFENSIVE, C.LONG_BUFF},
@@ -952,3 +953,24 @@ lib:RegisterSpells({
     },
 }, "WARLOCK")
 
+
+-------------------------------------------------------------------------------
+-- Season of Discovery Skill Books (Classic Era client only)
+--
+-- Abilities learned from SoD skill books (drops/vendors), NOT runes -- ordinary
+-- known spells detected via IsSpellKnown. SoD-only spell IDs distinct from their
+-- TBC/Wrath counterparts; self-prune on TBC. Matching TBC entries are guarded
+-- with versionOverrides above.
+-------------------------------------------------------------------------------
+lib:RegisterSpells({
+    {
+        spellID = 403619,  -- Fel Armor (SoD skill book; Phase 4)
+        name = "Fel Armor",
+        description = "Surrounds you with fel energy, increasing spell power and causing your spells to heal you for a portion of the damage dealt. Lasts 30 min. Only one Armor spell can be active at a time.",
+        tags = {C.BUFF, C.MAINTENANCE, C.HAS_BUFF, C.LONG_BUFF},
+        cooldown = 0,
+        duration = 1800,
+        auraTarget = AT.SELF,
+        specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+    },
+}, "WARLOCK")

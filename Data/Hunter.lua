@@ -494,6 +494,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 34074,  -- Aspect of the Viper (mana regen, TBC)
+        versionOverrides = { vanilla = false },  -- TBC/Wrath ability; on Era/SoD it is the skill-book version
         name = "Aspect of the Viper",
         description = "The hunter takes on the aspects of a viper, regenerating mana equal to up to 55% of his Intellect plus 35% of his level every 5 sec. The lower the hunter's current mana, the more mana will be regenerated. Only one Aspect can be active at a time.",
         tags = {C.BUFF, C.RESOURCE},
@@ -626,3 +627,32 @@ lib:RegisterSpells({
     },
 }, "HUNTER")
 
+
+-------------------------------------------------------------------------------
+-- Season of Discovery Skill Books (Classic Era client only)
+--
+-- Abilities learned from SoD skill books (drops/vendors), NOT runes -- ordinary
+-- known spells detected via IsSpellKnown. SoD-only spell IDs distinct from their
+-- TBC/Wrath counterparts; self-prune on TBC. Matching TBC entries are guarded
+-- with versionOverrides above.
+-------------------------------------------------------------------------------
+lib:RegisterSpells({
+    {
+        spellID = 415423,  -- Aspect of the Viper (SoD skill book; Phase 2)
+        name = "Aspect of the Viper",
+        description = "The hunter takes on the aspect of the viper, regenerating mana based on weapon speed and ranged attacks. Only one Aspect can be active at a time.",
+        tags = {C.BUFF, C.MAINTENANCE, C.HAS_BUFF, C.RESOURCE},
+        cooldown = 0,
+        auraTarget = AT.SELF,
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
+    },
+    {
+        spellID = 469145,  -- Aspect of the Falcon (SoD skill book; Phase 5)
+        name = "Aspect of the Falcon",
+        description = "The hunter takes on the aspect of the falcon, increasing attack power. Only one Aspect can be active at a time.",
+        tags = {C.DPS, C.BUFF, C.MAINTENANCE, C.HAS_BUFF},
+        cooldown = 0,
+        auraTarget = AT.SELF,
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
+    },
+}, "HUNTER")

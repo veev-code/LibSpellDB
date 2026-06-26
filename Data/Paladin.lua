@@ -306,6 +306,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 31884,  -- Avenging Wrath (DPS CD - throughput)
+        versionOverrides = { vanilla = false },  -- TBC/Wrath ability; on Era/SoD it is the skill-book version
         name = "Avenging Wrath",
         description = "Increases all damage caused by 30% for 20 sec. Causes Forebearance, preventing the use of Divine Shield, Divine Protection, Blessing of Protection again for 1 min.",
         tags = {C.DPS, C.MAJOR, C.HAS_BUFF, C.PVE_PVP},
@@ -845,3 +846,54 @@ lib:RegisterSpells({
     },
 }, "PALADIN")
 
+
+-------------------------------------------------------------------------------
+-- Season of Discovery Skill Books (Classic Era client only)
+--
+-- Abilities learned from SoD skill books (drops/vendors), NOT runes -- ordinary
+-- known spells detected via IsSpellKnown. SoD-only spell IDs distinct from their
+-- TBC/Wrath counterparts; self-prune on TBC. Matching TBC entries are guarded
+-- with versionOverrides above.
+-------------------------------------------------------------------------------
+lib:RegisterSpells({
+    {
+        spellID = 407788,  -- Avenging Wrath (SoD skill book; Phase 4)
+        name = "Avenging Wrath",
+        description = "Increases all damage and healing you deal by 20% for 20 sec. Triggers Forbearance.",
+        tags = {C.DPS, C.MAJOR, C.HAS_BUFF, C.OFFENSIVE_CD, C.PVE_PVP},
+        cooldown = 180,
+        duration = 20,
+        auraTarget = AT.SELF,
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+    },
+    {
+        spellID = 407798,  -- Seal of Martyrdom (SoD skill book; Phase 4)
+        name = "Seal of Martyrdom",
+        description = "Fills you with holy spirit for 30 sec, causing your melee attacks to deal additional Holy damage. Only one Seal can be active at a time.",
+        tags = {C.DPS, C.MAINTENANCE, C.HAS_BUFF, C.BUFF},
+        cooldown = 0,
+        duration = 30,
+        auraTarget = AT.SELF,
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+    },
+    {
+        spellID = 425600,  -- Horn of Lordaeron (SoD skill book; Phase 5)
+        name = "Horn of Lordaeron",
+        description = "Increases the Strength and Agility of all party members within 30 yards. Lasts 2 min.",
+        tags = {C.BUFF, C.MAINTENANCE, C.HAS_BUFF},
+        cooldown = 20,
+        duration = 120,
+        auraTarget = AT.SELF,
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+    },
+    {
+        spellID = 461607,  -- Divine Steed (SoD skill book; Phase 5)
+        name = "Divine Steed",
+        description = "Leap atop your charger for 3 sec, increasing movement speed by 100%. Usable while in combat.",
+        tags = {C.MOVEMENT, C.MOVEMENT_SPEED, C.MINOR},
+        cooldown = 45,
+        duration = 3,
+        auraTarget = AT.SELF,
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+    },
+}, "PALADIN")

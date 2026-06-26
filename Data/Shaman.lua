@@ -53,6 +53,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 30823,  -- Shamanistic Rage (TBC+)
+        versionOverrides = { vanilla = false },  -- TBC ability; on Era/SoD it is the book-learned version (425336)
         name = "Shamanistic Rage",
         description = "Reduces all damage taken by 30% and gives your successful melee attacks a chance to regenerate mana equal to 30% of your attack power. Lasts 15 sec.",
         tags = {C.DEFENSIVE, C.MAJOR, C.RESOURCE, C.HAS_BUFF},
@@ -849,6 +850,35 @@ lib:RegisterSpells({
         duration = 45,
         auraTarget = AT.NONE,
         specs = {S.ENHANCEMENT},
+    },
+}, "SHAMAN")
+
+-------------------------------------------------------------------------------
+-- Season of Discovery Skill Books (Classic Era client only)
+--
+-- Abilities learned from SoD skill books (drops/vendors), NOT runes — so they are
+-- ordinary known spells detected via IsSpellKnown (no C_Engraving). They use
+-- SoD-only spell IDs distinct from their TBC/Wrath counterparts, and self-prune on
+-- TBC/Anniversary. The matching TBC entry is guarded with versionOverrides above.
+-------------------------------------------------------------------------------
+lib:RegisterSpells({
+    {
+        spellID = 425336,  -- Shamanistic Rage (SoD skill book; TBC version = 30823)
+        name = "Shamanistic Rage",
+        description = "Reduces all damage taken by 20% and regenerates mana equal to 5% of your maximum mana every 1 sec for 15 sec. Party and raid members within 40 yards gain 18% of the mana you receive this way.",
+        tags = {C.DEFENSIVE, C.MAJOR, C.RESOURCE, C.HAS_BUFF},
+        cooldown = 60,
+        duration = 15,
+        auraTarget = AT.SELF,
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
+    },
+    {
+        spellID = 437009,  -- Totemic Projection (SoD skill book; Phase 2)
+        name = "Totemic Projection",
+        description = "Relocates your active totems to the specified location.",
+        tags = {C.UTILITY, C.MINOR},
+        cooldown = 10,
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
 }, "SHAMAN")
 

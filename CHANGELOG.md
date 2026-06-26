@@ -1,5 +1,16 @@
 # LibSpellDB Changelog
 
+## [1.0.99] - 2026-06-25
+
+Season of Discovery skill-book abilities.
+
+### Added
+- **Season of Discovery skill-book abilities** — 14 abilities learned from SoD skill books (drops/vendors, not runes), across 7 classes: Shaman (Shamanistic Rage, Totemic Projection), Paladin (Avenging Wrath, Seal of Martyrdom, Horn of Lordaeron, Divine Steed), Warrior (Commanding Shout, Meathook, Valor of Azeroth), Hunter (Aspect of the Viper, Aspect of the Falcon), Warlock (Fel Armor), Rogue (Redirect), Priest (Shadowfiend). These are ordinary known spells (detected via `IsSpellKnown`, no engraving) keyed to SoD-only spell IDs, and self-prune on TBC. Druid and Mage have no trackable skill-book abilities (their books are passive/out-of-combat).
+
+### Fixed
+- **TBC name-collisions with SoD skill books** — the TBC versions of Shamanistic Rage, Avenging Wrath, Fel Armor, Commanding Shout, Shadowfiend, and Aspect of the Viper now carry `versionOverrides = { vanilla = false }`, preventing phantom duplicates on the Era/SoD client.
+- **Misplaced Intervene version guard (regression from 1.0.97)** — the warrior Intervene `versionOverrides` had been attached to the Intercept Stun triggered-aura instead of the base Intervene entry, leaving base Intervene (3411) unguarded (a potential phantom duplicate on SoD). Now corrected.
+
 ## [1.0.98] - 2026-06-25
 
 ### Changed

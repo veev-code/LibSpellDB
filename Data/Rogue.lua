@@ -607,3 +607,22 @@ lib:RegisterSpells({
     },
 }, "ROGUE")
 
+
+-------------------------------------------------------------------------------
+-- Season of Discovery Skill Books (Classic Era client only)
+--
+-- Abilities learned from SoD skill books (drops/vendors), NOT runes -- ordinary
+-- known spells detected via IsSpellKnown. SoD-only spell IDs distinct from their
+-- TBC/Wrath counterparts; self-prune on TBC. Matching TBC entries are guarded
+-- with versionOverrides above.
+-------------------------------------------------------------------------------
+lib:RegisterSpells({
+    {
+        spellID = 438040,  -- Redirect (SoD skill book; Phase 2)
+        name = "Redirect",
+        description = "Removes your combo points from the target and stores them for up to 15 sec, transferring them to the next enemy you strike.",
+        tags = {C.DPS, C.UTILITY, C.MINOR},
+        cooldown = 10,
+        specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
+    },
+}, "ROGUE")

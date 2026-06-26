@@ -204,6 +204,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 34433,  -- Shadowfiend
+        versionOverrides = { vanilla = false },  -- TBC/Wrath ability; on Era/SoD it is the skill-book version
         name = "Shadowfiend",
         description = "Creates a shadowy fiend to attack the target. Caster receives mana when the Shadowfiend deals damage. Lasts 15 sec.",
         tags = {C.DPS, C.MAJOR, C.RESOURCE, C.PET_SUMMON, C.PET_SUMMON_TEMP, C.PVE},
@@ -935,3 +936,24 @@ lib:RegisterSpells({
     },
 }, "PRIEST")
 
+
+-------------------------------------------------------------------------------
+-- Season of Discovery Skill Books (Classic Era client only)
+--
+-- Abilities learned from SoD skill books (drops/vendors), NOT runes -- ordinary
+-- known spells detected via IsSpellKnown. SoD-only spell IDs distinct from their
+-- TBC/Wrath counterparts; self-prune on TBC. Matching TBC entries are guarded
+-- with versionOverrides above.
+-------------------------------------------------------------------------------
+lib:RegisterSpells({
+    {
+        spellID = 401977,  -- Shadowfiend (SoD skill book; Phase 2)
+        name = "Shadowfiend",
+        description = "Summons a shadowfiend to attack the target for 15 sec, returning mana to you each time it deals damage.",
+        tags = {C.DPS, C.MAJOR, C.PET_SUMMON, C.PET_SUMMON_TEMP, C.RESOURCE},
+        cooldown = 300,
+        duration = 15,
+        auraTarget = AT.NONE,
+        specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
+    },
+}, "PRIEST")

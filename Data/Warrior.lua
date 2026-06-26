@@ -66,7 +66,6 @@ lib:RegisterSpells({
         triggersAuras = {
             {
                 spellID = 20615,  -- Intercept Stun
-        versionOverrides = { vanilla = false },  -- TBC+ ability; on Era/SoD it exists only as a rune
                 tags = {C.CC_HARD},
                 type = "DEBUFF",
                 onTarget = true,
@@ -75,6 +74,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 3411,  -- Intervene (movement utility, intercepts next attack)
+        versionOverrides = { vanilla = false },  -- TBC ability; on Era/SoD it is the Intervene rune (403338)
         name = "Intervene",
         description = "Run at high speed towards a party member, intercepting the next melee or ranged attack made against them.",
         tags = {C.MOVEMENT_GAP_CLOSE, C.MOVEMENT},
@@ -591,6 +591,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 469,  -- Commanding Shout (party HP buff)
+        versionOverrides = { vanilla = false },  -- TBC/Wrath ability; on Era/SoD it is the skill-book version
         name = "Commanding Shout",
         description = "Increases maximum health of all party members within 20 yards by 1080. Lasts 2 min.",
         tags = {C.BUFF, C.UTILITY, C.LONG_BUFF},
@@ -754,3 +755,42 @@ lib:RegisterSpells({
     },
 }, "WARRIOR")
 
+
+-------------------------------------------------------------------------------
+-- Season of Discovery Skill Books (Classic Era client only)
+--
+-- Abilities learned from SoD skill books (drops/vendors), NOT runes -- ordinary
+-- known spells detected via IsSpellKnown. SoD-only spell IDs distinct from their
+-- TBC/Wrath counterparts; self-prune on TBC. Matching TBC entries are guarded
+-- with versionOverrides above.
+-------------------------------------------------------------------------------
+lib:RegisterSpells({
+    {
+        spellID = 403215,  -- Commanding Shout (SoD skill book; Phase 2)
+        name = "Commanding Shout",
+        description = "Increases the maximum health of all party and raid members within 20 yards. Lasts 5 min.",
+        tags = {C.BUFF, C.MAINTENANCE, C.HAS_BUFF},
+        cooldown = 0,
+        duration = 300,
+        auraTarget = AT.SELF,
+        specs = {S.ARMS, S.FURY, S.PROTECTION},
+    },
+    {
+        spellID = 403228,  -- Meathook (SoD skill book; Phase 4)
+        name = "Meathook",
+        description = "Hurls a chain at an enemy, pulling them to you and generating a high amount of threat.",
+        tags = {C.TANK, C.UTILITY, C.MINOR},
+        cooldown = 35,
+        specs = {S.ARMS, S.FURY, S.PROTECTION},
+    },
+    {
+        spellID = 461475,  -- Valor of Azeroth (SoD skill book; Phase 4)
+        name = "Valor of Azeroth",
+        description = "Grants increased critical strike chance and attack power to all party and raid members. Lasts 2 hours.",
+        tags = {C.BUFF, C.LONG_BUFF, C.HAS_BUFF, C.RAID_DEFENSIVE},
+        cooldown = 60,
+        duration = 7200,
+        auraTarget = AT.SELF,
+        specs = {S.ARMS, S.FURY, S.PROTECTION},
+    },
+}, "WARRIOR")
