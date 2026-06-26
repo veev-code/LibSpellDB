@@ -223,6 +223,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 35395,  -- Crusader Strike (use on CD)
+        versionOverrides = { vanilla = false },  -- TBC+ ability; on Era/SoD it exists only as a rune
         name = "Crusader Strike",
         description = "An instant strike that causes 110% weapon damage and refreshes all Judgements on the target.",
         tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
@@ -292,6 +293,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 31935,  -- Avenger's Shield (pull / on CD)
+        versionOverrides = { vanilla = false },  -- TBC+ ability; on Era/SoD it exists only as a rune
         name = "Avenger's Shield",
         description = "Hurls a holy shield at the enemy, dealing 270 to 330 Holy damage, Dazing them and then jumping to additional nearby enemies. Affects 3 total targets. Lasts 6 sec.",
         tags = {C.TANK, C.ROTATIONAL, C.CC_SOFT, C.PVE},
@@ -701,3 +703,145 @@ lib:RegisterSpells({
     },
 
 }, "PALADIN")
+
+-------------------------------------------------------------------------------
+-- Season of Discovery Runes (Classic Era client only)
+--
+-- These abilities are granted by the SoD rune-engraving system and use SoD-only
+-- spell IDs (407xxx+). On the TBC/Anniversary client these IDs do not resolve, so
+-- RegisterSpell self-prunes them automatically — no version guard needed (the IDs
+-- are SoD-reserved and never collide with a real TBC spell). Detection of whether
+-- a rune is active is handled consumer-side via C_Engraving.
+-------------------------------------------------------------------------------
+lib:RegisterSpells({
+    -------------------------------------------------------------------------------
+    -- Damage abilities
+    -------------------------------------------------------------------------------
+    {
+        spellID = 407676,  -- Crusader Strike (Gloves rune)
+        name = "Crusader Strike",
+        description = "An instant strike that causes 75% weapon damage as Holy and regenerates 5% of your maximum mana. Refreshes the duration of your Judgement on the target.",
+        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 6,
+        priority = 3,
+        specs = {S.HOLY, S.RETRIBUTION},
+    },
+    {
+        spellID = 407778,  -- Divine Storm (Chest rune)
+        name = "Divine Storm",
+        description = "An instant weapon attack that causes 110% of weapon damage to up to 4 enemies within 8 yards, and heals up to 3 party or raid members for 25% of the damage caused.",
+        tags = {C.DPS, C.AOE, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 10,
+        priority = 4,
+        specs = {S.RETRIBUTION},
+    },
+    {
+        spellID = 407632,  -- Hammer of the Righteous (Bracers rune)
+        name = "Hammer of the Righteous",
+        description = "Hammer the current target and up to 2 additional nearby targets, causing 3 times your main hand damage per second as Holy damage. Generates a high amount of threat.",
+        tags = {C.TANK, C.DPS, C.AOE, C.ROTATIONAL, C.PVE},
+        cooldown = 6,
+        priority = 4,
+        specs = {S.PROTECTION},
+    },
+    {
+        spellID = 407669,  -- Avenger's Shield (Legs rune)
+        name = "Avenger's Shield",
+        description = "Hurls a holy shield at the enemy, dealing Holy damage, bouncing to up to 2 additional targets and dazing them for 10 sec. Generates a high amount of threat. Requires a shield.",
+        tags = {C.TANK, C.DPS, C.AOE, C.ROTATIONAL, C.PVE},
+        cooldown = 15,
+        priority = 3,
+        specs = {S.PROTECTION},
+    },
+    {
+        spellID = 440658,  -- Shield of Righteousness (Cloak rune)
+        name = "Shield of Righteousness",
+        description = "Slam the target with your shield, causing Holy damage based on your block value plus an additional amount. Generates a high amount of threat. Requires a shield.",
+        tags = {C.TANK, C.DPS, C.ROTATIONAL, C.PVE},
+        cooldown = 6,
+        priority = 2,
+        specs = {S.PROTECTION},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Healing abilities
+    -------------------------------------------------------------------------------
+    {
+        spellID = 458856,  -- Divine Light (Cloak rune)
+        name = "Divine Light",
+        description = "Heals a friendly target for a large amount. A fast, high-cost direct heal.",
+        tags = {C.HEAL, C.HEAL_SINGLE, C.FILLER, C.PVE_PVP},
+        cooldown = 0,
+        specs = {S.HOLY},
+    },
+    {
+        spellID = 407613,  -- Beacon of Light (Gloves rune)
+        name = "Beacon of Light",
+        description = "The target becomes a Beacon of Light to all members of your party or raid within 40 yards. Heals you cast on those members also heal the Beacon for 100% of the amount healed. Lasts 1 min.",
+        tags = {C.HEAL, C.MAINTENANCE, C.HAS_BUFF, C.PVE},
+        cooldown = 0,
+        duration = 60,
+        auraTarget = AT.ALLY,
+        priority = 1,
+        specs = {S.HOLY},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Shields / absorbs
+    -------------------------------------------------------------------------------
+    {
+        spellID = 412019,  -- Sacred Shield (Boots rune)
+        name = "Sacred Shield",
+        description = "Each time the target takes damage they gain a Sacred Shield, absorbing damage. Cannot occur more than once every 6 sec. In addition, your Flash of Light has reduced cast time on the target. Lasts 30 sec.",
+        tags = {C.HEAL, C.MAINTENANCE, C.HAS_BUFF, C.PVE_PVP},
+        cooldown = 0,
+        duration = 30,
+        auraTarget = AT.ALLY,
+        specs = {S.HOLY},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Defensive cooldowns
+    -------------------------------------------------------------------------------
+    {
+        spellID = 462853,  -- Hand of Sacrifice (Legs rune)
+        name = "Hand of Sacrifice",
+        description = "Causes the target party or raid member to transfer 30% of damage taken to the caster. Lasts 12 sec.",
+        tags = {C.EXTERNAL_DEFENSIVE, C.DAMAGE_REDUCTION, C.DEFENSIVE, C.PVE_PVP},
+        cooldown = 120,
+        duration = 12,
+        auraTarget = AT.ALLY,
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+    },
+    {
+        spellID = 407624,  -- Aura Mastery (Legs rune)
+        name = "Aura Mastery",
+        description = "Causes your Concentration Aura to make all affected targets immune to Silence and Interrupt effects, and increases the effects of your other auras, for 6 sec.",
+        tags = {C.RAID_DEFENSIVE, C.DEFENSIVE, C.MINOR, C.PVE_PVP},
+        cooldown = 120,
+        duration = 6,
+        auraTarget = AT.SELF,
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Interrupts / taunts
+    -------------------------------------------------------------------------------
+    {
+        spellID = 425609,  -- Rebuke (Legs rune)
+        name = "Rebuke",
+        description = "Interrupts spellcasting and prevents any spell in that school from being cast for 3 sec.",
+        tags = {C.INTERRUPT, C.PVE_PVP},
+        cooldown = 10,
+        specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
+    },
+    {
+        spellID = 407631,  -- Hand of Reckoning (Gloves rune)
+        name = "Hand of Reckoning",
+        description = "Taunts the target to attack you, but has no effect if the target is already attacking you. While not in combat, it deals Holy damage instead.",
+        tags = {C.TAUNT, C.PVE},
+        cooldown = 8,
+        specs = {S.PROTECTION},
+    },
+}, "PALADIN")
+

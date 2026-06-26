@@ -363,6 +363,7 @@ lib:RegisterSpells({
     -- Surge of Light (Holy talent proc) - Note: may need ID verification
     {
         spellID = 33154,
+        versionOverrides = { vanilla = false },  -- TBC talent proc; on Era/SoD it exists only as a rune (see SoD proc section)
         name = "Surge of Light",
         description = "Your spell criticals have a 50% chance to cause your next Smite spell to be instant cast, cost no mana but be incapable of a critical hit. This effect lasts 10 sec.",
         tags = {C.PROC, C.HEAL, C.MINOR},
@@ -804,6 +805,7 @@ lib:RegisterSpells({
     -- Light's Grace (Holy talent) - reduces Holy Light cast time after casting Holy Light
     {
         spellID = 31834,  -- Light's Grace buff on player (name fallback recommended)
+        versionOverrides = { vanilla = false },  -- TBC talent proc; on Era/SoD it exists only as a rune (see SoD proc section)
         name = "Light's Grace",
         tags = {C.PROC, C.HEAL, C.MINOR},
         cooldown = 0,
@@ -899,6 +901,7 @@ lib:RegisterSpells({
     -- Expose Weakness (Survival talent) - debuff on target after crit with ranged
     {
         spellID = 34501,  -- Expose Weakness debuff on target (name fallback recommended)
+        versionOverrides = { vanilla = false },  -- TBC talent proc; on Era/SoD it exists only as a rune (see SoD proc section)
         name = "Expose Weakness",
         ranks = {34500, 34502, 34503},
         tags = {C.PROC, C.DPS, C.DEBUFF},
@@ -975,3 +978,397 @@ lib:RegisterSpells({
         },
     },
 }, "HUNTER")
+
+-------------------------------------------------------------------------------
+-- Season of Discovery Rune Procs (Classic Era client only)
+--
+-- Proc buffs granted by SoD rune abilities. spellID here is the BUFF ID (what
+-- UnitBuff returns), which differs from the rune ability ID — sourced from wowsims
+-- aura registrations (DPS) or Wowhead (healing). SoD-only IDs self-prune on
+-- TBC/Anniversary. VeevHUD's AuraTracker also matches by buff NAME, so detection
+-- is robust even if a buff ID drifts across client versions.
+-------------------------------------------------------------------------------
+lib:RegisterSpells({
+    {
+        spellID = 408505,  -- Maelstrom Weapon buff (rune ability = 408498)
+        name = "Maelstrom Weapon",
+        tags = {C.PROC, C.DPS},
+        cooldown = 0,
+        duration = 30,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Reduces the cast time and mana cost of your next damage or healing spell. Instant at 5 stacks.",
+            stacks = 5,
+            consumedOnCast = true,
+        },
+    },
+    {
+        spellID = 415105,  -- Power Surge buff (rune ability = 415100)
+        name = "Power Surge",
+        tags = {C.PROC, C.DPS},
+        cooldown = 0,
+        duration = 10,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Your next Lava Burst or Chain Lightning is instant and its cooldown is reset.",
+            stacks = false,
+            consumedOnCast = true,
+        },
+    },
+    {
+        spellID = 432042,  -- Tidal Waves (rune ability ID; healing proc not simmed by wowsims, matched by name)
+        name = "Tidal Waves",
+        tags = {C.PROC, C.HEAL},
+        cooldown = 0,
+        duration = 15,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Reduces Healing Wave cast time and boosts Lesser Healing Wave crit. 2 charges.",
+            stacks = 2,
+            consumedOnCast = true,
+        },
+    },
+}, "SHAMAN")
+
+lib:RegisterSpells({
+    {
+        spellID = 48108,  -- Hot Streak buff (rune ability = 400624)
+        name = "Hot Streak",
+        tags = {C.PROC, C.DPS},
+        cooldown = 0,
+        duration = 10,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Your next Pyroblast is instant.",
+            stacks = false,
+            consumedOnCast = true,
+        },
+    },
+    {
+        spellID = 400730,  -- Brain Freeze proc buff (in-game name "Fireball!"; rune ability = 400731)
+        name = "Fireball!",
+        tags = {C.PROC, C.DPS},
+        cooldown = 0,
+        duration = 15,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Your next Fireball, Spellfrost, Frostfire, or Balefire Bolt is instant and free.",
+            stacks = false,
+            consumedOnCast = true,
+        },
+    },
+    {
+        spellID = 400647,  -- Fingers of Frost (buff ID == rune ability ID)
+        name = "Fingers of Frost",
+        tags = {C.PROC, C.DPS},
+        cooldown = 0,
+        duration = 15,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Your next spells treat the target as frozen. 2 charges.",
+            stacks = 2,
+            consumedOnCast = true,
+        },
+    },
+    {
+        spellID = 400589,  -- Missile Barrage buff (rune ability = 400588)
+        name = "Missile Barrage",
+        tags = {C.PROC, C.DPS},
+        cooldown = 0,
+        duration = 15,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Your next Arcane Missiles channels faster and costs less mana.",
+            stacks = false,
+            consumedOnCast = true,
+        },
+    },
+    {
+        spellID = 400573,  -- Arcane Blast stacking buff (rune ability = 400574)
+        name = "Arcane Blast",
+        tags = {C.PROC, C.DPS},
+        cooldown = 0,
+        duration = 6,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Increases Arcane damage dealt; stacks as you cast Arcane Blast.",
+            stacks = 4,
+            lowPriority = true,
+        },
+    },
+}, "MAGE")
+
+lib:RegisterSpells({
+    {
+        spellID = 413399,  -- Blood Surge buff (rune ability = 413380)
+        name = "Blood Surge",
+        tags = {C.PROC, C.DPS},
+        cooldown = 0,
+        duration = 15,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Your next Slam is instant.",
+            stacks = false,
+            consumedOnCast = true,
+        },
+    },
+    {
+        spellID = 440114,  -- Sudden Death buff (rune ability = 440113)
+        name = "Sudden Death",
+        tags = {C.PROC, C.DPS},
+        cooldown = 0,
+        duration = 10,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Allows one use of Execute regardless of the target's health.",
+            stacks = false,
+            consumedOnCast = true,
+        },
+    },
+    {
+        spellID = 426969,  -- Taste for Blood buff (rune ability = 426953)
+        name = "Taste for Blood",
+        tags = {C.PROC, C.DPS},
+        cooldown = 0,
+        duration = 9,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Your Overpower is enabled.",
+            stacks = false,
+            consumedOnCast = true,
+        },
+    },
+}, "WARRIOR")
+
+lib:RegisterSpells({
+    {
+        spellID = 427714,  -- Backdraft buff (rune ability = 427713)
+        name = "Backdraft",
+        tags = {C.PROC, C.DPS},
+        cooldown = 0,
+        duration = 15,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Conflagrate grants 30% spellcasting haste.",
+            stacks = false,
+        },
+    },
+    {
+        spellID = 440873,  -- Decimation buff (rune ability = 440870)
+        name = "Decimation",
+        tags = {C.PROC, C.DPS},
+        cooldown = 0,
+        duration = 10,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Your Soul Fire casts are faster during the execute phase.",
+            stacks = false,
+        },
+    },
+    {
+        spellID = 426311,  -- Shadow and Flame buff (rune ability = 426316)
+        name = "Shadow and Flame",
+        tags = {C.PROC, C.DPS},
+        cooldown = 0,
+        duration = 10,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Increases your Fire and Shadow damage by 10%.",
+            stacks = false,
+        },
+    },
+    {
+        spellID = 426303,  -- Grimoire of Synergy buff (rune ability = 426301)
+        name = "Grimoire of Synergy",
+        tags = {C.PROC, C.DPS},
+        cooldown = 0,
+        duration = 15,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Increases damage done by you or your demon by 10%.",
+            stacks = false,
+        },
+    },
+    {
+        spellID = 412800,  -- Dance of the Wicked buff (rune ability = 412798)
+        name = "Dance of the Wicked",
+        tags = {C.PROC, C.PERSONAL_DEFENSIVE},
+        cooldown = 0,
+        duration = 15,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Grants dodge equal to your spell crit chance after a crit.",
+            stacks = false,
+            lowPriority = true,
+        },
+    },
+    {
+        spellID = 425464,  -- Demonic Pact buff (raid-wide spell power; buff ID == rune ability ID)
+        name = "Demonic Pact",
+        tags = {C.PROC, C.BUFF},
+        cooldown = 0,
+        duration = 45,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Your pet's critical strikes grant party and raid spell power.",
+            stacks = false,
+            lowPriority = true,
+        },
+    },
+}, "WARLOCK")
+
+lib:RegisterSpells({
+    {
+        spellID = 408250,  -- Eclipse: Solar buff (rune ability = 408248)
+        name = "Eclipse: Solar",
+        tags = {C.PROC, C.DPS},
+        cooldown = 0,
+        duration = 15,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Increases Wrath damage. Built by casting Starfire. 4 stacks.",
+            stacks = 4,
+            consumedOnCast = true,
+        },
+    },
+    {
+        spellID = 408255,  -- Eclipse: Lunar buff (rune ability = 408248)
+        name = "Eclipse: Lunar",
+        tags = {C.PROC, C.DPS},
+        cooldown = 0,
+        duration = 15,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Reduces Starfire cast time. Built by casting Wrath. 4 stacks.",
+            stacks = 4,
+            consumedOnCast = true,
+        },
+    },
+    {
+        spellID = 414800,  -- Fury of Stormrage buff (rune ability = 414799)
+        name = "Fury of Stormrage",
+        tags = {C.PROC, C.DPS},
+        cooldown = 0,
+        duration = 15,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Your next Wrath is instant and free.",
+            stacks = false,
+            consumedOnCast = true,
+        },
+    },
+}, "DRUID")
+
+lib:RegisterSpells({
+    {
+        spellID = 431666,  -- Surge of Light buff (rune ability = 431664)
+        name = "Surge of Light",
+        tags = {C.PROC, C.HEAL},
+        cooldown = 0,
+        duration = 15,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Your next Smite or Flash Heal is instant.",
+            stacks = false,
+            consumedOnCast = true,
+        },
+    },
+    {
+        spellID = 413247,  -- Serendipity buff (rune ability = 413248)
+        name = "Serendipity",
+        tags = {C.PROC, C.HEAL},
+        cooldown = 0,
+        duration = 20,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Reduces the cast time of your next big heal. 3 stacks.",
+            stacks = 3,
+            consumedOnCast = true,
+        },
+    },
+}, "PRIEST")
+
+lib:RegisterSpells({
+    {
+        spellID = 428912,  -- Light's Grace buff (rune ability = 428909)
+        name = "Light's Grace",
+        tags = {C.PROC, C.HEAL},
+        cooldown = 0,
+        duration = 15,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Reduces the cast time of your next Holy Light by 0.5 sec.",
+            stacks = false,
+            consumedOnCast = true,
+        },
+    },
+}, "PALADIN")
+
+lib:RegisterSpells({
+    {
+        spellID = 415413,  -- Lock and Load (buff ID == rune ability ID)
+        name = "Lock and Load",
+        tags = {C.PROC, C.DPS},
+        cooldown = 0,
+        duration = 20,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Your next Shot costs no mana and is off the global cooldown.",
+            stacks = false,
+            consumedOnCast = true,
+        },
+    },
+    {
+        spellID = 415358,  -- Raptor Fury (buff ID == rune ability ID)
+        name = "Raptor Fury",
+        tags = {C.PROC, C.DPS},
+        cooldown = 0,
+        duration = 30,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Increases Raptor Strike and Mongoose Bite damage. 5 stacks.",
+            stacks = 5,
+        },
+    },
+    {
+        spellID = 409507,  -- Expose Weakness buff (rune ability = 409504)
+        name = "Expose Weakness",
+        tags = {C.PROC, C.DPS},
+        cooldown = 0,
+        duration = 7,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Increases attack power by 40% of your Agility.",
+            stacks = false,
+        },
+    },
+}, "HUNTER")
+
+lib:RegisterSpells({
+    {
+        spellID = 462707,  -- Cutthroat buff (rune ability = 462708)
+        name = "Cutthroat",
+        tags = {C.PROC, C.DPS},
+        cooldown = 0,
+        duration = 10,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Your next Ambush can be used from the front.",
+            stacks = false,
+            consumedOnCast = true,
+        },
+    },
+    {
+        spellID = 425096,  -- Master of Subtlety (buff ID == rune ability ID)
+        name = "Master of Subtlety",
+        tags = {C.PROC, C.DPS},
+        cooldown = 0,
+        duration = 6,
+        auraTarget = AT.SELF,
+        procInfo = {
+            description = "Increases damage dealt for 6 sec after breaking stealth.",
+            stacks = false,
+            lowPriority = true,
+        },
+    },
+}, "ROGUE")

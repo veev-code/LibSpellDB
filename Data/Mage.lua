@@ -235,6 +235,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 30451,  -- Arcane Blast (main nuke, build stacks)
+        versionOverrides = { vanilla = false },  -- TBC+ ability; on Era/SoD it exists only as a rune
         name = "Arcane Blast",
         description = "Blasts the target with energy, dealing 668 to 772 Arcane damage. Each time you cast Arcane Blast, the casting time is reduced while mana cost is increased. Effect stacks up to 3 times and lasts 8 sec.",
         tags = {C.DPS, C.ROTATIONAL, C.PVE},
@@ -439,6 +440,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 30482,  -- Molten Armor (crit + fire damage on hit, TBC)
+        versionOverrides = { vanilla = false },  -- TBC+ ability; on Era/SoD it exists only as a rune
         name = "Molten Armor",
         description = "Causes 75 Fire damage when hit, increases your chance to critically hit with spells by 3%, and reduces the chance you are critically hit by 5%. Only one type of Armor spell can be active on the Mage at any time. Lasts 30 min.",
         tags = {C.BUFF, C.DPS, C.LONG_BUFF},
@@ -548,3 +550,210 @@ lib:RegisterSpells({
     },
 
 }, "MAGE")
+
+-------------------------------------------------------------------------------
+-- Season of Discovery Runes (Classic Era client only)
+--
+-- These abilities are granted by the SoD rune-engraving system and use SoD-only
+-- spell IDs (400xxx+). On the TBC/Anniversary client these IDs do not resolve, so
+-- RegisterSpell self-prunes them automatically — no version guard needed (the IDs
+-- are SoD-reserved and never collide with a real TBC spell). Detection of whether
+-- a rune is active is handled consumer-side via C_Engraving.
+-------------------------------------------------------------------------------
+lib:RegisterSpells({
+    -------------------------------------------------------------------------------
+    -- Damage abilities
+    -------------------------------------------------------------------------------
+    {
+        spellID = 400574,  -- Arcane Blast (Gloves rune)
+        name = "Arcane Blast",
+        description = "Blasts the target with energy, dealing Arcane damage. Each cast increases Arcane damage dealt by 15% and mana cost by 175% for 6 sec, stacking up to 4 times.",
+        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 0,
+        specs = {S.ARCANE},
+    },
+    {
+        spellID = 400610,  -- Arcane Barrage (Cloak rune)
+        name = "Arcane Barrage",
+        description = "Launches several missiles at the enemy target, causing Arcane damage.",
+        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 3,
+        specs = {S.ARCANE},
+    },
+    {
+        spellID = 425124,  -- Arcane Surge (Pants rune)
+        name = "Arcane Surge",
+        description = "Unleash all of your remaining mana in a surge of energy focused at the target, dealing damage based on the amount of mana consumed. For the next 8 sec your mana regeneration is increased and damage done is increased.",
+        tags = {C.DPS, C.MAJOR, C.OFFENSIVE_CD, C.HAS_BUFF, C.PVE_PVP},
+        cooldown = 120,
+        duration = 8,
+        auraTarget = AT.SELF,
+        specs = {S.ARCANE},
+    },
+    {
+        spellID = 428878,  -- Balefire Bolt (Bracers rune)
+        name = "Balefire Bolt",
+        description = "Unleash a reality-distorting burst of raw magic at your enemy, dealing damage. Each cast increases the damage of subsequent Balefire Bolts by 10% but also deals increasing damage to you, stacking up to 10 times.",
+        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 0,
+        specs = {S.ARCANE, S.FIRE},
+    },
+    {
+        spellID = 401502,  -- Frostfire Bolt (Belt rune)
+        name = "Frostfire Bolt",
+        description = "Launches a bolt of frostfire at the enemy, causing Frostfire damage, slowing the target's movement, and causing additional damage over time.",
+        tags = {C.DPS, C.ROTATIONAL, C.HAS_DOT, C.PVE_PVP},
+        cooldown = 0,
+        specs = {S.FIRE, S.FROST},
+    },
+    {
+        spellID = 412532,  -- Spellfrost Bolt (Belt rune)
+        name = "Spellfrost Bolt",
+        description = "Launches a bolt of spellfrost at the enemy, causing Spellfrost damage and slowing the target's movement speed.",
+        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 0,
+        specs = {S.ARCANE, S.FROST},
+    },
+    {
+        spellID = 400640,  -- Ice Lance (Gloves rune)
+        name = "Ice Lance",
+        description = "Quickly deals Frost damage. Causes triple damage against Frozen targets.",
+        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 0,
+        specs = {S.FROST},
+    },
+    {
+        spellID = 400613,  -- Living Bomb (Gloves rune)
+        name = "Living Bomb",
+        description = "The target becomes a Living Bomb, taking Fire damage over 12 sec. After 12 sec or when dispelled, the target explodes dealing Fire damage to all enemies within 10 yards.",
+        tags = {C.DPS, C.AOE, C.ROTATIONAL, C.HAS_DOT, C.PVE_PVP},
+        cooldown = 0,
+        duration = 12,
+        auraTarget = AT.ENEMY,
+        specs = {S.FIRE},
+    },
+    {
+        spellID = 401556,  -- Living Flame (Pants rune)
+        name = "Living Flame",
+        description = "Summons a spellfire flame that moves toward the target, leaving a trail of spellfire that deals Fire damage to enemies who stand in it and healing allies who pass through it.",
+        tags = {C.DPS, C.MINOR, C.PVE_PVP},
+        cooldown = 30,
+        specs = {S.ARCANE, S.FIRE, S.FROST},
+    },
+    {
+        spellID = 440802,  -- Frozen Orb (Cloak rune)
+        name = "Frozen Orb",
+        description = "Launches an orb of swirling ice which rapidly moves forward, dealing Frost damage and chilling enemies it passes through over 15 sec.",
+        tags = {C.DPS, C.AOE, C.MAJOR, C.OFFENSIVE_CD, C.PVE_PVP},
+        cooldown = 60,
+        duration = 15,
+        auraTarget = AT.NONE,  -- Travelling ground AoE
+        specs = {S.FROST},
+    },
+    {
+        spellID = 428885,  -- Temporal Anomaly (Helm rune)
+        name = "Temporal Anomaly",
+        description = "Launches an orb of temporal energy which slowly moves forward and every 2 sec grants all nearby party or raid members a shield absorbing damage.",
+        tags = {C.UTILITY, C.AOE, C.MINOR, C.PVE},
+        cooldown = 30,
+        duration = 10,
+        auraTarget = AT.NONE,  -- Travelling ground AoE shield
+        specs = {S.ARCANE},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Cooldowns
+    -------------------------------------------------------------------------------
+    {
+        spellID = 425121,  -- Icy Veins (Pants rune)
+        name = "Icy Veins",
+        description = "Hastens your spellcasting, increasing spell casting speed by 20% and reducing the pushback suffered from damaging attacks while casting. Lasts 20 sec.",
+        tags = {C.DPS, C.MAJOR, C.OFFENSIVE_CD, C.HAS_BUFF, C.PVE_PVP},
+        cooldown = 180,
+        duration = 20,
+        auraTarget = AT.SELF,
+        specs = {S.FROST},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Crowd control
+    -------------------------------------------------------------------------------
+    {
+        spellID = 428739,  -- Deep Freeze (Helm rune)
+        name = "Deep Freeze",
+        description = "Stuns the target for 5 sec. Only usable on Frozen targets. Deals a high amount of damage to targets permanently immune to stuns.",
+        tags = {C.CC_HARD, C.MINOR, C.PVE_PVP},
+        cooldown = 30,
+        duration = 5,
+        auraTarget = AT.ENEMY,
+        specs = {S.FROST},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Movement
+    -------------------------------------------------------------------------------
+    {
+        spellID = 428861,  -- Displacement (Bracers rune)
+        name = "Displacement",
+        description = "Teleports back to where you last cast Blink from and resets the cooldown on Blink. Only usable within 8 sec of casting Blink.",
+        tags = {C.MOVEMENT, C.MOVEMENT_ESCAPE, C.MINOR, C.PVE_PVP},
+        cooldown = 0,
+        specs = {S.ARCANE, S.FIRE, S.FROST},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Healing abilities
+    -------------------------------------------------------------------------------
+    {
+        spellID = 401417,  -- Regeneration (Chest rune)
+        name = "Regeneration",
+        description = "Heals the target for a large amount of health over 3 sec.",
+        tags = {C.HEAL, C.HEAL_SINGLE, C.HOT, C.HAS_HOT, C.PVE},
+        cooldown = 0,
+        duration = 3,
+        auraTarget = AT.ALLY,
+        specs = {},
+    },
+    {
+        spellID = 412510,  -- Mass Regeneration (Pants rune)
+        name = "Mass Regeneration",
+        description = "Heals all of target player's party members within 43.5 yards of target player over 3 sec.",
+        tags = {C.HEAL, C.HEAL_AOE, C.AOE, C.HOT, C.HAS_HOT, C.PVE},
+        cooldown = 12,
+        duration = 3,
+        auraTarget = AT.ALLY,
+        specs = {},
+    },
+    {
+        spellID = 436516,  -- Chronostatic Preservation (Boots rune)
+        name = "Chronostatic Preservation",
+        description = "Heals a friendly target and applies a Temporal Beacon to them, healing them when you cast healing spells on other targets.",
+        tags = {C.HEAL, C.HEAL_SINGLE, C.PVE},
+        cooldown = 6,
+        specs = {},
+    },
+    {
+        spellID = 401462,  -- Rewind Time (Bracers rune)
+        name = "Rewind Time",
+        description = "Your current target with your Temporal Beacon instantly heals all damage taken over the last 5 seconds.",
+        tags = {C.HEAL, C.HEAL_SINGLE, C.MINOR, C.PVE},
+        cooldown = 60,
+        specs = {},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Maintenance buffs
+    -------------------------------------------------------------------------------
+    {
+        spellID = 428741,  -- Molten Armor (Bracers rune)
+        name = "Molten Armor",
+        description = "Causes Fire damage when hit, increases spell critical strike chance, and reduces the chance you are critically hit. Only one type of Armor spell can be active on the Mage at any time. Lasts 30 min.",
+        tags = {C.BUFF, C.MAINTENANCE, C.LONG_BUFF, C.HAS_BUFF, C.PVE_PVP},
+        cooldown = 0,
+        duration = 1800,
+        auraTarget = AT.SELF,
+        specs = {S.ARCANE, S.FIRE, S.FROST},
+        buffGroup = "MAGE_ARMOR",
+    },
+}, "MAGE")
+

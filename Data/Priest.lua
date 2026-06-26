@@ -143,6 +143,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 33206,  -- Pain Suppression (Discipline talent)
+        versionOverrides = { vanilla = false },  -- TBC+ ability; on Era/SoD it exists only as a rune
         name = "Pain Suppression",
         description = "Instantly reduces a friendly target's threat by 5%, reduces all damage taken by 40% and increases resistance to Dispel mechanics by 65% for 8 sec.",
         tags = {C.EXTERNAL_DEFENSIVE, C.MAJOR, C.HAS_BUFF, C.PVE_PVP, C.IMPORTANT_EXTERNAL},
@@ -217,6 +218,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 33076,  -- Prayer of Mending (use on pull/CD)
+        versionOverrides = { vanilla = false },  -- TBC+ ability; on Era/SoD it exists only as a rune
         name = "Prayer of Mending",
         description = "Places a spell on the target that heals them for 800 the next time they take damage. When the heal occurs, Prayer of Mending jumps to a raid member within 20 yards. Jumps up to 5 times and lasts 30 sec after each jump. This spell can only be placed on one target at a time.",
         tags = {C.HEAL, C.ROTATIONAL, C.HEAL_SINGLE, C.PVE_PVP},
@@ -244,6 +246,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 34861,  -- Circle of Healing (instant AoE heal)
+        versionOverrides = { vanilla = false },  -- TBC+ ability; on Era/SoD it exists only as a rune
         name = "Circle of Healing",
         description = "Heals friendly target and that target's party members within 15 yards of the target for 250 to 274.",
         tags = {C.HEAL, C.FILLER, C.HEAL_AOE, C.PVE},
@@ -290,6 +293,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 32546,  -- Binding Heal (heal self + target)
+        versionOverrides = { vanilla = false },  -- TBC+ ability; on Era/SoD it exists only as a rune
         name = "Binding Heal",
         description = "Heals a friendly target and the caster for 1053 to 1350. Low threat.",
         tags = {C.HEAL, C.FILLER, C.HEAL_SINGLE, C.PVE_PVP},
@@ -368,6 +372,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 34914,  -- Vampiric Touch (apply first for mana)
+        versionOverrides = { vanilla = false },  -- TBC+ ability; on Era/SoD it exists only as a rune
         name = "Vampiric Touch",
         description = "Causes 450 Shadow damage over 15 sec to your target and causes all party members to gain mana equal to 5% of any Shadow spell damage you deal.",
         tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.RESOURCE, C.PVE},
@@ -416,6 +421,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 32996,  -- Shadow Word: Death (execute / finisher)
+        versionOverrides = { vanilla = false },  -- TBC+ ability; on Era/SoD it exists only as a rune
         name = "Shadow Word: Death",
         description = "A word of dark binding that inflicts 572 to 664 Shadow damage to the target. If the target is not killed by Shadow Word: Death, the caster takes damage equal to the damage inflicted upon the target.",
         tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
@@ -727,3 +733,205 @@ lib:RegisterSpells({
     },
 
 }, "PRIEST")
+
+-------------------------------------------------------------------------------
+-- Season of Discovery Runes (Classic Era client only)
+--
+-- These abilities are granted by the SoD rune-engraving system and use SoD-only
+-- spell IDs (40xxxx+). On the TBC/Anniversary client these IDs do not resolve, so
+-- RegisterSpell self-prunes them automatically — no version guard needed (the IDs
+-- are SoD-reserved and never collide with a real TBC spell). Detection of whether
+-- a rune is active is handled consumer-side via C_Engraving.
+-------------------------------------------------------------------------------
+lib:RegisterSpells({
+    -------------------------------------------------------------------------------
+    -- Damage abilities
+    -------------------------------------------------------------------------------
+    {
+        spellID = 431655,  -- Mind Spike (Belt rune)
+        name = "Mind Spike",
+        description = "Blasts the target for Shadowfrost damage and applies Mind Spike, increasing the damage your next Mind Blast deals to the target. Stacks up to 3 times.",
+        tags = {C.DPS, C.ROTATIONAL, C.HAS_DEBUFF, C.PVE_PVP},
+        cooldown = 0,
+        duration = 10,
+        auraTarget = AT.ENEMY,
+        specs = {S.SHADOW},
+    },
+    {
+        spellID = 413259,  -- Mind Sear (Gloves rune)
+        name = "Mind Sear",
+        description = "Causes an explosion of shadow magic around the enemy target, dealing Shadow damage every second to all enemies within 10 yards for 5 sec.",
+        tags = {C.DPS, C.AOE, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 0,
+        specs = {S.SHADOW},
+    },
+    {
+        spellID = 401955,  -- Shadow Word: Death (Gloves rune)
+        name = "Shadow Word: Death",
+        description = "A word of dark binding that inflicts Shadow damage. If the target is not killed by Shadow Word: Death, the caster takes damage equal to the damage inflicted upon the target.",
+        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 12,
+        specs = {S.SHADOW},
+    },
+    {
+        spellID = 425204,  -- Void Plague (Boots rune)
+        name = "Void Plague",
+        description = "Afflicts the target with a disease that causes Shadow damage over 18 sec.",
+        tags = {C.DPS, C.ROTATIONAL, C.HAS_DOT, C.HAS_DEBUFF, C.PVE_PVP},
+        cooldown = 6,
+        duration = 18,
+        auraTarget = AT.ENEMY,
+        specs = {S.SHADOW},
+    },
+    {
+        spellID = 431681,  -- Void Zone (Bracers rune)
+        name = "Void Zone",
+        description = "Summons a void zone in the target area that deals Shadow damage to all enemies within it every 1 sec for 10 sec.",
+        tags = {C.DPS, C.AOE, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 30,
+        duration = 10,
+        auraTarget = AT.NONE,  -- Ground-targeted AoE
+        specs = {S.SHADOW},
+    },
+    {
+        spellID = 402668,  -- Vampiric Touch (Cloak rune)
+        name = "Vampiric Touch",
+        description = "Causes Shadow damage over 15 sec and applies your Vampiric Embrace effect to the target, causing party members to be healed for a portion of the spell damage you deal.",
+        tags = {C.DPS, C.ROTATIONAL, C.MAINTENANCE, C.HAS_DOT, C.HAS_DEBUFF, C.PVE_PVP},
+        cooldown = 0,
+        duration = 15,
+        auraTarget = AT.ENEMY,
+        specs = {S.SHADOW},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Healing abilities
+    -------------------------------------------------------------------------------
+    {
+        spellID = 402174,  -- Penance (Gloves rune)
+        name = "Penance",
+        description = "Launches a volley of holy light at the target over a few seconds. When cast on an enemy, deals Holy damage. When cast on an ally, heals them.",
+        tags = {C.HEAL, C.DPS, C.ROTATIONAL, C.HEAL_SINGLE, C.PVE_PVP},
+        cooldown = 12,
+        specs = {S.DISCIPLINE, S.HOLY},
+    },
+    {
+        spellID = 401946,  -- Circle of Healing (Gloves rune)
+        name = "Circle of Healing",
+        description = "Heals all party members within 30 yards of the target for a moderate amount.",
+        tags = {C.HEAL, C.HEAL_AOE, C.AOE, C.PVE},
+        cooldown = 6,
+        specs = {S.DISCIPLINE, S.HOLY},
+    },
+    {
+        spellID = 401937,  -- Binding Heal (Cloak rune)
+        name = "Binding Heal",
+        description = "Heals a friendly target and the caster for a moderate amount. Low threat.",
+        tags = {C.HEAL, C.HEAL_SINGLE, C.PVE_PVP},
+        cooldown = 0,
+        specs = {S.DISCIPLINE, S.HOLY},
+    },
+    {
+        spellID = 401859,  -- Prayer of Mending (Pants rune)
+        name = "Prayer of Mending",
+        description = "Places a spell on the target that heals them the next time they take damage. When healed, the spell jumps to a party or raid member within 30 yards. Jumps up to 5 times and lasts 30 sec after each jump.",
+        tags = {C.HEAL, C.ROTATIONAL, C.HEAL_SINGLE, C.HAS_BUFF, C.PVE_PVP},
+        cooldown = 0,
+        duration = 30,
+        auraTarget = AT.ALLY,
+        specs = {S.DISCIPLINE, S.HOLY},
+    },
+    {
+        spellID = 425266,  -- Empowered Renew (Belt rune)
+        name = "Empowered Renew",
+        description = "Your Renew now heals one extra time immediately when applied, and gains increased benefit. Tracked via the resulting Renew HoT on the target.",
+        tags = {C.HEAL, C.HEAL_SINGLE, C.HOT, C.HAS_HOT, C.PVE},
+        cooldown = 0,
+        duration = 15,
+        auraTarget = AT.ALLY,
+        specs = {S.DISCIPLINE, S.HOLY},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Shields / absorbs
+    -------------------------------------------------------------------------------
+    {
+        spellID = 425207,  -- Power Word: Barrier (Bracers rune)
+        name = "Power Word: Barrier",
+        description = "Summons a holy barrier at the target location for 10 sec, reducing damage taken by all allies within it.",
+        tags = {C.HEAL, C.RAID_DEFENSIVE, C.DAMAGE_REDUCTION, C.HEALING_CD, C.AOE, C.PVE_PVP},
+        cooldown = 180,
+        duration = 10,
+        auraTarget = AT.NONE,  -- Ground-targeted barrier
+        specs = {S.DISCIPLINE, S.HOLY},
+    },
+    {
+        spellID = 431622,  -- Divine Aegis (Helm rune)
+        name = "Divine Aegis",
+        description = "Your critical heals create a protective shield on the target, absorbing damage. Lasts 15 sec.",
+        tags = {C.HEAL, C.HAS_BUFF, C.PVE_PVP},
+        cooldown = 0,
+        duration = 15,
+        auraTarget = AT.ALLY,
+        specs = {S.DISCIPLINE, S.HOLY},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Defensive cooldowns
+    -------------------------------------------------------------------------------
+    {
+        spellID = 425294,  -- Dispersion (Boots rune)
+        name = "Dispersion",
+        description = "Disperse into pure Shadow energy, reducing all damage taken by 90% and regenerating mana. You are unable to attack or cast spells. Lasts 6 sec.",
+        tags = {C.PERSONAL_DEFENSIVE, C.DAMAGE_REDUCTION, C.DEFENSIVE, C.MAJOR, C.PVE_PVP},
+        cooldown = 120,
+        duration = 6,
+        auraTarget = AT.SELF,
+        specs = {S.SHADOW},
+    },
+    {
+        spellID = 402004,  -- Pain Suppression (Boots rune)
+        name = "Pain Suppression",
+        description = "Instantly reduces a friendly target's damage taken by 40% and increases resistance to Dispel mechanics for 8 sec.",
+        tags = {C.EXTERNAL_DEFENSIVE, C.DEFENSIVE, C.DAMAGE_REDUCTION, C.HEALING_CD, C.PVE_PVP},
+        cooldown = 180,
+        duration = 8,
+        auraTarget = AT.ALLY,
+        specs = {S.DISCIPLINE, S.HOLY},
+    },
+    {
+        spellID = 425284,  -- Spirit of the Redeemer (Boots rune)
+        name = "Spirit of the Redeemer",
+        description = "Activate to become the Spirit of Redemption for 10 sec. While in this form, you can cast any healing spell free of cost, but you cannot move, attack, or be the target of attacks.",
+        tags = {C.PERSONAL_DEFENSIVE, C.HEALING_CD, C.MAJOR, C.PVE_PVP},
+        cooldown = 180,
+        duration = 10,
+        auraTarget = AT.SELF,
+        specs = {S.HOLY},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Summons
+    -------------------------------------------------------------------------------
+    {
+        spellID = 402799,  -- Homunculi (Pants rune)
+        name = "Homunculi",
+        description = "Break off splinters of your soul to animate 3 miniature copies of yourself that attempt to attack your enemies for 2 min.",
+        tags = {C.DPS, C.MAJOR, C.PET_SUMMON, C.PET_SUMMON_TEMP, C.OFFENSIVE_CD, C.PVE_PVP},
+        cooldown = 120,
+        duration = 120,
+        auraTarget = AT.NONE,
+        specs = {S.SHADOW},
+    },
+    {
+        spellID = 402789,  -- Eye of the Void (Helm rune)
+        name = "Eye of the Void",
+        description = "Call an eye of the void to fight for you for 30 sec. The eye can cast a variety of curses on your target.",
+        tags = {C.DPS, C.MAJOR, C.PET_SUMMON, C.PET_SUMMON_TEMP, C.OFFENSIVE_CD, C.PVE_PVP},
+        cooldown = 180,
+        duration = 30,
+        auraTarget = AT.NONE,
+        specs = {S.SHADOW},
+    },
+}, "PRIEST")
+

@@ -496,6 +496,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 33745,  -- Lacerate (stack and maintain)
+        versionOverrides = { vanilla = false },  -- TBC+ ability; on Era/SoD it exists only as a rune
         name = "Lacerate",
         description = "Lacerates the enemy target, dealing 31 bleed damage and making them bleed for 155 damage over 15 sec and causing a high amount of threat. Damage increased by attack power. This effect stacks up to 5 times on the same target.",
         tags = {C.TANK, C.ROTATIONAL, C.DEBUFF, C.PVE, C.BEAR_FORM},
@@ -544,6 +545,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 33763,  -- Lifebloom (stack to 3, maintain)
+        versionOverrides = { vanilla = false },  -- TBC+ ability; on Era/SoD it exists only as a rune
         name = "Lifebloom",
         description = "Heals the target for 273 over 7 sec. When Lifebloom completes its duration or is dispelled, the target instantly heals themself for 600. This effect can stack up to 3 times on the same target.",
         tags = {C.HEAL, C.ROTATIONAL, C.HOT, C.HEAL_SINGLE, C.PVE},
@@ -602,6 +604,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 33891,  -- Tree of Life (maintain form)
+        versionOverrides = { vanilla = false },  -- TBC+ ability; on Era/SoD it exists only as a rune
         name = "Tree of Life",
         description = "Shapeshift into the Tree of Life. While in this form you increase healing received by 25% of your total Spirit for all party members within 45 yards, your movement speed is reduced by 20%, and you can only cast Swiftmend, Innervate, Nature's Swiftness, Rebirth, Barkskin, poison removing and healing over time spells, but the mana cost of these spells is reduced by 20%.The act of shapeshifting frees the caster of Polymorph and Movement Impairing effects.",
         tags = {C.SHAPESHIFT, C.BUFF, C.PVE},
@@ -671,3 +674,176 @@ lib:RegisterSpells({
     },
 
 }, "DRUID")
+
+-------------------------------------------------------------------------------
+-- Season of Discovery Runes (Classic Era client only)
+--
+-- These abilities are granted by the SoD rune-engraving system and use SoD-only
+-- spell IDs (407xxx+). On the TBC/Anniversary client these IDs do not resolve, so
+-- RegisterSpell self-prunes them automatically — no version guard needed (the IDs
+-- are SoD-reserved and never collide with a real TBC spell). Detection of whether
+-- a rune is active is handled consumer-side via C_Engraving.
+-------------------------------------------------------------------------------
+lib:RegisterSpells({
+    -------------------------------------------------------------------------------
+    -- Damage abilities
+    -------------------------------------------------------------------------------
+    {
+        spellID = 407995,  -- Mangle (Gloves rune; Cat/Bear)
+        name = "Mangle",
+        description = "Mangle the target for 160% normal damage and cause the target to take 30% additional damage from Bleed effects for 12 sec.",
+        tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE_PVP},
+        cooldown = 6,
+        duration = 12,
+        auraTarget = AT.ENEMY,
+        priority = 2,
+        specs = {S.FERAL},
+    },
+    {
+        spellID = 414644,  -- Lacerate (Pants rune)
+        name = "Lacerate",
+        description = "Lacerates the enemy target, making them bleed and causing additional Physical damage over 15 sec. Damage increased each time you Lacerate the target, stacking up to 5 times.",
+        tags = {C.DPS, C.TANK, C.ROTATIONAL, C.DEBUFF, C.PVE_PVP},
+        cooldown = 0,
+        duration = 15,
+        auraTarget = AT.ENEMY,
+        priority = 3,
+        specs = {S.FERAL},
+    },
+    {
+        spellID = 417157,  -- Starsurge (Pants rune)
+        name = "Starsurge",
+        description = "Launch surging stellar energies at the target, dealing Arcane damage and increasing the damage of your next Wrath or Starfire.",
+        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 6,
+        priority = 2,
+        specs = {S.BALANCE},
+    },
+    {
+        spellID = 414689,  -- Sunfire (Gloves rune)
+        name = "Sunfire",
+        description = "Burns the enemy with Nature damage and then additional Nature damage over 12 sec. Usable in Moonkin Form and Cat Form.",
+        tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.HAS_DOT, C.PVE_PVP},
+        cooldown = 0,
+        duration = 12,
+        auraTarget = AT.ENEMY,
+        priority = 4,
+        specs = {S.BALANCE, S.FERAL},
+    },
+    {
+        spellID = 407988,  -- Savage Roar (Pants rune)
+        name = "Savage Roar",
+        description = "Finishing move that increases physical damage done by 30% while in Cat Form. Lasts longer per combo point.",
+        tags = {C.DPS, C.FINISHER, C.HAS_BUFF, C.PVE_PVP},
+        cooldown = 0,
+        duration = 14,  -- 9s base + 5s per combo point; shown at 1 CP
+        auraTarget = AT.SELF,
+        priority = 1,
+        specs = {S.FERAL},
+    },
+
+    -------------------------------------------------------------------------------
+    -- AoE / area damage
+    -------------------------------------------------------------------------------
+    {
+        spellID = 439748,  -- Starfall (Cloak rune)
+        name = "Starfall",
+        description = "Summon a flurry of stars from the sky over 10 sec, striking enemies within 30 yards of the targeted area for Arcane damage.",
+        tags = {C.DPS, C.AOE, C.MAJOR, C.PVE_PVP},
+        cooldown = 90,
+        duration = 10,
+        auraTarget = AT.SELF,
+        specs = {S.BALANCE},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Healing abilities
+    -------------------------------------------------------------------------------
+    {
+        spellID = 409824,  -- Lifebloom (Pants rune)
+        name = "Lifebloom",
+        description = "Heals the target over 7 sec. When the effect ends or is dispelled, the target is instantly healed. This effect can stack up to 3 times on the same target.",
+        tags = {C.HEAL, C.ROTATIONAL, C.HEAL_SINGLE, C.HOT, C.HAS_HOT, C.PVE},
+        cooldown = 0,
+        duration = 7,
+        auraTarget = AT.ALLY,
+        priority = 2,
+        specs = {S.RESTORATION},
+    },
+    {
+        spellID = 408247,  -- Nourish (Belt rune)
+        name = "Nourish",
+        description = "Heals a friendly target. Heals for an additional 20% for each of your heal over time effects present on the target.",
+        tags = {C.HEAL, C.FILLER, C.HEAL_SINGLE, C.PVE},
+        cooldown = 0,
+        priority = 3,
+        specs = {S.RESTORATION},
+    },
+    {
+        spellID = 408120,  -- Wild Growth (Gloves rune)
+        name = "Wild Growth",
+        description = "Heals all of target player's party members within 43.5 yards of target player over 7 sec. The amount healed is applied quickly at first, and slows down as the effect fades.",
+        tags = {C.HEAL, C.HEAL_AOE, C.AOE, C.HOT, C.HAS_HOT, C.PVE},
+        cooldown = 6,
+        duration = 7,
+        auraTarget = AT.ALLY,
+        specs = {S.RESTORATION},
+    },
+    {
+        spellID = 417149,  -- Efflorescence (Bracers rune)
+        name = "Efflorescence",
+        description = "Your Swiftmend now also causes Efflorescence, healing all party members within 15 yards of the Swiftmend target over 7 sec.",
+        tags = {C.HEAL, C.HEAL_AOE, C.AOE, C.PVE},
+        cooldown = 0,
+        duration = 7,
+        auraTarget = AT.NONE,  -- Ground-targeted AoE heal at the Swiftmend target
+        specs = {S.RESTORATION},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Forms / cooldowns
+    -------------------------------------------------------------------------------
+    {
+        spellID = 439733,  -- Tree of Life (Cloak rune)
+        name = "Tree of Life",
+        description = "Shapeshift into the Tree of Life, increasing healing received by 10% for all party and raid members and increasing your healing done. While in this form you can only cast Restoration spells.",
+        tags = {C.HEAL, C.MAJOR, C.SHAPESHIFT, C.HAS_BUFF, C.PVE},
+        cooldown = 0,
+        auraTarget = AT.SELF,
+        formType = "TREE",
+        specs = {S.RESTORATION},
+    },
+    {
+        spellID = 417141,  -- Berserk (Belt rune)
+        name = "Berserk",
+        description = "When activated, your Mangle (Bear) and Lacerate abilities hit up to 3 targets, and clears the Fear effect and makes you immune to Fear for the duration. Lasts 15 sec.",
+        tags = {C.DPS, C.TANK, C.MAJOR, C.HAS_BUFF, C.CC_BREAK, C.PVE_PVP},
+        cooldown = 180,
+        duration = 15,
+        auraTarget = AT.SELF,
+        specs = {S.FERAL},
+    },
+    {
+        spellID = 408024,  -- Survival Instincts (Boots rune)
+        name = "Survival Instincts",
+        description = "When activated, grants you 30% of your maximum health and increases all non-Physical healing you receive by 20% for 20 sec.",
+        tags = {C.DEFENSIVE, C.TANK, C.MAJOR, C.PERSONAL_DEFENSIVE, C.HAS_BUFF, C.PVE_PVP},
+        cooldown = 180,
+        duration = 20,
+        auraTarget = AT.SELF,
+        specs = {S.FERAL},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Interrupts
+    -------------------------------------------------------------------------------
+    {
+        spellID = 410176,  -- Skull Bash (Gloves rune)
+        name = "Skull Bash",
+        description = "Charge to a target within 13 yards and bash the target's skull, interrupting spellcasting and preventing any spell in that school from being cast for 5 sec. Usable in Cat Form and Bear Form.",
+        tags = {C.INTERRUPT, C.MOVEMENT_GAP_CLOSE, C.PVE_PVP},
+        cooldown = 15,
+        specs = {S.FERAL},
+    },
+}, "DRUID")
+

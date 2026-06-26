@@ -66,6 +66,7 @@ lib:RegisterSpells({
         triggersAuras = {
             {
                 spellID = 20615,  -- Intercept Stun
+        versionOverrides = { vanilla = false },  -- TBC+ ability; on Era/SoD it exists only as a rune
                 tags = {C.CC_HARD},
                 type = "DEBUFF",
                 onTarget = true,
@@ -371,6 +372,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 34428,  -- Victory Rush (TBC, usable after killing blow)
+        versionOverrides = { vanilla = false },  -- TBC+ ability; on Era/SoD it exists only as a rune
         name = "Victory Rush",
         description = "Instantly attack the target causing (Attack Power * 45 / 100) damage. Can only be used within 20 sec after you kill an enemy that yields experience or honor. Damage is based on your attack power.",
         tags = {C.DPS, C.ROTATIONAL, C.REACTIVE, C.HEAL_SINGLE, C.PVE_PVP, C.PROC},
@@ -403,6 +405,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 29801,  -- Rampage (critical buff to maintain, procs on crit)
+        versionOverrides = { vanilla = false },  -- TBC+ ability; on Era/SoD it exists only as a rune
         name = "Rampage",
         description = "Warrior goes on a rampage, increasing attack power by 30 and causing most successful melee attacks to increase attack power by an additional 30. This effect will stack up to 5 times. Lasts 30 sec. This ability can only be used after scoring a critical hit.",
         tags = {C.DPS, C.ROTATIONAL, C.BUFF, C.HAS_BUFF, C.REACTIVE, C.PVE},
@@ -478,6 +481,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 20243,  -- Devastate (filler, stacks Sunder)
+        versionOverrides = { vanilla = false },  -- TBC+ ability; on Era/SoD it exists only as a rune
         name = "Devastate",
         description = "Sunder the target's armor causing the Sunder Armor effect. In addition, causes 50% of weapon damage plus 15 for each application of Sunder Armor on the target. The Sunder Armor effect can stack up to 5 times.",
         tags = {C.TANK, C.ROTATIONAL, C.DEBUFF, C.PVE},
@@ -627,3 +631,126 @@ lib:RegisterSpells({
     },
 
 }, "WARRIOR")
+
+-------------------------------------------------------------------------------
+-- Season of Discovery Runes (Classic Era client only)
+--
+-- These abilities are granted by the SoD rune-engraving system and use SoD-only
+-- spell IDs (40xxxx+). On the TBC/Anniversary client these IDs do not resolve, so
+-- RegisterSpell self-prunes them automatically — no version guard needed (the IDs
+-- are SoD-reserved and never collide with a real TBC spell). Detection of whether
+-- a rune is active is handled consumer-side via C_Engraving.
+-------------------------------------------------------------------------------
+lib:RegisterSpells({
+    -------------------------------------------------------------------------------
+    -- Damage abilities
+    -------------------------------------------------------------------------------
+    {
+        spellID = 429765,  -- Quick Strike (Gloves rune)
+        name = "Quick Strike",
+        description = "A reckless instant melee attack with your two-handed weapon dealing (Attack power * 25 / 100) to (Attack power * 35 / 100) physical damage. This ability benefits from and triggers all effects associated with Heroic Strike.",
+        tags = {C.DPS, C.ROTATIONAL, C.SWING_RESET, C.PVE_PVP},
+        cooldown = 0,
+        specs = {S.ARMS, S.FURY},
+    },
+    {
+        spellID = 402911,  -- Raging Blow (Chest rune)
+        name = "Raging Blow",
+        description = "A ferocious strike that deals 100% weapon damage, but can only be used while Enrage, Berserker Rage, or Bloodrage is active. Each other melee ability used while Enrage, Berserker Rage, or Bloodrage is active reduces Raging Blow's remaining cooldown by 1 sec.",
+        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 8,
+        specs = {S.FURY, S.ARMS},
+    },
+    {
+        spellID = 403195,  -- Devastate (Gloves rune)
+        name = "Devastate",
+        description = "While you are in Defensive Stance and have a shield equipped, Sunder Armor also deals damage equal to 150% of your equipped weapon's damage per second, increased by 10% per application of Sunder Armor already on the target. Devastate damage deals a high amount of threat while you are in Defensive Stance.",
+        tags = {C.TANK, C.ROTATIONAL, C.PVE},
+        cooldown = 0,
+        specs = {S.PROTECTION},
+    },
+    {
+        spellID = 402927,  -- Victory Rush (Gloves rune)
+        name = "Victory Rush",
+        description = "Instantly attack the target causing (1 + Attack power * 45 / 100) damage and healing you for 30% of your maximum health. Only useable within 20 sec after you kill an enemy that yields experience or honor.",
+        tags = {C.DPS, C.ROTATIONAL, C.REACTIVE, C.HEAL_SINGLE, C.PVE_PVP, C.PROC},
+        cooldown = 0,
+        auraTarget = AT.SELF,  -- Self-heal on kill
+        reactiveWindow = 20,  -- Usable for 20s after killing blow
+        reactiveWindowEvent = "PARTY_KILL",  -- CLEU sub-event that triggers/refreshes the window
+        specs = {S.ARMS, S.FURY},
+        procInfo = {
+            description = "Usable for 20 sec after a killing blow",
+            stacks = false,
+        },
+    },
+
+    -------------------------------------------------------------------------------
+    -- Cooldowns / rage spenders
+    -------------------------------------------------------------------------------
+    {
+        spellID = 426940,  -- Rampage (Bracers rune)
+        name = "Rampage",
+        description = "Go on a rampage, increasing your attack power by 10% for 30 sec. This ability can only be used while Enraged.",
+        tags = {C.DPS, C.OFFENSIVE_CD, C.HAS_BUFF, C.PVE_PVP},
+        cooldown = 90,
+        duration = 30,
+        auraTarget = AT.SELF,
+        specs = {S.ARMS, S.FURY},
+    },
+    {
+        spellID = 440488,  -- Shockwave (Cloak rune)
+        name = "Shockwave",
+        description = "Sends a wave of force in front of the warrior, causing (50 / 100 * Attack power) damage and stunning all enemy targets within 10 yards in a frontal cone for 4 sec.",
+        tags = {C.TANK, C.AOE, C.CC_HARD, C.MINOR, C.PVE_PVP},
+        cooldown = 20,
+        duration = 4,
+        auraTarget = AT.ENEMY,
+        specs = {S.PROTECTION, S.ARMS, S.FURY},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Defensives
+    -------------------------------------------------------------------------------
+    {
+        spellID = 402913,  -- Enraged Regeneration (Boots rune)
+        name = "Enraged Regeneration",
+        description = "Heals you for 30% of your maximum health over 10 sec, but can only be used while Enrage, Berserker Rage, or Bloodrage is active. Useable while Stunned.",
+        tags = {C.PERSONAL_DEFENSIVE, C.MINOR, C.HAS_HOT, C.PVE_PVP},
+        cooldown = 180,
+        duration = 10,
+        auraTarget = AT.SELF,
+        specs = {S.ARMS, S.FURY, S.PROTECTION},
+    },
+    {
+        spellID = 426490,  -- Rallying Cry (Boots rune)
+        name = "Rallying Cry",
+        description = "Let loose a rallying cry, granting all party and raid members within 40 yards 15% increased maximum health for 10 sec.",
+        tags = {C.RAID_DEFENSIVE, C.EXTERNAL_DEFENSIVE, C.MINOR, C.PVE_PVP},
+        cooldown = 180,
+        duration = 10,
+        auraTarget = AT.ALLY,
+        specs = {S.ARMS, S.FURY, S.PROTECTION},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Movement / stances
+    -------------------------------------------------------------------------------
+    {
+        spellID = 403338,  -- Intervene (Boots rune)
+        name = "Intervene",
+        description = "Run at high speed towards a party member, intercepting the next melee or ranged attack made against them as well as reducing their total threat by 10%.",
+        tags = {C.MOVEMENT, C.MOVEMENT_GAP_CLOSE, C.UTILITY, C.PVE_PVP},
+        cooldown = 30,
+        specs = {S.ARMS, S.FURY, S.PROTECTION},
+    },
+    {
+        spellID = 412513,  -- Gladiator Stance (Boots rune)
+        name = "Gladiator Stance",
+        description = "An aggressive stance that increases damage while you are wearing a shield by 10% and increases block chance by 10%, but reduces armor by 30% and threat generated by 30%. In addition, you gain 50% increased Rage when your auto-attack damages an enemy not targeting you. While wearing a shield in Gladiator Stance, you may use all abilities that are restricted to other stances.",
+        tags = {C.STANCE, C.PVE_PVP},
+        cooldown = 0,
+        specs = {S.PROTECTION, S.ARMS, S.FURY},
+    },
+}, "WARRIOR")
+

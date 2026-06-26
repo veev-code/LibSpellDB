@@ -208,6 +208,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 36554,  -- Shadowstep
+        versionOverrides = { vanilla = false },  -- TBC+ ability; on Era/SoD it exists only as a rune
         name = "Shadowstep",
         description = "Attempts to step through the shadows and reappear behind your enemy target. The damage of your next ability is increased by 20% and the threat caused is reduced by 50%. Lasts 10 sec.",
         tags = {C.MOVEMENT, C.MOVEMENT_GAP_CLOSE, C.DPS, C.MINOR, C.HAS_BUFF},
@@ -324,6 +325,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 1329,  -- Mutilate (Assassination builder)
+        versionOverrides = { vanilla = false },  -- TBC+ ability; on Era/SoD it exists only as a rune
         name = "Mutilate",
         description = "Instantly attacks with both weapons for an additional 44 with each weapon. Damage is increased by 50% against Poisoned targets. Must be behind the target. Awards 2 combo points.",
         tags = {C.DPS, C.ROTATIONAL, C.PVE},
@@ -451,3 +453,157 @@ lib:RegisterSpells({
     },
 
 }, "ROGUE")
+
+-------------------------------------------------------------------------------
+-- Season of Discovery Runes (Classic Era client only)
+--
+-- These abilities are granted by the SoD rune-engraving system and use SoD-only
+-- spell IDs (398xxx+). On the TBC/Anniversary client these IDs do not resolve, so
+-- RegisterSpell self-prunes them automatically — no version guard needed (the IDs
+-- are SoD-reserved and never collide with a real TBC spell). Detection of whether
+-- a rune is active is handled consumer-side via C_Engraving.
+-------------------------------------------------------------------------------
+lib:RegisterSpells({
+    -------------------------------------------------------------------------------
+    -- Builders / strikes
+    -------------------------------------------------------------------------------
+    {
+        spellID = 399956,  -- Mutilate (Gloves rune)
+        name = "Mutilate",
+        description = "Instantly attacks with both weapons for 80% weapon damage plus additional damage. Damage is increased against Poisoned targets. Awards 2 combo points.",
+        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 0,
+        specs = {S.ASSASSINATION},
+    },
+    {
+        spellID = 424785,  -- Saber Slash (Gloves rune)
+        name = "Saber Slash",
+        description = "Viciously slash an enemy for 100% weapon damage and cause the target to bleed. Stacks up to 5 times. Awards 1 combo point.",
+        tags = {C.DPS, C.ROTATIONAL, C.HAS_DEBUFF, C.HAS_DOT, C.PVE_PVP},
+        cooldown = 0,
+        duration = 12,
+        auraTarget = AT.ENEMY,
+        specs = {S.COMBAT},
+    },
+    {
+        spellID = 424919,  -- Main Gauche (Gloves rune)
+        name = "Main Gauche",
+        description = "Instantly strike with your off-hand weapon for normal off-hand weapon damage and increase your chance to parry by 10% for 5 sec. Awards 1 combo point.",
+        tags = {C.DPS, C.ROTATIONAL, C.HAS_BUFF, C.PVE_PVP},
+        cooldown = 0,
+        duration = 5,
+        auraTarget = AT.SELF,
+        specs = {S.COMBAT},
+    },
+    {
+        spellID = 398196,  -- Quick Draw (Chest rune)
+        name = "Quick Draw",
+        description = "Draw your ranged weapon and fire a quick shot at an enemy, causing normal ranged weapon damage and reducing their movement speed. Awards 1 combo point.",
+        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 10,
+        specs = {S.COMBAT},
+    },
+    {
+        spellID = 399985,  -- Shadowstrike (Gloves rune; requires stealth)
+        name = "Shadowstrike",
+        description = "Teleport behind your target and strike, causing 150% weapon damage. Must be stealthed. Awards 1 combo point.",
+        tags = {C.DPS, C.ROTATIONAL, C.STEALTH, C.PVE_PVP},
+        cooldown = 0,
+        specs = {S.SUBTLETY},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Ranged / thrown
+    -------------------------------------------------------------------------------
+    {
+        spellID = 399986,  -- Shuriken Toss (Belt rune)
+        name = "Shuriken Toss",
+        description = "Throw a shuriken at your enemy dealing damage equal to 50% of your Attack Power, and strike additional nearby enemies. Awards 1 combo point.",
+        tags = {C.DPS, C.AOE, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 20,
+        specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
+    },
+    {
+        spellID = 425012,  -- Poisoned Knife (Belt rune)
+        name = "Poisoned Knife",
+        description = "Instantly throw your off-hand weapon to deal normal off-hand weapon damage with a 100% chance to apply your active poison. Awards 1 combo point.",
+        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 6,
+        specs = {S.ASSASSINATION},
+    },
+
+    -------------------------------------------------------------------------------
+    -- AoE
+    -------------------------------------------------------------------------------
+    {
+        spellID = 409240,  -- Fan of Knives (Cloak rune)
+        name = "Fan of Knives",
+        description = "Instantly throw both weapons at all targets within 8 yards, causing weapon damage. Applies your active poisons.",
+        tags = {C.DPS, C.AOE, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 0,
+        specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
+    },
+    {
+        spellID = 436564,  -- Blunderbuss (Cloak rune)
+        name = "Blunderbuss",
+        description = "Fire a musket blast at up to 4 enemies in a cone in front of you, causing damage and awarding combo points based on targets hit.",
+        tags = {C.DPS, C.AOE, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 15,
+        specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Finishers
+    -------------------------------------------------------------------------------
+    {
+        spellID = 399963,  -- Envenom (Pants rune)
+        name = "Envenom",
+        description = "Finishing move that deals instant poison damage based on Deadly Poison doses on the target. One dose is consumed per combo point.",
+        tags = {C.DPS, C.FINISHER, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 0,
+        specs = {S.ASSASSINATION},
+    },
+    {
+        spellID = 400009,  -- Between the Eyes (Pants rune)
+        name = "Between the Eyes",
+        description = "Ranged finishing move that causes damage per combo point and stuns the target for a duration based on combo points spent.",
+        tags = {C.DPS, C.FINISHER, C.CC_HARD, C.HAS_DEBUFF, C.PVE_PVP},
+        cooldown = 20,
+        duration = 5,
+        auraTarget = AT.ENEMY,
+        specs = {S.COMBAT, S.SUBTLETY},
+    },
+    {
+        spellID = 400012,  -- Blade Dance (Pants rune)
+        name = "Blade Dance",
+        description = "Finishing move that increases your Parry chance by 10% and grants Attack Power for each combo point. Lasts longer per combo point.",
+        tags = {C.DPS, C.FINISHER, C.HAS_BUFF, C.PVE_PVP},
+        cooldown = 0,
+        duration = 12,
+        auraTarget = AT.SELF,
+        specs = {S.COMBAT, S.SUBTLETY},
+    },
+    {
+        spellID = 412096,  -- Crimson Tempest (Cloak rune)
+        name = "Crimson Tempest",
+        description = "Finishing move that slashes all enemies within 8 yards, causing victims to bleed over time. Lasts longer per combo point.",
+        tags = {C.DPS, C.AOE, C.FINISHER, C.HAS_DEBUFF, C.HAS_DOT, C.PVE_PVP},
+        cooldown = 0,
+        duration = 12,
+        auraTarget = AT.ENEMY,
+        specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Movement / gap-closers
+    -------------------------------------------------------------------------------
+    {
+        spellID = 400029,  -- Shadowstep (Belt rune)
+        name = "Shadowstep",
+        description = "Attempts to step through the shadows and reappear behind your enemy, increasing movement speed and the damage of your next ability.",
+        tags = {C.MOVEMENT, C.MOVEMENT_GAP_CLOSE, C.MINOR, C.PVE_PVP},
+        cooldown = 30,
+        specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
+    },
+}, "ROGUE")
+

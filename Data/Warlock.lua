@@ -278,6 +278,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 30108,  -- Unstable Affliction (apply early)
+        versionOverrides = { vanilla = false },  -- TBC+ ability; on Era/SoD it exists only as a rune
         name = "Unstable Affliction",
         description = "Shadow energy slowly destroys the target, causing 660 damage over 18 sec. In addition, if the Unstable Affliction is dispelled it will cause 990 damage to the dispeller and silence them for 5 sec.",
         tags = {C.DPS, C.ROTATIONAL, C.DEBUFF, C.PVE},
@@ -332,6 +333,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 29722,  -- Incinerate (main nuke with Immolate up)
+        versionOverrides = { vanilla = false },  -- TBC+ ability; on Era/SoD it exists only as a rune
         name = "Incinerate",
         description = "Deals 416 to 480 Fire damage to your target and an additional 103 to 120 Fire damage if the target is affected by an Immolate spell.",
         tags = {C.DPS, C.FILLER, C.PVE},
@@ -505,6 +507,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 30146,  -- Summon Felguard (Demonology capstone)
+        versionOverrides = { vanilla = false },  -- TBC+ ability; on Era/SoD it exists only as a rune
         name = "Summon Felguard",
         description = "Summons a Felguard under the command of the Warlock.",
         tags = {C.PET_SUMMON, C.UTILITY, C.OUT_OF_COMBAT},
@@ -791,3 +794,161 @@ lib:RegisterSpells({
     },
 
 }, "WARLOCK")
+
+-------------------------------------------------------------------------------
+-- Season of Discovery Runes (Classic Era client only)
+--
+-- These abilities are granted by the SoD rune-engraving system and use SoD-only
+-- spell IDs (403xxx+). On the TBC/Anniversary client these IDs do not resolve, so
+-- RegisterSpell self-prunes them automatically — no version guard needed (the IDs
+-- are SoD-reserved and never collide with a real TBC spell). Detection of whether
+-- a rune is active is handled consumer-side via C_Engraving.
+-------------------------------------------------------------------------------
+lib:RegisterSpells({
+    -------------------------------------------------------------------------------
+    -- Damage abilities
+    -------------------------------------------------------------------------------
+    {
+        spellID = 403629,  -- Chaos Bolt (Gloves rune)
+        name = "Chaos Bolt",
+        description = "Sends a bolt of chaotic fire at the enemy, dealing Fire damage. Chaos Bolt cannot be resisted and pierces through absorption effects.",
+        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 12,
+        specs = {S.DESTRUCTION},
+    },
+    {
+        spellID = 403501,  -- Haunt (Gloves rune)
+        name = "Haunt",
+        description = "Unleash a ghostly soul on an enemy, dealing Shadow damage and increasing your damage done by your damage-over-time effects on the target by 20% for 15 sec.",
+        tags = {C.DPS, C.ROTATIONAL, C.HAS_DEBUFF, C.PVE_PVP},
+        cooldown = 12,
+        duration = 15,
+        auraTarget = AT.ENEMY,
+        specs = {S.AFFLICTION},
+    },
+    {
+        spellID = 412798,  -- Incinerate (Bracers rune)
+        name = "Incinerate",
+        description = "Burn your enemy for Fire damage. If the target is affected by your Immolate, the damage of Incinerate is increased.",
+        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 0,
+        specs = {S.DESTRUCTION},
+    },
+    {
+        spellID = 403628,  -- Shadow Bolt Volley (Gloves rune)
+        name = "Shadow Bolt Volley",
+        description = "Your Shadow Bolt now strikes up to 5 targets within a chain distance of 10 yards, but for 5% reduced damage per additional target struck.",
+        tags = {C.DPS, C.ROTATIONAL, C.AOE, C.PVE},
+        cooldown = 0,
+        specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+    },
+    {
+        spellID = 426320,  -- Shadowflame (Boots rune)
+        name = "Shadowflame",
+        description = "Burns the enemy for Shadowflame damage and an additional Fire damage over 8 sec, dealt to all enemies in a cone in front of you.",
+        tags = {C.DPS, C.AOE, C.ROTATIONAL, C.HAS_DOT, C.PVE},
+        cooldown = 0,
+        duration = 8,
+        auraTarget = AT.ENEMY,
+        specs = {S.DEMONOLOGY, S.DESTRUCTION},
+    },
+    {
+        spellID = 427717,  -- Unstable Affliction (Bracers rune)
+        name = "Unstable Affliction",
+        description = "Shadow energy slowly destroys the target, causing Shadow damage over 18 sec. In addition, if the Unstable Affliction is dispelled it will cause damage to the dispeller and silence them for 5 sec.",
+        tags = {C.DPS, C.ROTATIONAL, C.HAS_DOT, C.HAS_DEBUFF, C.PVE_PVP},
+        cooldown = 0,
+        duration = 18,
+        auraTarget = AT.ENEMY,
+        specs = {S.AFFLICTION},
+    },
+    {
+        spellID = 403666,  -- Lake of Fire (Chest rune)
+        name = "Lake of Fire",
+        description = "Your Rain of Fire is no longer channeled, but gains an 8 sec cooldown, and creates a lake of fire that increases the Fire damage taken by enemies standing in it.",
+        tags = {C.DPS, C.AOE, C.ROTATIONAL, C.PVE},
+        cooldown = 8,
+        specs = {S.DESTRUCTION},
+    },
+    {
+        spellID = 403668,  -- Master Channeler (Chest rune)
+        name = "Master Channeler",
+        description = "Your Drain Life is no longer channeled, lasts 15 sec with a 15 sec cooldown, costs 100% more mana, and heals you for the amount drained.",
+        tags = {C.DPS, C.ROTATIONAL, C.HAS_DOT, C.PVE},
+        cooldown = 15,
+        duration = 15,
+        auraTarget = AT.ENEMY,
+        specs = {S.AFFLICTION},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Auras
+    -------------------------------------------------------------------------------
+    {
+        spellID = 427726,  -- Immolation Aura (Bracers rune)
+        name = "Immolation Aura",
+        description = "Engulfs you in flames for 15 sec, burning nearby enemies for Fire damage every second.",
+        tags = {C.DPS, C.AOE, C.HAS_BUFF, C.PVE},
+        cooldown = 0,
+        duration = 15,
+        auraTarget = AT.SELF,
+        specs = {S.DEMONOLOGY, S.DESTRUCTION},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Defensive / utility cooldowns
+    -------------------------------------------------------------------------------
+    {
+        spellID = 425463,  -- Demonic Grace (Legs rune)
+        name = "Demonic Grace",
+        description = "Surge with fel energy, increasing your pet's and your own dodge chance by 20%, and your chance to critically strike with spells by 20% for 6 sec.",
+        tags = {C.PERSONAL_DEFENSIVE, C.MINOR, C.HAS_BUFF, C.PVE_PVP},
+        cooldown = 20,
+        duration = 6,
+        auraTarget = AT.SELF,
+        specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+    },
+    {
+        spellID = 440882,  -- Infernal Armor (Cloak rune)
+        name = "Infernal Armor",
+        description = "Your spirit becomes infused with demonic energy, reducing all Magic damage you take by a percentage for 10 sec.",
+        tags = {C.DEFENSIVE, C.PERSONAL_DEFENSIVE, C.DAMAGE_REDUCTION, C.MINOR, C.HAS_BUFF, C.PVE_PVP},
+        cooldown = 60,
+        duration = 10,
+        auraTarget = AT.SELF,
+        specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+    },
+    {
+        spellID = 426195,  -- Vengeance (Helm rune)
+        name = "Vengeance",
+        description = "When activated, this ability temporarily grants you a 30% increase to your maximum health for 20 sec.",
+        tags = {C.DEFENSIVE, C.PERSONAL_DEFENSIVE, C.MINOR, C.HAS_BUFF, C.PVE_PVP},
+        cooldown = 180,
+        duration = 20,
+        auraTarget = AT.SELF,
+        specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
+    },
+    {
+        spellID = 412789,  -- Metamorphosis (Gloves rune) -- taunt; col1 ID 403789 in some sources
+        name = "Metamorphosis",
+        description = "Forces all nearby enemies to focus attacks on you for 6 sec.",
+        tags = {C.TAUNT, C.AOE, C.MINOR, C.PVE},
+        cooldown = 0,
+        duration = 6,
+        auraTarget = AT.ENEMY,
+        specs = {S.DEMONOLOGY},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Summons
+    -------------------------------------------------------------------------------
+    {
+        spellID = 427733,  -- Summon Felguard (Bracers rune)
+        name = "Summon Felguard",
+        description = "Summons a Felguard under the command of the Warlock. The Felguard benefits from all talents and effects that affect your other demons.",
+        tags = {C.PET_SUMMON, C.UTILITY},
+        cooldown = 0,
+        specs = {S.DEMONOLOGY},
+    },
+}, "WARLOCK")
+

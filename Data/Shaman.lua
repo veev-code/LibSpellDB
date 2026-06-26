@@ -198,6 +198,7 @@ lib:RegisterSpells({
     -------------------------------------------------------------------------------
     {
         spellID = 974,  -- Earth Shield (maintain on tank or self)
+        versionOverrides = { vanilla = false },  -- TBC+ ability; on Era/SoD it exists only as a rune
         name = "Earth Shield",
         description = "Protects the target with an earthen shield, giving a 30% chance of ignoring spell interruption when damaged and causing attacks to heal the shielded target for 150. This effect can only occur once every few seconds. 6 charges. Lasts 10 min. Earth Shield can only be placed on one target at a time and only one Elemental Shield can be active on a target at a time.",
         tags = {C.HEAL, C.ROTATIONAL, C.HEAL_SINGLE, C.HAS_BUFF, C.LONG_BUFF, C.PVE, C.IMPORTANT_EXTERNAL},
@@ -215,6 +216,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 24398,  -- Water Shield (maintain on self)
+        versionOverrides = { vanilla = false },  -- TBC+ ability; on Era/SoD it exists only as a rune
         name = "Water Shield",
         description = "The caster is surrounded by 3 globes of water, granting 43 mana per 5 sec. When a spell, melee or ranged attack hits the caster, 182 mana is restored to the caster. This expends one water globe. Only one globe will activate every few seconds. Lasts 10 min. Only one Elemental Shield can be active on the Shaman at any one time.",
         tags = {C.HEAL, C.MAINTENANCE, C.BUFF, C.RESOURCE, C.HAS_BUFF, C.LONG_BUFF, C.PVE_PVP},
@@ -729,3 +731,124 @@ lib:RegisterSpells({
     },
 
 }, "SHAMAN")
+
+-------------------------------------------------------------------------------
+-- Season of Discovery Runes (Classic Era client only)
+--
+-- These abilities are granted by the SoD rune-engraving system and use SoD-only
+-- spell IDs (408xxx+). On the TBC/Anniversary client these IDs do not resolve, so
+-- RegisterSpell self-prunes them automatically — no version guard needed (the IDs
+-- are SoD-reserved and never collide with a real TBC spell). Detection of whether
+-- a rune is active is handled consumer-side via C_Engraving.
+-------------------------------------------------------------------------------
+lib:RegisterSpells({
+    -------------------------------------------------------------------------------
+    -- Damage abilities
+    -------------------------------------------------------------------------------
+    {
+        spellID = 408490,  -- Lava Burst (Gloves rune)
+        name = "Lava Burst",
+        description = "You hurl molten lava at the target, dealing Fire damage. A guaranteed critical strike if Flame Shock is on the target.",
+        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 8,
+        priority = 3,
+        specs = {S.ELEMENTAL, S.ENHANCEMENT},
+    },
+    {
+        spellID = 408507,  -- Lava Lash (Gloves rune)
+        name = "Lava Lash",
+        description = "You charge your off-hand weapon with lava, instantly dealing 100% off-hand Weapon damage. Damage is increased by 100% if your off-hand weapon is enchanted with Flametongue.",
+        tags = {C.DPS, C.ROTATIONAL},
+        cooldown = 6,
+        priority = 5,
+        specs = {S.ENHANCEMENT},
+    },
+    {
+        spellID = 425339,  -- Molten Blast (Gloves rune)
+        name = "Molten Blast",
+        description = "Blast up to 10 enemies in a cone in front of you for Fire damage and generate a high amount of threat. Shares a cooldown with your Shocks.",
+        tags = {C.DPS, C.AOE, C.ROTATIONAL},
+        cooldown = 6,
+        priority = 6,
+        specs = {S.ELEMENTAL, S.ENHANCEMENT},
+    },
+    {
+        spellID = 408339,  -- Fire Nova (Belt rune; replaces Fire Nova Totem)
+        name = "Fire Nova",
+        description = "Causes your active Fire totem to emit a wave of flame, dealing Fire damage to all enemies within 10 yards of the totem.",
+        tags = {C.DPS, C.AOE, C.MINOR},
+        cooldown = 10,
+        specs = {S.ELEMENTAL, S.ENHANCEMENT},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Healing abilities
+    -------------------------------------------------------------------------------
+    {
+        spellID = 408521,  -- Riptide (Bracers rune)
+        name = "Riptide",
+        description = "Heals a friendly target instantly and then every 3 sec for 15 sec. Empowers your next Chain Heal.",
+        tags = {C.HEAL, C.ROTATIONAL, C.HEAL_SINGLE, C.HOT, C.HAS_HOT, C.PVE},
+        cooldown = 6,
+        duration = 15,
+        auraTarget = AT.ALLY,
+        priority = 2,
+        specs = {S.RESTORATION},
+    },
+    {
+        spellID = 415236,  -- Healing Rain (Chest rune)
+        name = "Healing Rain",
+        description = "Heals all party members in the target area over 10 sec.",
+        tags = {C.HEAL, C.HEAL_AOE, C.AOE, C.PVE},
+        cooldown = 10,
+        duration = 10,
+        auraTarget = AT.NONE,  -- Ground-targeted AoE heal
+        specs = {S.RESTORATION},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Shields / maintenance buffs
+    -------------------------------------------------------------------------------
+    {
+        spellID = 408514,  -- Earth Shield (Legs rune)
+        name = "Earth Shield",
+        description = "Protects the target with an earthen shield, reducing casting/channeling time lost when damaged by 30% and healing the target when they are attacked. 9 charges. Lasts 10 min. Only one Elemental Shield can be active on a target at a time.",
+        tags = {C.HEAL, C.ROTATIONAL, C.HEAL_SINGLE, C.HAS_BUFF, C.LONG_BUFF, C.PVE, C.IMPORTANT_EXTERNAL},
+        cooldown = 0,
+        duration = 600,
+        charges = 9,
+        singleTarget = true,
+        dispelType = "Magic",
+        priority = 1,
+        auraTarget = AT.ALLY,
+        specs = {S.RESTORATION},
+        buffGroup = "SHAMAN_SHIELD",
+    },
+    {
+        spellID = 408510,  -- Water Shield (Gloves rune)
+        name = "Water Shield",
+        description = "The caster is surrounded by 3 globes of water that restore mana when the caster is struck and passively. Lasts 10 min. Only one Elemental Shield can be active on the Shaman at a time.",
+        tags = {C.BUFF, C.MAINTENANCE, C.RESOURCE, C.HAS_BUFF, C.LONG_BUFF, C.PVE_PVP},
+        cooldown = 0,
+        duration = 600,
+        charges = 3,
+        auraTarget = AT.SELF,
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
+        buffGroup = "SHAMAN_SHIELD",
+    },
+
+    -------------------------------------------------------------------------------
+    -- Summons / cooldowns
+    -------------------------------------------------------------------------------
+    {
+        spellID = 440580,  -- Feral Spirit (Cloak rune)
+        name = "Feral Spirit",
+        description = "Summons two Spirit Wolves under the command of the Shaman, lasting 45 sec.",
+        tags = {C.DPS, C.MAJOR, C.PET_SUMMON, C.PET_SUMMON_TEMP, C.OFFENSIVE_CD},
+        cooldown = 180,
+        duration = 45,
+        auraTarget = AT.NONE,
+        specs = {S.ENHANCEMENT},
+    },
+}, "SHAMAN")
+

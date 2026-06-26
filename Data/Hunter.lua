@@ -354,6 +354,7 @@ lib:RegisterSpells({
     },
     {
         spellID = 34120,  -- Steady Shot (main shot, weave with Auto)
+        versionOverrides = { vanilla = false },  -- TBC+ ability; on Era/SoD it exists only as a rune
         name = "Steady Shot",
         description = "A steady shot that causes base weapon damage plus (Ranged Attack Power * 0.2 + 150). Causes an additional 175 against Dazed targets.",
         tags = {C.DPS, C.FILLER, C.PVE},
@@ -529,3 +530,99 @@ lib:RegisterSpells({
     },
 
 }, "HUNTER")
+
+-------------------------------------------------------------------------------
+-- Season of Discovery Runes (Classic Era client only)
+--
+-- These abilities are granted by the SoD rune-engraving system and use SoD-only
+-- spell IDs (408xxx+). On the TBC/Anniversary client these IDs do not resolve, so
+-- RegisterSpell self-prunes them automatically — no version guard needed (the IDs
+-- are SoD-reserved and never collide with a real TBC spell). Detection of whether
+-- a rune is active is handled consumer-side via C_Engraving.
+-------------------------------------------------------------------------------
+lib:RegisterSpells({
+    -------------------------------------------------------------------------------
+    -- Ranged shots
+    -------------------------------------------------------------------------------
+    {
+        spellID = 409433,  -- Chimera Shot (Gloves rune)
+        name = "Chimera Shot",
+        description = "You deal 135% weapon damage, refreshing the current Sting on your target and triggering an effect based on the active Sting.",
+        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 6,
+        specs = {S.MARKSMANSHIP, S.SURVIVAL},
+    },
+    {
+        spellID = 409552,  -- Explosive Shot (Gloves rune)
+        name = "Explosive Shot",
+        description = "You fire an explosive charge into the enemy target, dealing damage over 2 sec. Every time Explosive Shot deals damage it has a chance to reset the cooldown.",
+        tags = {C.DPS, C.ROTATIONAL, C.HAS_DOT, C.PVE_PVP},
+        cooldown = 6,
+        duration = 2,
+        auraTarget = AT.ENEMY,
+        specs = {S.SURVIVAL, S.MARKSMANSHIP},
+    },
+    {
+        spellID = 437123,  -- Steady Shot (Belt rune)
+        name = "Steady Shot",
+        description = "A steady shot that causes 100% ranged weapon damage.",
+        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 0,
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
+    },
+    {
+        spellID = 409593,  -- Kill Shot (Pants rune)
+        name = "Kill Shot",
+        description = "You attempt to finish off a wounded target, firing a ranged attack dealing 100% weapon damage plus additional damage. Only usable on enemies that have 20% or less health.",
+        tags = {C.DPS, C.ROTATIONAL, C.FINISHER, C.PVE_PVP},
+        cooldown = 12,
+        specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Melee strikes (Survival)
+    -------------------------------------------------------------------------------
+    {
+        spellID = 425711,  -- Carve (Gloves rune)
+        name = "Carve",
+        description = "A sweeping attack that strikes all enemies in front of you with your melee weapons for 65% weapon damage.",
+        tags = {C.DPS, C.AOE, C.ROTATIONAL, C.PVE_PVP},
+        cooldown = 6,
+        specs = {S.SURVIVAL},
+    },
+    {
+        spellID = 415320,  -- Flanking Strike (Pants rune)
+        name = "Flanking Strike",
+        description = "You and your pet deal simultaneous instant 100% melee damage. Afterward, you deal 8% increased damage for 10 sec. Requires a pet.",
+        tags = {C.DPS, C.ROTATIONAL, C.REQUIRES_PET, C.PVE_PVP},
+        cooldown = 30,
+        duration = 10,
+        auraTarget = AT.SELF,
+        specs = {S.SURVIVAL},
+    },
+    {
+        spellID = 458479,  -- Wyvern Strike (Boots rune; replaces Wyvern Sting)
+        name = "Wyvern Strike",
+        description = "Replaces your Wyvern Sting ability with Wyvern Strike, a vicious strike that deals 140% weapon damage and causes the target to suffer additional Nature damage over 8 sec.",
+        tags = {C.DPS, C.ROTATIONAL, C.HAS_DOT, C.PVE_PVP},
+        cooldown = 8,
+        duration = 8,
+        auraTarget = AT.ENEMY,
+        specs = {S.SURVIVAL},
+    },
+
+    -------------------------------------------------------------------------------
+    -- Pet cooldowns
+    -------------------------------------------------------------------------------
+    {
+        spellID = 428726,  -- Focus Fire (Bracers rune)
+        name = "Focus Fire",
+        description = "Consumes all applications of Frenzy from your pet, increasing your ranged attack speed by 3% and granting your pet a focus regeneration bonus per stack consumed for 20 sec. Requires a pet.",
+        tags = {C.BUFF, C.MINOR, C.HAS_BUFF, C.REQUIRES_PET, C.PVE_PVP},
+        cooldown = 0,
+        duration = 20,
+        auraTarget = AT.SELF,
+        specs = {S.BEAST_MASTERY},
+    },
+}, "HUNTER")
+

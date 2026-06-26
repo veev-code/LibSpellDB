@@ -1,5 +1,16 @@
 # LibSpellDB Changelog
 
+## [1.0.97] - 2026-06-25
+
+Season of Discovery rune support.
+
+### Added
+- **Season of Discovery rune abilities** — 118 active rune abilities across all nine classes (Lava Burst, Earth Shield, Chaos Bolt, Penance, Mutilate, Starsurge, Crusader Strike, and more), keyed to SoD spell IDs. They register as ordinary spells and self-prune on TBC/Anniversary where the IDs don't resolve, so dependent addons need no changes to pick them up on a SoD client.
+- **Season of Discovery rune procs** — 28 proc buffs in `Procs.lua` (Maelstrom Weapon, Power Surge, Hot Streak, Brain Freeze, Fingers of Frost, Eclipse, Blood Surge, Sudden Death, Surge of Light, Lock and Load, Cutthroat, and more) with `procInfo` metadata. The registered `spellID` is the actual buff/aura ID, which is distinct from the rune ability ID.
+
+### Changed
+- **TBC entries that share a name with a SoD rune now exclude themselves on Classic Era** via `versionOverrides = { vanilla = false }` (Earth Shield, Water Shield, Crusader Strike, Prayer of Mending, Vampiric Touch, Victory Rush, Surge of Light, Light's Grace, Expose Weakness, and 20 others — 29 entries total). Those TBC IDs resolve on the Era/SoD client, so without the guard they would register alongside the rune version and surface as phantom duplicates in name-based consumers. TBC/Anniversary behavior is unchanged.
+
 ## [1.0.96] - 2026-06-11
 
 Full library audit release.
