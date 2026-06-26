@@ -492,7 +492,7 @@ lib.BuffGroups = {
     },
     MAGE_ARMOR = {
         description = "Mage armor",
-        spells = {6117, 7302, 30482, 168},
+        spells = {6117, 7302, 30482, 168, 428741},  -- 428741 = SoD Molten Armor rune (unknown/ignored on TBC)
         relationship = "exclusive",
     },
     MAGE_MAGIC_MODIFIER = {
@@ -502,7 +502,7 @@ lib.BuffGroups = {
     },
     SHAMAN_SHIELD = {
         description = "Shaman shields",
-        spells = {24398, 324, 974},
+        spells = {24398, 324, 974, 408510, 408514},  -- 408510/408514 = SoD Water/Earth Shield runes (unknown/ignored on TBC)
         relationship = "exclusive",
     },
     PALADIN_AURAS = {

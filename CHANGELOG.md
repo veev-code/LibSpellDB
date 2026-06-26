@@ -1,5 +1,10 @@
 # LibSpellDB Changelog
 
+## [1.0.98] - 2026-06-25
+
+### Changed
+- **SoD shield/armor runes added to their exclusive BuffGroups** — `SHAMAN_SHIELD` now includes the Season of Discovery Water Shield (408510) and Earth Shield (408514) runes, and `MAGE_ARMOR` includes the SoD Molten Armor (428741) rune. Consumers that resolve missing-buff logic through `BuffGroups` now treat these rune buffs as group members on the Era/SoD client; previously the groups listed only TBC/vanilla IDs, so a SoD character relying solely on a rune shield or armor matched no group member. The added IDs read as unknown and are ignored on TBC/Anniversary.
+
 ## [1.0.97] - 2026-06-25
 
 Season of Discovery rune support.
