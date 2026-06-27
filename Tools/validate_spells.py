@@ -77,7 +77,7 @@ CORE_DIR = ROOT_DIR / "Core"
 VALID_AURA_TARGETS = {"AT.SELF", "AT.ALLY", "AT.ENEMY", "AT.PET", "AT.NONE"}
 
 # Files to skip (no spell registrations)
-SKIP_FILES = {"Data.xml", "Trinkets.lua"}
+SKIP_FILES = {"Data.xml", "Trinkets.lua", "SpellColors.lua"}
 
 # Totem element tags
 TOTEM_ELEMENT_TAGS = {"TOTEM_EARTH", "TOTEM_FIRE", "TOTEM_WATER", "TOTEM_AIR"}
@@ -683,6 +683,31 @@ def check_duplicate_spell_ids(all_spell_ids):
     return errors
 
 
+def check_color_coverage(all_spell_ids):
+    """Every registered spell should have a Data/SpellColors.lua entry. That
+    table is generated from spell icons (Tools/generate_icon_colors.py); a spell
+    added without regenerating silently falls back to the consumer's default bar
+    color. Flagging the gap keeps the generated colors in sync with spell data."""
+    colors_path = DATA_DIR / "SpellColors.lua"
+    if not colors_path.is_file():
+        return ["MISSING COLORS FILE: Data/SpellColors.lua not found — "
+                "run: python Tools/generate_icon_colors.py --write"]
+    colored = {int(m) for m in re.findall(r"\[(\d+)\]\s*=\s*\{",
+                                          colors_path.read_text(encoding="utf-8"))}
+    errors = []
+    seen = set()
+    for spell_id, name, _class, filename, _line in all_spell_ids:
+        if spell_id in seen:
+            continue
+        seen.add(spell_id)
+        if spell_id not in colored:
+            errors.append(
+                f"MISSING COLOR: [{spell_id}] {name} ({filename}) has no SpellColors.lua entry — "
+                f"run: python Tools/fetch_missing_icons.py && python Tools/generate_icon_colors.py --write"
+            )
+    return errors
+
+
 def main():
     if not DATA_DIR.is_dir():
         print(f"ERROR: Data directory not found: {DATA_DIR}")
@@ -726,6 +751,9 @@ def main():
 
     # Rule 18: Cross-file duplicate spellID check
     all_errors.extend(check_duplicate_spell_ids(all_spell_ids))
+
+    # Rule 19: Every spell must have a generated bar color (Data/SpellColors.lua)
+    all_errors.extend(check_color_coverage(all_spell_ids))
 
     # Report
     print(f"LibSpellDB Validation: checked {spells_checked} spells across {files_checked} files")

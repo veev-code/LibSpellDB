@@ -1,5 +1,16 @@
 # LibSpellDB Changelog
 
+## [1.0.100] - 2026-06-26
+
+Per-spell icon colors.
+
+### Added
+- **`GetSpellColor(spellID)`** — returns `r, g, b` (0-1) of a vibrant color sampled offline from the spell's icon, or nil. Rank-aware (falls back to the canonical spell's color). Intended as a default fill color for status-bar-style aura displays.
+- **`Data/SpellColors.lua`** — auto-generated `spellID -> {r, g, b}` table backing `GetSpellColor`, covering the full spell database. Produced by the new `Tools/generate_icon_colors.py`, which extracts a vibrant, center-weighted dominant color from each icon (with a perceptual brightness pass for warm hues); `Tools/fetch_missing_icons.py` resolves icon names via Wowhead. Spells whose icon can't be sampled get a neutral fallback so coverage is always complete.
+
+### Changed
+- **`validate_spells.py` now enforces color coverage** — CI fails if any registered spell lacks a `SpellColors.lua` entry, keeping the generated colors in sync as spells are added.
+
 ## [1.0.99] - 2026-06-25
 
 Season of Discovery skill-book abilities.

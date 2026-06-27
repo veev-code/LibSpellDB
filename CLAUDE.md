@@ -25,6 +25,7 @@ LibSpellDB is a shared spell database library for World of Warcraft addon develo
 - `Racials.lua` — Racial abilities and PvP trinkets (`class = "SHARED"`)
 - `Procs.lua` — Proc buff definitions with `procInfo` metadata
 - `Externals.lua` — Cross-class external buffs: drums, item-based effects (`class = "SHARED"`)
+- `SpellColors.lua` — **Auto-generated** (`Tools/generate_icon_colors.py`). Maps `spellID -> {r, g, b}`, a vibrant color sampled from each spell's icon; exposed via `GetSpellColor`. Regenerate after adding spells (CI fails on missing coverage). Do not hand-edit.
 - `Trinkets.lua` — Trinket proc buff metadata (passive proc trinkets only; on-use auto-detected by consumers)
 - `Potions.lua` — Combat potion metadata (itemID, optional buffSpellID for duration tracking)
 - `Consumables.lua` — Non-potion combat consumable metadata (runes, sappers, Zanza buffs, etc.)
@@ -302,6 +303,7 @@ BALANCE, FERAL,                 -- Druid (RESTORATION shared)
 - `lib:HasCharges(spellID)` — Returns true if spell has charges (Inner Fire, shields)
 - `lib:GetDispelType(spellID)` — Returns dispel type string for a spell's buff
 - `lib:GetSpellIcon(spellID)` — Returns override icon texture ID, or nil (falls back to auto-resolved)
+- `lib:GetSpellColor(spellID)` — Returns `r, g, b` (0-1) of a vibrant color sampled offline from the spell's icon (Data/SpellColors.lua), or nil. Rank-aware (falls back to the canonical spell's color). Used by consumers as a default fill color for status-bar aura displays.
 
 ### Item Cooldowns & Requirements
 - `lib:GetCooldownItemIDs(spellID)` — Returns array of item IDs for spells with item-based cooldowns, or nil

@@ -1,2 +1,6 @@
 # Library externals (fetched by .pkgmeta at release, Tools/fetch-libs.sh for local dev)
 Libs/
+
+# Python bytecode cache from Tools/ scripts (committed by-source, not bytecode)
+__pycache__/
+*.pyc
