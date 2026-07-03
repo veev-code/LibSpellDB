@@ -44,7 +44,7 @@ lib:RegisterSpells({
         cooldown = 60,
         duration = 4,
         auraTarget = AT.ENEMY,
-        ranks = {5211, 6798, 8983, 25515},
+        ranks = {5211, 6798, 8983},
         specs = {S.FERAL},
     },
     {

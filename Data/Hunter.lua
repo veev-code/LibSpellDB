@@ -27,9 +27,6 @@ lib:RegisterSpells({
         auraTarget = AT.ENEMY,
         talent = true,
         specs = {S.MARKSMANSHIP},
-        triggersAuras = {
-            { spellID = 37506, tags = {C.CC_HARD, C.DISORIENT}, type = "DEBUFF", onTarget = true },  -- Scatter Shot effect
-        },
     },
     {
         spellID = 3355,  -- Freezing Trap
@@ -38,7 +35,7 @@ lib:RegisterSpells({
         cooldown = 0,  -- Trap has arming time, shared with other traps
         duration = 20,
         auraTarget = AT.ENEMY,
-        ranks = {3355, 14308, 14309, 31932},
+        ranks = {3355, 14308, 14309},
         specs = {S.BEAST_MASTERY, S.MARKSMANSHIP, S.SURVIVAL},
     },
     {

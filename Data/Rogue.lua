@@ -25,7 +25,7 @@ lib:RegisterSpells({
         cooldown = 10,
         duration = 5,  -- Lockout duration
         auraTarget = AT.ENEMY,
-        ranks = {1766, 1767, 1768, 1769, 27613, 38768},
+        ranks = {1766, 1767, 1768, 1769, 38768},
         specs = {S.ASSASSINATION, S.COMBAT, S.SUBTLETY},
     },
 

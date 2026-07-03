@@ -1,5 +1,20 @@
 # LibSpellDB Changelog
 
+## [1.0.101] - 2026-07-03
+
+Spell-data corrections.
+
+### Fixed
+- **Removed spell IDs that don't exist in TBC** from several rank/variant lists. Only true ranks belong in `ranks` (never IDs that are absent from — or reused by — a given client), so these were pruned to keep the data correct across versions:
+  - **Bash** (Druid) — dropped rank `25515`
+  - **Freezing Trap** (Hunter) — dropped rank `31932`
+  - **Mind Control** (Priest) — dropped rank `27620`
+  - **Shackle Undead** (Priest) — dropped rank `27655`
+  - **Kick** (Rogue) — dropped rank `27613`
+  - **Polymorph** (Mage) — dropped variant `28270` (Turtle `28271` / Pig `28272` retained)
+- **Scatter Shot** (Hunter) — removed the `triggersAuras` mapping to effect ID `37506`; the 4s disorient is already tracked on the base spell (`19503`), which carries the `CC_HARD`/`DISORIENT` tags.
+- **Arcane Torrent** (Blood Elf racial) — removed the redundant Hunter-only entry (`28733`) and its `SpellColors` row; Hunters and Paladins share the mana-user entry (`28730`).
+
 ## [1.0.100] - 2026-06-26
 
 Per-spell icon colors.

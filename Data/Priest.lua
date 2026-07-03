@@ -62,7 +62,7 @@ lib:RegisterSpells({
         duration = 60,
         auraTarget = AT.ENEMY,
         singleTarget = true,
-        ranks = {605, 10911, 10912, 27620},
+        ranks = {605, 10911, 10912},
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
     {
@@ -74,7 +74,7 @@ lib:RegisterSpells({
         duration = 50,
         auraTarget = AT.ENEMY,
         singleTarget = true,
-        ranks = {9484, 9485, 10955, 27655},
+        ranks = {9484, 9485, 10955},
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
 

@@ -41,7 +41,7 @@ lib:RegisterSpells({
         auraTarget = AT.ENEMY,
         singleTarget = true,
         ranks = {118, 12824, 12825, 12826},
-        variants = {28270, 28271, 28272},  -- Pig/Turtle variants: cast detection only, never "highest rank"
+        variants = {28271, 28272},  -- Pig/Turtle variants: cast detection only, never "highest rank"
         specs = {S.ARCANE, S.FIRE, S.FROST},
     },
     {

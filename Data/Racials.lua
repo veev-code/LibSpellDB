@@ -146,7 +146,7 @@ lib:RegisterSpells({
     -- Blood Elf - Arcane Torrent (AoE silence + resource restore)
     -- Different spellIDs per class, but all share same base functionality
     {
-        spellID = 28730,  -- Mage/Warlock/Priest/Paladin version (restores mana)
+        spellID = 28730,  -- Mana-user version
         name = "Arcane Torrent",
         description = "Silence all enemies within 8 yards for 2 sec. In addition, you gain 10 Mana for each Mana Tap charge currently affecting you.",
         tags = {C.SILENCE, C.INTERRUPT, C.RESOURCE},
@@ -175,16 +175,7 @@ lib:RegisterSpells({
         auraTarget = AT.SELF,
         race = BLOODELF,
     },
-    {
-        spellID = 28733,  -- Hunter version
-        name = "Arcane Torrent",
-        tags = {C.SILENCE, C.INTERRUPT, C.RESOURCE},
-        cooldown = 120,
-        duration = 2,
-        auraTarget = AT.ENEMY,
-        race = BLOODELF,
-    },
-    -- Paladin Arcane Torrent shares spellID 28730 (mana version) above
+    -- Paladin and Hunter Arcane Torrent share spellID 28730 (mana version) above.
 }, "SHARED")
 
 -------------------------------------------------------------------------------
