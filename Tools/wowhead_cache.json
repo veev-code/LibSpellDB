@@ -11878,5 +11878,16 @@
     "spells": {},
     "buffspells": {},
     "completion_category": 7
+  },
+  "15107": {
+    "name": "Windwall Totem",
+    "icon": "spell_nature_earthbind",
+    "tooltip": "<table><tr><td><a class=\"whtt-name\" href=\"/tbc/spell=15107/windwall-totem\"><b class=\"whtt-name\">Windwall Totem</b></a><br />115 Mana<br />Instant<div class=\"wowhead-tooltip-requirements\">Requires Shaman</div><span class=\"wowhead-tooltip-requirements\">Requires level 36</span><br /></td></tr></table><table><tr><td>Tools:<br /><div class=\"indent q1\"><a href=\"/tbc/items?filter=91;3;0\">Air Totem</a></div><div class=\"q\">Summons a Windwall Totem with 5 health at the feet of the caster. &nbsp;The totem protects party members within 20 yards, reducing ranged damage taken by 32. &nbsp;Lasts 2 min.</div></td></tr></table>",
+    "tooltip2": "",
+    "buff": "",
+    "quality": -1,
+    "spells": {},
+    "buffspells": {},
+    "completion_category": 7
   }
 }

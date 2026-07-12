@@ -1,5 +1,15 @@
 # LibSpellDB Changelog
 
+## [1.0.102] - 2026-07-12
+
+TBC Anniversary 2.5.6 compatibility and Shaman totem coverage.
+
+### Added
+- **Shaman: Windwall Totem** (`15107`) — Added all four ranks, Air-element metadata, the two-minute duration, and corresponding party-buff IDs for range detection.
+
+### Changed
+- **TBC Anniversary 2.5.6 compatibility** — Added interface `20506` so the library loads without being marked out of date on the latest TBC Anniversary client.
+
 ## [1.0.101] - 2026-07-03
 
 Spell-data corrections.

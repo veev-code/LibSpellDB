@@ -469,6 +469,18 @@ lib:RegisterSpells({
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
     {
+        spellID = 15107,  -- Windwall Totem
+        name = "Windwall Totem",
+        description = "Summons a Windwall Totem with 5 health at the feet of the caster. The totem protects party members within 20 yards, reducing ranged damage taken by 32. Lasts 2 min.",
+        tags = {C.BUFF, C.RAID_DEFENSIVE, C.TOTEM, C.TOTEM_AIR},
+        cooldown = 0,
+        duration = 120,
+        auraTarget = AT.NONE,
+        ranks = {15107, 15111, 15112, 25577},
+        appliesBuff = {15108, 15109, 15110, 25576},
+        specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
+    },
+    {
         spellID = 8835,  -- Grace of Air Totem
         name = "Grace of Air Totem",
         description = "Summons a Grace of Air Totem with 5 health at the feet of the caster. The totem increases the agility of party members within 20 yards by 43. Lasts 2 min.",
@@ -881,4 +893,3 @@ lib:RegisterSpells({
         specs = {S.ELEMENTAL, S.ENHANCEMENT, S.RESTORATION},
     },
 }, "SHAMAN")
-
