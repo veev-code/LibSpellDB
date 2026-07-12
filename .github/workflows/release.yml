@@ -3,9 +3,15 @@ name: Package and Release
 on:
   push:
     branches:
-      - main
+      - master
     tags:
-      - '*'
+      - 'v*.*.*'
+  pull_request:
+    branches:
+      - master
+
+permissions:
+  contents: read
 
 jobs:
   validate:
@@ -13,7 +19,15 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Validate release tag
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          if [[ ! "$GITHUB_REF_NAME" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Release tag must have the form vX.Y.Z."
+            exit 1
+          fi
 
       - name: Lua syntax check
         run: |
@@ -34,29 +48,75 @@ jobs:
           echo "All Lua files pass syntax check"
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: '3.x'
 
       - name: Validate spell data
         run: python Tools/validate_spells.py
 
+      - name: Build package without uploading
+        uses: BigWigsMods/packager@6d50adb6e8517eefef63f4afb16a6518166a6b28 # v2
+        with:
+          args: -d
+
+      - name: Verify package excludes agent tooling
+        run: |
+          shopt -s nullglob
+          archives=(.release/*.zip)
+          if [ ${#archives[@]} -ne 1 ]; then
+            echo "Expected exactly one package zip, found ${#archives[@]}."
+            exit 1
+          fi
+          source_version=$(sed -n 's/^## Version: *//p' LibSpellDB.toc | tr -d '\r')
+          source_minor=$(sed -n 's/^local MAJOR, MINOR = "LibSpellDB-1.0", *//p' Core/LibSpellDB.lua | tr -d '\r')
+          if ! grep -Fq "## [$source_version]" CHANGELOG.md; then
+            echo "CHANGELOG.md has no entry for $source_version."
+            exit 1
+          fi
+          for archive in "${archives[@]}"; do
+            entries=$(unzip -Z1 "$archive")
+            blocked=$(printf '%s\n' "$entries" | grep -Ei '(^|/)(\.agents|\.claude|\.git|\.github)(/|$)|^LibSpellDB/Tools(/|$)|(^|/)(AGENTS|CLAUDE|SKILL)\.md$|^LibSpellDB/README\.md$|(^|/)\.gitignore$' || true)
+            if [ -n "$blocked" ]; then
+              echo "Source-only files found in $archive:"
+              echo "$blocked"
+              exit 1
+            fi
+            roots=$(printf '%s\n' "$entries" | sed '/^$/d; s#/.*##' | sort -u)
+            if [ "$roots" != "LibSpellDB" ]; then
+              echo "Unexpected archive root(s): $roots"
+              exit 1
+            fi
+            archive_version=$(unzip -p "$archive" LibSpellDB/LibSpellDB.toc | sed -n 's/^## Version: *//p' | tr -d '\r')
+            archive_minor=$(unzip -p "$archive" LibSpellDB/Core/LibSpellDB.lua | sed -n 's/^local MAJOR, MINOR = "LibSpellDB-1.0", *//p' | tr -d '\r')
+            if [ "$archive_version" != "$source_version" ] || [ "$archive_minor" != "$source_minor" ]; then
+              echo "Archive version or LibStub minor does not match source."
+              exit 1
+            fi
+            sha256sum "$archive"
+          done
+          echo "Package boundary and release contract OK."
+
   release:
     needs: validate
     if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
+
+    concurrency:
+      group: libspelldb-release
+      cancel-in-progress: false
 
     permissions:
       contents: write
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 0
 
       - name: Package and Release
-        uses: BigWigsMods/packager@v2
+        uses: BigWigsMods/packager@6d50adb6e8517eefef63f4afb16a6518166a6b28 # v2
         # Game versions (Classic Era 11508 + TBC 20506) are auto-detected from the TOC ## Interface line
         env:
           CF_API_KEY: ${{ secrets.CF_API_KEY }}

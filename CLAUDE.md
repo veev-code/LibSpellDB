@@ -1,3 +1,5 @@
+@AGENTS.md
+
 # LibSpellDB - Addon Context
 
 LibSpellDB is a shared spell database library for World of Warcraft addon developers (Classic Era and TBC / Anniversary Edition). It provides a centralized, curated repository of spell data with extensive tagging for categorization, spec detection, rank handling, and proc tracking.

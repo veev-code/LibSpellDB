@@ -7,6 +7,8 @@ externals:
 
 ignore:
   - README.md
+  - .agents
+  - .claude
   - .github
   - .git
   - .gitignore
