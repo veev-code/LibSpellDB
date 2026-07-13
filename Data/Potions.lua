@@ -153,5 +153,5 @@ lib:RegisterPotions({
     { itemID = 22846, buffSpellID = 28537 },
 
     -- Major Holy Protection Potion
-    { itemID = 22847, buffSpellID = 28510 },
+    { itemID = 22847, buffSpellID = 28538 },
 })

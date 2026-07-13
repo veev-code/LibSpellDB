@@ -104,7 +104,7 @@ lib:RegisterSpells({
         cooldown = 30,
         duration = 10,
         auraTarget = AT.SELF,
-        ranks = {586, 9578, 9579, 9592, 10941, 10942, 27614},
+        ranks = {586, 9578, 9579, 9592, 10941, 10942, 25429},
         specs = {S.DISCIPLINE, S.HOLY, S.SHADOW},
     },
     {
@@ -172,7 +172,7 @@ lib:RegisterSpells({
         cooldown = 360,
         duration = 180,
         talent = true,
-        ranks = {724, 27870, 27871, 28276},
+        ranks = {724, 27870, 27871, 28275},
         auraTarget = AT.NONE,  -- Placed object, no unit target
         specs = {S.HOLY},
     },
@@ -382,7 +382,7 @@ lib:RegisterSpells({
         auraTarget = AT.ENEMY,
         priority = 1,
         talent = true,
-        ranks = {34914, 34916, 34917, 34918, 34919},
+        ranks = {34914, 34916, 34917},
         specs = {S.SHADOW},
     },
     {
@@ -428,7 +428,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
         cooldown = 12,
         priority = 5,
-        ranks = {32379, 32380, 32996},
+        ranks = {32379, 32996},
         specs = {S.SHADOW},
     },
     {
@@ -837,7 +837,7 @@ lib:RegisterSpells({
         name = "Prayer of Mending",
         description = "Places a spell on the target that heals them the next time they take damage. When healed, the spell jumps to a party or raid member within 30 yards. Jumps up to 5 times and lasts 30 sec after each jump.",
         tags = {C.HEAL, C.ROTATIONAL, C.HEAL_SINGLE, C.HAS_BUFF, C.PVE_PVP},
-        cooldown = 0,
+        cooldown = 10,
         duration = 30,
         auraTarget = AT.ALLY,
         specs = {S.DISCIPLINE, S.HOLY},
@@ -905,7 +905,7 @@ lib:RegisterSpells({
         name = "Spirit of the Redeemer",
         description = "Activate to become the Spirit of Redemption for 10 sec. While in this form, you can cast any healing spell free of cost, but you cannot move, attack, or be the target of attacks.",
         tags = {C.PERSONAL_DEFENSIVE, C.HEALING_CD, C.MAJOR, C.PVE_PVP},
-        cooldown = 180,
+        cooldown = 120,
         duration = 10,
         auraTarget = AT.SELF,
         specs = {S.HOLY},

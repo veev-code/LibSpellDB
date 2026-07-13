@@ -17,7 +17,7 @@
 
 -- MINOR must increase on every release, or LibStub cannot prefer the newer
 -- copy when both a standalone install and an embedded copy are present.
-local MAJOR, MINOR = "LibSpellDB-1.0", 102
+local MAJOR, MINOR = "LibSpellDB-1.0", 103
 local lib, oldMinor = LibStub:NewLibrary(MAJOR, MINOR)
 
 -- Hand-off marker for this distribution's secondary files (Core/Categories.lua,

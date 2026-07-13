@@ -1,5 +1,31 @@
 # LibSpellDB Tools
 
+## Live two-source spell audit (`wowhead_audit.py`)
+
+The authoritative correctness check compares every authored spell reference with
+two current external sources:
+
+- Wowhead's TBC or Classic tooltip service, selected per record.
+- Wago's latest Anniversary or Classic Era DB2 exports.
+
+A spell ID or cooldown is reported as a confirmed error only when both sources
+agree. Source disagreements remain warnings and must not be applied automatically.
+The audit covers top-level spells, ranks, variants, triggered auras, applied buffs,
+cooldown reset references, rank-duration keys, and version overrides.
+
+```bash
+# Fast targeted verification while editing
+python Tools/wowhead_audit.py --audit --strict --ids 29858,403789,412789
+
+# Full live verification (also runs weekly in GitHub Actions)
+python Tools/wowhead_audit.py --audit --strict --no-cache
+```
+
+The optional `Tools/.cache/wowhead-live.json` file is disposable acceleration.
+It records the source URL, branch, and fetch time, is ignored by Git, and is never
+treated as evidence. The legacy committed `wowhead_cache.json` is retained only
+for icon-generation compatibility and must not be used to approve spell data.
+
 This folder contains tools to help identify spells where the cast spell ID differs from the applied aura spell ID.
 
 ## Why This Matters

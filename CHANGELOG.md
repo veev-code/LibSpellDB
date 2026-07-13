@@ -1,5 +1,18 @@
 # LibSpellDB Changelog
 
+## [1.0.103] - 2026-07-12
+
+Live-verified TBC and Season of Discovery spell-data corrections.
+
+### Fixed
+- **TBC rank resolution** — Removed unrelated or nonexistent IDs from Fire Blast, Hammer of Justice, Holy Shield, Vampiric Touch, Shadow Word: Death, Sprint, and Mocking Blow; corrected Fade rank 7 and Lightwell rank 4.
+- **TBC cooldowns and consumables** — Corrected Soulshatter to 5 minutes, warrior stance switches to the 1-second shared cooldown, and Major Holy Protection Potion to its actual protection aura.
+- **Season of Discovery identities** — Corrected Metamorphosis, Demonic Howl, and Incinerate IDs and metadata so each ability resolves independently.
+- **Season of Discovery cooldowns** — Corrected Skull Bash, Rewind Time, Displacement, Divine Light, Rebuke, Hand of Reckoning, Prayer of Mending, Spirit of the Redeemer, Main Gauche, Victory Rush, and Gladiator Stance.
+
+### Changed
+- **Two-source spell verification** — The live audit now checks every authored spell reference against current Wowhead data and Wago DB2 exports, fails strict validation on source conflicts or outages, and runs weekly in GitHub Actions. Committed legacy TBC cache data is no longer accepted as release evidence.
+
 ## [1.0.102] - 2026-07-12
 
 TBC Anniversary 2.5.6 compatibility and Shaman totem coverage.

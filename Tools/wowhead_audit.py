@@ -1,609 +1,562 @@
 #!/usr/bin/env python3
+"""Two-source live spell-data audit for LibSpellDB.
+
+The authored Lua files are expectations, never the authority. A finding is
+"confirmed" only when Wowhead and Wago's current DB2 export agree. The audit
+covers primary spell IDs, rank arrays, variants, triggered auras, applied buffs,
+cooldown-reset references, rank-duration keys, and explicit version overrides.
+
+Examples:
+    python Tools/wowhead_audit.py --audit --ids 33938,403789
+    python Tools/wowhead_audit.py --audit --strict
+    python Tools/wowhead_audit.py --audit --strict --no-cache --json-report report.json
+
+The optional cache is disposable acceleration. It records source URL, branch,
+and fetch time, lives under Tools/.cache, and is never a source of truth.
 """
-LibSpellDB Wowhead Audit & Name/Description Enrichment Tool
 
-Scrapes Wowhead's TBC tooltip API to:
-1. Audit cooldown/duration values against LibSpellDB data files
-2. Add name and description fields to all spell entries
-
-Usage:
-    python wowhead_audit.py --fetch              # Fetch all spells from Wowhead (cached)
-    python wowhead_audit.py --audit              # Compare cached data vs LibSpellDB
-    python wowhead_audit.py --apply --dry-run    # Preview name/description insertion
-    python wowhead_audit.py --apply              # Write name/description to Lua files
-    python wowhead_audit.py --fetch --audit --apply  # All steps
-
-Options:
-    --delay FLOAT       Delay between API requests in seconds (default: 0.15)
-    --force-fetch       Re-fetch even if cached
-    --dry-run           Preview --apply changes without writing
-"""
+from __future__ import annotations
 
 import argparse
+import csv
+import io
 import json
-import os
 import re
 import sys
 import time
-import urllib.request
 import urllib.error
+import urllib.request
+from dataclasses import asdict, dataclass
+from datetime import datetime, timezone
 from html import unescape
 from pathlib import Path
+from typing import Iterable
 
-# ─── Constants ───────────────────────────────────────────────────────────────
 
-SCRIPT_DIR = Path(__file__).parent
+SCRIPT_DIR = Path(__file__).resolve().parent
 DATA_DIR = SCRIPT_DIR.parent / "Data"
-CACHE_FILE = SCRIPT_DIR / "wowhead_cache.json"
-WOWHEAD_URL = "https://nether.wowhead.com/tbc/tooltip/spell/{spell_id}"
+DEFAULT_CACHE = SCRIPT_DIR / ".cache" / "wowhead-live.json"
+WAGO_BUILDS_URL = "https://wago.tools/api/builds"
+WAGO_CSV_URL = "https://wago.tools/db2/{table}/csv?build={build}"
+WOWHEAD_URL = "https://nether.wowhead.com/{branch}/tooltip/spell/{spell_id}"
 
-DATA_FILES = [
-    "Warrior.lua",
-    "Paladin.lua",
-    "Hunter.lua",
-    "Mage.lua",
-    "Priest.lua",
-    "Rogue.lua",
-    "Shaman.lua",
-    "Warlock.lua",
-    "Druid.lua",
-    "Racials.lua",
-    "Procs.lua",
-]
-
-# ─── Lua Parsing ─────────────────────────────────────────────────────────────
+TBC_PRODUCT = "wow_anniversary"
+CLASSIC_PRODUCT = "wow_classic_era"
+NON_SPELL_FILES = {"SpellColors.lua"}
+ITEM_SPELL_FIELDS = {
+    "Consumables.lua": ("buffSpellID",),
+    "Potions.lua": ("buffSpellID",),
+    "Trinkets.lua": ("procBuffID", "onUseBuffID"),
+}
+ROMAN_RANK_SUFFIX = re.compile(r"\s+[IVXLCDM]+$", re.IGNORECASE)
 
 
-def parse_lua_file(filepath):
-    """
-    Parse a LibSpellDB data file, extracting top-level spell entries.
+@dataclass(frozen=True)
+class SpellReference:
+    spell_id: int
+    branch: str
+    kind: str
+    filename: str
+    line: int
+    expected_name: str | None = None
+    aliases: tuple[str, ...] = ()
+    cooldown: float | None = None
 
-    Uses brace-depth tracking to distinguish top-level entries (depth 2)
-    from nested sub-entries like triggersAuras (depth 4+).
 
-    Returns list of dicts:
-        {spellID, line, cooldown, duration, has_name, has_description}
-    """
-    with open(filepath, "r", encoding="utf-8") as f:
-        lines = f.readlines()
+@dataclass
+class Finding:
+    severity: str
+    code: str
+    spell_id: int
+    branch: str
+    message: str
+    contexts: list[str]
+    wowhead: str | float | None = None
+    wago: str | float | None = None
 
-    entries = []
+
+def _request_text(url: str, timeout: int = 30) -> str:
+    request = urllib.request.Request(url, headers={"User-Agent": "LibSpellDB-Live-Audit/2.0"})
+    with urllib.request.urlopen(request, timeout=timeout) as response:
+        return response.read().decode("utf-8")
+
+
+def _balanced_table(text: str, start: int) -> tuple[str, int] | None:
+    brace = text.find("{", start)
+    if brace == -1:
+        return None
     depth = 0
-
-    for i, line in enumerate(lines):
-        # Strip comments for brace counting (but keep strings simple —
-        # our data files don't have braces inside string literals)
-        code = line.split("--")[0]
-        opens = code.count("{")
-        closes = code.count("}")
-
-        # Check for spellID at current depth (before updating for this line's braces)
-        spell_match = re.match(r"^(\s+)spellID\s*=\s*(\d+)", line)
-        if spell_match:
-            indent_len = len(spell_match.group(1))
-            spell_id = int(spell_match.group(2))
-
-            # Top-level entries have spellID at depth 2 (8-space indent)
-            # triggersAuras sub-entries are at depth 4+ (16+ space indent)
-            if depth == 2 and indent_len == 8:
-                # Look ahead for existing name/description and extract cooldown/duration
-                has_name = False
-                has_description = False
-                cooldown = None
-                duration = None
-
-                for j in range(i + 1, min(i + 25, len(lines))):
-                    ahead = lines[j].strip()
-                    if ahead.startswith("name ="):
-                        has_name = True
-                    if ahead.startswith("description ="):
-                        has_description = True
-                    cd_match = re.match(r"cooldown\s*=\s*([\d.]+)", ahead)
-                    if cd_match:
-                        cooldown = float(cd_match.group(1))
-                    dur_match = re.match(r"duration\s*=\s*([\d.]+)", ahead)
-                    if dur_match:
-                        duration = float(dur_match.group(1))
-                    # Stop at next entry or closing brace at depth 2
-                    if ahead == "},":
-                        break
-
-                entries.append(
-                    {
-                        "spellID": spell_id,
-                        "line": i,
-                        "cooldown": cooldown,
-                        "duration": duration,
-                        "has_name": has_name,
-                        "has_description": has_description,
-                    }
-                )
-
-        depth += opens - closes
-
-    return entries
-
-
-def parse_all_files():
-    """Parse all data files. Returns dict: filename -> list of entries."""
-    result = {}
-    for filename in DATA_FILES:
-        filepath = DATA_DIR / filename
-        if filepath.exists():
-            result[filename] = parse_lua_file(filepath)
-    return result
-
-
-# ─── Wowhead API ─────────────────────────────────────────────────────────────
-
-
-def load_cache():
-    """Load cached Wowhead responses."""
-    if CACHE_FILE.exists():
-        with open(CACHE_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return {}
-
-
-def save_cache(cache):
-    """Save cache to disk."""
-    with open(CACHE_FILE, "w", encoding="utf-8") as f:
-        json.dump(cache, f, indent=2, ensure_ascii=False)
-
-
-def fetch_spell(spell_id, cache, delay=0.15, force=False):
-    """Fetch a single spell from Wowhead tooltip API, with caching."""
-    key = str(spell_id)
-    if key in cache and not force:
-        return cache[key]
-
-    url = WOWHEAD_URL.format(spell_id=spell_id)
-    retries = 3
-
-    for attempt in range(retries):
-        try:
-            req = urllib.request.Request(
-                url, headers={"User-Agent": "LibSpellDB-Audit/1.0"}
-            )
-            with urllib.request.urlopen(req, timeout=15) as resp:
-                data = json.loads(resp.read().decode("utf-8"))
-                cache[key] = data
-                time.sleep(delay)
-                return data
-        except urllib.error.HTTPError as e:
-            if e.code == 404:
-                cache[key] = {"error": "not_found", "spell_id": spell_id}
-                time.sleep(delay)
-                return cache[key]
-            if attempt < retries - 1:
-                wait = 2 ** (attempt + 1)
-                print(f"  HTTP {e.code} for spell {spell_id}, retrying in {wait}s...")
-                time.sleep(wait)
-            else:
-                print(f"  FAILED: spell {spell_id} after {retries} attempts: HTTP {e.code}")
-                cache[key] = {"error": f"http_{e.code}", "spell_id": spell_id}
-                return cache[key]
-        except Exception as e:
-            if attempt < retries - 1:
-                wait = 2 ** (attempt + 1)
-                print(f"  Error for spell {spell_id}: {e}, retrying in {wait}s...")
-                time.sleep(wait)
-            else:
-                print(f"  FAILED: spell {spell_id} after {retries} attempts: {e}")
-                cache[key] = {"error": str(e), "spell_id": spell_id}
-                return cache[key]
-
-    return cache.get(key)
-
-
-def fetch_all(all_files, delay=0.15, force=False):
-    """Fetch all unique spellIDs from Wowhead. Returns updated cache."""
-    cache = load_cache()
-
-    # Collect unique spellIDs
-    all_ids = set()
-    for filename, entries in all_files.items():
-        for entry in entries:
-            all_ids.add(entry["spellID"])
-
-    all_ids = sorted(all_ids)
-    to_fetch = [sid for sid in all_ids if str(sid) not in cache or force]
-
-    print(f"Total unique spellIDs: {len(all_ids)}")
-    print(f"Already cached: {len(all_ids) - len(to_fetch)}")
-    print(f"To fetch: {len(to_fetch)}")
-
-    if not to_fetch:
-        print("Nothing to fetch — cache is complete.")
-        return cache
-
-    est_time = len(to_fetch) * delay
-    print(f"Estimated time: {est_time:.0f}s ({est_time/60:.1f}m)\n")
-
-    for i, spell_id in enumerate(to_fetch):
-        if (i + 1) % 50 == 0 or i == 0:
-            print(f"  Fetching {i+1}/{len(to_fetch)}...")
-        fetch_spell(spell_id, cache, delay=delay, force=force)
-
-        # Save cache every 100 fetches for crash safety
-        if (i + 1) % 100 == 0:
-            save_cache(cache)
-
-    save_cache(cache)
-    print(f"\nFetch complete. Cache saved to {CACHE_FILE}")
-
-    # Report errors
-    errors = {k: v for k, v in cache.items() if k in [str(s) for s in all_ids] and isinstance(v, dict) and "error" in v}
-    if errors:
-        print(f"\n{len(errors)} spells had errors:")
-        for k, v in sorted(errors.items(), key=lambda x: int(x[0])):
-            print(f"  {k}: {v['error']}")
-
-    return cache
-
-
-# ─── Tooltip Parsing ─────────────────────────────────────────────────────────
-
-
-def extract_description(tooltip_html):
-    """Extract clean description text from Wowhead tooltip HTML."""
-    if not tooltip_html:
-        return None
-
-    # Find the last <div class="q"> block (description is always in this div)
-    matches = re.findall(r'<div class="q">(.*?)</div>', tooltip_html, re.DOTALL)
-    if not matches:
-        return None
-
-    # Use the last match (sometimes there are multiple divs; description is last)
-    desc = matches[-1]
-
-    # Strip HTML comments (cooldown variant references etc.)
-    desc = re.sub(r"<!--.*?-->", "", desc)
-
-    # Strip remaining HTML tags
-    desc = re.sub(r"<[^>]+>", "", desc)
-
-    # Decode HTML entities
-    desc = unescape(desc)
-
-    # Normalize whitespace
-    desc = desc.replace("\xa0", " ")
-    desc = re.sub(r"\s+", " ", desc).strip()
-
-    return desc if desc else None
-
-
-def extract_cooldown(tooltip_html):
-    """Extract base cooldown in seconds from tooltip HTML."""
-    if not tooltip_html:
-        return None
-
-    match = re.search(r"<!--baseCooldown:(.+?)-->", tooltip_html)
-    if not match:
-        return None
-
-    cd_text = match.group(1)
-
-    # Parse "6 sec cooldown" or "3 min cooldown" or "1 hr cooldown"
-    hr_match = re.search(r"([\d.]+)\s*hr", cd_text)
-    min_match = re.search(r"([\d.]+)\s*min", cd_text)
-    sec_match = re.search(r"([\d.]+)\s*sec", cd_text)
-
-    if hr_match:
-        return int(float(hr_match.group(1)) * 3600)
-    if min_match:
-        return int(float(min_match.group(1)) * 60)
-    if sec_match:
-        val = float(sec_match.group(1))
-        return int(val) if val == int(val) else val
+    in_string = False
+    escaped = False
+    for index in range(brace, len(text)):
+        char = text[index]
+        if in_string:
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == '"':
+                in_string = False
+            continue
+        if char == '"':
+            in_string = True
+        elif char == "{":
+            depth += 1
+        elif char == "}":
+            depth -= 1
+            if depth == 0:
+                return text[brace : index + 1], index + 1
     return None
 
 
-def extract_duration(buff_html):
-    """Extract buff/debuff duration in seconds from the buff field."""
-    if not buff_html:
-        return None
+def _remove_named_table(text: str, field: str) -> tuple[str, str | None]:
+    match = re.search(rf"\b{re.escape(field)}\s*=", text)
+    if not match:
+        return text, None
+    table = _balanced_table(text, match.end())
+    if not table:
+        return text, None
+    payload, end = table
+    return text[: match.start()] + text[end:], payload
 
+
+def _named_subtable(text: str, field: str) -> str | None:
+    match = re.search(rf"\b{re.escape(field)}\s*=\s*", text)
+    if not match:
+        return None
+    if text[match.end() :].lstrip().startswith("false"):
+        return None
+    table = _balanced_table(text, match.end())
+    return table[0] if table else None
+
+
+def _number_array(text: str, field: str) -> list[int]:
+    match = re.search(rf"^\s*{re.escape(field)}\s*=\s*\{{([^}}]*)\}}", text, re.MULTILINE)
+    return [int(value) for value in re.findall(r"\d+", match.group(1))] if match else []
+
+
+def _string_array(text: str, field: str) -> tuple[str, ...]:
+    match = re.search(rf"^\s*{re.escape(field)}\s*=\s*\{{([^}}]*)\}}", text, re.MULTILINE)
+    return tuple(re.findall(r'"([^"]+)"', match.group(1))) if match else ()
+
+
+def _scalar_number(text: str, field: str) -> float | None:
+    match = re.search(rf"^\s*{re.escape(field)}\s*=\s*([\d.]+)", text, re.MULTILINE)
+    return float(match.group(1)) if match else None
+
+
+def _scalar_string(text: str, field: str) -> str | None:
+    match = re.search(rf'^\s*{re.escape(field)}\s*=\s*"([^"]+)"', text, re.MULTILINE)
+    return match.group(1) if match else None
+
+
+def iter_entry_blocks(path: Path) -> Iterable[tuple[str, int]]:
+    lines = path.read_text(encoding="utf-8-sig").splitlines()
+    in_register = False
+    depth = 0
+    current: list[str] = []
+    start_line = 0
+
+    for line_number, line in enumerate(lines, 1):
+        stripped = line.strip()
+        if "lib:RegisterSpells(" in stripped:
+            in_register = True
+            depth += stripped.count("{") - stripped.count("}")
+            continue
+        if not in_register:
+            continue
+
+        opens = stripped.count("{")
+        closes = stripped.count("}")
+        if depth == 1 and stripped.startswith("{") and opens:
+            current = [line]
+            start_line = line_number
+            depth += opens - closes
+            continue
+
+        depth += opens - closes
+        if current:
+            current.append(line)
+            if depth <= 1:
+                yield "\n".join(current), start_line
+                current = []
+        if depth <= 0:
+            in_register = False
+            depth = 0
+
+
+def _infer_branch(primary_id: int, explicit: str | None) -> str:
+    if explicit in {"tbc", "classic"}:
+        return explicit
+    return "classic" if primary_id >= 398000 else "tbc"
+
+
+def _references_for_payload(
+    payload: str,
+    *,
+    branch: str,
+    filename: str,
+    line: int,
+    expected_name: str | None,
+    aliases: tuple[str, ...],
+    include_stats: bool,
+) -> list[SpellReference]:
+    primary_match = re.search(r"^\s*spellID\s*=\s*(\d+)", payload, re.MULTILINE)
+    if not primary_match:
+        return []
+    primary_id = int(primary_match.group(1))
+    cooldown = _scalar_number(payload, "cooldown") if include_stats else None
+    references = [
+        SpellReference(primary_id, branch, "primary", filename, line, expected_name, aliases, cooldown)
+    ]
+
+    for spell_id in _number_array(payload, "ranks"):
+        references.append(SpellReference(spell_id, branch, "rank", filename, line, expected_name, aliases))
+    for field, kind in (("variants", "variant"), ("appliesBuff", "applied_aura")):
+        for spell_id in _number_array(payload, field):
+            references.append(SpellReference(spell_id, branch, kind, filename, line))
+
+    # Nested spellID fields are triggered/helper auras. The first occurrence is
+    # the primary ID already recorded above.
+    nested_ids = [int(value) for value in re.findall(r"\bspellID\s*=\s*(\d+)", payload)][1:]
+    for spell_id in nested_ids:
+        references.append(SpellReference(spell_id, branch, "triggered_aura", filename, line))
+
+    reset_match = re.search(r"\bcooldownResetBy\s*=\s*(\{.*?\}|\d+)", payload, re.DOTALL)
+    if reset_match:
+        for value in re.findall(r"\d+", reset_match.group(1)):
+            references.append(SpellReference(int(value), branch, "reset_source", filename, line))
+
+    duration_match = re.search(r"\brankDurations\s*=\s*(\{.*?\})", payload, re.DOTALL)
+    if duration_match:
+        for value in re.findall(r"\[(\d+)\]\s*=", duration_match.group(1)):
+            references.append(SpellReference(int(value), branch, "rank_duration", filename, line))
+    return references
+
+
+def parse_lua_file(path: Path) -> list[SpellReference]:
+    if path.name in ITEM_SPELL_FIELDS:
+        references: list[SpellReference] = []
+        fields = "|".join(map(re.escape, ITEM_SPELL_FIELDS[path.name]))
+        pattern = re.compile(rf"\b({fields})\s*=\s*(\d+)")
+        for line, text in enumerate(path.read_text(encoding="utf-8-sig").splitlines(), 1):
+            for match in pattern.finditer(text):
+                references.append(
+                    SpellReference(int(match.group(2)), "tbc", match.group(1), path.name, line)
+                )
+        return references
+
+    references: list[SpellReference] = []
+    for block, line in iter_entry_blocks(path):
+        base, overrides = _remove_named_table(block, "versionOverrides")
+        primary_match = re.search(r"^\s*spellID\s*=\s*(\d+)", base, re.MULTILINE)
+        if not primary_match:
+            continue
+        primary_id = int(primary_match.group(1))
+        name = _scalar_string(base, "name")
+        aliases = _string_array(base, "auditAliases")
+        branch = _infer_branch(primary_id, _scalar_string(base, "auditBranch"))
+        references.extend(
+            _references_for_payload(
+                base,
+                branch=branch,
+                filename=path.name,
+                line=line,
+                expected_name=name,
+                aliases=aliases,
+                include_stats=True,
+            )
+        )
+
+        if overrides:
+            for version, override_branch in (("vanilla", "classic"), ("tbc", "tbc")):
+                payload = _named_subtable(overrides, version)
+                if payload and re.search(r"\b(?:spellID|ranks)\s*=", payload):
+                    # An override can replace only ranks while retaining the base
+                    # primary ID, so synthesize the inherited ID when necessary.
+                    if not re.search(r"\bspellID\s*=", payload):
+                        payload = "{\nspellID = %d,\n%s\n}" % (primary_id, payload[1:-1])
+                    references.extend(
+                        _references_for_payload(
+                            payload,
+                            branch=override_branch,
+                            filename=path.name,
+                            line=line,
+                            expected_name=name,
+                            aliases=aliases,
+                            include_stats=False,
+                        )
+                    )
+    return references
+
+
+def parse_all_files() -> dict[str, list[SpellReference]]:
+    result: dict[str, list[SpellReference]] = {}
+    for path in sorted(DATA_DIR.glob("*.lua")):
+        if path.name not in NON_SPELL_FILES:
+            result[path.name] = parse_lua_file(path)
+    return result
+
+
+def extract_cooldown(tooltip_html: str) -> float | None:
+    match = re.search(r"<!--baseCooldown:(.+?)-->", tooltip_html or "")
+    if not match:
+        return None
+    for unit, multiplier in (("hr", 3600), ("min", 60), ("sec", 1)):
+        value = re.search(rf"([\d.]+)\s*{unit}", match.group(1))
+        if value:
+            return float(value.group(1)) * multiplier
+    return None
+
+
+def extract_duration(buff_html: str) -> float | None:
     match = re.search(
-        r"<span class=\"q\">(\d+)\s*(seconds?|minutes?|hours?)\s*remaining</span>",
-        buff_html,
+        r'<span class="q">([\d.]+)\s*(seconds?|minutes?|hours?)\s*remaining</span>',
+        buff_html or "",
     )
     if not match:
         return None
-
-    value = int(match.group(1))
-    unit = match.group(2)
-
-    if "hour" in unit:
-        return value * 3600
-    if "minute" in unit:
-        return value * 60
-    return value
+    multiplier = 3600 if "hour" in match.group(2) else 60 if "minute" in match.group(2) else 1
+    return float(match.group(1)) * multiplier
 
 
-def lua_escape(s):
-    """Escape a string for use in a Lua double-quoted string literal."""
-    s = s.replace("\\", "\\\\")
-    s = s.replace('"', '\\"')
-    s = s.replace("\n", "\\n")
-    return s
+def extract_description(tooltip_html: str) -> str | None:
+    matches = re.findall(r'<div class="q">(.*?)</div>', tooltip_html or "", re.DOTALL)
+    if not matches:
+        return None
+    text = re.sub(r"<!--.*?-->|<[^>]+>", "", matches[-1], flags=re.DOTALL)
+    return re.sub(r"\s+", " ", unescape(text).replace("\xa0", " ")).strip() or None
 
 
-# ─── Audit ────────────────────────────────────────────────────────────────────
+class WowheadClient:
+    def __init__(self, cache_path: Path | None, max_age_hours: float, delay: float):
+        self.cache_path = cache_path
+        self.max_age = max_age_hours * 3600
+        self.delay = delay
+        self.cache: dict[str, dict] = {}
+        if cache_path and cache_path.exists():
+            try:
+                document = json.loads(cache_path.read_text(encoding="utf-8"))
+                if document.get("schema") == 1:
+                    self.cache = document.get("entries", {})
+            except (OSError, ValueError):
+                self.cache = {}
+
+    def fetch(self, branch: str, spell_id: int) -> dict:
+        key = f"{branch}:{spell_id}"
+        now = time.time()
+        cached = self.cache.get(key)
+        if cached and now - cached.get("fetched_at_epoch", 0) <= self.max_age:
+            return cached["payload"]
+        url = WOWHEAD_URL.format(branch=branch, spell_id=spell_id)
+        try:
+            payload = json.loads(_request_text(url))
+        except urllib.error.HTTPError as error:
+            payload = {"error": f"http_{error.code}"}
+        except Exception as error:  # network failures must remain distinguishable from 404s
+            payload = {"error": "network", "detail": str(error)}
+        self.cache[key] = {
+            "branch": branch,
+            "spell_id": spell_id,
+            "source_url": url,
+            "fetched_at": datetime.now(timezone.utc).isoformat(),
+            "fetched_at_epoch": now,
+            "payload": payload,
+        }
+        time.sleep(self.delay)
+        return payload
+
+    def save(self) -> None:
+        if not self.cache_path:
+            return
+        self.cache_path.parent.mkdir(parents=True, exist_ok=True)
+        document = {"schema": 1, "entries": self.cache}
+        self.cache_path.write_text(json.dumps(document, indent=2, sort_keys=True), encoding="utf-8")
 
 
-def run_audit(all_files, cache):
-    """Compare LibSpellDB values against Wowhead data. Print report."""
-    print("=" * 80)
-    print("WOWHEAD AUDIT REPORT")
-    print("=" * 80)
+class WagoClient:
+    def __init__(self, tbc_build: str | None = None, classic_build: str | None = None):
+        builds = json.loads(_request_text(WAGO_BUILDS_URL))
+        self.builds = {
+            "tbc": tbc_build or self._latest(builds, TBC_PRODUCT),
+            "classic": classic_build or self._latest(builds, CLASSIC_PRODUCT),
+        }
+        self.names: dict[str, dict[int, str]] = {}
+        self.cooldowns: dict[str, dict[int, float]] = {}
+        for branch, build in self.builds.items():
+            self.names[branch] = self._load_names(build)
+            self.cooldowns[branch] = self._load_cooldowns(build)
 
-    total = 0
-    not_found = 0
-    cd_mismatch = 0
-    dur_mismatch = 0
-    ok = 0
-    errors = 0
+    @staticmethod
+    def _latest(builds: dict, product: str) -> str:
+        candidates = builds.get(product) or []
+        if not candidates:
+            raise RuntimeError(f"Wago returned no builds for {product}")
+        return candidates[0]["version"]
 
-    for filename in DATA_FILES:
-        entries = all_files.get(filename, [])
-        if not entries:
+    @staticmethod
+    def _load_names(build: str) -> dict[int, str]:
+        text = _request_text(WAGO_CSV_URL.format(table="SpellName", build=build))
+        return {int(row["ID"]): row["Name_lang"] for row in csv.DictReader(io.StringIO(text))}
+
+    @staticmethod
+    def _load_cooldowns(build: str) -> dict[int, float]:
+        text = _request_text(WAGO_CSV_URL.format(table="SpellCooldowns", build=build))
+        result: dict[int, float] = {}
+        for row in csv.DictReader(io.StringIO(text)):
+            spell_id = int(row["SpellID"])
+            milliseconds = max(int(row["RecoveryTime"]), int(row["CategoryRecoveryTime"]))
+            if milliseconds:
+                result[spell_id] = milliseconds / 1000
+        return result
+
+
+def normalize_name(name: str, *, rank: bool) -> str:
+    normalized = re.sub(r"\s+", " ", name.strip()).casefold()
+    return ROMAN_RANK_SUFFIX.sub("", normalized) if rank else normalized
+
+
+def name_matches(actual: str, reference: SpellReference) -> bool:
+    if not reference.expected_name:
+        return True
+    accepted = (reference.expected_name,) + reference.aliases
+    rank = reference.kind == "rank"
+    normalized_actual = normalize_name(actual, rank=rank)
+    return any(normalized_actual == normalize_name(candidate, rank=rank) for candidate in accepted)
+
+
+def _context(reference: SpellReference) -> str:
+    return f"{reference.filename}:{reference.line} ({reference.kind})"
+
+
+def audit(
+    references: list[SpellReference],
+    wowhead: WowheadClient,
+    wago: WagoClient,
+) -> list[Finding]:
+    findings: list[Finding] = []
+    grouped: dict[tuple[str, int], list[SpellReference]] = {}
+    for reference in references:
+        grouped.setdefault((reference.branch, reference.spell_id), []).append(reference)
+
+    for index, ((branch, spell_id), contexts) in enumerate(sorted(grouped.items()), 1):
+        wh = wowhead.fetch(branch, spell_id)
+        wh_name = None if wh.get("error") else wh.get("name")
+        wago_name = wago.names[branch].get(spell_id)
+        context_labels = sorted({_context(reference) for reference in contexts})
+
+        if wh_name is None and wago_name is None:
+            findings.append(Finding("error", "confirmed_missing", spell_id, branch,
+                                    "Both live sources have no spell record", context_labels))
+            continue
+        if wh_name is None or wago_name is None:
+            findings.append(Finding("warning", "source_incomplete", spell_id, branch,
+                                    "Only one live source returned this spell", context_labels,
+                                    wh_name, wago_name))
+            continue
+        if normalize_name(wh_name, rank=False) != normalize_name(wago_name, rank=False):
+            findings.append(Finding("warning", "source_conflict", spell_id, branch,
+                                    "Wowhead and Wago disagree on spell identity", context_labels,
+                                    wh_name, wago_name))
             continue
 
-        print(f"\n{'-' * 70}")
-        print(f"  {filename} ({len(entries)} entries)")
-        print(f"{'-' * 70}")
+        strict_contexts = [reference for reference in contexts if reference.expected_name]
+        mismatched = [reference for reference in strict_contexts if not name_matches(wh_name, reference)]
+        if mismatched:
+            expected = sorted({reference.expected_name for reference in mismatched if reference.expected_name})
+            findings.append(Finding("error", "confirmed_name_mismatch", spell_id, branch,
+                                    f"Authored identity {expected} disagrees with both live sources",
+                                    sorted({_context(reference) for reference in mismatched}),
+                                    wh_name, wago_name))
 
-        for entry in entries:
-            total += 1
-            sid = entry["spellID"]
-            wh = cache.get(str(sid))
-
-            if not wh or "error" in wh:
-                err_type = wh.get("error", "missing") if wh else "not_cached"
-                print(f"  [{err_type.upper():>9}]  {sid}")
-                if err_type == "not_found":
-                    not_found += 1
-                else:
-                    errors += 1
+        for reference in contexts:
+            if reference.kind != "primary" or reference.cooldown is None or reference.filename == "Procs.lua":
                 continue
+            wh_cooldown = extract_cooldown(wh.get("tooltip", ""))
+            wago_cooldown = wago.cooldowns[branch].get(spell_id)
+            if wh_cooldown is None or wago_cooldown is None:
+                continue
+            if wh_cooldown != wago_cooldown:
+                findings.append(Finding("warning", "source_cooldown_conflict", spell_id, branch,
+                                        "Wowhead and Wago disagree on cooldown", [_context(reference)],
+                                        wh_cooldown, wago_cooldown))
+            elif reference.cooldown != wh_cooldown:
+                findings.append(Finding("error", "confirmed_cooldown_mismatch", spell_id, branch,
+                                        f"Authored cooldown {reference.cooldown:g}s disagrees with both live sources",
+                                        [_context(reference)], wh_cooldown, wago_cooldown))
 
-            name = wh.get("name", "?")
-            wh_cd = extract_cooldown(wh.get("tooltip", ""))
-            wh_dur = extract_duration(wh.get("buff", ""))
-            lib_cd = entry["cooldown"]
-            lib_dur = entry["duration"]
-
-            issues = []
-
-            # Cooldown comparison
-            if lib_cd is not None and wh_cd is not None:
-                if lib_cd != wh_cd:
-                    issues.append(f"cd: lib={lib_cd} wh={wh_cd}")
-                    cd_mismatch += 1
-            elif lib_cd is not None and lib_cd > 0 and wh_cd is None:
-                issues.append(f"cd: lib={lib_cd} wh=NONE")
-            elif lib_cd is None and wh_cd is not None and wh_cd > 0:
-                issues.append(f"cd: lib=NONE wh={wh_cd}")
-
-            # Duration comparison
-            if lib_dur is not None and wh_dur is not None:
-                if lib_dur != wh_dur:
-                    issues.append(f"dur: lib={lib_dur} wh={wh_dur}")
-                    dur_mismatch += 1
-            elif lib_dur is not None and lib_dur > 0 and wh_dur is None:
-                # Many spells have duration in LibSpellDB but no buff field on Wowhead
-                # (e.g., totems, instant effects) — skip these as warnings only
-                pass
-            elif lib_dur is None and wh_dur is not None and wh_dur > 0:
-                issues.append(f"dur: lib=NONE wh={wh_dur}")
-
-            if issues:
-                print(f"  [    DIFF]  {sid:<6} {name:<35} {' | '.join(issues)}")
-            else:
-                ok += 1
-
-    print(f"\n{'=' * 80}")
-    print("SUMMARY")
-    print(f"{'=' * 80}")
-    print(f"  Total entries:        {total}")
-    print(f"  OK (match):           {ok}")
-    print(f"  Cooldown mismatches:  {cd_mismatch}")
-    print(f"  Duration mismatches:  {dur_mismatch}")
-    print(f"  Not found (404):      {not_found}")
-    print(f"  Other errors:         {errors}")
+        if index % 100 == 0:
+            print(f"Checked {index}/{len(grouped)} unique branch/ID pairs...", file=sys.stderr)
+    wowhead.save()
+    return findings
 
 
-# ─── Apply ────────────────────────────────────────────────────────────────────
+def _flatten(parsed: dict[str, list[SpellReference]]) -> list[SpellReference]:
+    return [reference for references in parsed.values() for reference in references]
 
 
-def apply_to_file(filepath, cache, dry_run=False):
-    """Insert name and description fields into a Lua data file."""
-    with open(filepath, "r", encoding="utf-8") as f:
-        lines = f.readlines()
-
-    new_lines = []
-    depth = 0
-    insertions = 0
-    i = 0
-
-    while i < len(lines):
-        line = lines[i]
-        code = line.split("--")[0]
-
-        # Update depth BEFORE checking (brace on previous line already counted)
-        opens = code.count("{")
-        closes = code.count("}")
-
-        # Check for top-level spellID at depth 2, 8-space indent
-        spell_match = re.match(r"^(        )spellID\s*=\s*(\d+)", line)
-        if spell_match and depth == 2:
-            indent = spell_match.group(1)
-            spell_id = int(spell_match.group(2))
-
-            # Check if name/description already exist on next lines
-            next_line = lines[i + 1].strip() if i + 1 < len(lines) else ""
-            already_has = next_line.startswith("name =") or next_line.startswith(
-                "description ="
-            )
-
-            wh = cache.get(str(spell_id))
-            can_insert = (
-                wh
-                and "error" not in wh
-                and not already_has
-            )
-
-            if can_insert:
-                name = wh.get("name", "")
-                desc = extract_description(wh.get("tooltip", ""))
-
-                insert_lines = []
-                if name:
-                    insert_lines.append(f'{indent}name = "{lua_escape(name)}",\n')
-                if desc:
-                    insert_lines.append(
-                        f'{indent}description = "{lua_escape(desc)}",\n'
-                    )
-
-                if insert_lines:
-                    if dry_run:
-                        print(f"  + {spell_id} ({name})")
-                        for il in insert_lines:
-                            print(f"    {il.rstrip()}")
-                    new_lines.append(line)
-                    new_lines.extend(insert_lines)
-                    insertions += len(insert_lines)
-                    depth += opens - closes
-                    i += 1
-                    continue
-
-        new_lines.append(line)
-        depth += opens - closes
-        i += 1
-
-    if not dry_run and insertions > 0:
-        with open(filepath, "w", encoding="utf-8") as f:
-            f.writelines(new_lines)
-
-    return insertions
+def _parse_ids(values: list[str]) -> set[int]:
+    result: set[int] = set()
+    for value in values:
+        result.update(int(item) for item in value.split(",") if item.strip())
+    return result
 
 
-def apply_all(all_files, cache, dry_run=False):
-    """Apply name/description to all data files."""
-    action = "DRY RUN" if dry_run else "APPLYING"
-    print(f"\n{'=' * 80}")
-    print(f"{action}: Insert name/description fields")
-    print(f"{'=' * 80}")
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--audit", action="store_true", help="run the two-source live audit")
+    parser.add_argument("--ids", action="append", default=[], help="comma-separated IDs to audit")
+    parser.add_argument("--strict", action="store_true", help="exit nonzero for any error or source warning")
+    parser.add_argument("--delay", type=float, default=0.15, help="delay after Wowhead requests")
+    parser.add_argument("--no-cache", action="store_true", help="do not read or write the disposable cache")
+    parser.add_argument("--cache", type=Path, default=DEFAULT_CACHE, help="disposable Wowhead cache path")
+    parser.add_argument("--max-cache-age-hours", type=float, default=24)
+    parser.add_argument("--tbc-build", help="override auto-discovered Wago Anniversary build")
+    parser.add_argument("--classic-build", help="override auto-discovered Wago Classic Era build")
+    parser.add_argument("--json-report", type=Path, help="write a machine-readable report")
+    args = parser.parse_args(argv)
 
-    total_insertions = 0
-
-    for filename in DATA_FILES:
-        filepath = DATA_DIR / filename
-        if not filepath.exists():
-            continue
-
-        print(f"\n{'-' * 50}")
-        print(f"  {filename}")
-        print(f"{'-' * 50}")
-
-        count = apply_to_file(filepath, cache, dry_run=dry_run)
-        lines_added = count
-        entries_enriched = count // 2  # Each entry gets 2 lines (name + description)
-        total_insertions += count
-
-        if not dry_run:
-            print(f"  {entries_enriched} entries enriched ({lines_added} lines added)")
-
-    print(f"\n{'=' * 80}")
-    print(f"Total: {total_insertions} lines {'would be ' if dry_run else ''}inserted")
-    if not dry_run and total_insertions > 0:
-        print("Files updated successfully.")
-
-
-# ─── Main ─────────────────────────────────────────────────────────────────────
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="LibSpellDB Wowhead Audit & Enrichment Tool"
-    )
-    parser.add_argument(
-        "--fetch", action="store_true", help="Fetch spell data from Wowhead"
-    )
-    parser.add_argument(
-        "--audit",
-        action="store_true",
-        help="Audit cooldown/duration against Wowhead",
-    )
-    parser.add_argument(
-        "--apply",
-        action="store_true",
-        help="Insert name/description into Lua files",
-    )
-    parser.add_argument(
-        "--dry-run",
-        action="store_true",
-        help="Preview --apply changes without writing",
-    )
-    parser.add_argument(
-        "--delay",
-        type=float,
-        default=0.15,
-        help="Delay between API requests (default: 0.15s)",
-    )
-    parser.add_argument(
-        "--force-fetch",
-        action="store_true",
-        help="Re-fetch even if already cached",
-    )
-
-    args = parser.parse_args()
-
-    if not any([args.fetch, args.audit, args.apply, args.dry_run]):
+    if not args.audit:
         parser.print_help()
-        sys.exit(1)
+        return 2
 
-    # If --dry-run without --apply, treat as --apply --dry-run
-    if args.dry_run:
-        args.apply = True
+    parsed = parse_all_files()
+    references = _flatten(parsed)
+    selected_ids = _parse_ids(args.ids)
+    if selected_ids:
+        references = [reference for reference in references if reference.spell_id in selected_ids]
+    if not references:
+        print("No matching spell references found.", file=sys.stderr)
+        return 2
 
-    print(f"Data directory: {DATA_DIR}")
-    print(f"Cache file: {CACHE_FILE}\n")
+    print(f"Parsed {len(references)} references from {len(parsed)} data files.")
+    wago = WagoClient(args.tbc_build, args.classic_build)
+    print(f"Wago builds: TBC={wago.builds['tbc']} Classic={wago.builds['classic']}")
+    wowhead = WowheadClient(None if args.no_cache else args.cache, args.max_cache_age_hours, args.delay)
+    findings = audit(references, wowhead, wago)
 
-    # Step 1: Parse all Lua files
-    print("Parsing LibSpellDB data files...")
-    all_files = parse_all_files()
-    total_entries = sum(len(entries) for entries in all_files.values())
-    print(f"Found {total_entries} top-level spell entries across {len(all_files)} files\n")
+    for finding in findings:
+        print(f"[{finding.severity.upper()}] {finding.code} {finding.branch}:{finding.spell_id} - {finding.message}")
+        if finding.wowhead is not None or finding.wago is not None:
+            print(f"        Wowhead={finding.wowhead!r} Wago={finding.wago!r}")
+        for context in finding.contexts:
+            print(f"        {context}")
 
-    for filename, entries in all_files.items():
-        print(f"  {filename:<20} {len(entries):>3} entries")
-
-    # Step 2: Fetch from Wowhead (if requested)
-    cache = load_cache()
-    if args.fetch:
-        print(f"\n{'=' * 80}")
-        print("FETCHING FROM WOWHEAD")
-        print(f"{'=' * 80}\n")
-        cache = fetch_all(all_files, delay=args.delay, force=args.force_fetch)
-    elif not cache:
-        print(
-            "\nWARNING: No cache found. Run with --fetch first to populate the cache."
-        )
-        if args.audit or args.apply:
-            sys.exit(1)
-
-    # Step 3: Audit (if requested)
-    if args.audit:
-        print()
-        run_audit(all_files, cache)
-
-    # Step 4: Apply (if requested)
-    if args.apply:
-        apply_all(all_files, cache, dry_run=args.dry_run)
+    counts = {severity: sum(item.severity == severity for item in findings) for severity in ("error", "warning")}
+    print(f"Summary: {counts['error']} confirmed error(s), {counts['warning']} warning(s)")
+    if args.json_report:
+        args.json_report.parent.mkdir(parents=True, exist_ok=True)
+        report = {
+            "generated_at": datetime.now(timezone.utc).isoformat(),
+            "wago_builds": wago.builds,
+            "findings": [asdict(finding) for finding in findings],
+        }
+        args.json_report.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    # Strict mode means the data was fully verified, not merely that no agreed
+    # mismatch was found. A source outage or disagreement must fail the gate so
+    # CI cannot approve committed data from only one source.
+    return 1 if args.strict and findings else 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

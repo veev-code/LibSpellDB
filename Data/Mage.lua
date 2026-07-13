@@ -226,7 +226,7 @@ lib:RegisterSpells({
         tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
         cooldown = 8,
         priority = 3,
-        ranks = {2136, 2137, 2138, 8412, 8413, 10197, 10199, 27078, 27079, 33938},
+        ranks = {2136, 2137, 2138, 8412, 8413, 10197, 10199, 27078, 27079},
         specs = {S.FIRE},
     },
 
@@ -697,7 +697,7 @@ lib:RegisterSpells({
         name = "Displacement",
         description = "Teleports back to where you last cast Blink from and resets the cooldown on Blink. Only usable within 8 sec of casting Blink.",
         tags = {C.MOVEMENT, C.MOVEMENT_ESCAPE, C.MINOR, C.PVE_PVP},
-        cooldown = 0,
+        cooldown = 30,
         specs = {S.ARCANE, S.FIRE, S.FROST},
     },
 
@@ -737,7 +737,7 @@ lib:RegisterSpells({
         name = "Rewind Time",
         description = "Your current target with your Temporal Beacon instantly heals all damage taken over the last 5 seconds.",
         tags = {C.HEAL, C.HEAL_SINGLE, C.MINOR, C.PVE},
-        cooldown = 60,
+        cooldown = 30,
         specs = {},
     },
 
@@ -756,4 +756,3 @@ lib:RegisterSpells({
         buffGroup = "MAGE_ARMOR",
     },
 }, "MAGE")
-

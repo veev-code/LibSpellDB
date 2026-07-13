@@ -1033,6 +1033,7 @@ lib:RegisterSpells({
 lib:RegisterSpells({
     {
         spellID = 48108,  -- Hot Streak buff (rune ability = 400624)
+        auditBranch = "classic",
         name = "Hot Streak",
         tags = {C.PROC, C.DPS},
         cooldown = 0,

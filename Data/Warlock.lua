@@ -163,7 +163,7 @@ lib:RegisterSpells({
         name = "Soulshatter",
         description = "Reduces threat by 50% for all enemies within 50 yards.",
         tags = {C.UTILITY},
-        cooldown = 180,
+        cooldown = 300,
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
         reagentItemID = 6265,  -- Soul Shard
     },
@@ -828,11 +828,13 @@ lib:RegisterSpells({
         specs = {S.AFFLICTION},
     },
     {
-        spellID = 412798,  -- Incinerate (Bracers rune)
+        spellID = 412758,  -- Incinerate (Bracers rune)
         name = "Incinerate",
-        description = "Burn your enemy for Fire damage. If the target is affected by your Immolate, the damage of Incinerate is increased.",
-        tags = {C.DPS, C.ROTATIONAL, C.PVE_PVP},
+        description = "Burn your enemy for Fire damage and increase all Fire damage you deal by 40% for the next 15 sec.",
+        tags = {C.DPS, C.ROTATIONAL, C.HAS_BUFF, C.PVE_PVP},
         cooldown = 0,
+        duration = 15,
+        auraTarget = AT.SELF,
         specs = {S.DESTRUCTION},
     },
     {
@@ -930,11 +932,20 @@ lib:RegisterSpells({
         specs = {S.AFFLICTION, S.DEMONOLOGY, S.DESTRUCTION},
     },
     {
-        spellID = 412789,  -- Metamorphosis (Gloves rune) -- taunt; col1 ID 403789 in some sources
+        spellID = 403789,  -- Metamorphosis (Gloves rune)
         name = "Metamorphosis",
+        description = "Transform into a Demon, increasing Armor by 500%, Health by 15%, reducing the chance you will be critically hit by 6%, increasing threat by 50%, and increasing mana gained from Life Tap by 100%, but reducing all damage you deal by 10%.",
+        tags = {C.STANCE, C.TANK, C.DEFENSIVE, C.HAS_BUFF, C.PVE_PVP},
+        cooldown = 0,
+        auraTarget = AT.SELF,
+        specs = {S.DEMONOLOGY},
+    },
+    {
+        spellID = 412789,  -- Demonic Howl (granted by Metamorphosis)
+        name = "Demonic Howl",
         description = "Forces all nearby enemies to focus attacks on you for 6 sec.",
         tags = {C.TAUNT, C.AOE, C.MINOR, C.PVE},
-        cooldown = 0,
+        cooldown = 600,
         duration = 6,
         auraTarget = AT.ENEMY,
         specs = {S.DEMONOLOGY},

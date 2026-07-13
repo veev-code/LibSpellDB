@@ -4,3 +4,9 @@ Libs/
 # Python bytecode cache from Tools/ scripts (committed by-source, not bytecode)
 __pycache__/
 *.pyc
+
+# Disposable, source-attributed live-audit responses. Never committed as truth.
+Tools/.cache/
+
+# BigWigs packager output.
+.release/

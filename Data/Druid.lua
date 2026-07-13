@@ -842,8 +842,7 @@ lib:RegisterSpells({
         name = "Skull Bash",
         description = "Charge to a target within 13 yards and bash the target's skull, interrupting spellcasting and preventing any spell in that school from being cast for 5 sec. Usable in Cat Form and Bear Form.",
         tags = {C.INTERRUPT, C.MOVEMENT_GAP_CLOSE, C.PVE_PVP},
-        cooldown = 15,
+        cooldown = 10,
         specs = {S.FERAL},
     },
 }, "DRUID")
-

@@ -253,11 +253,13 @@ lib:RegisterSpells({
     -- Classic Insignia trinkets
     {
         spellID = 23273,  -- Insignia of the Alliance
+        auditBranch = "classic",
         tags = {C.CC_BREAK},
         cooldown = 300,
     },
     {
         spellID = 23276,  -- Insignia of the Horde
+        auditBranch = "classic",
         name = "Immune Fear/Polymorph/Stun",
         description = "Dispels all Fear, Polymorph and Stun effects.",
         tags = {C.CC_BREAK},

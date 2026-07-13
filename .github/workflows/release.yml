@@ -56,46 +56,14 @@ jobs:
         run: python Tools/validate_spells.py
 
       - name: Build package without uploading
+        if: github.ref_type != 'tag'
         uses: BigWigsMods/packager@6d50adb6e8517eefef63f4afb16a6518166a6b28 # v2
         with:
           args: -d
 
-      - name: Verify package excludes agent tooling
-        run: |
-          shopt -s nullglob
-          archives=(.release/*.zip)
-          if [ ${#archives[@]} -ne 1 ]; then
-            echo "Expected exactly one package zip, found ${#archives[@]}."
-            exit 1
-          fi
-          source_version=$(sed -n 's/^## Version: *//p' LibSpellDB.toc | tr -d '\r')
-          source_minor=$(sed -n 's/^local MAJOR, MINOR = "LibSpellDB-1.0", *//p' Core/LibSpellDB.lua | tr -d '\r')
-          if ! grep -Fq "## [$source_version]" CHANGELOG.md; then
-            echo "CHANGELOG.md has no entry for $source_version."
-            exit 1
-          fi
-          for archive in "${archives[@]}"; do
-            entries=$(unzip -Z1 "$archive")
-            blocked=$(printf '%s\n' "$entries" | grep -Ei '(^|/)(\.agents|\.claude|\.git|\.github)(/|$)|^LibSpellDB/Tools(/|$)|(^|/)(AGENTS|CLAUDE|SKILL)\.md$|^LibSpellDB/README\.md$|(^|/)\.gitignore$' || true)
-            if [ -n "$blocked" ]; then
-              echo "Source-only files found in $archive:"
-              echo "$blocked"
-              exit 1
-            fi
-            roots=$(printf '%s\n' "$entries" | sed '/^$/d; s#/.*##' | sort -u)
-            if [ "$roots" != "LibSpellDB" ]; then
-              echo "Unexpected archive root(s): $roots"
-              exit 1
-            fi
-            archive_version=$(unzip -p "$archive" LibSpellDB/LibSpellDB.toc | sed -n 's/^## Version: *//p' | tr -d '\r')
-            archive_minor=$(unzip -p "$archive" LibSpellDB/Core/LibSpellDB.lua | sed -n 's/^local MAJOR, MINOR = "LibSpellDB-1.0", *//p' | tr -d '\r')
-            if [ "$archive_version" != "$source_version" ] || [ "$archive_minor" != "$source_minor" ]; then
-              echo "Archive version or LibStub minor does not match source."
-              exit 1
-            fi
-            sha256sum "$archive"
-          done
-          echo "Package boundary and release contract OK."
+      - name: Verify package contract
+        if: github.ref_type != 'tag'
+        run: python3 Tools/check_package_contents.py .release --source-root .
 
   release:
     needs: validate
@@ -121,3 +89,6 @@ jobs:
         env:
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
           GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Verify release package contract
+        run: python3 Tools/check_package_contents.py .release --source-root .

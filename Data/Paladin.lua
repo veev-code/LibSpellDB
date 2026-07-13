@@ -25,7 +25,7 @@ lib:RegisterSpells({
         cooldown = 60,
         duration = 6,
         auraTarget = AT.ENEMY,
-        ranks = {853, 5588, 5589, 10308, 27148},
+        ranks = {853, 5588, 5589, 10308},
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
@@ -42,6 +42,7 @@ lib:RegisterSpells({
     {
         spellID = 2878,  -- Turn Undead
         name = "Turn Undead",
+        auditAliases = {"Turn Evil"},  -- TBC rank 3 was renamed without changing the spell family
         description = "The targeted undead enemy will be compelled to flee for up to 10 sec. Damage caused may interrupt the effect. Only one target can be turned at a time.",
         tags = {C.CC_HARD, C.FEAR},
         cooldown = 30,
@@ -287,7 +288,7 @@ lib:RegisterSpells({
         duration = 10,
         priority = 1,
         talent = true,
-        ranks = {20925, 20927, 20928, 27179, 32778},
+        ranks = {20925, 20927, 20928, 27179},
         auraTarget = AT.SELF,
         specs = {S.PROTECTION},
     },
@@ -772,7 +773,7 @@ lib:RegisterSpells({
         name = "Divine Light",
         description = "Heals a friendly target for a large amount. A fast, high-cost direct heal.",
         tags = {C.HEAL, C.HEAL_SINGLE, C.FILLER, C.PVE_PVP},
-        cooldown = 0,
+        cooldown = 8,
         specs = {S.HOLY},
     },
     {
@@ -833,7 +834,7 @@ lib:RegisterSpells({
         name = "Rebuke",
         description = "Interrupts spellcasting and prevents any spell in that school from being cast for 3 sec.",
         tags = {C.INTERRUPT, C.PVE_PVP},
-        cooldown = 10,
+        cooldown = 15,
         specs = {S.HOLY, S.PROTECTION, S.RETRIBUTION},
     },
     {
@@ -841,7 +842,7 @@ lib:RegisterSpells({
         name = "Hand of Reckoning",
         description = "Taunts the target to attack you, but has no effect if the target is already attacking you. While not in combat, it deals Holy damage instead.",
         tags = {C.TAUNT, C.PVE},
-        cooldown = 8,
+        cooldown = 10,
         specs = {S.PROTECTION},
     },
 }, "PALADIN")
